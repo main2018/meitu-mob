@@ -1,0 +1,26 @@
+.tab-title,
+.tab-content
+  display flex
+  li
+    flex 1
+.tab-title li
+  padding .5rem 0
+  text-align center
+.tab-content
+  transition 0.5s
+  li
+    width 100%
+    min-height 90vh
+  li:nth-child(1)
+    background #ccc
+  li:nth-child(2)
+    background #eee
+  li:nth-child(3)
+    background #ddd
+.tab-color
+  height 2px
+  background gray
+  transition 0.5s
+.tab-content-wrap
+  width 100%
+  overflow hidden

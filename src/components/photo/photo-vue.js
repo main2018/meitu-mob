@@ -1,9 +1,11 @@
 exports.js = () => {
   const Card = require('base/card/card')
+  const Tab = require('base/tab/tab')
   return {
     name: 'photo',
     components: {
-      Card
+      Card,
+      Tab
     },
 
     created () {
