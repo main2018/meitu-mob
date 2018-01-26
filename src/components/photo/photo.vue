@@ -1,8 +1,13 @@
 <template lang="pug">
   .photo
-    tab
-    .wrap(v-for="item in photos.one")
-      card(:content="item")
+    tab(:menu="menu")
+      .wrap(
+        v-for="(photo, index) in photos"
+        :slot="'slot-'+index"
+        )
+        ul
+          li(v-for="item in photo")
+            card(:content="item")
 </template>
 
 <script type="text/ecmascript-6">

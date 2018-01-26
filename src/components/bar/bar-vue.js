@@ -13,7 +13,7 @@ exports.js = () => {
     data () {
       return {
         sign: '≡',
-        menuShow: true
+        menuShow: false
       }
     },
 
@@ -44,7 +44,6 @@ exports.js = () => {
     },
 
     mounted () {
-      console.log(this.url)
     }
   }
 }
