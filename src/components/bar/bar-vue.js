@@ -13,7 +13,7 @@ exports.js = () => {
     data () {
       return {
         sign: '≡',
-        menuShow: true
+        menuShow: false
       }
     },
 
@@ -24,9 +24,16 @@ exports.js = () => {
     },
 
     methods: {
-      toogle () {
+      toggle () {
         this.menuShow = !this.menuShow
         this.sign = this.menuShow ? '×' : '≡'
+      },
+      go (path) {
+        this.$router.push(`${path}`)
+        this.toggle()
+      },
+      goHome () {
+        this.$router.push(`/home`)
       }
     },
 

@@ -1,15 +1,18 @@
 <template lang="pug">
-  .head
-    .bar
-      .brand Logo
-      .icon(v-text="sign", @click="toogle")
-    menu.menu(v-show="menuShow")
-      ul
-        li About
-        li Contact
-        li.search
-          input(type="text")
-          .hint search
+  .head-wrapper
+    .head
+      .bar
+        .brand(@click="goHome") Logo
+        .icon(v-text="sign", @click="toggle")
+      menu.menu(v-show="menuShow")
+        ul
+          li(@click="go('/photo')") Photo
+          li(@click="go('/design')") Pic
+          li(@click="go('/vedio')") Vedio
+          li.search
+            input(type="text")
+            .hint search
+    .head-padding
 </template>
 
 <script type="text/ecmascript-6">
