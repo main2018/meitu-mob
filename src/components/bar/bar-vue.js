@@ -13,11 +13,14 @@ exports.js = () => {
     data () {
       return {
         sign: '≡',
-        menuShow: false
+        menuShow: true
       }
     },
 
     computed: {
+      url () {
+        return this.$route.path
+      }
     },
 
     watch: {
@@ -27,17 +30,21 @@ exports.js = () => {
       toggle () {
         this.menuShow = !this.menuShow
         this.sign = this.menuShow ? '×' : '≡'
+        console.log(this.url)
       },
       go (path) {
         this.$router.push(`${path}`)
         this.toggle()
       },
       goHome () {
-        this.$router.push(`/home`)
+        this.$router.push(`/`)
+        this.menuShow = false
+        this.sign = '≡'
       }
     },
 
     mounted () {
+      console.log(this.url)
     }
   }
 }

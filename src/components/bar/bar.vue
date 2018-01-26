@@ -6,9 +6,18 @@
         .icon(v-text="sign", @click="toggle")
       menu.menu(v-show="menuShow")
         ul
-          li(@click="go('/photo')") Photo
-          li(@click="go('/design')") Pic
-          li(@click="go('/vedio')") Vedio
+          li(@click="go('/photo')")
+            .text
+              p Photo
+              .hint-color(v-show="url==='/photo'")
+          li(@click="go('/design')")
+            .text
+              p pic
+              .hint-color(v-show="url==='/design'")
+          li(@click="go('/vedio')")
+            .text
+              p Vedio
+              .hint-color(v-show="url==='/vedio'")
           li.search
             input(type="text")
             .hint search
