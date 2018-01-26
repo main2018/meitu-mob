@@ -1,6 +1,6 @@
 <template lang="pug">
   #home
-    amap
+    p hi
 </template>
 
 <script type="text/ecmascript-6">
