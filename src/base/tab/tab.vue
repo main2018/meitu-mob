@@ -1,11 +1,14 @@
 <template lang="pug">
   .tab-container(v-if="isTabValid")
-    ul.tab-title
-      li(
-        v-for="(item, index) in list"
-        @click="tap(index)"
-        ) {{item}}
-    .tab-color(:style="colorStyle")
+    .tab-title
+      ul.tab-menu
+        li(
+          v-for="(item, index) in list"
+          @click="tap(index)"
+          ) {{item}}
+      .tab-color(:style="colorStyle")
+
+    .tab-padding
     .tab-content-wrap
       ul.tab-content(
         ref="content"

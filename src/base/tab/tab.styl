@@ -1,22 +1,33 @@
-.tab-title,
+.tab-menu,
 .tab-content
   display flex
   li
     flex 1
-.tab-title li
-  padding .5rem 0
-  text-align center
+.tab-title
+  width 100%
+  position fixed
+  background #eee
+.tab-menu
+  li
+    margin .6rem 0
+    line-height 1rem
+    text-align center
+    border-right 1px solid #ccc
+.tab-padding
+  height 2.3rem
 .tab-content
   transition 0.5s
   li
     width 100%
-    min-height 90vh
+    min-height 80vh
+    /*
   li:nth-child(1)
     background #ccc
   li:nth-child(2)
     background #eee
   li:nth-child(3)
     background #ddd
+    */
 .tab-color
   height 2px
   background gray
