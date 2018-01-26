@@ -1,5 +1,5 @@
 <template lang="pug">
-  .tab-container(v-if="volid")
+  .tab-container(v-if="isTabValid")
     ul.tab-title
       li(
         v-for="(item, index) in list"
