@@ -1,6 +1,7 @@
 <template lang="pug">
   .photo
-    // card
+    .wrap(v-for="item in photos.one")
+      card(:content="item")
 </template>
 
 <script type="text/ecmascript-6">

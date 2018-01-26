@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import testStore from './modules/template-store'
-import amapStore from './modules/amap-store'
+import photoStore from './modules/photo-store'
 // import createLogger from 'vuex/dist/logger' // 日志插件
 
 Vue.use(Vuex)
@@ -10,8 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    test: testStore,
-    amap: amapStore
+    photo: photoStore
   }
   // strict: debug,
   // plugins: debug ? [createLogger()] : []

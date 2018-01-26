@@ -14,6 +14,7 @@ exports.js = () => {
 
     data () {
       return {
+        photos: {}
       }
     },
 
@@ -27,6 +28,7 @@ exports.js = () => {
     },
 
     mounted () {
+      this.photos = this.$store.getters.photos
     }
   }
 }
