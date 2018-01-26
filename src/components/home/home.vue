@@ -1,6 +1,9 @@
 <template lang="pug">
   #home
-    p hi
+    ul
+      li(@click="$router.push('/photo')") Photo
+      li(@click="$router.push('/design')") Pic
+      li(@click="$router.push('/vedio')") Vedio
 </template>
 
 <script type="text/ecmascript-6">
