@@ -1,6 +1,11 @@
 const state = {
   photos: {
-    one: [{title: 'test1'}, {title: 'test2'}],
+    one: [{
+      id: '001',
+      title: 'test1',
+      // img: 'http://192.168.0.106:8000/static/default.png',
+      time: '2016-1-2'
+    }, {title: 'test2'}],
     two: [{title: 'test3'}]
   }
 }

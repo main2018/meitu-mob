@@ -5,7 +5,7 @@
         v-for="(photo, index) in photos"
         :slot="'slot-'+index"
         )
-        ul
+        ul.page-content
           li(v-for="item in photo")
             card(:content="item")
 </template>
