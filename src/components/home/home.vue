@@ -3,7 +3,7 @@
     ul
       li(@click="$router.push('/photo')") Photo
       li(@click="$router.push('/design')") Pic
-      li(@click="$router.push('/vedio')") Vedio
+      li(@click="$router.push('/video')") Video
 </template>
 
 <script type="text/ecmascript-6">

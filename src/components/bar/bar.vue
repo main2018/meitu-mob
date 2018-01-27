@@ -17,7 +17,7 @@
           li(@click="go('/vedio')")
             .text
               p Vedio
-              .hint-color(v-show="url==='/vedio'")
+              .hint-color(v-show="url==='/video'")
           li.search
             input(type="text")
             .hint search

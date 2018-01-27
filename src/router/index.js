@@ -4,7 +4,7 @@ import Home from 'comp/home/home'
 import Photo from 'comp/photo/photo.vue'
 // import PhotoDetail from 'comp/photo-detail/photo-detail.vue'
 import Design from 'comp/design/design.vue'
-import Vedio from 'comp/vedio/vedio.vue'
+import Video from 'comp/video/video.vue'
 import Detail from 'comp/detail/detail.vue'
 
 Vue.use(Router)
@@ -25,9 +25,9 @@ export default new Router({
       name: 'Design',
       component: Design
     }, {
-      path: '/vedio',
-      name: 'Vedio',
-      component: Vedio
+      path: '/video',
+      name: 'Video',
+      component: Video
     }, {
       path: '/detail',
       name: 'Detail',
