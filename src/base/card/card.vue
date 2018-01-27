@@ -1,7 +1,12 @@
 <template lang="pug">
   .card
-    img(:src="content.img")
-    h3(v-text="content.title") {content.title}
+    img(
+      :src="content.img"
+      )
+    h3(
+      v-text="content.title"
+      @click="goDetail"
+      ) {content.title}
     time(v-text="content.time")
 </template>
 
@@ -30,6 +35,16 @@ export default {
   },
 
   methods: {
+    goDetail () {
+      if (!this.content.id) {
+        alert('no detail')
+        return
+      }
+      this.$router.push({
+        path: '/detail',
+        query: { id: this.content.id }
+      })
+    }
   },
 
   mounted () {
