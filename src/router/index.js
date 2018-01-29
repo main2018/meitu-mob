@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from 'comp/home/home'
 import Photo from 'comp/photo/photo.vue'
 // import PhotoDetail from 'comp/photo-detail/photo-detail.vue'
+import mediaDetail from 'comp/media-detail/media-detail.vue'
 import Design from 'comp/design/design.vue'
 import Video from 'comp/video/video.vue'
 import Detail from 'comp/detail/detail.vue'
@@ -32,6 +33,10 @@ export default new Router({
       path: '/detail',
       name: 'Detail',
       component: Detail
+    }, {
+      path: '/mediadetail',
+      name: 'mediaDetail',
+      component: mediaDetail
     }
   ]
 })
