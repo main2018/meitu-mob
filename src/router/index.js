@@ -7,6 +7,7 @@ import mediaDetail from 'comp/media-detail/media-detail.vue'
 import Design from 'comp/design/design.vue'
 import Video from 'comp/video/video.vue'
 import Detail from 'comp/detail/detail.vue'
+import Admin from 'comp/admin/admin.vue'
 
 Vue.use(Router)
 
@@ -17,6 +18,10 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    }, {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin
     }, {
       path: '/photo',
       name: 'Photo',
