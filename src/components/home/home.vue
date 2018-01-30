@@ -4,6 +4,7 @@
       li(@click="$router.push('/photo')") Photo
       li(@click="$router.push('/design')") Pic
       li(@click="$router.push('/video')") Video
+      li(@click="$router.push('/media')") Media
 </template>
 
 <script type="text/ecmascript-6">

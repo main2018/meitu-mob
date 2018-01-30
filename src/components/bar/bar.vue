@@ -6,21 +6,31 @@
         .icon(v-text="sign", @click="toggle")
       menu.menu(v-show="menuShow")
         ul
+          li(@click="go('/about')")
+            .text
+              p about
+              .hint-color(v-show="url==='/about'")
           li(@click="go('/photo')")
             .text
               p Photo
               .hint-color(v-show="url==='/photo'")
           li(@click="go('/design')")
             .text
-              p pic
+              p design
               .hint-color(v-show="url==='/design'")
-          li(@click="go('/vedio')")
+          li(@click="go('/media')")
             .text
-              p Vedio
+              p media
+              .hint-color(v-show="url==='/media'")
+          li(@click="go('/video')")
+            .text
+              p Video
               .hint-color(v-show="url==='/video'")
           li.search
             input(type="text")
-            .hint search
+            .hint
+              span.mdi.mdi-magnify
+              span search
     .head-padding
 </template>
 
