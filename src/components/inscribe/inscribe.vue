@@ -6,9 +6,10 @@
         .text E-MAIL: DAMEI@FOXMAIL.COM
         .copyright
           .line
-          .text Copyright© 2017 foto inc.
+          span.text Copyright© 2017 foto inc.
+          span.ch-zn 保留所有权利.
       .qrcode
-        span.text wechat:
+        span.ch-zn 微信公众号:
         span &nbsp;
         img(:src="qrcode")
 </template>
