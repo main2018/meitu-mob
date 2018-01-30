@@ -1,8 +1,6 @@
 <template lang="pug">
-  .inscribe(
-    v-show="show"
-    )
-    .wrapper.bd-1px-t
+  .inscribe
+    .wrapper(:class="thinLine")
       .contact
         .text TEL: 0898-8888 8888
         .text E-MAIL: DAMEI@FOXMAIL.COM
@@ -22,10 +20,6 @@ export default {
   },
 
   props: {
-    show: {
-      type: Boolean,
-      default: true
-    }
   },
 
   data () {
@@ -36,12 +30,13 @@ export default {
   computed: {
     qrcode () {
       return 'http://192.168.0.106:8000/static/qrcode.png'
-    }
-    /*
+    },
+    url () {
+      return this.$route.path
+    },
     thinLine () {
-      return this.theme === 'dark' ? '' : 'bd-1px-t'
+      return this.url === '/' ? '' : 'bd-1px-t'
     }
-      */
   },
 
   watch: {
