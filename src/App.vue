@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <bar></bar>
+    <!-- <bar></bar> -->
     <keep-alive include="Home">
       <router-view></router-view>
     </keep-alive>
+    <inscribe></inscribe>
   </div>
 </template>
 
@@ -11,9 +12,11 @@
 /* eslint-disable no-unused-vars */
 // import vconsole from 'vconsole'
 import Bar from 'comp/bar/bar'
+import Inscribe from 'comp/inscribe/inscribe'
 export default {
   components: {
-    Bar
+    Bar,
+    Inscribe
   },
   name: 'app'
 }
