@@ -1,11 +1,25 @@
 <template lang="pug">
   .aside
     ul.category
-      li.bd-1px-b(v-for="item in categories")
-        p {{item.category}}
+      li.bd-1px-b(v-for="(item, index) in categories")
+        .first
+          .text(@click="emit([ item.category ])") {{item.category}}
+          .btn
+            .mdi.mdi-pencil
+          .btn(
+            @click="delCategory(item.category, index)"
+            )
+            .mdi.mdi-minus
         ol.subcategory
-          li(v-for="subcategory in item.subcategories")
-            p {{subcategory}}
+          li.bd-1px-t(v-for="subcategory in item.subcategories")
+            .second
+              .text(
+                @click="emit([ item.category, subcategory ])"
+                ) {{subcategory}}
+              .btn
+                .mdi.mdi-pencil
+              .btn(@click="delSubcategory(item.category, subcategory)")
+                .mdi.mdi-minus
 
     .control
       input.add-category(
@@ -46,22 +60,4 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
   @import './aside.styl'
-  .category
-    padding .5rem 5px
-  .subcategory
-    margin-left: 1rem;
-  .control
-    background: #ddd;
-    padding 10px
-  .select
-    margin: 1rem 0 .5rem 0;
-    width: 81%;
-  .add-category
-    padding .2rem 2%
-    display inlineblock
-    width: 81%;
-  .add-btn
-    padding .2rem 0
-    width: 15%;
-    background: #ccc;
 </style>

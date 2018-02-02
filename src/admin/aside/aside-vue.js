@@ -32,7 +32,6 @@ exports.js = () => {
           if (!resp.success) { return }
           this.categories = resp.data
           this.currCategory = this.categories[0].category
-          console.log(this.categories)
         })
       },
       addCategory () {
@@ -46,6 +45,20 @@ exports.js = () => {
           this.getCategory()
         })
       },
+      delCategory (category, index) {
+        let subcategories = this.categories[index].subcategories
+        if (subcategories.length !== 0) {
+          window.alert('please delete second and try angin')
+          return
+        }
+        this.post('/category/del', {
+          category
+        }, (resp) => {
+          if (!resp.success) { return }
+          window.alert('delete success')
+          this.getCategory()
+        })
+      },
       addSubcategory () {
         this.post('/subcategory/add', {
           category: this.currCategory,
@@ -56,6 +69,18 @@ exports.js = () => {
           this.subcategory = ''
           this.getCategory()
         })
+      },
+      delSubcategory (category, subcategory) {
+        this.post('/subcategory/del', {
+          category, subcategory
+        }, (resp) => {
+          if (!resp.success) { return }
+          window.alert('delete success')
+          this.getCategory()
+        })
+      },
+      emit (category) {
+        // console.log(category)
       }
     },
 
