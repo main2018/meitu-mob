@@ -9,7 +9,7 @@ import Design from 'comp/design/design.vue'
 import Video from 'comp/video/video.vue'
 import Media from 'comp/media/media.vue'
 import Detail from 'comp/detail/detail.vue'
-import Admin from 'comp/admin/admin.vue'
+import Admin from 'admin/home/home.vue'
 
 Vue.use(Router)
 
