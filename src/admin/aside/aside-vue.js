@@ -48,7 +48,7 @@ exports.js = () => {
       },
       addSubcategory () {
         this.post('/subcategory/add', {
-          category: this.currCategory.category,
+          category: this.currCategory,
           subcategory: this.subcategory
         }, (resp) => {
           if (!resp.success) { return }
