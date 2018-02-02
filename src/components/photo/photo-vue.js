@@ -31,6 +31,9 @@ exports.js = () => {
     },
 
     mounted () {
+      this.post('/album/find', {category: 'one'}, (resp) => {
+        console.log(resp)
+      })
       let album = this.$store.getters.photos
       for (let key in album) {
         this.menu.push(key)
