@@ -1,17 +1,33 @@
 <template lang="pug">
   .aside
     ul.category
-      li.bd-1px-b(v-for="item in categories")
-        .first
-          .text(@click="emit([ item.category ])") {{item.category}}
-          .btn -
+      li.bd-1px-b(
+        v-for="(parent, index) in categories")
+        .first(
+          :ref="'' + index"
+          @mouseenter="addBtn('' + index)"
+          @mouseleave="delBtn('' + index)"
+          )
+          .text(
+            @click="emit([ parent.category ])"
+            ) {{parent.category}}
+          .btn.mdi.mdi-minus(
+            @click="delCategory(parent.category, index)"
+            )
         ol.subcategory
-          li.bd-1px-t(v-for="subcategory in item.subcategories")
-            .second
+          li.bd-1px-t(
+            v-for="(subcategory, subIndex) in parent.subcategories")
+            .second(
+              :ref="index + subPrefix + subIndex"
+              @mouseenter="addBtn(index + subPrefix + subIndex)"
+              @mouseleave="delBtn(index + subPrefix + subIndex)"
+              )
               .text(
-                @click="emit([ item.category, subcategory ])"
+                @click="emit([ parent.category, subcategory ])"
                 ) {{subcategory}}
-              .btn -
+              .btn.mdi.mdi-minus(
+                @click="delSubcategory(parent.category, subcategory)"
+                )
 
     category(@update="getCategory")
 </template>
