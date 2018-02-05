@@ -13,6 +13,7 @@ exports.js = () => {
     data () {
       return {
         category: '',
+        newCategory: '',
         subcategory: '',
         currCategory: {},
         categories: [],
@@ -30,6 +31,13 @@ exports.js = () => {
       getCategory () {
         this.get('/category/findAll', (resp) => {
           if (!resp.success) { return }
+          resp.data.forEach((item) => {
+            item.first = false
+            item.second = []
+            item.subcategories.forEach((subItem) => {
+              item.second.push(false)
+            })
+          })
           this.categories = resp.data
           this.currCategory = this.categories[0].category
         })
@@ -43,6 +51,17 @@ exports.js = () => {
           window.alert('publish success')
           this.category = ''
           this.getCategory()
+        })
+      },
+      updateCategory (index) {
+        this.toggleEditable(index)
+        this.post('/category/update', {
+          category: this.categories[index].category,
+          newCategory: this.newCategory
+        }, (resp) => {
+          if (!resp.success) { return }
+          this.getCategory()
+          window.alert('update success')
         })
       },
       delCategory (category, index) {
@@ -78,6 +97,10 @@ exports.js = () => {
           window.alert('delete success')
           this.getCategory()
         })
+      },
+      toggleEditable (index, inputModel = false) {
+        this.categories[index].first = !this.categories[index].first
+        if (inputModel) { this.newCategory = inputModel }
       },
       emit (category) {
         // console.log(category)

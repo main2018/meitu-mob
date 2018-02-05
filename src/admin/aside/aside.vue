@@ -3,9 +3,23 @@
     ul.category
       li.bd-1px-b(v-for="(item, index) in categories")
         .first
-          .text(@click="emit([ item.category ])") {{item.category}}
-          .btn
-            .mdi.mdi-pencil
+          .text(
+            @click="emit([ item.category ])"
+            v-show="!item.first"
+            ) {{item.category}}
+          input.new-category(
+            type="text"
+            v-show="item.first"
+            v-model="newCategory"
+            )
+          .btn(v-show="!item.first")
+            .mdi.mdi-pencil(
+              @click="toggleEditable(index, item.category)"
+              )
+          .btn(v-show="item.first")
+            .mdi.mdi-check(
+              @click="updateCategory(index)"
+              )
           .btn(
             @click="delCategory(item.category, index)"
             )
