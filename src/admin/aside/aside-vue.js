@@ -9,7 +9,6 @@ exports.js = () => {
     data () {
       return {
         isEditable: false,
-        subPrefix: '_',
         newCategory: '',
         categories: []
       }
@@ -76,6 +75,7 @@ exports.js = () => {
         btn.setAttribute('id', id)
         btn.setAttribute('class', 'mdi mdi-' + icon)
         btn.style.width = '30px'
+        btn.style.lineHeight = '1.9rem'
         btn.addEventListener('click', event)
         return btn
       },
