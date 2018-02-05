@@ -53,18 +53,9 @@ exports.js = () => {
         let editBtn = this.addDom(key, 'pencil', editEvent)
         let updateEvent = this.updateCategory(currentDom, key, this.categories, (urlPrefix, category, newCategory) => {
           if (category === newCategory) { return }
-          let url = ''
-          let postJson = {}
-          if (urlPrefix === 'category') {
-            url = '/category/update'
-            postJson = { category, newCategory }
-          } else if (urlPrefix === 'subcategory') {
-            url = '/subcategory/update'
-          }
-          this.post(url, postJson, (resp) => {
-            if (resp.success) {
-              this.getCategory()
-            }
+          let url = urlPrefix === 'category' ? '/category' : '/subcategory'
+          this.post(`${url}/update`, { category, newCategory }, (resp) => {
+            if (resp.success) { this.getCategory() }
           })
         })
         let updateBtn = this.addDom(key + '_', 'check', updateEvent)
