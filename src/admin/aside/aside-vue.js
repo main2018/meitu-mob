@@ -110,7 +110,7 @@ exports.js = () => {
       },
 
       emit (category) {
-        console.log(category)
+        this.$emit('clicked', category)
       }
     },
 

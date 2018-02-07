@@ -1,17 +1,19 @@
 <template lang="pug">
   .home
-    .aside
-      adminAside
+    // .aside
+      adminAside(@clicked="getCategory")
     .content
-      p home
+      publish(:crumb="categories")
 </template>
 
 <script>
-import adminAside from 'admin/aside/aside'
+import AdminAside from 'admin/aside/aside'
+import Publish from 'admin/publish/publish'
 export default {
   name: 'home',
   components: {
-    adminAside
+    AdminAside,
+    Publish
   },
 
   props: {
@@ -19,6 +21,7 @@ export default {
 
   data () {
     return {
+      categories: []
     }
   },
 
@@ -29,6 +32,9 @@ export default {
   },
 
   methods: {
+    getCategory (category) {
+      this.categories = category
+    }
   },
 
   mounted () {
