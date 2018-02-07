@@ -5,7 +5,8 @@ export const formConf = [
     type: 'file'
   }, {
     model: 'title',
-    label: 'cover',
+    label: 'title',
+    required: true,
     type: 'text',
     placeholder: 'title'
   }, {

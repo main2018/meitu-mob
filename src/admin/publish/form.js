@@ -1,5 +1,5 @@
 const { formConf } = require('config/form.js')
-const PREFIX = 'aw-'
+const { genTemplate, genModel } = require('./json2templ.js')
 
 export const customform = {
   template: genTemplate(formConf),
@@ -13,6 +13,15 @@ export const customform = {
       console.log(this.postJson)
     },
     publish (url) {
+      let pass = true
+      formConf.forEach((json) => {
+        if (!json.required) { return }
+        pass = pass && this.postJson[json.model]
+      })
+      if (!pass) {
+        alert('info no complete')
+        return
+      }
       this.post(url, this.postJson, (resp) => {
         if (!resp.success) { return }
         for (let key in this.postJson) { this.postJson[key] = '' }
@@ -22,60 +31,3 @@ export const customform = {
   }
 }
 
-function genTemplate (arr) {
-  return `<ul>${genLiDom(arr)}</ul>`
-}
-
-function genLiDom (arr) {
-  let liDom = ''
-  let element = ''
-  arr.forEach(json => {
-    element = json.type === 'textarea' ? 'textarea' : 'input'
-    liDom += `
-    <li class="${PREFIX}item}">
-      <label for="${json.model}">${json.label || json.model || ''}</label>
-      <${element} ${genAttribute(json)}></${element}>
-    </li>`
-  })
-  return liDom
-}
-
-function genAttribute (json) {
-  let attr = `${bindModel(json)} name="${json.model}"`
-  for (let key in json) {
-    if (key === 'model') { continue }
-    attr += key === 'event' ? `${bindEvent(json)}` : `${key}="${json[key]}"`
-  }
-  return attr
-}
-
-function bindModel (json) {
-  let noModel = json.type === 'file' || json.type === 'button'
-  return noModel ? '' : `v-model="postJson.${json.model}"`
-}
-
-function bindEvent (json) {
-  let event = ''
-  for (let key in json.event) {
-    event += ` @${key}=${getFunString(json.event[key])}`
-    console.log(event)
-  }
-  return event
-}
-
-function getFunString (event) {
-  let hasParam = /\(/.test(event)
-  if (!hasParam) { return event }
-  let funName = event.split('(')[0]
-  let param = /\((\S+)\)/.exec(event)[1]
-  return `"${funName}('${param}')"`
-}
-
-function genModel (arr) {
-  let model = {}
-  arr.forEach(json => {
-    if (json.type === 'file' || json.type === 'button') { return }
-    model[json.model] = ''
-  })
-  return model
-}
