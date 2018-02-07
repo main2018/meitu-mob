@@ -1,6 +1,7 @@
 <template lang="pug">
   .publish(ref="form")
     p {{breadcrumb}}
+    customform
 </template>
 
 <script type="text/ecmascript-6">

@@ -1,8 +1,10 @@
 exports.js = () => {
-  const { json2dom } = require('common/js/json2dom')
+  // const { json2dom } = require('common/js/json2dom')
+  const { customform } = require('./form')
   return {
     name: 'publish',
     components: {
+      customform
     },
 
     props: {
@@ -60,13 +62,6 @@ exports.js = () => {
     },
 
     mounted () {
-      this.$refs.form.append(json2dom(this.post))
-      this.postJson = {}
-      this.post.forEach((json) => {
-        if (json.type === 'button') { return }
-        let input = document.getElementById(json.field)
-        this.postJson[json.field] = input.value
-      })
     }
   }
 }
