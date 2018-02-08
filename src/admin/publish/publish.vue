@@ -12,9 +12,15 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import '~common/stylus/variable.styl'
   @import './publish.styl'
-  .aw-style
-    color #fff
-    background: #000;
   .aw-item
+    padding .5rem 0
     background: #eee;
+    display flex
+    .aw-warn
+      color red
+    label
+      padding-left 15px
+      display inlineblock
+      width: 5rem;
+      background: none;
 </style>

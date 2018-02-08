@@ -1,20 +1,24 @@
 export const formConf = [
   {
-    model: 'coverimg',
-    label: 'cover',
-    type: 'file'
+    type: 'file',
+    model: 'coverimg'
   }, {
+    type: 'file',
+    model: 'images',
+    multiple: true
+  }, {
+    type: 'text',
     model: 'title',
     label: 'title',
     required: true,
-    type: 'text',
     placeholder: 'title'
   }, {
+    type: 'textarea',
     model: 'text',
-    type: 'textarea'
+    required: true
   }, {
-    model: 'year',
     type: 'range',
+    model: 'year',
     min: 1,
     max: 100,
     step: 1,

@@ -1,7 +1,7 @@
 const CLASS_PREFIX = 'aw-'
 
 export function genTemplate (arr) {
-  return `<ul>${genLiDom(arr)}</ul>`
+  return `<ul class="${CLASS_PREFIX}form">${genLiDom(arr)}</ul>`
 }
 
 export function genModel (arr) {
@@ -19,8 +19,11 @@ function genLiDom (arr) {
   arr.forEach(json => {
     element = json.type === 'textarea' ? 'textarea' : 'input'
     liDom += `
-    <li class="${CLASS_PREFIX}item}">
-      <label for="${json.model}">${json.label || json.model || ''}</label>
+    <li class="${CLASS_PREFIX}item">
+      <label for="${json.model}">
+        ${json.required ? '<span class="aw-warn">*</span>' : ''}
+        ${json.label || json.model || ''}
+      </label>
       <${element} ${genAttribute(json)}></${element}>
     </li>`
   })
@@ -33,6 +36,7 @@ function genAttribute (json) {
     if (key === 'model') { continue }
     attr += key === 'event' ? `${bindEvent(json)}` : `${key}="${json[key]}"`
   }
+  if (json.type === 'file') { attr += ` @change="getFile($event)"` }
   return attr
 }
 
