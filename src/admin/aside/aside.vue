@@ -6,8 +6,11 @@
         @mouseenter="addBtn('' + idx)"
         @mouseleave="delBtn('' + idx)"
         )
-        .active(v-show="active[idx].category")
-        .text(@click="emit([item.category], idx)") {{item.category}}
+        .active(v-show="actives[idx].category")
+        .text(
+          @keydown.13="enter($event)"
+          @click="setActive([item.category], idx)"
+          ) {{item.category}}
         .btn.mdi.mdi-minus( @click="delCategory(item.category, idx)")
 
       ol.subcategory
@@ -16,9 +19,10 @@
             @mouseenter="addBtn(`${idx}_${_idx}`)"
             @mouseleave="delBtn(`${idx}_${_idx}`)"
             )
-            .active(v-show="active[idx].subcategories[_idx]")
+            .active(v-show="actives[idx].subcategories[_idx]")
             .text(
-              @click="emit([item.category, subcategory], idx, _idx)"
+              @input="enter($event)"
+              @click="setActive([item.category, subcategory], idx, _idx)"
               ) {{subcategory}}
             .btn.mdi.mdi-minus(@click="delSubcategory(item.category, subcategory)")
 

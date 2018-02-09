@@ -8,10 +8,10 @@ exports.js = () => {
 
     data () {
       return {
-        isEditable: false,
+        canEdit: false,
         newCategory: '',
         categories: [],
-        active: []
+        actives: []
       }
     },
 
@@ -20,19 +20,19 @@ exports.js = () => {
         this.get('/category/findAll', (resp) => {
           if (resp.success) {
             this.categories = resp.data
-            this.setActiveStatus(resp.data)
+            this.setActivesStatus(resp.data)
           }
         })
       },
 
-      setActiveStatus (data) {
-        this.active = []
+      setActivesStatus (data) {
+        this.actives = []
         data.forEach(item => {
           let status = { category: false, subcategories: [] }
           item.subcategories.forEach(() => {
             status.subcategories.push(false)
           })
-          this.active.push(status)
+          this.actives.push(status)
         })
       },
 
@@ -42,14 +42,13 @@ exports.js = () => {
           window.alert('please delete second and try angin')
           return
         }
-        this.post('/category/del', {
-          category
-        }, (resp) => {
+        this.post('/category/del', { category }, (resp) => {
           if (!resp.success) { return }
           window.alert('delete success')
           this.getCategory()
         })
       },
+
       delSubcategory (category, subcategory) {
         this.post('/subcategory/del', {
           category, subcategory
@@ -60,20 +59,29 @@ exports.js = () => {
         })
       },
 
-      addBtn (key) {
-        let currentDom = this.$refs[key][0]
-        let editEvent = this.editCategory(currentDom, key)
-        let editBtn = this.addDom(key, 'pencil', editEvent)
-        let updateEvent = this.updateCategory(currentDom, key, this.categories, (urlPrefix, category, newCategory) => {
+      updateEvent (currDom, key) {
+        return this.updateCategory(currDom, key, this.categories, (urlPrefix, category, newCategory) => {
+          this.canEdit = false
+          if (!newCategory) {
+            let txtDom = currDom.getElementsByClassName('text')[0]
+            txtDom.innerHTML = category
+            return
+          }
           if (category === newCategory) { return }
           let url = urlPrefix === 'category' ? '/category' : '/subcategory'
           this.post(`${url}/update`, { category, newCategory }, (resp) => {
             if (resp.success) { this.getCategory() }
           })
         })
-        let updateBtn = this.addDom(key + '_', 'check', updateEvent)
-        currentDom.append(editBtn)
-        currentDom.append(updateBtn)
+      },
+
+      addBtn (key) {
+        let currDom = this.$refs[key][0]
+        let editEvent = this.editCategory(currDom, key)
+        let editBtn = this.addDom(key, 'pencil', editEvent)
+        let updateBtn = this.addDom(key + '_', 'check', this.updateEvent(currDom, key))
+        currDom.append(editBtn)
+        currDom.append(updateBtn)
       },
 
       delBtn (key) {
@@ -95,7 +103,8 @@ exports.js = () => {
       },
 
       editCategory (dom, id) {
-        return function () {
+        return () => {
+          this.canEdit = true
           let txtDom = dom.getElementsByClassName('text')[0]
           txtDom.setAttribute('contenteditable', true)
           txtDom.focus()
@@ -103,7 +112,7 @@ exports.js = () => {
       },
 
       updateCategory (dom, id, categories, callback) {
-        return function () {
+        return () => {
           let txtDom = dom.getElementsByClassName('text')[0]
           txtDom.setAttribute('contenteditable', false)
 
@@ -123,19 +132,26 @@ exports.js = () => {
         }
       },
 
-      emit (category, index, subIndex) {
-        this.setActiveStatus(this.categories)
+      setActive (category, index, subIndex) {
+        if (this.canEdit) { return }
+        this.setActivesStatus(this.categories)
         if (subIndex || subIndex === 0) {
-          this.active[index].subcategories.splice(subIndex, 1, true)
+          this.actives[index].subcategories.splice(subIndex, 1, true)
         } else {
-          this.active[index].category = true
+          this.actives[index].category = true
         }
+        this.emit(category)
+      },
+
+      enter (ev) {
+        console.log(ev)
+      },
+
+      emit (category) {
         this.$emit('clicked', category)
       }
     },
 
-    mounted () {
-      this.getCategory()
-    }
+    mounted () { this.getCategory() }
   }
 }
