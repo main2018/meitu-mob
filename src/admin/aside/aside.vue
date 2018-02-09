@@ -1,22 +1,26 @@
 <template lang="pug">
   ul.aside
-    li.category.bd-1px-b(v-for="(category, index) in categories")
+    li.category.bd-1px-b(v-for="(item, idx) in categories")
 
-      div.first(:ref="'' + index"
-        @mouseenter="addBtn('' + index)"
-        @mouseleave="delBtn('' + index)"
+      div.first(:ref="'' + idx"
+        @mouseenter="addBtn('' + idx)"
+        @mouseleave="delBtn('' + idx)"
         )
-        .text(@click="emit([category.category])") {{category.category}}
-        .btn.mdi.mdi-minus( @click="delCategory(category.category, index)")
+        .active(v-show="active[idx].category")
+        .text(@click="emit([item.category], idx)") {{item.category}}
+        .btn.mdi.mdi-minus( @click="delCategory(item.category, idx)")
 
       ol.subcategory
-        li.bd-1px-t(v-for="(subcategory, subIndex) in category.subcategories")
-          .second(:ref="`${index}_${subIndex}`"
-            @mouseenter="addBtn(`${index}_${subIndex}`)"
-            @mouseleave="delBtn(`${index}_${subIndex}`)"
+        li.bd-1px-t(v-for="(subcategory, _idx) in item.subcategories")
+          .second(:ref="`${idx}_${_idx}`"
+            @mouseenter="addBtn(`${idx}_${_idx}`)"
+            @mouseleave="delBtn(`${idx}_${_idx}`)"
             )
-            .text(@click="emit([category.category, subcategory])") {{subcategory}}
-            .btn.mdi.mdi-minus(@click="delSubcategory(category.category, subcategory)")
+            .active(v-show="active[idx].subcategories[_idx]")
+            .text(
+              @click="emit([item.category, subcategory], idx, _idx)"
+              ) {{subcategory}}
+            .btn.mdi.mdi-minus(@click="delSubcategory(item.category, subcategory)")
 
     category(@update="getCategory")
 </template>

@@ -2,7 +2,7 @@
   line-height 2rem
   .first
     .text
-      padding 0 10px
+      padding-left 10px
       font-weight 700
 .first,
 .second
@@ -12,13 +12,16 @@
     .btn
       display block
 
-.text,
-.new-category
+  .active
+    display block
+    margin-right -.5rem
+    width .5rem
+    background $color-theme
+
+.second .text
+    margin-left 20px
+.text
   flex 1
-.new-category
-  display block
-  width 100%
-  padding .4rem 10px
 .btn
   display none
   margin 5px 10px 5px 0
@@ -34,4 +37,4 @@
 .subcategory
   list-style disc
   background #eee
-  padding-left 10px;
+  // padding-left 10px;

@@ -1,6 +1,6 @@
 <template lang="pug">
   .home
-    // .aside
+    .aside
       adminAside(@clicked="getCategory")
     .content
       publish(:crumb="categories")

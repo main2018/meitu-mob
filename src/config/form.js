@@ -1,5 +1,6 @@
 export const formConf = [
   {
+  /*
     type: 'file',
     model: 'coverimg'
   }, {
@@ -7,6 +8,7 @@ export const formConf = [
     model: 'images',
     multiple: true
   }, {
+  */
     type: 'text',
     model: 'title',
     label: 'title',
@@ -16,6 +18,7 @@ export const formConf = [
     type: 'textarea',
     model: 'text',
     required: true
+    /*
   }, {
     type: 'range',
     model: 'year',
@@ -23,6 +26,7 @@ export const formConf = [
     max: 100,
     step: 1,
     value: 50
+    */
   }, {
     type: 'button',
     value: 'submit',

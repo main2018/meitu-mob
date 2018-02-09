@@ -10,7 +10,8 @@ exports.js = () => {
       return {
         isEditable: false,
         newCategory: '',
-        categories: []
+        categories: [],
+        active: []
       }
     },
 
@@ -19,9 +20,22 @@ exports.js = () => {
         this.get('/category/findAll', (resp) => {
           if (resp.success) {
             this.categories = resp.data
+            this.setActiveStatus(resp.data)
           }
         })
       },
+
+      setActiveStatus (data) {
+        this.active = []
+        data.forEach(item => {
+          let status = { category: false, subcategories: [] }
+          item.subcategories.forEach(() => {
+            status.subcategories.push(false)
+          })
+          this.active.push(status)
+        })
+      },
+
       delCategory (category, index) {
         let subcategories = this.categories[index].subcategories
         if (subcategories.length !== 0) {
@@ -82,7 +96,7 @@ exports.js = () => {
 
       editCategory (dom, id) {
         return function () {
-          let txtDom = dom.firstChild
+          let txtDom = dom.getElementsByClassName('text')[0]
           txtDom.setAttribute('contenteditable', true)
           txtDom.focus()
         }
@@ -90,7 +104,7 @@ exports.js = () => {
 
       updateCategory (dom, id, categories, callback) {
         return function () {
-          let txtDom = dom.firstChild
+          let txtDom = dom.getElementsByClassName('text')[0]
           txtDom.setAttribute('contenteditable', false)
 
           let idxArr = id.split('_')
@@ -109,7 +123,13 @@ exports.js = () => {
         }
       },
 
-      emit (category) {
+      emit (category, index, subIndex) {
+        this.setActiveStatus(this.categories)
+        if (subIndex || subIndex === 0) {
+          this.active[index].subcategories.splice(subIndex, 1, true)
+        } else {
+          this.active[index].category = true
+        }
         this.$emit('clicked', category)
       }
     },

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .publish(ref="form")
+  .publish.bd-1px-l(ref="form")
     p {{breadcrumb}}
     customform
 </template>
