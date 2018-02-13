@@ -34,3 +34,18 @@ export function get (url, success, fail) {
   })
   .catch(err => { console.log(err) })
 }
+
+export const ajax = {
+  get (path, cb) {
+    let url = `${VUE_SERVER}${path}`
+    axios.get(url).then((resp) => {
+      if (resp.data.success) { cb(resp.data.data) }
+    })
+  },
+  post (path, json, cb) {
+    let url = `${VUE_SERVER}${path}`
+    axios.post(url, json).then((resp) => {
+      if (resp.data.success) { cb(resp.data.data) }
+    })
+  }
+}

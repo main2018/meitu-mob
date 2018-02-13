@@ -38,6 +38,9 @@ export default {
   },
 
   mounted () {
+    this.$store.dispatch('getAlbums')
+    this.$store.dispatch('getCategory')
+    console.log('ttt: ', this.$store.getters)
   }
 
 }

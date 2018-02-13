@@ -1,4 +1,4 @@
-import { post, get } from './ajax-axios'
+import { post, get, ajax } from './ajax-axios'
 import { getLocalStore, setLocalStore } from './localStorage'
 import { log } from './logger'
 import { postForm } from './axios-file'
@@ -50,3 +50,5 @@ export const Log = {
   },
   log: log
 }
+
+export const axiosAjax = ajax
