@@ -9,32 +9,20 @@ exports.js = () => {
     data () {
       return {
         canEdit: false,
-        newCategory: '',
-        categories: [],
-        actives: []
+        newCategory: ''
+      }
+    },
+
+    computed: {
+      categories () {
+        return this.$store.getters.categories
+      },
+      actives () {
+        return this.$store.getters.categoryStatus
       }
     },
 
     methods: {
-      getCategory () {
-        this.get('/category/findAll', (resp) => {
-          if (resp.success) {
-            this.categories = resp.data
-            this.setActivesStatus(resp.data)
-          }
-        })
-      },
-
-      setActivesStatus (data) {
-        this.actives = []
-        data.forEach(item => {
-          let status = { category: false, subcategories: [] }
-          item.subcategories.forEach(() => {
-            status.subcategories.push(false)
-          })
-          this.actives.push(status)
-        })
-      },
 
       delCategory (category, index) {
         let subcategories = this.categories[index].subcategories
@@ -45,7 +33,7 @@ exports.js = () => {
         this.post('/category/del', { category }, (resp) => {
           if (!resp.success) { return }
           window.alert('delete success')
-          this.getCategory()
+          this.$store.dispatch('getCategory')
         })
       },
 
@@ -55,7 +43,7 @@ exports.js = () => {
         }, (resp) => {
           if (!resp.success) { return }
           window.alert('delete success')
-          this.getCategory()
+          this.$store.dispatch('getCategory')
         })
       },
 
@@ -70,7 +58,9 @@ exports.js = () => {
           if (category === newCategory) { return }
           let url = urlPrefix === 'category' ? '/category' : '/subcategory'
           this.post(`${url}/update`, { category, newCategory }, (resp) => {
-            if (resp.success) { this.getCategory() }
+            if (resp.success) {
+              this.$store.dispatch('getCategory')
+            }
           })
         })
       },
@@ -134,12 +124,11 @@ exports.js = () => {
 
       setActive (category, index, subIndex) {
         if (this.canEdit) { return }
-        this.setActivesStatus(this.categories)
+        let order = { index }
         if (subIndex || subIndex === 0) {
-          this.actives[index].subcategories.splice(subIndex, 1, true)
-        } else {
-          this.actives[index].category = true
+          order.subIndex = subIndex
         }
+        this.$store.dispatch('setStatus', order)
         this.emit(category)
       },
 
@@ -147,16 +136,12 @@ exports.js = () => {
         console.log(ev)
       },
 
-      pageRefresh () {
-        this.getCategory()
-        location.reload()
-      },
-
       emit (category) {
         this.$emit('clicked', category)
       }
     },
 
-    mounted () { this.getCategory() }
+    mounted () {
+    }
   }
 }

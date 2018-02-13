@@ -2,7 +2,7 @@ import { axiosAjax } from 'common/js'
 
 const state = {
   categories: [],
-  categorystatus: []
+  categoryStatus: []
 }
 
 const actions = {
@@ -12,6 +12,10 @@ const actions = {
 
   setCategory ({ commit }, categories) {
     commit('SET_CATEGORY', categories)
+  },
+
+  setStatus ({ commit }, order) {
+    commit('SET_STATUS', order)
   }
 }
 
@@ -26,12 +30,28 @@ const mutations = {
 
   SET_CATEGORY (state, categories) {
     state.categories = categories
+  },
+
+  SET_STATUS (state, order) {
+    state.categoryStatus.forEach((item, idx) => {
+      item.category = false
+      item.subcategories.forEach((subItem, subIdx) => {
+        item.subcategories.splice(subIdx, 1, false)
+      })
+    })
+    let { index, subIndex } = order
+    let current = state.categoryStatus[index]
+    if (subIndex || subIndex === 0) {
+      current.subcategories.splice(subIndex, 1, true)
+    } else {
+      current.category = true
+    }
   }
 }
 
 const getters = {
   categories: state => state.categories,
-  categorystatus: state => state.categorystatus
+  categoryStatus: state => state.categoryStatus
 }
 
 export default {
@@ -42,13 +62,13 @@ export default {
 }
 
 function setActivesStatus (state, data) {
-  state.categorystatus = []
+  state.categoryStatus = []
   data.forEach(item => {
     let status = { category: false, subcategories: [] }
     item.subcategories.forEach(() => {
       status.subcategories.push(false)
     })
-    state.categorystatus.push(status)
+    state.categoryStatus.push(status)
   })
 }
 

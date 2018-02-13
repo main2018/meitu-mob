@@ -2,7 +2,7 @@
   .home
     .aside
       adminAside(@clicked="getCategory")
-    .content
+    // .content
       publish(:crumb="categories")
 </template>
 
