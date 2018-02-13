@@ -12,7 +12,6 @@ exports.js = () => {
 
     data () {
       return {
-        categories: [],
         category: '',
         subcategory: '',
         currCategory: ''
@@ -20,20 +19,18 @@ exports.js = () => {
     },
 
     computed: {
+      categories () {
+        return this.$store.getters.categories
+      }
     },
 
     watch: {
+      categories () {
+        this.currCategory = this.categories[0].category
+      }
     },
 
     methods: {
-      getCategory () {
-        this.get('/category/findAll', (resp) => {
-          if (resp.success) {
-            this.categories = resp.data
-            this.currCategory = this.categories[0].category
-          }
-        })
-      },
       addCategory () {
         if (!this.category) { return }
         this.post('/category/add', {
@@ -42,9 +39,8 @@ exports.js = () => {
           if (!resp.success) { return }
           window.alert('publish success')
           this.category = ''
-          this.getCategory()
+          this.$store.dispatch('getCategory')
         })
-        this.emitClick()
       },
       addSubcategory () {
         this.post('/subcategory/add', {
@@ -54,17 +50,12 @@ exports.js = () => {
           if (!resp.success) { return }
           window.alert('publish success')
           this.subcategory = ''
-          this.getCategory()
+          this.$store.dispatch('getCategory')
         })
-        this.emitClick()
-      },
-      emitClick () {
-        this.$emit('update')
       }
     },
 
     mounted () {
-      this.getCategory()
     }
   }
 }

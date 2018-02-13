@@ -1,7 +1,8 @@
 import { axiosAjax } from 'common/js'
 
 const state = {
-  categories: []
+  categories: [],
+  categorystatus: []
 }
 
 const actions = {
@@ -19,6 +20,7 @@ const mutations = {
     let path = '/category/findAll'
     axiosAjax.get(path, resp => {
       state.categories = resp
+      setActivesStatus(state, resp)
     })
   },
 
@@ -28,7 +30,8 @@ const mutations = {
 }
 
 const getters = {
-  categories: state => state.categories
+  categories: state => state.categories,
+  categorystatus: state => state.categorystatus
 }
 
 export default {
@@ -37,3 +40,15 @@ export default {
   actions,
   mutations
 }
+
+function setActivesStatus (state, data) {
+  state.categorystatus = []
+  data.forEach(item => {
+    let status = { category: false, subcategories: [] }
+    item.subcategories.forEach(() => {
+      status.subcategories.push(false)
+    })
+    state.categorystatus.push(status)
+  })
+}
+

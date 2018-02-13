@@ -147,6 +147,11 @@ exports.js = () => {
         console.log(ev)
       },
 
+      pageRefresh () {
+        this.getCategory()
+        location.reload()
+      },
+
       emit (category) {
         this.$emit('clicked', category)
       }

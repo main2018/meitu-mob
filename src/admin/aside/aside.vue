@@ -26,7 +26,7 @@
               ) {{subcategory}}
             .btn.mdi.mdi-minus(@click="delSubcategory(item.category, subcategory)")
 
-    category(@update="getCategory")
+    category(@update="pageRefresh")
 </template>
 
 <script type="text/ecmascript-6">
