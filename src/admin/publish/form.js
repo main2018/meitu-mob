@@ -13,6 +13,13 @@ export const customform = {
       postJson: genModel(formConf)
     }
   },
+  computed: {
+    category () {
+      console.log('in gettest: ', this.$store.getters)
+      return this.$store.getters.categories
+    }
+  },
+
   methods: {
     test () {
       console.log(this.postJson)
@@ -32,7 +39,7 @@ function getFile (event) {
 
 function publish (url) {
   let pass = true
-  formConf.forEach((json) => {
+  formConf.forEach(json => {
     if (!json.required) { return }
     pass = pass && this.postJson[json.model]
   })

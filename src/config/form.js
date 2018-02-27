@@ -1,9 +1,11 @@
 export const formConf = [
   {
     type: 'select',
+    options: ['1', '3'],
     model: 'category'
   }, {
     type: 'select',
+    options: ['one', 'two'],
     model: 'subcategory'
   }, {
   /*
@@ -38,5 +40,11 @@ export const formConf = [
     value: 'submit',
     event: {
       click: 'publish(/album/add)'
+    }
+  }, {
+    type: 'button',
+    value: 'test',
+    event: {
+      click: 'test'
     }
   }]

@@ -1,7 +1,7 @@
 import { CLASS_PREFIX } from 'common/constant'
 
 export function genTemplate (arr) {
-  console.log(`<ul class="${CLASS_PREFIX}form">${genLiDom(arr)}</ul>`)
+  // console.log(`<ul class="${CLASS_PREFIX}form">${genLiDom(arr)}</ul>`)
   return `<ul class="${CLASS_PREFIX}form">${genLiDom(arr)}</ul>`
 }
 
@@ -10,6 +10,7 @@ export function genModel (arr) {
   arr.forEach(json => {
     if (json.type === 'file' || json.type === 'button') { return }
     model[json.model] = ''
+    if (json.options) { model[json.model] = json.options[0] }
   })
   return model
 }
@@ -22,7 +23,9 @@ function genLiDom (arr) {
     liDom += `
     <li class="${CLASS_PREFIX}item">
       ${genLabel(json)}
-      <${element} ${genAttribute(json)}></${element}>
+      <${element} ${genAttribute(json)}>
+        ${genOptions(json, json.options)}
+      </${element}>
     </li>`
   })
   return liDom
@@ -49,6 +52,14 @@ function genElement (type) {
   return element
 }
 
+function genOptions (json, options) {
+  let elements = ''
+  if (json.type === 'select' && options) {
+    options.forEach(opt => { elements += `<option>${opt}</option>` })
+  }
+  return elements
+}
+
 function genAttribute (json) {
   let attr = `${bindModel(json)} name="${json.model}"`
   for (let key in json) {
@@ -61,7 +72,7 @@ function genAttribute (json) {
 
 function needAddAttr (key, formJson) {
   let needAdd = true
-  if (key === 'model') { needAdd = false }
+  if (key === 'model' || key === 'options') { needAdd = false }
   if (key === 'type' && formJson.type === 'select') { needAdd = false }
   return needAdd
 }
