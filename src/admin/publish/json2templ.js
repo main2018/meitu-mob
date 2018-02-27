@@ -1,6 +1,7 @@
-const CLASS_PREFIX = 'aw-'
+import { CLASS_PREFIX } from 'common/constant'
 
 export function genTemplate (arr) {
+  console.log(`<ul class="${CLASS_PREFIX}form">${genLiDom(arr)}</ul>`)
   return `<ul class="${CLASS_PREFIX}form">${genLiDom(arr)}</ul>`
 }
 
@@ -17,27 +18,52 @@ function genLiDom (arr) {
   let liDom = ''
   let element = ''
   arr.forEach(json => {
-    element = json.type === 'textarea' ? 'textarea' : 'input'
+    element = genElement(json.type)
     liDom += `
     <li class="${CLASS_PREFIX}item">
-      <label for="${json.model}">
-        ${json.required ? '<span class="aw-warn">*</span>' : ''}
-        ${json.label || json.model || ''}
-      </label>
+      ${genLabel(json)}
       <${element} ${genAttribute(json)}></${element}>
     </li>`
   })
   return liDom
 }
 
+function genLabel (json) {
+  if (!json.label && !json.model) { return '' }
+  let mark = json.required ? '<span class="aw-warn">*</span>' : ''
+  return `<label for="${json.model}"> ${mark}${json.label || json.model} </label>`
+}
+
+function genElement (type) {
+  let element = ''
+  switch (type) {
+    case 'textarea':
+      element = 'textarea'
+      break
+    case 'select':
+      element = 'select'
+      break
+    default:
+      element = 'input'
+  }
+  return element
+}
+
 function genAttribute (json) {
   let attr = `${bindModel(json)} name="${json.model}"`
   for (let key in json) {
-    if (key === 'model') { continue }
+    if (!needAddAttr(key, json)) { continue }
     attr += key === 'event' ? `${bindEvent(json)}` : `${key}="${json[key]}"`
   }
   if (json.type === 'file') { attr += ` @change="getFile($event)"` }
   return attr
+}
+
+function needAddAttr (key, formJson) {
+  let needAdd = true
+  if (key === 'model') { needAdd = false }
+  if (key === 'type' && formJson.type === 'select') { needAdd = false }
+  return needAdd
 }
 
 function bindModel (json) {

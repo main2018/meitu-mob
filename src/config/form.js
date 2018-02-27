@@ -1,5 +1,11 @@
 export const formConf = [
   {
+    type: 'select',
+    model: 'category'
+  }, {
+    type: 'select',
+    model: 'subcategory'
+  }, {
   /*
     type: 'file',
     model: 'coverimg'
