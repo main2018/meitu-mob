@@ -2,54 +2,30 @@
   .home
     .aside
       adminAside(@clicked="getCategory")
-    .content
-      p {{breadcrumb}}
-      publish(:crumb="categories")
+    .container
+      .nav.bd-1px-b
+        .crumb {{breadcrumb || '/'}}
+        input.add(
+          type="button"
+          :value="isPublishShow ? 'unpublish' : 'publish'"
+          v-show="categories.length !== 0"
+          @click="showPublish"
+          )
+      .content(
+        v-show="!isPublishShow && adminAlbums.length !== 0"
+        ) {{adminAlbums}}
+      .blank-page(
+        v-show="adminAlbums.length === 0"
+        ) no Records
+
+
+      .publish(v-show="isPublishShow")
+        publish(:crumb="categories")
 </template>
 
-<script>
-import AdminAside from 'admin/aside/aside'
-import Publish from 'admin/publish/publish'
-export default {
-  name: 'home',
-  components: {
-    AdminAside,
-    Publish
-  },
-
-  props: {
-  },
-
-  data () {
-    return {
-      categories: []
-    }
-  },
-
-  computed: {
-    breadcrumb () {
-      if (this.categories.length === 0) { return '' }
-      return this.categories.reduce((pre, nxt) => {
-        return `${pre} / ${nxt}`
-      })
-    }
-  },
-
-  watch: {
-  },
-
-  methods: {
-    getCategory (category) {
-      this.categories = category
-    }
-  },
-
-  mounted () {
-    this.$store.dispatch('getAlbums')
-    this.$store.dispatch('getCategory')
-  }
-
-}
+<script type="text/ecmascript-6">
+  import { js } from './home-vue.js'
+  export default js.call(this)
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

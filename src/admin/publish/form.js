@@ -55,12 +55,19 @@ function publish (url) {
     pass = pass && this.postJson[json.model]
   })
   if (!pass) { return alert('info no complete') }
+
   for (let key in category) {
     if (category[key]) { this.postJson[key] = category[key] }
-  }
+  } // add category
+
   for (let key in this.postJson) {
     this.formData.set(key, this.postJson[key])
-  }
+  } // construct formData
+
+  for (let key in category) {
+    if (!category[key]) { this.formData.delete(key) }
+  } // move blank category
+
   axios.post(VUE_SERVER + url, this.formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   }).then((resp) => {

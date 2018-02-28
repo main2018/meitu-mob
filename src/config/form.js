@@ -1,5 +1,6 @@
 export const formConf = [
   {
+    /*
     type: 'select',
     options: ['one', 'two'],
     model: 'select'
@@ -11,6 +12,7 @@ export const formConf = [
     model: 'images',
     multiple: true
   }, {
+  */
     type: 'text',
     model: 'title',
     label: 'title',
