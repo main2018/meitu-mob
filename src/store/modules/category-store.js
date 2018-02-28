@@ -2,6 +2,7 @@ import { axiosAjax } from 'common/js'
 
 const state = {
   categories: [],
+  activeCategory: [],
   categoryStatus: []
 }
 
@@ -12,6 +13,10 @@ const actions = {
 
   setCategory ({ commit }, categories) {
     commit('SET_CATEGORY', categories)
+  },
+
+  setActiveCategory ({ commit }, activeCategory) {
+    commit('SET_ACTIVE_CATEGORY', activeCategory)
   },
 
   setStatus ({ commit }, order) {
@@ -30,6 +35,10 @@ const mutations = {
 
   SET_CATEGORY (state, categories) {
     state.categories = categories
+  },
+
+  SET_ACTIVE_CATEGORY (state, activeCategory) {
+    state.activeCategory = activeCategory
   },
 
   SET_STATUS (state, order) {
@@ -51,6 +60,7 @@ const mutations = {
 
 const getters = {
   categories: state => state.categories,
+  activeCategory: state => state.activeCategory,
   categoryStatus: state => state.categoryStatus
 }
 

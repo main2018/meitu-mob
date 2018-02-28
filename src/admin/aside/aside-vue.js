@@ -129,6 +129,7 @@ exports.js = () => {
           order.subIndex = subIndex
         }
         this.$store.dispatch('setStatus', order)
+        this.$store.dispatch('setActiveCategory', category)
         this.emit(category)
       },
 

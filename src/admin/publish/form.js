@@ -15,16 +15,18 @@ export const customform = {
   },
   computed: {
     category () {
-      console.log('in gettest: ', this.$store.getters)
+      console.log(this.$store.getters)
       return this.$store.getters.categories
     }
   },
 
   methods: {
     test () {
-      console.log(this.postJson)
+      console.log(this.getCategory())
+      // console.log(this.postJson)
     },
     publish,
+    getCategory,
     getFile
   }
 }
@@ -37,22 +39,34 @@ function getFile (event) {
   }
 }
 
+function getCategory () {
+  let activeCategory = this.$store.getters.activeCategory
+  return {
+    category: activeCategory[0],
+    subcategory: activeCategory[1]
+  }
+}
+
 function publish (url) {
   let pass = true
+  let category = this.getCategory()
   formConf.forEach(json => {
     if (!json.required) { return }
     pass = pass && this.postJson[json.model]
   })
   if (!pass) { return alert('info no complete') }
+  for (let key in category) {
+    if (category[key]) { this.postJson[key] = category[key] }
+  }
   for (let key in this.postJson) {
-    this.formData.append(key, this.postJson[key])
+    this.formData.set(key, this.postJson[key])
   }
   axios.post(VUE_SERVER + url, this.formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   }).then((resp) => {
     if (resp.data.success) {
-      for (let key in this.postJson) { this.postJson[key] = '' }
-      alert('publish success')
+      // for (let key in this.postJson) { this.postJson[key] = '' }
+      // alert('publish success')
     }
   })
   /*

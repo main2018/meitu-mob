@@ -1,7 +1,8 @@
 <template lang="pug">
   .publish.bd-1px-l(ref="form")
-    p {{breadcrumb}}
-    customform
+    // p {{breadcrumb}}
+    .form-wrapper
+      customform
 </template>
 
 <script type="text/ecmascript-6">

@@ -1,8 +1,9 @@
 <template lang="pug">
   .home
-    // .aside
+    .aside
       adminAside(@clicked="getCategory")
     .content
+      p {{breadcrumb}}
       publish(:crumb="categories")
 </template>
 
@@ -26,6 +27,12 @@ export default {
   },
 
   computed: {
+    breadcrumb () {
+      if (this.categories.length === 0) { return '' }
+      return this.categories.reduce((pre, nxt) => {
+        return `${pre} / ${nxt}`
+      })
+    }
   },
 
   watch: {
@@ -40,7 +47,6 @@ export default {
   mounted () {
     this.$store.dispatch('getAlbums')
     this.$store.dispatch('getCategory')
-    console.log('ttt: ', this.$store.getters)
   }
 
 }
