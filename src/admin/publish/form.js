@@ -72,8 +72,10 @@ function publish (url) {
     headers: { 'Content-Type': 'multipart/form-data' }
   }).then((resp) => {
     if (resp.data.success) {
-      // for (let key in this.postJson) { this.postJson[key] = '' }
-      // alert('publish success')
+      for (let key in this.postJson) { this.postJson[key] = '' }
+      this.$store.dispatch('hidePublish')
+      this.$store.dispatch('getAdminAlbums', this.$store.getters.activeCategory)
+      alert('publish success')
     }
   })
   /*
