@@ -17,7 +17,7 @@
         .card-wrapper(
           v-for="album in adminAlbums"
           )
-          card(:content="album")
+          card(:content="album" :editable="editable")
       .blank-page(
         v-show="adminAlbums.length === 0"
         ) no Records

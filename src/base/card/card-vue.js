@@ -9,6 +9,10 @@ exports.js = () => {
       content: {
         type: Object,
         default: () => {}
+      },
+      editable: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -19,7 +23,6 @@ exports.js = () => {
 
     computed: {
       coverImgStyle () {
-        console.log(this.$refs.card)
         return `
         width: 100%;
         height: 0;
@@ -42,11 +45,16 @@ exports.js = () => {
           alert('no detail')
           return
         }
+        if (this.editable) {
+          console.log('in Edit')
+          return
+        }
         this.$router.push({
           path: '/detail',
           query: { id: this.content.id }
         })
-      }
+      },
+      format (str) { return str.substr(0, 10) }
     },
 
     mounted () {

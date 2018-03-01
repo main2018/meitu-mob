@@ -1,17 +1,15 @@
 <template lang="pug">
   .card(ref="card")
-    // img(
-      :src="content.img"
-      )
-    .img(
-      ref="img"
-      :style="coverImgStyle"
-      )
-    h3(
+    .img(:style="coverImgStyle")
+    .title(
       v-text="content.title"
       @click="goDetail"
       ) {content.title}
-    time(v-text="content.time")
+    .foot
+      .time(v-text="format(content.time)")
+      .category(v-if="content.subcategory || content.category")
+        span {{content.category}}
+        span(v-if="content.subcategory")  | {{content.subcategory}}
 </template>
 
 <script type="text/ecmascript-6">

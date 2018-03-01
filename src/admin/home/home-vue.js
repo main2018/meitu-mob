@@ -19,7 +19,8 @@ exports.js = () => {
 
     data () {
       return {
-        categories: []
+        categories: [],
+        editable: true
       }
     },
 
