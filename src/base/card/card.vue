@@ -6,7 +6,10 @@
       @click="goDetail"
       ) {content.title}
     .foot
-      .time(v-text="format(content.time)")
+      .time(
+        v-if="content.time"
+        v-text="format(content.time)"
+        )
       .category(v-if="content.subcategory || content.category")
         span {{content.category}}
         span(v-if="content.subcategory")  | {{content.subcategory}}

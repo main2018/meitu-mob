@@ -16,6 +16,9 @@ exports.js = () => {
     },
 
     computed: {
+      categories () {
+        return this.$store.getters.categories
+      }
     },
 
     watch: {

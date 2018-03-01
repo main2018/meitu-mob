@@ -54,7 +54,7 @@ exports.js = () => {
           query: { id: this.content.id }
         })
       },
-      format (str) { return str.substr(0, 10) }
+      format (str) { return str ? str.substr(0, 10) : null }
     },
 
     mounted () {

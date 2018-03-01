@@ -5,6 +5,7 @@
       li(@click="$router.push('/design')") Pic
       li(@click="$router.push('/video')") Video
       li(@click="$router.push('/media')") Media
+      li(v-for="item in categories") {{item.category}}
 </template>
 
 <script type="text/ecmascript-6">

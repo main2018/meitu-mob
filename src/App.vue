@@ -18,6 +18,9 @@ export default {
     Bar,
     Inscribe
   },
-  name: 'app'
+  name: 'app',
+  mounted () {
+    this.$store.dispatch('getCategory')
+  }
 }
 </script>

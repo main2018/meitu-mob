@@ -33,7 +33,7 @@ const mutations = {
 
   GET_ADMIN_ALBUMS (state, category) {
     let path = '/album/findByCategory'
-    axiosAjax.post(path, { category: category }, resp => {
+    axiosAjax.post(path, { category }, resp => {
       state.adminAlbums = resp
     })
   },

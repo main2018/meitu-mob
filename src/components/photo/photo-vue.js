@@ -31,7 +31,7 @@ exports.js = () => {
     },
 
     mounted () {
-      this.post('/album/find', {category: 'one'}, (resp) => {
+      this.post('/album/findByCategory', {category: 'one'}, (resp) => {
         console.log(resp)
       })
       let album = this.$store.getters.photos

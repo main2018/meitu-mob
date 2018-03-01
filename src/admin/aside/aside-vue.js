@@ -130,7 +130,10 @@ exports.js = () => {
         }
         this.$store.dispatch('setStatus', order)
         this.$store.dispatch('setActiveCategory', category)
-        this.$store.dispatch('getAdminAlbums', category)
+        this.$store.dispatch('getAdminAlbums', {
+          category: category[0],
+          subcategory: category[1]
+        })
         this.emit(category)
       },
 
