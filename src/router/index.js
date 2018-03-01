@@ -10,10 +10,11 @@ import Video from 'comp/video/video.vue'
 import Media from 'comp/media/media.vue'
 import Detail from 'comp/detail/detail.vue'
 import Admin from 'admin/home/home.vue'
+import { dynamicWrapper as Dynamic } from 'base/str-templ/dynamic-wrapper.js'
 
 Vue.use(Router)
 
-export default new Router({
+let router = {
   mode: 'history',
   routes: [
     {
@@ -52,6 +53,12 @@ export default new Router({
       path: '/mediadetail',
       name: 'mediaDetail',
       component: mediaDetail
+    }, {
+      path: '/dynamic',
+      name: 'dynamic',
+      component: Dynamic
     }
   ]
-})
+}
+
+export default new Router(router)
