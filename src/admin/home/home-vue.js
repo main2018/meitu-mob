@@ -1,11 +1,14 @@
 exports.js = () => {
+  // const { VUE_SERVER } = require('config/vue-remote-server.js')
   const AdminAside = require('admin/aside/aside')
   const Publish = require('admin/publish/publish')
+  const Card = require('base/card/card')
   return {
     name: 'admin-home',
     components: {
       AdminAside,
-      Publish
+      Publish,
+      Card
     },
 
     created () {

@@ -13,7 +13,11 @@
           )
       .content(
         v-show="!isPublishShow && adminAlbums.length !== 0"
-        ) {{adminAlbums}}
+        )
+        .card-wrapper(
+          v-for="album in adminAlbums"
+          )
+          card(:content="album")
       .blank-page(
         v-show="adminAlbums.length === 0"
         ) no Records

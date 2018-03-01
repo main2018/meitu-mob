@@ -1,7 +1,11 @@
 <template lang="pug">
-  .card
-    img(
+  .card(ref="card")
+    // img(
       :src="content.img"
+      )
+    .img(
+      ref="img"
+      :style="coverImgStyle"
       )
     h3(
       v-text="content.title"
@@ -10,47 +14,9 @@
     time(v-text="content.time")
 </template>
 
-<script>
-export default {
-  name: 'card',
-  components: {
-  },
-
-  props: {
-    content: {
-      type: Object,
-      default: () => {}
-    }
-  },
-
-  data () {
-    return {
-    }
-  },
-
-  computed: {
-  },
-
-  watch: {
-  },
-
-  methods: {
-    goDetail () {
-      if (!this.content.id) {
-        alert('no detail')
-        return
-      }
-      this.$router.push({
-        path: '/detail',
-        query: { id: this.content.id }
-      })
-    }
-  },
-
-  mounted () {
-  }
-
-}
+<script type="text/ecmascript-6">
+  import { js } from './card-vue.js'
+  export default js.call(this)
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
