@@ -11,6 +11,10 @@ exports.js = () => {
       menu: {
         type: Array,
         default: () => [1, 2, 3]
+      },
+      showActive: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -63,8 +67,12 @@ exports.js = () => {
         return `margin-left:${this.contentLeft}px`
       },
       colorStyle () {
-        let left = `${this.index * 100 / this.count}%`
-        let width = `width: ${100 / this.count}%`
+        let left = 0
+        let width = '100%'
+        if (this.count) {
+          left = `${this.index * 100 / this.count}%`
+          width = `width: ${100 / this.count}%`
+        }
         return `${width};margin-left:${left}`
       }
     },

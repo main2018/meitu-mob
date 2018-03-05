@@ -1,6 +1,13 @@
 <template lang="pug">
   .dynamic
-    p dynamic
+    tab(:menu="menu")
+      .wrap(
+        v-for="(photo, index) in photos"
+        :slot="'slot-'+index"
+        )
+        ul.page-content
+          li(v-for="item in photo")
+            card(:content="item")
 </template>
 
 <script type="text/ecmascript-6">
