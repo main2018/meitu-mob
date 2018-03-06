@@ -52,7 +52,6 @@ exports.js = () => {
     },
 
     mounted () {
-      this.$store.dispatch('getAlbums')
       this.$store.dispatch('getCategory')
     }
   }

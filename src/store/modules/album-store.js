@@ -1,14 +1,15 @@
 import { axiosAjax } from 'common/js'
 
 const state = {
-  albums: [],
+  albums: {},
   adminAlbums: [],
   isPublishShow: false
 }
 
 const actions = {
-  getAlbums ({ commit }) { commit('GET_ALBUMS') },
+  getAlbumsByCategory ({ commit }, category) { commit('GET_ALBUMS_BY_CATEGORY', category) },
   setAlbums ({ commit }, albums) { commit('SET_ALBUMS', albums) },
+  getAllAlbum ({ commit }, option) { commit('GET_ALL_ALBUMS', option) },
   showPublish ({ commit }) { commit('SHOW_PUBLISH') },
   hidePublish ({ commit }) { commit('HIDE_PUBLISH') },
 
@@ -23,17 +24,25 @@ const actions = {
 }
 
 const mutations = {
-  GET_ALBUMS (state) {
-    let path = '/album/find'
-    axiosAjax.get(path, resp => {
-      state.albums = resp
+  GET_ALBUMS_BY_CATEGORY (state, category) {
+    let path = '/album/findByCategory'
+    axiosAjax.post(path, { category }, resp => {
+      state.albums[category] = formatAlbums(resp)
     })
   },
+
+  GET_ALL_ALBUMS (state, option) {
+    axiosAjax.get('/album/findAll', resp => {
+      state.albums = formatAlbums(resp)
+      // console.log(JSON.stringify(state.albums, null, 2))
+    })
+  },
+
   SET_ALBUMS (state, albums) { state.albums = albums },
 
   GET_ADMIN_ALBUMS (state, category) {
     let path = '/album/findByCategory'
-    axiosAjax.post(path, { category }, resp => {
+    axiosAjax.post(path, category, resp => {
       state.adminAlbums = resp
     })
   },
@@ -53,4 +62,28 @@ export default {
   getters,
   actions,
   mutations
+}
+
+/* albumsFormat:
+  {category-1: {
+    category: [],
+    subcategory: {subcategory-1: [], subcategory-2: []}
+  }} */
+function formatAlbums (resp) {
+  let data = {}
+  resp.forEach(album => {
+    let { category, subcategory } = album
+    if (!data[category]) {
+      data[category] = { category: [], subcategory: {} }
+    }
+    if (!album.subcategory) {
+      data[category].category.push(album)
+    } else {
+      if (!data[category].subcategory[subcategory]) {
+        data[category].subcategory[subcategory] = []
+      }
+      data[category].subcategory[subcategory].push(album)
+    }
+  })
+  return data
 }

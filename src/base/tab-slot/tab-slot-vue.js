@@ -1,12 +1,6 @@
 exports.js = () => {
   return {
     name: 'tab',
-    components: {
-    },
-
-    created () {
-    },
-
     props: {
       menu: {
         type: Array,

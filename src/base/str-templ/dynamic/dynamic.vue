@@ -1,13 +1,15 @@
 <template lang="pug">
   .dynamic
-    tab(:menu="menu")
+    // tab(:menu="menu")
       .wrap(
-        v-for="(photo, index) in photos"
+        v-for="(subAlbums, index) in albums"
         :slot="'slot-'+index"
         )
         ul.page-content
-          li(v-for="item in photo")
-            card(:content="item")
+          p {{subAlbums}}
+          li(v-for="album in subAlbums")
+            card(:content="album")
+    tab
 </template>
 
 <script type="text/ecmascript-6">

@@ -7,7 +7,7 @@
       // li(@click="$router.push('/media')") Media
       li(
         v-for="item in categories"
-        @click="$router.push(`/${item.category}`)"
+        @click="goUrl (item.category)"
         ) {{item.category}}
 </template>
 
