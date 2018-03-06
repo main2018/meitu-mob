@@ -1,14 +1,14 @@
 .tab-menu,
 .tab-content
   display flex
-  li
+  &>li
     flex 1
 .tab-title
   width 100%
   position fixed
   background #eee
 .tab-menu
-  li
+  &>li
     margin .6rem 0
     font-size .8rem
     line-height .8rem
@@ -18,17 +18,9 @@
   height 2.1rem
 .tab-content
   transition 0.5s
-  li
+  .tab-page
     width 100%
     min-height 80vh
-    /*
-  li:nth-child(1)
-    background #ccc
-  li:nth-child(2)
-    background #eee
-  li:nth-child(3)
-    background #ddd
-    */
 .tab-color
   height 2px
   background gray
@@ -36,3 +28,5 @@
 .tab-content-wrap
   width 100%
   overflow hidden
+.card-wrapper
+  margin 15px

@@ -1,7 +1,10 @@
 exports.js = () => {
+  let Card = {}
+  Card = require('base/card/card')
   return {
     name: 'tab',
     components: {
+      Card
     },
 
     created () {

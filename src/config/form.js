@@ -5,6 +5,7 @@ export const formConf = [
     options: ['one', 'two'],
     model: 'select'
   }, {
+  */
     type: 'file',
     model: 'coverimg'
   }, {
@@ -12,7 +13,6 @@ export const formConf = [
     model: 'images',
     multiple: true
   }, {
-  */
     type: 'text',
     model: 'title',
     label: 'title',

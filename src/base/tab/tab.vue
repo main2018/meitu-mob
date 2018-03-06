@@ -17,12 +17,14 @@
         ref="content"
         :style="contentStyle"
         )
-        li(
+        li.tab-page(
           v-for="content in contents"
           @touchstart="touchstart(index)"
           @touchmove="touchmove(index)"
           @touchend="touchend(index)"
-          ) {{content}}
+          )
+          ol: li.card-wrapper(v-for="item in content")
+              card(:content="item")
     .no-subcategory(
       v-show="!isTabShow"
       ) {{rootAlbums}}
