@@ -18,9 +18,8 @@ exports.js = () => {
     },
 
     computed: {
-      url () {
-        return this.$route.path
-      }
+      categories () { return this.$store.getters.categories },
+      url () { return this.$route.path }
     },
 
     watch: {
@@ -28,6 +27,7 @@ exports.js = () => {
 
     methods: {
       toggle () {
+        console.log('in')
         this.menuShow = !this.menuShow
         this.sign = this.menuShow ? '×' : '≡'
         console.log(this.url)
