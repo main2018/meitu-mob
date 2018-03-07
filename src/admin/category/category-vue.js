@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { _2space } = require('common/js/index.js')
   return {
     name: 'category',
     components: {
@@ -31,6 +32,7 @@ exports.js = () => {
     },
 
     methods: {
+      _2space,
       addCategory () {
         if (!this.category) { return }
         this.post('/category/add', {

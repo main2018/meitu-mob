@@ -2,13 +2,10 @@
   #home
     ul
       // li(@click="$router.push('/photo')") Photo
-      // li(@click="$router.push('/design')") Pic
-      // li(@click="$router.push('/video')") Video
-      // li(@click="$router.push('/media')") Media
       li(
         v-for="item in categories"
         @click="goUrl (item.category)"
-        ) {{item.category}}
+        ) {{_2space(item.category)}}
 </template>
 
 <script type="text/ecmascript-6">

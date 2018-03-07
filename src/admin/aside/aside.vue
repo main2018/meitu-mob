@@ -1,5 +1,6 @@
 <template lang="pug">
   ul.aside
+    li.brand
     li.category.bd-1px-b(v-for="(item, idx) in categories")
 
       div.first(:ref="'' + idx"
@@ -10,7 +11,7 @@
         .text(
           @keydown.13="enter($event)"
           @click="setActive([item.category], idx)"
-          ) {{item.category}}
+          ) {{_2space(item.category)}}
         .btn.mdi.mdi-minus( @click="delCategory(item.category, idx)")
 
       ol.subcategory

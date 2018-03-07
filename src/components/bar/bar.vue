@@ -1,5 +1,5 @@
 <template lang="pug">
-  .head-wrapper
+  .head-wrapper(v-show="url !== '/admin'")
     .head
       div.bar
         .brand(@click="goHome")
@@ -11,7 +11,7 @@
             v-for="item in categories"
             @click="go(`/${item.category}`)"
             ): .text
-              p {{item.category}}
+              p {{_2space(item.category)}}
               .hint-color(v-show="url==='/' + item.category")
 
           // li(@click="go('/video')")

@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { _2space } = require('common/js/index.js')
   return {
     name: 'home',
     components: {
@@ -26,7 +27,8 @@ exports.js = () => {
     methods: {
       goUrl (router) {
         this.$router.push(`/${router}`)
-      }
+      },
+      _2space
     },
 
     mounted () {

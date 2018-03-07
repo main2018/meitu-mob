@@ -1,9 +1,10 @@
 <template lang="pug">
   .category
+    .title category edit
     input.add-category(
       type="text"
       v-model="category"
-      placeholder="category name"
+      placeholder="category"
       )
     input.add-btn(
       type="button"
@@ -16,11 +17,11 @@
       option(
         v-for="item in categories"
         :value="item.category"
-        ) {{item.category}}
+        ) {{_2space(item.category)}}
     input.add-category(
       type="text"
       v-model="subcategory"
-      placeholder="subcategory name"
+      placeholder="subcategory"
       )
     input.add-btn(
       type="button"
@@ -37,10 +38,12 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
   @import './category.styl'
+input
+  background: #eee
 .category
-  margin-top 10px
+  margin-top 35px
   background: #ddd;
-  padding 10px
+  padding 0 10px 10px 10px
 .select
   margin: 1rem 0 .5rem 0;
   padding .2rem 5px

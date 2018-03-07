@@ -52,3 +52,5 @@ export const Log = {
 }
 
 export const axiosAjax = ajax
+
+export const _2space = str => str.replace(/__/g, ' ')
