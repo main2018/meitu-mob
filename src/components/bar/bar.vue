@@ -3,8 +3,8 @@
     .head
       div.bar
         .brand(@click="goHome")
-          .logo Logo
-        .icon(v-text="sign", @click="toggle")
+          // .logo Logo
+        .icon(@click="toggle") {{sign}}
       menu.menu(v-show="menuShow")
         ul
           li(
