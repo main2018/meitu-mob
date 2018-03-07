@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from 'comp/home/home'
 import mediaDetail from 'comp/media-detail/media-detail.vue'
-import About from 'comp/about/about.vue'
 import Detail from 'comp/detail/detail.vue'
 import Admin from 'admin/home/home.vue'
+// import About from 'comp/about/about.vue'
 // import Design from 'comp/design/design.vue'
 // import Video from 'comp/video/video.vue'
 // import Media from 'comp/media/media.vue'
@@ -19,9 +19,11 @@ const routes = [
   }, {
     path: '/admin',
     component: Admin
+  /*
   }, {
     path: '/about',
     component: About
+  */
   }, {
     path: '/detail',
     component: Detail
