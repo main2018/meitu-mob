@@ -1,11 +1,9 @@
 export const formConf = [
   {
-    /*
     type: 'select',
     options: ['one', 'two'],
     model: 'select'
   }, {
-  */
     type: 'file',
     model: 'coverimg'
   }, {

@@ -1,5 +1,5 @@
 exports.js = () => {
-  // const { VUE_SERVER } = require('config/vue-remote-server.js')
+  const { _2space } = require('common/js/index.js')
   const AdminAside = require('admin/aside/aside')
   const Publish = require('admin/publish/publish')
   const Card = require('base/card/card')
@@ -26,10 +26,18 @@ exports.js = () => {
 
     computed: {
       breadcrumb () {
-        if (this.categories.length === 0) { return '' }
-        return this.categories
-                   .reduce((pre, nxt) => `${pre} / ${nxt}`)
+        let categories = this.categories
+        if (categories.length === 0) { return '' }
+        console.log(categories)
+        let crumb = ''
+        if (categories[1]) {
+          crumb = categories[0] + ' / ' + categories[1]
+        } else {
+          crumb = categories[0]
+        }
+        return _2space(crumb)
       },
+
       adminAlbums () {
         return this.$store.getters.adminAlbums
       },
