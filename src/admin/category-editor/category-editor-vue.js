@@ -1,7 +1,9 @@
 exports.js = () => {
+  const ImgUpload = require('base/img-upload/img-upload')
   return {
     name: 'category-editor',
     components: {
+      ImgUpload
     },
 
     created () {
@@ -71,7 +73,7 @@ exports.js = () => {
         let trDom = this.$refs[idx][0]
         this.keyArr.forEach((item) => {
           let tdDom = trDom.getElementsByClassName(item)[0]
-          tdDom.innerHTML = this.categories[idx][item] || ''
+          tdDom.innerHTML = this.categories[idx][item] || '—'
         })
       },
       getVal (idx) {

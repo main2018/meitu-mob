@@ -1,7 +1,7 @@
 <template lang="pug">
   .category-editor
     .title
-      span.txt category editor
+      span.txt Category editor
       span.mdi.mdi-close(@click="close")
     table.table
       tr
@@ -16,9 +16,10 @@
           :ref="`${idx}-${category.order}`"
           ) {{category.order}}
         td.icon(
-          :contenteditable="status[idx]"
           :ref="`${idx}-${category.icon}`"
-          ) {{category.icon}}
+          )
+          span {{category.icon}}
+          img-upload
         td.category(
           :contenteditable="status[idx]"
           :ref="`${idx}-${category.category}`"

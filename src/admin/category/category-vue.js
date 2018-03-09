@@ -19,7 +19,7 @@ exports.js = () => {
         categoryName: '',
         subcategory: '',
         currCategory: '',
-        isEditorShow: true
+        isEditorShow: false
       }
     },
 

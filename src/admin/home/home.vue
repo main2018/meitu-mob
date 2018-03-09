@@ -5,9 +5,8 @@
     .container
       .nav.bd-1px-b
         .crumb {{breadcrumb || '/'}}
-        input.add(
-          type="button"
-          :value="isPublishShow ? 'unpublish' : 'publish'"
+        .add(
+          v-text="isPublishShow ? '×' : '+'"
           v-show="categories.length !== 0"
           @click="showPublish"
           )
