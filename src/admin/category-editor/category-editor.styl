@@ -22,14 +22,21 @@
 
 .table
   width 100%
-  th, td
+  ul
+    display flex
+    padding 0 10px
+  li
+    flex 1
     text-align left
-    padding 0 5px
     border-bottom 1px solid #ccc
-  td
-    padding 0 5px
+  .header li
+    height 2rem
+  .content li
+    height 3rem
+    padding 3px 0
+    line-height 3rem
   .mdi
     margin 0 8px
     cursor pointer
-.operator
-  width 9rem
+.iconimg
+  height 3rem

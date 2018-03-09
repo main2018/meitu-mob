@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { VUE_SERVER } = require('config/vue-remote-server.js')
   const ImgUpload = require('base/img-upload/img-upload')
   return {
     name: 'category-editor',
@@ -12,6 +13,8 @@ exports.js = () => {
 
     data () {
       return {
+        http: VUE_SERVER,
+        imgStyle: '',
         status: [],
         keyArr: ['order', 'category', 'name']
       }
@@ -32,19 +35,22 @@ exports.js = () => {
     methods: {
       close () { this.$emit('close') },
       edit (idx) {
+        this.imgStyle = 'cursor: pointer'
         this.initStatus()
         this.status.splice(idx, 1, true)
       },
       cancel (idx) {
+        this.imgStyle = ''
         this.resetVal(idx)
         this.status.splice(idx, 1, false)
       },
       check (idx) {
-        let category = this.getVal(idx)
-        category.oldCategory = this.categories[idx].category
-        this.post('/category/update', category, (resp) => {
+        this.setFormData(idx)
+        this.formData.set('oldCategory', this.categories[idx].category)
+        this.post('/category/update', this.formData, (resp) => {
           if (resp.success) { this.$store.dispatch('getCategory') }
         })
+        this.imgStyle = ''
         this.status.splice(idx, 1, false)
       },
       del (idx) {
@@ -68,20 +74,22 @@ exports.js = () => {
           tdDom.innerHTML = this.categories[idx][item] || ''
         })
       },
-      getVal (idx) {
+      setFormData (idx) {
         let trDom = this.$refs[idx][0]
-        let vals = {}
-        this.keyArr.forEach((item) => {
-          let tdDom = trDom.getElementsByClassName(item)[0]
-          let html = tdDom.innerHTML
-          let val = item === 'order' ? parseInt(html) : html
+        this.keyArr.forEach((key) => {
+          let html = trDom.getElementsByClassName(key)[0].innerHTML
           if (!html) { return }
-          vals[item] = val
+          let val = key === 'order' ? parseInt(html) : html
+          this.formData.set(key, val)
         })
-        return vals
       },
       getFiles (event) {
-        console.log(event)
+        let files = event.target.files[0]
+        this.formData.set('icon', files)
+      },
+      updateImg (idx) {
+        if (!this.status[idx]) { return }
+        this.$refs.upload[idx].dispatch()
       }
     },
 

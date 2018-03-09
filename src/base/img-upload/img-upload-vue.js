@@ -34,7 +34,7 @@ exports.js = () => {
       getFiles (event) {
         let method = this.multilple ? 'getImgs' : 'getImg'
         this[method](event)
-        this.emit(event.target.files)
+        this.emit(event)
       },
 
       getImg (event) {
@@ -54,7 +54,7 @@ exports.js = () => {
       },
 
       dispatch () { this.$refs.file.click() },
-      emit (val) { this.$emit('change', event.target.files) }
+      emit (val) { this.$emit('change', event) }
     },
 
     mounted () {

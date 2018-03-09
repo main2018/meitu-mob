@@ -3,35 +3,38 @@
     .title
       span.txt Category editor
       span.mdi.mdi-close(@click="close")
-    table.table
-      tr
-        th order
-        th icon
-        th category
-        th name
-        th operate
-      tr(v-for="(category, idx) in categories" :ref="'' + idx")
-        td.order(
+    .table
+      ul.header
+        li order
+        li icon
+        li category
+        li name
+        li operate
+      ul.content(v-for="(category, idx) in categories" :ref="'' + idx")
+        li.order(
           :contenteditable="status[idx]"
           :ref="`${idx}-${category.order}`"
           ) {{category.order}}
-        td.icon(
-          :ref="`${idx}-${category.icon}`"
-          )
+        li.icon
           img-upload(
-            :show="!!status[idx]"
+            ref="upload"
+            v-show="!!status[idx] && !category.icon"
             @change="getFiles"
           )
-          span {{category.icon}}
-        td.category(
+          img.iconimg(
+            @click="updateImg(idx)"
+            :style="imgStyle"
+            :src="`${http}${category.icon}`"
+            )
+        li.category(
           :contenteditable="status[idx]"
           :ref="`${idx}-${category.category}`"
           ) {{category.category}}
-        td.name(
+        li.name(
           :contenteditable="status[idx]"
           :ref="`${idx}-${category.name}`"
           ) {{category.name}}
-        td.operator
+        li.operator
           span(v-show="!status[idx]" @click="edit(idx)").mdi.mdi-pencil
           span(v-show="status[idx]" @click="cancel(idx)").mdi.mdi-close
           span(v-show="status[idx]" @click="check(idx)").mdi.mdi-check
