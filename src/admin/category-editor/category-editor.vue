@@ -18,8 +18,11 @@
         td.icon(
           :ref="`${idx}-${category.icon}`"
           )
+          img-upload(
+            :show="!!status[idx]"
+            @change="getFiles"
+          )
           span {{category.icon}}
-          img-upload
         td.category(
           :contenteditable="status[idx]"
           :ref="`${idx}-${category.category}`"

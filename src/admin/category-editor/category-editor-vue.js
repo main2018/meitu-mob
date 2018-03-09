@@ -7,15 +7,13 @@ exports.js = () => {
     },
 
     created () {
-    },
-
-    props: {
+      this.formData = new FormData()
     },
 
     data () {
       return {
         status: [],
-        keyArr: ['order', 'icon', 'category', 'name']
+        keyArr: ['order', 'category', 'name']
       }
     },
 
@@ -31,13 +29,8 @@ exports.js = () => {
       }
     },
 
-    watch: {
-    },
-
     methods: {
-      close () {
-        this.$emit('close')
-      },
+      close () { this.$emit('close') },
       edit (idx) {
         this.initStatus()
         this.status.splice(idx, 1, true)
@@ -49,7 +42,6 @@ exports.js = () => {
       check (idx) {
         let category = this.getVal(idx)
         category.oldCategory = this.categories[idx].category
-        // console.log(this.getVal(idx))
         this.post('/category/update', category, (resp) => {
           if (resp.success) { this.$store.dispatch('getCategory') }
         })
@@ -73,21 +65,23 @@ exports.js = () => {
         let trDom = this.$refs[idx][0]
         this.keyArr.forEach((item) => {
           let tdDom = trDom.getElementsByClassName(item)[0]
-          tdDom.innerHTML = this.categories[idx][item] || '—'
+          tdDom.innerHTML = this.categories[idx][item] || ''
         })
       },
       getVal (idx) {
         let trDom = this.$refs[idx][0]
-        let val = {}
+        let vals = {}
         this.keyArr.forEach((item) => {
           let tdDom = trDom.getElementsByClassName(item)[0]
-          if (item === 'order') {
-            val.order = parseInt(tdDom.innerHTML)
-          } else {
-            if (tdDom.innerHTML) { val[item] = tdDom.innerHTML }
-          }
+          let html = tdDom.innerHTML
+          let val = item === 'order' ? parseInt(html) : html
+          if (!html) { return }
+          vals[item] = val
         })
-        return val
+        return vals
+      },
+      getFiles (event) {
+        console.log(event)
       }
     },
 

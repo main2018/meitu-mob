@@ -11,6 +11,10 @@ exports.js = () => {
       multilple: {
         type: Boolean,
         default: false
+      },
+      show: {
+        type: Boolean,
+        default: true
       }
     },
 
@@ -50,7 +54,7 @@ exports.js = () => {
       },
 
       dispatch () { this.$refs.file.click() },
-      emit (val) { this.$emit('getFiles', event.target.files) }
+      emit (val) { this.$emit('change', event.target.files) }
     },
 
     mounted () {

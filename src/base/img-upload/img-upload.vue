@@ -1,5 +1,5 @@
 <template lang="pug">
-  .img-upload
+  .img-upload(v-show="show")
     input.upload(
       ref="file"
       type="file"
