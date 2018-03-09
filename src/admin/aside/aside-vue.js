@@ -58,7 +58,7 @@ exports.js = () => {
           }
           if (category === newCategory) { return }
           let url = urlPrefix === 'category' ? '/category' : '/subcategory'
-          this.post(`${url}/update`, { category, newCategory }, (resp) => {
+          this.post(`${url}/updateName`, { category, newCategory }, (resp) => {
             if (resp.success) {
               this.$store.dispatch('getCategory')
             }

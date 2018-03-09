@@ -10,18 +10,28 @@
         th category
         th name
         th operate
-      tr(
-        v-for="(category, index) in categories"
-        )
-        td {{category.order}}
-        td {{category.icon}}
-        td {{category.category}}
-        td {{category.name}}
+      tr(v-for="(category, idx) in categories" :ref="'' + idx")
+        td.order(
+          :contenteditable="status[idx]"
+          :ref="`${idx}-${category.order}`"
+          ) {{category.order}}
+        td.icon(
+          :contenteditable="status[idx]"
+          :ref="`${idx}-${category.icon}`"
+          ) {{category.icon}}
+        td.category(
+          :contenteditable="status[idx]"
+          :ref="`${idx}-${category.category}`"
+          ) {{category.category}}
+        td.name(
+          :contenteditable="status[idx]"
+          :ref="`${idx}-${category.name}`"
+          ) {{category.name}}
         td.operator
-          span(v-show="!status[index]" @click="edit(index)").mdi.mdi-pencil
-          span(v-show="status[index]" @click="cancel(index)").mdi.mdi-close
-          span(v-show="status[index]").mdi.mdi-check
-          span(v-show="canDel[index]").mdi.mdi-minus
+          span(v-show="!status[idx]" @click="edit(idx)").mdi.mdi-pencil
+          span(v-show="status[idx]" @click="cancel(idx)").mdi.mdi-close
+          span(v-show="status[idx]" @click="check(idx)").mdi.mdi-check
+          span(v-show="canDel[idx]" @click="del(idx)").mdi.mdi-minus
 </template>
 
 <script type="text/ecmascript-6">
