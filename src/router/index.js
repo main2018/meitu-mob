@@ -25,7 +25,7 @@ const routes = [
     component: About
   */
   }, {
-    path: '/detail',
+    path: '/__detail',
     component: Detail
   }, {
     path: '/mediadetail',

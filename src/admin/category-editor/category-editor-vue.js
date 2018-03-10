@@ -14,6 +14,7 @@ exports.js = () => {
     data () {
       return {
         http: VUE_SERVER,
+        showBtn: true,
         imgStyle: '',
         status: [],
         keyArr: ['order', 'category', 'name']
@@ -84,6 +85,7 @@ exports.js = () => {
         })
       },
       getFiles (event) {
+        this.showBtn = false
         let files = event.target.files[0]
         this.formData.set('icon', files)
       },

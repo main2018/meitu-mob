@@ -1,7 +1,6 @@
 import { CLASS_PREFIX } from 'common/constant'
 
 export function genTemplate (arr) {
-  // console.log(`<ul class="${CLASS_PREFIX}form">${genLiDom(arr)}</ul>`)
   return `<ul class="${CLASS_PREFIX}form">${genLiDom(arr)}</ul>`
 }
 
@@ -19,6 +18,7 @@ function genLiDom (arr) {
   let liDom = ''
   let element = ''
   arr.forEach(json => {
+    if (json.type === 'options') { return }
     element = genElement(json.type)
     liDom += `
     <li class="${CLASS_PREFIX}item">

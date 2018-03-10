@@ -1,12 +1,13 @@
 export const formConf = [
   {
-    type: 'select',
-    options: ['one', 'two'],
-    model: 'select'
-  }, {
-    type: 'file',
-    model: 'coverimg'
-  }, {
+    type: 'options',
+    options: {
+      name: '',
+      card: 'normal'
+    }
+  },
+
+  {
     type: 'file',
     model: 'images',
     multiple: true

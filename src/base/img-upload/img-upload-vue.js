@@ -15,6 +15,10 @@ exports.js = () => {
       show: {
         type: Boolean,
         default: true
+      },
+      showBtn: {
+        type: Boolean,
+        default: true
       }
     },
 
@@ -32,12 +36,14 @@ exports.js = () => {
 
     methods: {
       getFiles (event) {
+        this.imgs = []
         let method = this.multilple ? 'getImgs' : 'getImg'
         this[method](event)
         this.emit(event)
       },
 
       getImg (event) {
+        this.imgs = []
         this.file = event.target.files[0]
         if (!this.file || !window.FileReader) return
         if (!/^image/.test(this.file.type)) return
@@ -63,7 +69,6 @@ exports.js = () => {
 }
 
 function setImgs (imgs, file) {
-  this.imgs = []
   let reader = new FileReader()
   reader.readAsDataURL(file)
   reader.onloadend = () => {

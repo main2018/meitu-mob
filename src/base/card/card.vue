@@ -1,6 +1,8 @@
 <template lang="pug">
   .card(ref="card")
-    .img(:style="coverImgStyle")
+    .btn(v-show="btn")
+      .mdi.mdi-close(@click="del")
+    .img(:style="coverImgStyle" @click="goDetail")
     .title(
       v-text="content.title"
       @click="goDetail"

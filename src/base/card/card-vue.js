@@ -13,6 +13,10 @@ exports.js = () => {
       editable: {
         type: Boolean,
         default: false
+      },
+      btn: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -40,6 +44,11 @@ exports.js = () => {
     },
 
     methods: {
+      del () {
+        this.post('/album/del', {id: this.content.id}, (resp) => {
+          console.log(resp)
+        })
+      },
       goDetail () {
         if (!this.content.id) {
           alert('no detail')
@@ -49,10 +58,7 @@ exports.js = () => {
           console.log('in Edit')
           return
         }
-        this.$router.push({
-          path: '/detail',
-          query: { id: this.content.id }
-        })
+        this.$router.push({ path: '/__detail', query: { id: this.content.id } })
       },
       format (str) { return str ? str.substr(0, 10) : null }
     },

@@ -19,6 +19,7 @@
           img-upload(
             ref="upload"
             v-show="!!status[idx] && !category.icon"
+            :showBtn="showBtn"
             @change="getFiles"
           )
           img.iconimg(

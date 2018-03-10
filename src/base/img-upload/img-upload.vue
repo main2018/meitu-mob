@@ -6,10 +6,16 @@
       @change="getFiles($event)"
       multiple="multiple"
       )
-    .mdi.mdi-upload(@click="dispatch")
+    .mdi.mdi-upload(
+      @click="dispatch"
+      v-show="showBtn"
+      )
       span image
     .preview(v-show="imgs.length > 0")
-      img(v-for="img in imgs" :src="img")
+      img(
+        v-for="img in imgs" :src="img"
+        @click="dispatch"
+        )
 </template>
 
 <script type="text/ecmascript-6">
@@ -27,6 +33,7 @@
     cursor pointer
   .preview
   img
+    cursor pointer
     height 3rem
     width auto
 </style>

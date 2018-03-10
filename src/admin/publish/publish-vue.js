@@ -16,30 +16,6 @@ exports.js = () => {
 
     data () {
       return {
-        post: [{
-          field: 'coverimg',
-          type: 'file',
-          value: ''
-        }, {
-          field: 'title',
-          type: 'text',
-          placeholder: 'title'
-        }, {
-          field: 'text',
-          type: 'textarea'
-        }, {
-          field: 'year',
-          type: 'range',
-          min: 1,
-          max: 100,
-          step: 1
-        }, {
-          type: 'button',
-          value: 'submit',
-          event: {
-            click: () => this.test()
-          }
-        }]
       }
     },
 
