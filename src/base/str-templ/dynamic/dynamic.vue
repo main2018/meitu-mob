@@ -1,6 +1,6 @@
 <template lang="pug">
   .dynamic
-    // tab(:menu="menu")
+    tab
       .wrap(
         v-for="(subAlbums, index) in albums"
         :slot="'slot-'+index"
@@ -9,7 +9,6 @@
           p {{subAlbums}}
           li(v-for="album in subAlbums")
             card(:content="album")
-    tab
 </template>
 
 <script type="text/ecmascript-6">

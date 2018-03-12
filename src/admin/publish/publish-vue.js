@@ -15,14 +15,7 @@ exports.js = () => {
     data () {
       return {
         coverStyle: '',
-        postJson: {
-          status: 0,
-          files: [],
-          title: '',
-          desc: '',
-          hasVideo: false,
-          content: ''
-        }
+        postJson: this.genPostJson()
       }
     },
 
@@ -38,12 +31,9 @@ exports.js = () => {
     methods: {
       getFiles (event) {
         let files = event.target.files
-        let file = files[0]
-        this.postJson.files.push({
-          images: event.target.files
-        })
+        this.postJson.files.push({ coverimg: files })
         let reader = new FileReader()
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(files[0])
         reader.onloadend = () => {
           this.coverStyle = `
             background-image: url(${reader.result});
@@ -51,20 +41,42 @@ exports.js = () => {
             background-size: cover;
             background-position: center;
           `
-          // this.postJson.cover = reader.result
-          // imgs.push(reader.result)
         }
       },
-      getPostJson () {
-
+      genPostJson () {
+        return {
+          status: 0,
+          files: [],
+          title: '',
+          desc: '',
+          hasVideo: false,
+          content: ''
+        }
+      },
+      addCategory () {
+        this.postJson.category = this.crumb[0]
+        if (this.crumb[1]) {
+          this.postJson.subcategory = this.crumb[1]
+        }
+      },
+      validate () {
+        return this.postJson.title && this.postJson.desc
       },
       reset () {
-        console.log(this.postJson)
+        this.postJson = this.genPostJson()
+        this.coverStyle = ''
       },
       publish () {
-        if (!this.postJson.title && !this.postJson.desc) { return }
-        this.postForm('/album/add', this.postJson, (resp) => {
-          console.log(resp)
+        if (!this.validate) {
+          alert('info not complete')
+          return
+        }
+        this.addCategory()
+        this.postForm('/album/add', this.postJson, () => {
+          this.reset()
+          this.$store.dispatch('hidePublish')
+          this.$store.dispatch('getAdminAlbums', this.$store.getters.activeCategory)
+          alert('publish success')
         })
       },
       dispatch () { this.$refs.file.click() },

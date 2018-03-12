@@ -29,13 +29,9 @@ exports.js = () => {
       coverImgStyle () {
         return `
         width: 100%;
-        height: 0;
         padding-bottom: 65%;
         background-color: #eee;
         background-image: url(${VUE_SERVER}${this.content.img});
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
         `
       }
     },
@@ -45,8 +41,7 @@ exports.js = () => {
 
     methods: {
       del () {
-        this.post('/album/del', {id: this.content.id}, (resp) => {
-          console.log(resp)
+        this.post('/album/del', {id: this.content.id}, () => {
         })
       },
       goDetail () {

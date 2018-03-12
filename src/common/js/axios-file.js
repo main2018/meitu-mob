@@ -17,7 +17,8 @@ export function postForm (url, json, success, fail, contentType = 'FORM') {
 
   let config = {headers: { 'ContentType': 'multipart/form-data' }}
   axios.post(`${VUE_SERVER}${url}`, formData, config)
-  .then((resp) => {
+  .then(resp => {
+    console.log({ resp })
     if (resp.data.success) {
       success(resp.data.data)
     } else if (fail) {

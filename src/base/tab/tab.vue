@@ -26,8 +26,10 @@
           ol: li.card-wrapper(v-for="item in content")
               card(:content="item")
     .no-subcategory(
-      v-show="!isTabShow"
-      ) {{rootAlbums}}
+      v-if="!isTabShow"
+      )
+      ol: li.card-wrapper(v-for="item in rootAlbums")
+            card(:content="item")
 </template>
 
 <script type="text/ecmascript-6">

@@ -6,7 +6,6 @@
         type="file"
         @change="getFiles($event)"
         style="display: none; z-index: -1;"
-        multiple="multiple"
         )
       p card
       .input-card
@@ -37,7 +36,7 @@
       .input-button
         input(type="button" value="reset" @click="reset")
         input(type="button" value="publish" @click="publish")
-      customform
+      // customform
 </template>
 
 <script type="text/ecmascript-6">
