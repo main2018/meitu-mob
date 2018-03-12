@@ -2,15 +2,27 @@ const { formConf } = require('config/form.js')
 const { genTemplate, genModel } = require('./json2templ.js')
 const axios = require('axios')
 const { VUE_SERVER } = require('config')
+const ImgUpload = require('base/img-upload/img-upload')
+const { quillEditor } = require('vue-quill-editor')
 
 export const customform = {
   template: genTemplate(formConf),
+  components: { ImgUpload, quillEditor },
   created () {
     this.formData = new FormData()
   },
   data () {
     return {
-      postJson: genModel(formConf)
+      postJson: genModel(formConf),
+      editorOptions: {
+        modules: {
+          toolbar: [
+            ['bold', 'italic'],
+            ['image'],
+            ['clean']
+          ]
+        }
+      }
     }
   },
   computed: {
@@ -21,13 +33,14 @@ export const customform = {
   },
 
   methods: {
-    test () {
-      console.log(this.getCategory())
-      // console.log(this.postJson)
+    reset () {
+      console.log(this.postJson)
+      console.log('in reset')
     },
     publish,
     getCategory,
-    getFile
+    getFile,
+    test () { console.log('test') }
   }
 }
 

@@ -1,4 +1,5 @@
 export const formConf = [
+  /*
   {
     type: 'options',
     options: {
@@ -6,10 +7,23 @@ export const formConf = [
       card: 'normal'
     }
   },
+  */
 
   {
+    type: 'select',
+    model: 'select',
+    label: 'haha',
+    options: [
+      'one',
+      'two'
+    ]
+  }, {
     type: 'file',
-    model: 'images',
+    label: 'coverimg',
+    multiple: false
+  }, {
+    type: 'file',
+    label: 'images',
     multiple: true
   }, {
     type: 'text',
@@ -17,11 +31,11 @@ export const formConf = [
     label: 'title',
     required: true,
     placeholder: 'title'
+  /*
   }, {
     type: 'textarea',
     model: 'text',
     required: true
-    /*
   }, {
     type: 'range',
     model: 'year',
@@ -29,17 +43,12 @@ export const formConf = [
     max: 100,
     step: 1,
     value: 50
-    */
-  }, {
-    type: 'button',
-    value: 'submit',
-    event: {
-      click: 'publish(/album/add)'
-    }
+
   }, {
     type: 'button',
     value: 'test',
     event: {
       click: 'test'
     }
+  */
   }]

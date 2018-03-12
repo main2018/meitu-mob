@@ -16,7 +16,13 @@ import {
 import store from './store'
 import { dynamicWrapper as Dynamic } from 'base/str-templ/dynamic-wrapper.js'
 
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 Vue.config.productionTip = false
+Vue.use(VueQuillEditor)
 Vue.use(AjaxPost)
 Vue.use(AjaxGet)
 Vue.use(SetLocal)
