@@ -1,6 +1,8 @@
 <template lang="pug">
   .dynamic
     tab
+
+    // tab-slot(:menu="menu")
       .wrap(
         v-for="(subAlbums, index) in albums"
         :slot="'slot-'+index"
