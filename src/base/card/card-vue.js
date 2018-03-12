@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { timeFormat } = require('common/js')
   const { VUE_SERVER } = require('config/vue-remote-server.js')
   return {
     name: 'card',
@@ -28,7 +29,6 @@ exports.js = () => {
     computed: {
       coverImgStyle () {
         return `
-        width: 100%;
         padding-bottom: 65%;
         background-color: #eee;
         background-image: url(${VUE_SERVER}${this.content.img});
@@ -40,11 +40,12 @@ exports.js = () => {
     },
 
     methods: {
+      timeFormat,
       del () {
-        this.post('/album/del', {id: this.content.id}, () => {
-        })
+        this.post('/album/del', {id: this.content.id})
       },
       goDetail () {
+        this.$store.dispatch('getCurrAlbum', this.content.id)
         if (!this.content.id) {
           alert('no detail')
           return
@@ -54,8 +55,7 @@ exports.js = () => {
           return
         }
         this.$router.push({ path: '/__detail', query: { id: this.content.id } })
-      },
-      format (str) { return str ? str.substr(0, 10) : null }
+      }
     },
 
     mounted () {

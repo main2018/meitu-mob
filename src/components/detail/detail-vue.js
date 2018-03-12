@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { timeFormat } = require('common/js')
   return {
     name: 'detail',
     components: {
@@ -22,6 +23,9 @@ exports.js = () => {
       },
       video () {
         return this.$refs.video
+      },
+      album () {
+        return this.$store.getters.currAlbum
       }
     },
 
@@ -29,6 +33,7 @@ exports.js = () => {
     },
 
     methods: {
+      timeFormat,
       playVid () {
         this.video.play()
       },

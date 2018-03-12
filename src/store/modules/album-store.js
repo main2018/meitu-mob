@@ -2,6 +2,7 @@ import { axiosAjax } from 'common/js'
 
 const state = {
   albums: {},
+  currAlbum: {},
   adminAlbums: [],
   isPublishShow: false
 }
@@ -16,6 +17,10 @@ const actions = {
   getAdminAlbums ({ commit }, category) {
     commit('HIDE_PUBLISH')
     commit('GET_ADMIN_ALBUMS', category)
+  },
+
+  getCurrAlbum ({ commit }, id) {
+    commit('GET_CURR_ALBUM', id)
   },
 
   setAdminAlbums ({ commit }, adminAlbums) {
@@ -38,6 +43,12 @@ const mutations = {
     })
   },
 
+  GET_CURR_ALBUM (state, id) {
+    axiosAjax.post('/album/findById', { _id: id }, resp => {
+      state.currAlbum = resp
+    })
+  },
+
   SET_ALBUMS (state, albums) { state.albums = albums },
 
   GET_ADMIN_ALBUMS (state, category) {
@@ -53,6 +64,7 @@ const mutations = {
 
 const getters = {
   albums: state => state.albums,
+  currAlbum: state => state.currAlbum,
   adminAlbums: state => state.adminAlbums,
   isPublishShow: state => state.isPublishShow
 }

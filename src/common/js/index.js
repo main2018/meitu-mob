@@ -54,3 +54,4 @@ export const Log = {
 export const axiosAjax = ajax
 
 export const _2space = str => str.replace(/__/g, ' ')
+export const timeFormat = str => str ? str.substr(0, 10) : null

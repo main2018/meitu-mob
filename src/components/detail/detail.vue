@@ -1,19 +1,18 @@
 <template lang="pug">
   .detail
-    video.video(
+    //video.video(
       v-if="currItem.vedio"
       :poster="currItem.vedioPoster"
       :src="currItem.vedio"
       controls="controls"
       )
 
-    .article
-      h1 {{currItem.title}}
-      time {{currItem.time}}
-      p {{currItem.desc}}
-    ul(v-if="currItem.imgs")
-      li(v-for="img in currItem.imgs")
-        img(:src="img")
+    .aw-article
+      h1.aw-title {{album.title}}
+      time.aw-category {{timeFormat(album.createAt)}} | &nbsp;
+        span(v-if="album.subcategory") {{album.subcategory.subcategory}}
+      p.aw-desc {{album.desc}}
+    .aw-content(v-html="album.content")
 </template>
 
 <script type="text/ecmascript-6">
@@ -21,7 +20,7 @@
   export default js.call(this)
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" rel="stylesheet/stylus">
   @import '~common/stylus/variable.styl'
   @import './detail.styl'
 </style>

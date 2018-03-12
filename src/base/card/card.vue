@@ -10,7 +10,7 @@
     .foot
       .time(
         v-if="content.time"
-        v-text="format(content.time)"
+        v-text="timeFormat(content.time)"
         )
       .category(v-if="content.subcategory || content.category")
         span {{content.category}}
