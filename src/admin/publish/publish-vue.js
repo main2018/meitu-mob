@@ -47,6 +47,9 @@ exports.js = () => {
       },
       isUpdatesShow () {
         if (!this.isUpdatesShow) { this.reset() }
+      },
+      isPublishShow () {
+        if (!this.isPublishShow) { this.reset() }
       }
     },
 
@@ -76,7 +79,7 @@ exports.js = () => {
         }
       },
       validate () {
-        return this.postJson.title && this.postJson.desc
+        return !this.postJson.title && !this.postJson.desc
       },
       reset () {
         this.postJson = json
@@ -86,7 +89,7 @@ exports.js = () => {
         this.postJson = this.genPostJson()
       },
       publish () {
-        if (!this.validate) {
+        if (this.validate) {
           alert('info not complete')
           return
         }
@@ -99,7 +102,7 @@ exports.js = () => {
         })
       },
       update () {
-        if (!this.validate) {
+        if (this.validate) {
           alert('info not complete')
           return
         }
