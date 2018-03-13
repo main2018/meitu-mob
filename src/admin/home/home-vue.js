@@ -28,7 +28,6 @@ exports.js = () => {
       breadcrumb () {
         let categories = this.categories
         if (categories.length === 0) { return '' }
-        console.log(categories)
         let crumb = ''
         if (categories[1]) {
           crumb = categories[0] + ' / ' + categories[1]
@@ -41,9 +40,8 @@ exports.js = () => {
       adminAlbums () {
         return this.$store.getters.adminAlbums
       },
-      isPublishShow () {
-        return this.$store.getters.isPublishShow
-      }
+      isPublishShow () { return this.$store.getters.isPublishShow },
+      isUpdatesShow () { return this.$store.getters.isUpdatesShow }
     },
 
     watch: {
@@ -56,6 +54,9 @@ exports.js = () => {
       showPublish () {
         let prefix = this.isPublishShow ? 'hide' : 'show'
         this.$store.dispatch(`${prefix}Publish`)
+      },
+      closeUpdates () {
+        this.$store.dispatch(`hideUpdates`)
       }
     },
 

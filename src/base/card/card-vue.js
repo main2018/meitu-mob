@@ -27,6 +27,9 @@ exports.js = () => {
     },
 
     computed: {
+      isUpdatesShow () {
+        return this.$store.getters.isUpdatesShow
+      },
       coverImgStyle () {
         return `
         padding-bottom: 65%;
@@ -51,7 +54,8 @@ exports.js = () => {
           return
         }
         if (this.editable) {
-          console.log('in Edit')
+          let prefix = this.isUpdatesShow ? 'hide' : 'show'
+          this.$store.dispatch(`${prefix}Updates`)
           return
         }
         this.$router.push({ path: '/__detail', query: { id: this.content.id } })

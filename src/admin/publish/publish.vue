@@ -34,8 +34,10 @@
       .input-content
         quill-editor(v-model="postJson.content")
       .input-button
-        input(type="button" value="reset" @click="reset")
-        input(type="button" value="publish" @click="publish")
+        input(v-show="isPublishShow" type="button" value="reset" @click="reset")
+        input(v-show="isUpdatesShow" type="button" value="reset" @click="updatesReset")
+        input(v-show="isPublishShow" type="button" value="publish" @click="publish")
+        input(v-show="isUpdatesShow" type="button" value="update" @click="update")
       // customform
 </template>
 

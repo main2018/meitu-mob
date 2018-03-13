@@ -4,7 +4,8 @@ const state = {
   albums: {},
   currAlbum: {},
   adminAlbums: [],
-  isPublishShow: false
+  isPublishShow: false,
+  isUpdatesShow: false
 }
 
 const actions = {
@@ -13,6 +14,8 @@ const actions = {
   getAllAlbum ({ commit }, option) { commit('GET_ALL_ALBUMS', option) },
   showPublish ({ commit }) { commit('SHOW_PUBLISH') },
   hidePublish ({ commit }) { commit('HIDE_PUBLISH') },
+  showUpdates ({ commit }) { commit('SHOW_UPDATES') },
+  hideUpdates ({ commit }) { commit('HIDE_UPDATES') },
 
   getAdminAlbums ({ commit }, category) {
     commit('HIDE_PUBLISH')
@@ -59,14 +62,17 @@ const mutations = {
   },
   SET_ADMIN_ALBUMS (state, albums) { state.adminAlbums = albums },
   SHOW_PUBLISH (state) { state.isPublishShow = true },
-  HIDE_PUBLISH (state) { state.isPublishShow = false }
+  HIDE_PUBLISH (state) { state.isPublishShow = false },
+  SHOW_UPDATES (state) { state.isUpdatesShow = true },
+  HIDE_UPDATES (state) { state.isUpdatesShow = false }
 }
 
 const getters = {
   albums: state => state.albums,
   currAlbum: state => state.currAlbum,
   adminAlbums: state => state.adminAlbums,
-  isPublishShow: state => state.isPublishShow
+  isPublishShow: state => state.isPublishShow,
+  isUpdatesShow: state => state.isUpdatesShow
 }
 
 export default {

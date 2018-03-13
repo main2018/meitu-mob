@@ -1,6 +1,15 @@
 exports.js = () => {
   const { quillEditor } = require('vue-quill-editor')
+  const { VUE_SERVER } = require('config/vue-remote-server.js')
   const { customform } = require('./form')
+  let json = {
+    status: 0,
+    files: [],
+    title: '',
+    desc: '',
+    hasVideo: false,
+    content: ''
+  }
   return {
     name: 'publish',
     components: { customform, quillEditor },
@@ -15,16 +24,29 @@ exports.js = () => {
     data () {
       return {
         coverStyle: '',
-        postJson: this.genPostJson()
+        postJson: json
       }
     },
-
     computed: {
       breadcrumb () {
         if (this.crumb.length === 0) { return '' }
         return this.crumb.reduce((pre, nxt) => {
           return `${pre} / ${nxt}`
         })
+      },
+      isPublishShow () { return this.$store.getters.isPublishShow },
+      isUpdatesShow () { return this.$store.getters.isUpdatesShow },
+      currAlbum () { return this.$store.getters.currAlbum }
+    },
+
+    watch: {
+      currAlbum () {
+        if (this.isUpdatesShow) {
+          this.postJson = this.genPostJson()
+        }
+      },
+      isUpdatesShow () {
+        if (!this.isUpdatesShow) { this.reset() }
       }
     },
 
@@ -35,23 +57,17 @@ exports.js = () => {
         let reader = new FileReader()
         reader.readAsDataURL(files[0])
         reader.onloadend = () => {
-          this.coverStyle = `
-            background-image: url(${reader.result});
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-          `
+          this.coverStyle = `background-image: url(${reader.result});`
         }
       },
       genPostJson () {
-        return {
-          status: 0,
-          files: [],
-          title: '',
-          desc: '',
-          hasVideo: false,
-          content: ''
-        }
+        let album = this.currAlbum
+        let {status, title, desc, content, hasVideo} = album
+        let postJson = {status, title, desc, content, hasVideo}
+        postJson.files = []
+        postJson.category = album.category.category
+        this.coverStyle = `background-image: url(${VUE_SERVER}${album.coverimg});`
+        return postJson
       },
       addCategory () {
         this.postJson.category = this.crumb[0]
@@ -63,8 +79,11 @@ exports.js = () => {
         return this.postJson.title && this.postJson.desc
       },
       reset () {
-        this.postJson = this.genPostJson()
+        this.postJson = json
         this.coverStyle = ''
+      },
+      updatesReset () {
+        this.postJson = this.genPostJson()
       },
       publish () {
         if (!this.validate) {
@@ -75,8 +94,29 @@ exports.js = () => {
         this.postForm('/album/add', this.postJson, () => {
           this.reset()
           this.$store.dispatch('hidePublish')
-          this.$store.dispatch('getAdminAlbums', this.$store.getters.activeCategory)
+          this.refreshAlbum()
           alert('publish success')
+        })
+      },
+      update () {
+        if (!this.validate) {
+          alert('info not complete')
+          return
+        }
+        this.addCategory()
+        this.postJson._id = this.currAlbum._id
+        this.postForm('/album/update', this.postJson, () => {
+          this.postJson = this.genPostJson()
+          this.updatesReset()
+          this.$store.dispatch('hideUpdates')
+          this.refreshAlbum()
+          alert('update success')
+        })
+      },
+      refreshAlbum () {
+        this.$store.dispatch('getAdminAlbums', {
+          category: this.crumb[0],
+          subcategory: this.crumb[1]
         })
       },
       dispatch () { this.$refs.file.click() },
