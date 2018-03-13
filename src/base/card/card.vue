@@ -13,6 +13,10 @@
         v-text="timeFormat(content.time)"
         )
       .category(v-if="content.subcategory || content.category")
+        span.mdi(
+          v-show="btn"
+          :class = "!content.status ? 'mdi-eye' : 'mdi-eye-off'"
+          ) &nbsp;|&nbsp;
         span {{content.category}}
         span(v-if="content.subcategory")  | {{content.subcategory}}
 </template>

@@ -36,6 +36,9 @@ exports.js = () => {
         background-color: #eee;
         background-image: url(${VUE_SERVER}${this.content.img});
         `
+      },
+      activeCategory () {
+        return this.$store.getters.activeCategory
       }
     },
 
@@ -46,6 +49,10 @@ exports.js = () => {
       timeFormat,
       del () {
         this.post('/album/del', {id: this.content.id})
+        this.$store.dispatch('getAdminAlbums', {
+          category: this.activeCategory[0],
+          subcategory: this.activeCategory[1]
+        })
       },
       goDetail () {
         this.$store.dispatch('getCurrAlbum', this.content.id)

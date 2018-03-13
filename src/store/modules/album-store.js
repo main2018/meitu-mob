@@ -34,7 +34,7 @@ const actions = {
 const mutations = {
   GET_ALBUMS_BY_CATEGORY (state, category) {
     let path = '/album/findByCategory'
-    axiosAjax.post(path, { category }, resp => {
+    axiosAjax.post(path, { category, status: 0 }, resp => {
       state.albums[category] = formatAlbums(resp)
     })
   },

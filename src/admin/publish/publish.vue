@@ -22,7 +22,7 @@
               label outline &nbsp;
                 input(type="radio" name ="status" value="1" v-model="postJson.status")
             label.video hasvideo &nbsp;
-              input(type="checkbox" v-model="postJson.hasVideo")
+              input(type="checkbox" value="postJson.hasVideo" v-model="postJson.hasVideo")
           ul.input-item
             li
               label * title
@@ -34,10 +34,10 @@
       .input-content
         quill-editor(v-model="postJson.content")
       .input-button
-        input(v-show="isPublishShow" type="button" value="reset" @click="reset")
-        input(v-show="isUpdatesShow" type="button" value="reset" @click="updatesReset")
-        input(v-show="isPublishShow" type="button" value="publish" @click="publish")
-        input(v-show="isUpdatesShow" type="button" value="update" @click="update")
+        input.reset(v-show="isPublishShow" type="button" value="reset" @click="reset")
+        input.reset(v-show="isUpdatesShow" type="button" value="reset" @click="updatesReset")
+        input.submit(v-show="isPublishShow" type="button" value="publish" @click="publish")
+        input.submit(v-show="isUpdatesShow" type="button" value="update" @click="update")
       // customform
 </template>
 
