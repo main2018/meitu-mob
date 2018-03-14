@@ -40,6 +40,10 @@ exports.js = () => {
         this.$router.push(`/`)
         this.menuShow = false
         this.sign = '≡'
+      },
+      isHintShow (category) {
+        let isCurrCateory = new RegExp(`/${category}`)
+        return isCurrCateory.test(this.url)
       }
     },
 

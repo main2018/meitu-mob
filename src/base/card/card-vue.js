@@ -27,6 +27,7 @@ exports.js = () => {
     },
 
     computed: {
+      url () { return this.$route.path },
       isUpdatesShow () {
         return this.$store.getters.isUpdatesShow
       },
@@ -65,7 +66,7 @@ exports.js = () => {
           this.$store.dispatch(`${prefix}Updates`)
           return
         }
-        this.$router.push({ path: '/__detail', query: { id: this.content.id } })
+        this.$router.push({ path: `${this.url}/detail`, query: { id: this.content.id } })
       }
     },
 

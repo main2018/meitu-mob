@@ -12,7 +12,7 @@
             @click="go(`/${item.category}`)"
             ): .text
               p {{_2space(item.category)}}
-              .hint-color(v-show="url==='/' + item.category")
+              .hint-color(v-show="isHintShow(item.category)")
 
           // li(@click="go('/video')")
             .text

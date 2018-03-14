@@ -15,6 +15,7 @@ import {
 } from 'common/js'
 import store from './store'
 import { dynamicWrapper as Dynamic } from 'base/str-templ/dynamic-wrapper.js'
+import Detail from 'comp/detail/detail.vue'
 
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
@@ -37,6 +38,10 @@ get('/category/findAll', resp => {
     routes.push({
       path: `/${item.category}`,
       component: Dynamic
+    })
+    routes.push({
+      path: `/${item.category}/detail`,
+      component: Detail
     })
   })
   const router = new Router({ mode: 'history', routes })
