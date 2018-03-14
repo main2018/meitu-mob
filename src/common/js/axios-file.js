@@ -17,7 +17,8 @@ export function postForm (url, json, success, fail, contentType = 'FORM') {
 
   let config = {headers: { 'ContentType': 'multipart/form-data' }}
   axios.post(`${VUE_SERVER}${url}`, formData, config)
-  .then((resp) => {
+  .then(resp => {
+    console.log({ resp })
     if (resp.data.success) {
       success(resp.data.data)
     } else if (fail) {
@@ -30,7 +31,20 @@ export function postForm (url, json, success, fail, contentType = 'FORM') {
 }
 
 function appendFiles (formData, files) {
+  files.forEach(file => {
+    for (let field in file) {
+      formData.set(field, file[field][0])
+      for (let i = 1; i < file[field].length; i++) {
+        formData.append(field, file[field][i])
+      }
+    }
+  })
+}
+
+/*
+function appendFiles (formData, files) {
   for (let i = 0; i < files.length; i++) {
     formData.append('files', files[i])
   }
 }
+*/

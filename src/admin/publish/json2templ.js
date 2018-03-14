@@ -19,6 +19,7 @@ function genLiDom (arr) {
   let liDom = ''
   let element = ''
   arr.forEach(json => {
+    if (json.type === 'options') { return }
     element = genElement(json.type)
     liDom += `
     <li class="${CLASS_PREFIX}item">
@@ -28,6 +29,16 @@ function genLiDom (arr) {
       </${element}>
     </li>`
   })
+  liDom += `
+    <li class="quill-wrapper">
+      <label>Content</label>
+      <quill-editor :options="editorOptions" v-model="postJson.content"></quill-editor>
+    </li>
+    <li class="${CLASS_PREFIX}btn">
+      <input class="warn" type="button" value="reset" @click="reset">
+      <input class="normal" type="button" value="submit" @click="publish('/album/add')">
+    </li>
+  `
   return liDom
 }
 
@@ -40,14 +51,9 @@ function genLabel (json) {
 function genElement (type) {
   let element = ''
   switch (type) {
-    case 'textarea':
-      element = 'textarea'
-      break
-    case 'select':
-      element = 'select'
-      break
-    default:
-      element = 'input'
+    case 'textarea': element = 'textarea'; break
+    case 'select': element = 'select'; break
+    default: element = 'input'
   }
   return element
 }

@@ -1,6 +1,8 @@
 <template lang="pug">
   .card(ref="card")
-    .img(:style="coverImgStyle")
+    .btn(v-show="btn")
+      .mdi.mdi-close(@click="del")
+    .img(:style="coverImgStyle" @click="goDetail")
     .title(
       v-text="content.title"
       @click="goDetail"
@@ -8,9 +10,13 @@
     .foot
       .time(
         v-if="content.time"
-        v-text="format(content.time)"
+        v-text="timeFormat(content.time)"
         )
       .category(v-if="content.subcategory || content.category")
+        span.mdi(
+          v-show="btn"
+          :class = "!content.status ? 'mdi-eye' : 'mdi-eye-off'"
+          ) &nbsp;|&nbsp;
         span {{content.category}}
         span(v-if="content.subcategory")  | {{content.subcategory}}
 </template>
@@ -20,7 +26,7 @@
   export default js.call(this)
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
 @import '~common/stylus/variable.styl'
 @import './card.styl'
 </style>

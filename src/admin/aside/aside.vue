@@ -1,32 +1,35 @@
 <template lang="pug">
-  ul.aside
-    li.category.bd-1px-b(v-for="(item, idx) in categories")
+  .aside
+    .brand
+    .category-editor
+      category
+    ul.category-wrapper
+      li.category.bd-1px-b(v-for="(item, idx) in categories")
 
-      div.first(:ref="'' + idx"
-        @mouseenter="addBtn('' + idx)"
-        @mouseleave="delBtn('' + idx)"
-        )
-        .active(v-show="actives[idx].category")
-        .text(
-          @keydown.13="enter($event)"
-          @click="setActive([item.category], idx)"
-          ) {{item.category}}
-        .btn.mdi.mdi-minus( @click="delCategory(item.category, idx)")
+        div.first(:ref="'' + idx"
+          @mouseenter="addBtn('' + idx)"
+          @mouseleave="delBtn('' + idx)"
+          )
+          .active(v-show="actives[idx].category")
+          .text(
+            @keydown.13="enter($event)"
+            @click="setActive([item.category], idx)"
+            ) {{_2space(item.category)}}
+          .btn.mdi.mdi-minus( @click="delCategory(item.category, idx)")
 
-      ol.subcategory
-        li.bd-1px-t(v-for="(subcategory, _idx) in item.subcategories")
-          .second(:ref="`${idx}_${_idx}`"
-            @mouseenter="addBtn(`${idx}_${_idx}`)"
-            @mouseleave="delBtn(`${idx}_${_idx}`)"
-            )
-            .active(v-show="actives[idx].subcategories[_idx]")
-            .text(
-              @input="enter($event)"
-              @click="setActive([item.category, subcategory], idx, _idx)"
-              ) {{subcategory}}
-            .btn.mdi.mdi-minus(@click="delSubcategory(item.category, subcategory)")
+        ol.subcategory
+          li.bd-1px-t(v-for="(subcategory, _idx) in item.subcategories")
+            .second(:ref="`${idx}_${_idx}`"
+              @mouseenter="addBtn(`${idx}_${_idx}`)"
+              @mouseleave="delBtn(`${idx}_${_idx}`)"
+              )
+              .active(v-show="actives[idx].subcategories[_idx]")
+              .text(
+                @input="enter($event)"
+                @click="setActive([item.category, subcategory], idx, _idx)"
+                ) {{subcategory}}
+              .btn.mdi.mdi-minus(@click="delSubcategory(item.category, subcategory)")
 
-    category
 </template>
 
 <script type="text/ecmascript-6">

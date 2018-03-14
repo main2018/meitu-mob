@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <bar></bar> -->
+    <bar></bar>
     <keep-alive include="Home">
       <router-view></router-view>
     </keep-alive>
@@ -24,3 +24,9 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  @import '~common/stylus/variable.styl'
+  #app
+    background: $color-bg;
+</style>

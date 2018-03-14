@@ -1,11 +1,11 @@
 <template lang="pug">
   #home
     ul
-      li(@click="$router.push('/photo')") Photo
-      li(@click="$router.push('/design')") Pic
-      li(@click="$router.push('/video')") Video
-      li(@click="$router.push('/media')") Media
-      li(v-for="item in categories") {{item.category}}
+      // li(@click="$router.push('/photo')") Photo
+      li(
+        v-for="item in categories"
+        @click="goUrl (item.category)"
+        ) {{_2space(item.category)}}
 </template>
 
 <script type="text/ecmascript-6">

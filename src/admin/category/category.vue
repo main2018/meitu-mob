@@ -1,32 +1,44 @@
 <template lang="pug">
-  .category
-    input.add-category(
-      type="text"
-      v-model="category"
-      placeholder="category name"
-      )
-    input.add-btn(
-      type="button"
-      value="+"
-      @click="addCategory"
-      )
-    select.select(
-      v-model="currCategory"
-      )
-      option(
-        v-for="item in categories"
-        :value="item.category"
-        ) {{item.category}}
-    input.add-category(
-      type="text"
-      v-model="subcategory"
-      placeholder="subcategory name"
-      )
-    input.add-btn(
-      type="button"
-      value="+"
-      @click="addSubcategory"
+  .wrapper
+    .category
+      .title
+        span.txt category
+        span.mdi.mdi-pencil(@click="showEditor")
+      input.add-category(
+        type="text"
+        v-model="category"
+        placeholder="category"
         )
+      input.add-category(
+        type="text"
+        v-model="categoryName"
+        placeholder="category ZH"
+        )
+      input.add-btn(
+        type="button"
+        value="+"
+        @click="addCategory"
+        )
+      .title subcategory
+      select.select(
+        v-model="currCategory"
+        )
+        option(
+          v-for="item in categories"
+          :value="item.category"
+          ) {{item.name || _2space(item.category)}}
+      input.add-category(
+        type="text"
+        v-model="subcategory"
+        placeholder="subcategory"
+        )
+      input.add-btn(
+        type="button"
+        value="+"
+        @click="addSubcategory"
+        )
+    .editor(v-show="isEditorShow")
+      category-editor(@close="hideEditor")
 </template>
 
 <script type="text/ecmascript-6">
@@ -37,20 +49,4 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
   @import './category.styl'
-.category
-  margin-top 10px
-  background: #ddd;
-  padding 10px
-.select
-  margin: 1rem 0 .5rem 0;
-  padding .2rem 5px
-  width: 100%;
-.add-category
-  padding .2rem 2%
-  display inlineblock
-  width: 81%;
-.add-btn
-  padding .2rem 0
-  width: 15%;
-  background: #ccc;
 </style>

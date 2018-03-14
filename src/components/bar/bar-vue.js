@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { _2space } = require('common/js/index.js')
   return {
     name: 'bar',
     components: {
@@ -18,19 +19,18 @@ exports.js = () => {
     },
 
     computed: {
-      url () {
-        return this.$route.path
-      }
+      categories () { return this.$store.getters.categories },
+      url () { return this.$route.path }
     },
 
     watch: {
     },
 
     methods: {
+      _2space,
       toggle () {
         this.menuShow = !this.menuShow
         this.sign = this.menuShow ? '×' : '≡'
-        console.log(this.url)
       },
       go (path) {
         this.$router.push(`${path}`)

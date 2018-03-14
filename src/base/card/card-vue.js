@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { timeFormat } = require('common/js')
   const { VUE_SERVER } = require('config/vue-remote-server.js')
   return {
     name: 'card',
@@ -13,6 +14,10 @@ exports.js = () => {
       editable: {
         type: Boolean,
         default: false
+      },
+      btn: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -22,17 +27,18 @@ exports.js = () => {
     },
 
     computed: {
+      isUpdatesShow () {
+        return this.$store.getters.isUpdatesShow
+      },
       coverImgStyle () {
         return `
-        width: 100%;
-        height: 0;
         padding-bottom: 65%;
         background-color: #eee;
         background-image: url(${VUE_SERVER}${this.content.img});
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
         `
+      },
+      activeCategory () {
+        return this.$store.getters.activeCategory
       }
     },
 
@@ -40,21 +46,27 @@ exports.js = () => {
     },
 
     methods: {
+      timeFormat,
+      del () {
+        this.post('/album/del', {id: this.content.id})
+        this.$store.dispatch('getAdminAlbums', {
+          category: this.activeCategory[0],
+          subcategory: this.activeCategory[1]
+        })
+      },
       goDetail () {
+        this.$store.dispatch('getCurrAlbum', this.content.id)
         if (!this.content.id) {
           alert('no detail')
           return
         }
         if (this.editable) {
-          console.log('in Edit')
+          let prefix = this.isUpdatesShow ? 'hide' : 'show'
+          this.$store.dispatch(`${prefix}Updates`)
           return
         }
-        this.$router.push({
-          path: '/detail',
-          query: { id: this.content.id }
-        })
-      },
-      format (str) { return str ? str.substr(0, 10) : null }
+        this.$router.push({ path: '/__detail', query: { id: this.content.id } })
+      }
     },
 
     mounted () {

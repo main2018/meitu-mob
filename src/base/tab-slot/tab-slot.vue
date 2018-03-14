@@ -6,9 +6,12 @@
           v-for="(item, index) in menu"
           @click="tap(index)"
           ) {{item}}
-      .tab-color(:style="colorStyle")
+      .tab-color(
+        v-show="menu.length > 0"
+        :style="colorStyle"
+        )
 
-    .tab-padding
+    .tab-padding(v-show="menu.length > 0")
     .tab-content-wrap
       ul.tab-content(
         ref="content"
@@ -20,7 +23,14 @@
           @touchmove="touchmove(index)"
           @touchend="touchend(index)"
           )
-          slot(:name="'slot-'+index")
+          slot(
+            v-if="menu.length > 0"
+            :name="'slot-'+index"
+            )
+    slot(
+      v-if="menu.length === 0"
+      :name="'slot-0'"
+      )
 </template>
 
 <script type="text/ecmascript-6">

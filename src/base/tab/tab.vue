@@ -3,23 +3,33 @@
     .tab-title
       ul.tab-menu
         li(
-          v-for="(item, index) in list"
+          v-for="(item, index) in menu"
           @click="tap(index)"
           ) {{item}}
-      .tab-color(:style="colorStyle")
+      .tab-color(
+        v-show = "menu.length > 0"
+        :style="colorStyle"
+        )
 
-    .tab-padding
+    .tab-padding(v-show="menu.length > 0")
     .tab-content-wrap
       ul.tab-content(
         ref="content"
         :style="contentStyle"
         )
-        li(
-          v-for="item in content"
+        li.tab-page(
+          v-for="content in contents"
           @touchstart="touchstart(index)"
           @touchmove="touchmove(index)"
           @touchend="touchend(index)"
-          ) {{item}}
+          )
+          ol: li.card-wrapper(v-for="item in content")
+              card(:content="item")
+    .no-subcategory(
+      v-if="!isTabShow"
+      )
+      ol: li.card-wrapper(v-for="item in rootAlbums")
+            card(:content="item")
 </template>
 
 <script type="text/ecmascript-6">
