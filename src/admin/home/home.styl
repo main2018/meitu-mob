@@ -1,28 +1,31 @@
+$aside-width = 15rem
 .home
   min-height 100vh
   background rgb(245, 246, 247)
   display flex
 .aside
-  width 15rem
+  position fixed
+  z-index 10000
+  width $aside-width
   min-height 100vh
   background #eee
 .container
+  margin-left $aside-width
+  width 100%
   // background #333
   flex 1
-  .card-wrapper
-    display inline-block
-    margin-left 1rem
-    width 18rem
   .nav
-    // position fixed
-    width calc(100% - 10px)
+    position fixed
+    display flex
+    z-index 1000
+
+    width calc(100% - 15rem)
     height 2rem
     line-height 2rem
-    padding-left 10px
     background #666
     color #fff
-    display flex
   .crumb
+    padding-left 15px
     flex 1
   .add
     width 2rem
@@ -33,5 +36,9 @@
     background #aaa
   .add-updates
     background #00f
+  .nav-gap
+    margin-bottom 2rem
 .card-wrapper
   margin 16px 0 0 10px
+  display inline-block
+  width 18rem

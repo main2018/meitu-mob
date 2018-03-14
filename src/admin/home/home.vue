@@ -3,8 +3,9 @@
     .aside
       adminAside(@clicked="getCategory")
     .container
-      .nav.bd-1px-b
-        .crumb {{breadcrumb || '/'}}
+      div.nav
+        .crumb
+          span {{breadcrumb || '/'}}
         .add.add-publish(
           v-text="isPublishShow ? '×' : '+'"
           v-show="categories.length !== 0 && !isUpdatesShow"
@@ -15,7 +16,8 @@
           v-show="categories.length !== 0 && isUpdatesShow"
           @click="closeUpdates"
           )
-      .content(
+      div.nav-gap
+      div.content(
         v-show="!isPublishShow && !isUpdatesShow && adminAlbums.length !== 0"
         )
         .card-wrapper(
@@ -26,12 +28,12 @@
             :btn="!''"
             :editable="editable"
             )
-      .blank-page(
+      div.blank-page(
         v-show="adminAlbums.length === 0 && !isPublishShow && !isUpdatesShow"
         ) no Records
 
 
-      .publish(v-show="isPublishShow || isUpdatesShow")
+      div.publish(v-show="isPublishShow || isUpdatesShow")
         publish(:crumb="categories")
 </template>
 
