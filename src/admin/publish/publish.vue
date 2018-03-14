@@ -22,7 +22,12 @@
               label outline &nbsp;
                 input(type="radio" name ="status" value="1" v-model="postJson.status")
             label.video hasvideo &nbsp;
-              input(type="checkbox" value="postJson.hasVideo" v-model="postJson.hasVideo")
+              input(
+                type="checkbox"
+                value="postJson.hasVideo"
+                v-model="postJson.hasVideo"
+                @click="test"
+                )
           ul.input-item
             li
               label * title

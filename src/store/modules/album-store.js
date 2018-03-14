@@ -18,7 +18,7 @@ const actions = {
   hideUpdates ({ commit }) { commit('HIDE_UPDATES') },
 
   getAdminAlbums ({ commit }, category) {
-    commit('HIDE_PUBLISH')
+    // commit('HIDE_PUBLISH') // aside hidePublish
     commit('GET_ADMIN_ALBUMS', category)
   },
 

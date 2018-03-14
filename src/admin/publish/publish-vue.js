@@ -89,7 +89,7 @@ exports.js = () => {
         this.postJson = this.genPostJson()
       },
       publish () {
-        if (this.validate) {
+        if (!this.postJson.title && !this.postJson.desc) {
           alert('info not complete')
           return
         }
@@ -102,7 +102,7 @@ exports.js = () => {
         })
       },
       update () {
-        if (this.validate) {
+        if (!this.postJson.title && !this.postJson.desc) {
           alert('info not complete')
           return
         }
