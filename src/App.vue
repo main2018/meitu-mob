@@ -21,6 +21,7 @@ export default {
   name: 'app',
   mounted () {
     this.$store.dispatch('getCategory')
+    this.$store.dispatch('getAllAlbum')
   }
 }
 </script>

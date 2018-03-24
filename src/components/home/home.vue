@@ -2,10 +2,11 @@
   #home
     ul
       // li(@click="$router.push('/photo')") Photo
-      li(
+      li.item(
         v-for="item in categories"
         @click="goUrl (item.category)"
-        ) {{_2space(item.category)}}
+        )
+          category-card(:content="item")
 </template>
 
 <script type="text/ecmascript-6">
@@ -13,7 +14,7 @@
   export default js.call(this)
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
   @import './home.styl'
 </style>

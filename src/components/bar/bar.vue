@@ -11,7 +11,7 @@
             v-for="item in categories"
             @click="go(`/${item.category}`)"
             ): .text
-              p {{_2space(item.category)}}
+              p {{_2space(item.category)}}{{item.name}}
               .hint-color(v-show="isHintShow(item.category)")
 
           // li(@click="go('/video')")

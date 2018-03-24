@@ -1,8 +1,10 @@
 exports.js = () => {
+  const CategoryCard = require('base/card/category-card/category-card.vue')
   const { _2space } = require('common/js/index.js')
   return {
     name: 'home',
     components: {
+      CategoryCard
     },
 
     created () {
@@ -32,7 +34,6 @@ exports.js = () => {
     },
 
     mounted () {
-      this.$store.dispatch('getAllAlbum')
     }
   }
 }
