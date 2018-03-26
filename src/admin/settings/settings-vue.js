@@ -15,14 +15,13 @@ exports.js = () => {
 
     data () {
       return {
-        showBtn: true,
         siteName: ''
       }
     },
 
     computed: {
-      name () { return this.$store.getters.name },
-      images () { return [`${this.$store.getters.logo}`] }
+      name () { return this.$store.getters.settings.name },
+      images () { return [`${this.$store.getters.settings.logo}`] }
     },
 
     watch: {
@@ -30,7 +29,6 @@ exports.js = () => {
 
     methods: {
       getFiles (event) {
-        // this.showBtn = false
         let files = event.target.files[0]
         this.formData.set('logo', files)
       },
@@ -40,6 +38,7 @@ exports.js = () => {
         this.post('/setSettings', this.formData, (resp) => {
           if (resp.success) {
             this.$store.dispatch('getSettings')
+            this.close()
           }
         })
       }

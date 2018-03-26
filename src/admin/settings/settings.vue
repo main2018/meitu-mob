@@ -4,17 +4,24 @@
       span.txt Settings
       span.mdi.mdi-close(@click="close")
     .content
-      label Site logo
       img-upload(
-        :showBtn="showBtn"
+        :hint="'Logo'"
         :images="images"
         @change="getFiles"
       )
+      span Title
+
+      input.site-name(
+        type="text"
+        v-model="siteName"
+        :placeholder="name"
+        )
       br
-      label Site name
-        input(type="text" v-model="siteName" :placeholder="name")
-      br
-      input(type="button" @click="submit" value="save")
+      input.submit(
+        type="button"
+        @click="submit"
+        value="save"
+        )
 </template>
 
 <script type="text/ecmascript-6">

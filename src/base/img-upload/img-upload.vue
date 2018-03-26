@@ -10,7 +10,7 @@
       @click="dispatch"
       v-show="showBtn"
       )
-      span image
+      span {{hint}}
     .preview(v-show="imgs.length > 0")
       img(
         v-for="img in imgs" :src="img"

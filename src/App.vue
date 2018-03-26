@@ -20,7 +20,9 @@ export default {
   },
   name: 'app',
   mounted () {
-    document.title = this.getLocal('siteName')
+    if (this.getLocal('siteName')) {
+      document.title = this.getLocal('siteName')
+    }
     this.$store.dispatch('getCategory')
     this.$store.dispatch('getAllAlbum')
     this.$store.dispatch('getSettings')

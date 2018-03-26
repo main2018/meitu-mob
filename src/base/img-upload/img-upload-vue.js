@@ -8,6 +8,10 @@ exports.js = () => {
     },
 
     props: {
+      hint: {
+        type: String,
+        default: 'image'
+      },
       multilple: {
         type: Boolean,
         default: false

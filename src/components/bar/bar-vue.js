@@ -14,7 +14,8 @@ exports.js = () => {
     data () {
       return {
         sign: '≡',
-        menuShow: false
+        menuShow: false,
+        logo: this.getLocal('siteLogo')
       }
     },
 
@@ -48,6 +49,7 @@ exports.js = () => {
     },
 
     mounted () {
+      console.log(this.logo)
     }
   }
 }

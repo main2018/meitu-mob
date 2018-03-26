@@ -22,15 +22,13 @@ const mutations = {
       if (!resp.data.logo) { return }
       let logo = VUE_SERVER + resp.data.logo
       state.settings.logo = logo
-      setLocalStore('sitLogo', logo)
+      setLocalStore('siteLogo', logo)
     })
   }
 }
 
 const getters = {
-  settings: state => state.settings,
-  name: state => state.settings.name,
-  logo: state => state.settings.logo
+  settings: state => state.settings
 }
 
 export default {
