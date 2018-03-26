@@ -19,6 +19,10 @@ exports.js = () => {
       showBtn: {
         type: Boolean,
         default: true
+      },
+      images: {
+        type: Array,
+        default: () => []
       }
     },
 
@@ -32,6 +36,9 @@ exports.js = () => {
     },
 
     watch: {
+      images () {
+        this.imgs = this.images
+      }
     },
 
     methods: {
@@ -39,7 +46,8 @@ exports.js = () => {
         this.imgs = []
         let method = this.multilple ? 'getImgs' : 'getImg'
         this[method](event)
-        this.emit(event)
+        this.$emit('change', event)
+        this.$emit('preview', this.imgs)
       },
 
       getImg (event) {
@@ -60,7 +68,8 @@ exports.js = () => {
       },
 
       dispatch () { this.$refs.file.click() },
-      emit (val) { this.$emit('change', event) }
+      emit (val) {
+      }
     },
 
     mounted () {

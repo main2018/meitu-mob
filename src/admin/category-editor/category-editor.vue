@@ -20,6 +20,7 @@
             ref="upload"
             v-show="!!status[idx] && !category.icon"
             :showBtn="showBtn"
+            @preview="setPreview"
             @change="getFiles"
           )
           img.iconimg(

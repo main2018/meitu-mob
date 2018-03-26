@@ -1,6 +1,9 @@
 <template lang="pug">
   .home
     .aside
+      .menu
+        .brand: span {{name || 'manager'}}
+        .util: .mdi.mdi-18px.mdi-settings(@click="openSettings")
       adminAside(@clicked="getCategory")
     .container
       div.nav
@@ -20,9 +23,7 @@
       div.content(
         v-show="!isPublishShow && !isUpdatesShow && adminAlbums.length !== 0"
         )
-        .card-wrapper(
-          v-for="album in adminAlbums"
-          )
+        .card-wrapper(v-for="album in adminAlbums")
           card(
             :content="album"
             :btn="!''"
@@ -35,6 +36,8 @@
 
       div.publish(v-show="isPublishShow || isUpdatesShow")
         publish(:crumb="categories")
+      div.settings(v-show="isSettingsShow")
+        settings(@close="closeSettings")
 </template>
 
 <script type="text/ecmascript-6">

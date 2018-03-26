@@ -1,7 +1,24 @@
 $aside-width = 15rem
+$bg = rgb(245, 246, 247)
+.menu
+  display flex
+  padding-left 10px
+  padding-right 5px
+  height 2rem
+  line-height 2rem
+  color $bg
+  background gray
+  .brand
+    flex 1
+    span
+      font-weight 700
+  .mdi
+    width 2rem
+    text-align center
+    cursor pointer
 .home
   min-height 100vh
-  background rgb(245, 246, 247)
+  background $bg
   display flex
 .aside
   position fixed

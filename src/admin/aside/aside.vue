@@ -1,6 +1,5 @@
 <template lang="pug">
   .aside
-    .brand
     .category-editor
       category
     ul.category-wrapper

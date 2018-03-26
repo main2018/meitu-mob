@@ -17,6 +17,8 @@ exports.js = () => {
         showBtn: true,
         imgStyle: '',
         status: [],
+        activeIdx: 0,
+        activeOldIcon: '',
         keyArr: ['order', 'category', 'name']
       }
     },
@@ -36,6 +38,8 @@ exports.js = () => {
     methods: {
       close () { this.$emit('close') },
       edit (idx) {
+        this.activeIdx = idx
+        this.activeOldIcon = this.categories[idx].icon
         this.imgStyle = 'cursor: pointer'
         this.initStatus()
         this.status.splice(idx, 1, true)
@@ -44,6 +48,7 @@ exports.js = () => {
         this.imgStyle = ''
         this.resetVal(idx)
         this.status.splice(idx, 1, false)
+        this.categories[this.activeIdx].icon = this.activeOldIcon
       },
       check (idx) {
         this.setFormData(idx)
@@ -83,6 +88,9 @@ exports.js = () => {
           let val = key === 'order' ? parseInt(html) : html
           this.formData.set(key, val)
         })
+      },
+      setPreview (imgs) {
+        this.categories[this.activeIdx].icon = imgs[0]
       },
       getFiles (event) {
         this.showBtn = false

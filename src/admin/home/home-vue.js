@@ -2,11 +2,13 @@ exports.js = () => {
   const { _2space } = require('common/js/index.js')
   const AdminAside = require('admin/aside/aside')
   const Publish = require('admin/publish/publish')
+  const Settings = require('admin/settings/settings')
   const Card = require('base/card/card')
   return {
     name: 'admin-home',
     components: {
       AdminAside,
+      Settings,
       Publish,
       Card
     },
@@ -20,7 +22,8 @@ exports.js = () => {
     data () {
       return {
         categories: [],
-        editable: true
+        editable: true,
+        isSettingsShow: true
       }
     },
 
@@ -40,6 +43,7 @@ exports.js = () => {
       adminAlbums () {
         return this.$store.getters.adminAlbums
       },
+      name () { return this.$store.getters.name },
       isPublishShow () { return this.$store.getters.isPublishShow },
       isUpdatesShow () { return this.$store.getters.isUpdatesShow }
     },
@@ -57,10 +61,13 @@ exports.js = () => {
       },
       closeUpdates () {
         this.$store.dispatch(`hideUpdates`)
-      }
+      },
+      closeSettings () { this.isSettingsShow = false },
+      openSettings () { this.isSettingsShow = true }
     },
 
     mounted () {
+      document.title = this.getLocal('siteName') + ' manager'
       this.$store.dispatch('getCategory')
     }
   }

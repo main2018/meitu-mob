@@ -20,8 +20,10 @@ export default {
   },
   name: 'app',
   mounted () {
+    document.title = this.getLocal('siteName')
     this.$store.dispatch('getCategory')
     this.$store.dispatch('getAllAlbum')
+    this.$store.dispatch('getSettings')
   }
 }
 </script>
