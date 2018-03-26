@@ -3,7 +3,7 @@
     .head
       div.bar
         .brand(@click="goHome")
-          img.logo(:src="logo")
+          img.logo(v-if="logo" :src="logo")
           // .logo Logo
         .icon(@click="toggle") {{sign}}
       menu.menu(v-show="menuShow")

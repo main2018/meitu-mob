@@ -15,16 +15,22 @@ exports.js = () => {
       return {
         sign: '≡',
         menuShow: false,
-        logo: this.getLocal('siteLogo')
+        logo: ''
       }
     },
 
     computed: {
       categories () { return this.$store.getters.categories },
-      url () { return this.$route.path }
+      url () { return this.$route.path },
+      siteLogo () { return this.$store.getters.settings.logo }
     },
 
     watch: {
+      siteLogo () {
+        if (this.siteLogo) {
+          this.logo = this.getLocal('siteLogo')
+        }
+      }
     },
 
     methods: {

@@ -58,6 +58,7 @@ exports.js = () => {
         this.post('/category/update', this.formData, (resp) => {
           if (resp.success) { this.$store.dispatch('getCategory') }
         })
+        this.formData = new FormData()
         this.imgStyle = ''
         this.status.splice(idx, 1, false)
         this.iconShowStatus.splice(this.activeIdx, 1, false)
