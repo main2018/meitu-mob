@@ -1,0 +1,28 @@
+<template lang="pug">
+  .settings
+    .title
+      span.txt Settings
+      span.mdi.mdi-close(@click="close")
+    .content
+      label Site logo
+      img-upload(
+        :showBtn="showBtn"
+        :images="images"
+        @change="getFiles"
+      )
+      br
+      label Site name
+        input(type="text" v-model="siteName" :placeholder="name")
+      br
+      input(type="button" @click="submit" value="save")
+</template>
+
+<script type="text/ecmascript-6">
+  import { js } from './settings-vue.js'
+  export default js.call(this)
+</script>
+
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  @import '~common/stylus/variable.styl'
+  @import './settings.styl'
+</style>
