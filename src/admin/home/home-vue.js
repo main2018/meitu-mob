@@ -23,7 +23,7 @@ exports.js = () => {
       return {
         categories: [],
         editable: true,
-        isSettingsShow: true
+        isSettingsShow: false
       }
     },
 

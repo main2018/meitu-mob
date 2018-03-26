@@ -24,6 +24,7 @@
             @change="getFiles"
           )
           img.iconimg(
+            v-show="!iconShowStatus[idx]"
             @click="updateImg(idx)"
             :style="imgStyle"
             :src="`${http}${category.icon}`"

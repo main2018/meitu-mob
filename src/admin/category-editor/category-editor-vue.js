@@ -17,6 +17,7 @@ exports.js = () => {
         showBtn: true,
         imgStyle: '',
         status: [],
+        iconShowStatus: [],
         activeIdx: 0,
         activeOldIcon: '',
         keyArr: ['order', 'category', 'name']
@@ -48,6 +49,7 @@ exports.js = () => {
         this.imgStyle = ''
         this.resetVal(idx)
         this.status.splice(idx, 1, false)
+        this.iconShowStatus.splice(this.activeIdx, 1, false)
         this.categories[this.activeIdx].icon = this.activeOldIcon
       },
       check (idx) {
@@ -58,6 +60,7 @@ exports.js = () => {
         })
         this.imgStyle = ''
         this.status.splice(idx, 1, false)
+        this.iconShowStatus.splice(this.activeIdx, 1, false)
       },
       del (idx) {
         this.post('/category/del', {
@@ -71,7 +74,11 @@ exports.js = () => {
 
       initStatus () {
         this.status = []
-        this.categories.forEach(() => { this.status.push(false) })
+        this.iconShowStatus = []
+        this.categories.forEach(() => {
+          this.status.push(false)
+          this.iconShowStatus.push(false)
+        })
       },
       resetVal (idx) {
         let trDom = this.$refs[idx][0]
@@ -96,6 +103,7 @@ exports.js = () => {
         this.showBtn = false
         let files = event.target.files[0]
         this.formData.set('icon', files)
+        this.iconShowStatus.splice(this.activeIdx, 1, true)
       },
       updateImg (idx) {
         if (!this.status[idx]) { return }
