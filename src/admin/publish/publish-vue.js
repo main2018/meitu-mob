@@ -2,6 +2,7 @@ exports.js = () => {
   const { quillEditor } = require('vue-quill-editor')
   const { VUE_SERVER } = require('config/vue-remote-server.js')
   const { customform } = require('./form')
+  const VideoPublish = require('admin/video-publish/video-publish')
   let json = {
     status: 0,
     files: [],
@@ -12,7 +13,7 @@ exports.js = () => {
   }
   return {
     name: 'publish',
-    components: { customform, quillEditor },
+    components: { customform, quillEditor, VideoPublish },
 
     props: {
       crumb: {

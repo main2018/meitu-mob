@@ -35,10 +35,13 @@
             li
               label * desc
               textarea(v-model="postJson.desc")
-      p content
-      .input-content
+      div.video(v-show="postJson.hasVideo") video
+        video-publish
+      video-publish
+      // p content
+      // .input-content
         quill-editor(v-model="postJson.content")
-      .input-button
+      // .input-button
         input.reset(v-show="isPublishShow" type="button" value="reset" @click="reset")
         input.reset(v-show="isUpdatesShow" type="button" value="reset" @click="updatesReset")
         input.submit(v-show="isPublishShow" type="button" value="publish" @click="publish")
