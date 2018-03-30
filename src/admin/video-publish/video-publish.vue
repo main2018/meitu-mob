@@ -5,9 +5,9 @@
       .mdi.mdi-plus(@click="add")
     div.list(v-for="(video, idx) in videos_")
       .item
-        img-upload(hint="cover")
+        img-upload(accept="image/*" hint="cover" @change="getFile")
       .item
-        img-upload(hint="video")
+        img-upload(hint="video" multiple="!''")
       .input-wrapper
         .input
           label.url url: &nbsp;

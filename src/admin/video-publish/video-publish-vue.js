@@ -31,16 +31,18 @@ exports.js = () => {
     methods: {
       add () {
         this.videos_.push({
-          url: '',
+          cover: '',
           video: '',
-          info: '',
-          no: ''
+          url: '',
+          order: '',
+          info: ''
         })
       },
       del (idx) {
-        console.log(idx)
         this.videos_.splice(idx, 1)
-        console.log(this.videos_)
+      },
+      getFile (ev) {
+        console.log(ev)
       }
     },
 

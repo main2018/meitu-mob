@@ -27,12 +27,20 @@ exports.js = () => {
       images: {
         type: Array,
         default: () => []
+      },
+      accept: {
+        type: String,
+        default: '*'
       }
     },
 
     data () {
       return {
-        imgs: []
+        video: {},
+        imgs: [],
+        hasDoc: false,
+        hasAudio: false,
+        hasVideo: false
       }
     },
 
@@ -53,19 +61,34 @@ exports.js = () => {
         this.$emit('change', event)
         this.$emit('preview', this.imgs)
       },
-
       getImg (event) {
         this.imgs = []
         this.file = event.target.files[0]
         if (!this.file || !window.FileReader) return
-        if (!/^image/.test(this.file.type)) return
-        setImgs(this.imgs, this.file)
+        if (/^video/.test(this.file.type)) {
+          this.setPreviewType('hasVideo')
+        } else if (/^image/.test(this.file.type)) {
+          setImgs(this.imgs, this.file)
+          this.setPreviewType()
+        } else {
+          this.setPreviewType('hasDoc')
+        }
+      },
+      setPreviewType (type) {
+        this.hasAudio = false
+        this.hasVideo = false
+        this.hasDoc = false
+        this[type] = true
       },
 
       getImgs (event) {
         this.files = event.target.files
         if (!this.files || !window.FileReader) return
         for (let i = 0; i < this.files.length; i++) {
+          if (!/^video/.test(this.file.type)) {
+            this.imgs.push('')
+            continue
+          }
           if (!/^image/.test(this.files[i].type)) { continue }
           setImgs(this.imgs, this.files[i])
         }
