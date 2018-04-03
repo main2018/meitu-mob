@@ -95,8 +95,7 @@ exports.js = () => {
       },
 
       dispatch () { this.$refs.file.click() },
-      emit (val) {
-      }
+      emit (val) {}
     },
 
     mounted () {

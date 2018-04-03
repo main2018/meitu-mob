@@ -101,6 +101,9 @@ exports.js = () => {
           this.refreshAlbum()
           alert('publish success')
         })
+        /*
+        console.log(this.postJson)
+        */
       },
       update () {
         if (!this.postJson.title && !this.postJson.desc) {
@@ -121,6 +124,45 @@ exports.js = () => {
         this.$store.dispatch('getAdminAlbums', {
           category: this.crumb[0],
           subcategory: this.crumb[1]
+        })
+      },
+      getVideos (videos) {
+        this.clearVideos()
+        videos.forEach((item, idx) => {
+          // add video file
+          let video = {}
+          let videoCover = {}
+          video[`videos${idx}_video`] = item.video
+          videoCover[`videos${idx}_cover`] = item.cover
+          this.postJson.files.push(video)
+          this.postJson.files.push(videoCover)
+          // add video infos
+          this.postJson[`videos${idx}_order`] = item.order
+          this.postJson[`videos${idx}_text`] = item.text
+          this.postJson[`videos${idx}_url`] = item.url
+        })
+      },
+
+      getLinks (links) {
+        this.clearVideos()
+        links.forEach((item, idx) => {
+          // add link file
+          let link = {}
+          let linkCover = {}
+          link[`links{idx}_video`] = item.video
+          linkCover[`links{idx}_cover`] = item.cover
+          this.postJson.files.push(link)
+          this.postJson.files.push(linkCover)
+          // add link infos
+          this.postJson[`links{idx}_order`] = item.order
+          this.postJson[`links{idx}_text`] = item.text
+          this.postJson[`links{idx}_url`] = item.url
+        })
+      },
+
+      clearVideos () {
+        this.postJson.files = this.postJson.files.filter(file => {
+          return file.hasOwnProperty('coverimg')
         })
       },
       dispatch () { this.$refs.file.click() },

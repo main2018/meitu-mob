@@ -5,21 +5,30 @@
       span.mdi.mdi-close(@click="close")
     .table
       ul.header
-        li order
-        li icon
-        li category
-        li name
-        li operate
+        li.order order
+        li.type content type
+        li.icon icon
+        li.category category
+        li.name name
+        li.operator operator
       ul.content(v-for="(category, idx) in categories" :ref="'' + idx")
         li.order(
           :contenteditable="status[idx]"
           :ref="`${idx}-${category.order}`"
           ) {{category.order}}
+        li.type
+          label Article
+            input(type="checkbox" v-model="category.hasArticle" :disabled="!status[idx]")
+          label video
+            input(type="checkbox" v-model="category.hasVideo" :disabled="!status[idx]")
+          label link
+            input(type="checkbox" v-model="category.hasLink" :disabled="!status[idx]")
         li.icon
           img-upload(
             ref="upload"
             v-show="!!status[idx] && !category.icon"
             :showBtn="showBtn"
+            accept="image/*"
             @preview="setPreview"
             @change="getFiles"
           )

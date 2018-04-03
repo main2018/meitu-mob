@@ -82,20 +82,23 @@ exports.js = () => {
         })
       },
       resetVal (idx) {
-        let trDom = this.$refs[idx][0]
+        let liDom = this.$refs[idx][0]
         this.keyArr.forEach((item) => {
-          let tdDom = trDom.getElementsByClassName(item)[0]
+          let tdDom = liDom.getElementsByClassName(item)[0]
           tdDom.innerHTML = this.categories[idx][item] || ''
         })
       },
       setFormData (idx) {
-        let trDom = this.$refs[idx][0]
+        let liDom = this.$refs[idx][0]
         this.keyArr.forEach((key) => {
-          let html = trDom.getElementsByClassName(key)[0].innerHTML
+          let html = liDom.getElementsByClassName(key)[0].innerHTML
           if (!html) { return }
           let val = key === 'order' ? parseInt(html) : html
           this.formData.set(key, val)
         })
+        this.formData.set('hasArticle', this.categories[idx].hasArticle)
+        this.formData.set('hasVideo', this.categories[idx].hasVideo)
+        this.formData.set('hasLink', this.categories[idx].hasLink)
       },
       setPreview (imgs) {
         this.categories[this.activeIdx].icon = imgs[0]
