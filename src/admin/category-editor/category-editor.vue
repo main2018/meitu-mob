@@ -6,23 +6,16 @@
     .table
       ul.header
         li.order order
-        li.type content type
         li.icon icon
         li.category category
         li.name name
+        li.type content type
         li.operator operator
       ul.content(v-for="(category, idx) in categories" :ref="'' + idx")
         li.order(
           :contenteditable="status[idx]"
           :ref="`${idx}-${category.order}`"
           ) {{category.order}}
-        li.type
-          label Article
-            input(type="checkbox" v-model="category.hasArticle" :disabled="!status[idx]")
-          label video
-            input(type="checkbox" v-model="category.hasVideo" :disabled="!status[idx]")
-          label link
-            input(type="checkbox" v-model="category.hasLink" :disabled="!status[idx]")
         li.icon
           img-upload(
             ref="upload"
@@ -46,6 +39,13 @@
           :contenteditable="status[idx]"
           :ref="`${idx}-${category.name}`"
           ) {{category.name}}
+        li.type
+          label Article
+            input(type="checkbox" v-model="category.hasArticle" :disabled="!status[idx]")
+          label video
+            input(type="checkbox" v-model="category.hasVideo" :disabled="!status[idx]")
+          label link
+            input(type="checkbox" v-model="category.hasLink" :disabled="!status[idx]")
         li.operator
           span(v-show="!status[idx]" @click="edit(idx)").mdi.mdi-pencil
           span(v-show="status[idx]" @click="cancel(idx)").mdi.mdi-close

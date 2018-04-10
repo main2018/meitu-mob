@@ -35,7 +35,7 @@ exports.js = () => {
       close () { this.$emit('close') },
       submit () {
         this.formData.set('name', this.siteName || this.name)
-        this.post('/setSettings', this.formData, (resp) => {
+        this.post('/site/set', this.formData, (resp) => {
           if (resp.success) {
             this.$store.dispatch('getSettings')
             this.close()

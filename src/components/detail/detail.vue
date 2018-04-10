@@ -1,18 +1,29 @@
 <template lang="pug">
   .detail
-    //video.video(
-      v-if="currItem.vedio"
-      :poster="currItem.vedioPoster"
-      :src="currItem.vedio"
-      controls="controls"
-      )
 
     .aw-article
       h1.aw-title {{album.title}}
-      time.aw-category {{timeFormat(album.createAt)}} | &nbsp;
+      time.aw-category {{timeFormat(album.meta.createdAt)}} | &nbsp;
         span(v-if="album.subcategory") {{album.subcategory.subcategory}}
       p.aw-desc {{album.desc}}
-    .aw-content(v-html="album.content")
+    .aw-content(v-html="album.content" v-show="album.hasArticle")
+    .aw-video(
+      v-if="album.hasVideo"
+      v-for="video in album.videos"
+      )
+      //video.video(
+        width="300vw"
+        :poster="`${http}${video.cover}`"
+        :src="getUrl(video.video)"
+        controls="controls"
+        )
+      video(
+        controls
+        preload="auto"
+        :poster="`${http}${video.cover}`"
+        )
+        source(:src="`${http}${video.video}`")
+        Your browser does not support the video tag.
 </template>
 
 <script type="text/ecmascript-6">

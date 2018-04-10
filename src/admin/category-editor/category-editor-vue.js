@@ -1,5 +1,6 @@
 exports.js = () => {
-  const { VUE_SERVER } = require('config/vue-remote-server.js')
+  const { qiniuUpload } = require('common/js/qiniu-upload.js')
+  const { QINIU_URL_PREFIX } = require('config')
   const ImgUpload = require('base/img-upload/img-upload')
   return {
     name: 'category-editor',
@@ -9,11 +10,12 @@ exports.js = () => {
 
     created () {
       this.formData = new FormData()
+      this.postJson = {}
     },
 
     data () {
       return {
-        http: VUE_SERVER,
+        http: QINIU_URL_PREFIX,
         showBtn: true,
         imgStyle: '',
         status: [],
@@ -47,24 +49,30 @@ exports.js = () => {
       },
       cancel (idx) {
         this.imgStyle = ''
+        this.file = {}
         this.resetVal(idx)
         this.status.splice(idx, 1, false)
         this.iconShowStatus.splice(this.activeIdx, 1, false)
         this.categories[this.activeIdx].icon = this.activeOldIcon
       },
       check (idx) {
-        this.setFormData(idx)
-        this.formData.set('oldCategory', this.categories[idx].category)
-        this.post('/category/update', this.formData, (resp) => {
-          if (resp.success) { this.$store.dispatch('getCategory') }
+        console.log('in')
+        qiniuUpload(this.file, (fname) => {
+          this.getPostJson(idx)
+          this.postJson.icon = fname
+          console.log({ fname })
+
+          this.post('/category/update', this.postJson, (resp) => {
+            if (resp.success) { this.$store.dispatch('getCategory') }
+          })
+          this.postJson = {}
+          this.imgStyle = ''
+          this.status.splice(idx, 1, false)
+          this.iconShowStatus.splice(this.activeIdx, 1, false)
         })
-        this.formData = new FormData()
-        this.imgStyle = ''
-        this.status.splice(idx, 1, false)
-        this.iconShowStatus.splice(this.activeIdx, 1, false)
       },
       del (idx) {
-        this.post('/category/del', {
+        this.post('/category/delByCategory', {
           category: this.categories[idx].category
         }, (resp) => {
           if (!resp.success) { return }
@@ -88,25 +96,25 @@ exports.js = () => {
           tdDom.innerHTML = this.categories[idx][item] || ''
         })
       },
-      setFormData (idx) {
+      getPostJson (idx) {
         let liDom = this.$refs[idx][0]
         this.keyArr.forEach((key) => {
           let html = liDom.getElementsByClassName(key)[0].innerHTML
           if (!html) { return }
           let val = key === 'order' ? parseInt(html) : html
-          this.formData.set(key, val)
+          this.postJson[key] = val
         })
-        this.formData.set('hasArticle', this.categories[idx].hasArticle)
-        this.formData.set('hasVideo', this.categories[idx].hasVideo)
-        this.formData.set('hasLink', this.categories[idx].hasLink)
+        this.postJson.hasArticle = this.categories[idx].hasArticle
+        this.postJson.hasVideo = this.categories[idx].hasVideo
+        this.postJson.hasLink = this.categories[idx].hasLink
+        this.postJson._id = this.categories[idx]._id
       },
       setPreview (imgs) {
         this.categories[this.activeIdx].icon = imgs[0]
       },
       getFiles (event) {
         this.showBtn = false
-        let files = event.target.files[0]
-        this.formData.set('icon', files)
+        this.file = event.target.files[0]
         this.iconShowStatus.splice(this.activeIdx, 1, true)
       },
       updateImg (idx) {

@@ -1,6 +1,6 @@
 exports.js = () => {
   const { timeFormat } = require('common/js')
-  const { VUE_SERVER } = require('config/vue-remote-server.js')
+  const { QINIU_URL_PREFIX } = require('config')
   return {
     name: 'card',
     components: {
@@ -35,7 +35,7 @@ exports.js = () => {
         return `
         padding-bottom: 65%;
         background-color: #eee;
-        background-image: url(${VUE_SERVER}${this.content.img});
+        background-image: url(${QINIU_URL_PREFIX}${this.content.img});
         `
       },
       activeCategory () {

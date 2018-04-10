@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { VUE_SERVER } = require('config/vue-remote-server.js')
   const { timeFormat } = require('common/js')
   return {
     name: 'detail',
@@ -13,20 +14,15 @@ exports.js = () => {
 
     data () {
       return {
-        currItem: {}
+        currItem: {},
+        http: VUE_SERVER
       }
     },
 
     computed: {
-      id () {
-        return this.$route.query.id
-      },
-      video () {
-        return this.$refs.video
-      },
-      album () {
-        return this.$store.getters.currAlbum
-      }
+      id () { return this.$route.query.id },
+      video () { return this.$refs.video },
+      album () { return this.$store.getters.currAlbum }
     },
 
     watch: {
@@ -39,10 +35,15 @@ exports.js = () => {
       },
       enableMute () {
         this.video.muted = false
+      },
+      getUrl (video) {
+        console.log(`${this.http}${video}`)
+        return `${this.http}${video}`
       }
     },
 
     mounted () {
+      console.log(this.album)
       this.currItem = this.$store.getters.currPhoto
     }
   }

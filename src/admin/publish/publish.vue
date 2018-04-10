@@ -15,20 +15,6 @@
             .mdi.mdi-upload cover
           .preview(:style="coverStyle")
         .input-list
-          .input-options
-            span.hint status
-            span.radio
-              label online &nbsp;
-                input(type="radio" name ="status" checked="checked" value="0" v-model="postJson.status")
-              label outline &nbsp;
-                input(type="radio" name ="status" value="1" v-model="postJson.status")
-            label.video hasvideo &nbsp;
-              input(
-                type="checkbox"
-                value="postJson.hasVideo"
-                v-model="postJson.hasVideo"
-                @click="test"
-                )
           ul.input-item
             li
               label * title
@@ -36,12 +22,27 @@
             li
               label * desc
               textarea(v-model="postJson.desc")
-      div.video(v-show="postJson.hasVideo")
+          .input-options
+            span.hint status
+            span.radio
+              label online &nbsp;
+                input(type="radio" name ="status" checked="checked" value="0" v-model="postJson.status")
+              label outline &nbsp;
+                input(type="radio" name ="status" value="1" v-model="postJson.status")
+            // label.video hasvideo &nbsp;
+              input(
+                type="checkbox"
+                value="postJson.hasVideo"
+                v-model="postJson.hasVideo"
+                @click="test"
+                )
+
+      div.video(v-show="hasVideo")
         video-publish(title="Videos" @change="getVideos")
-      div.links(v-show="postJson.hasVideo")
+      div.links(v-show="hasLink")
         video-publish(title="Links" @change="getLinks")
-      p content
-      .input-content
+      p(v-show="hasArticle") content
+      .input-content(v-show="hasArticle")
         quill-editor(v-model="postJson.content")
       .input-button
         input.reset(v-show="isPublishShow" type="button" value="reset" @click="reset")

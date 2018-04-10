@@ -3,7 +3,10 @@ import { axiosAjax } from 'common/js'
 const state = {
   categories: [],
   activeCategory: [],
-  categoryStatus: []
+  categoryStatus: [],
+  hasArticle: true,
+  hasVideo: false,
+  hasLink: false
 }
 
 const actions = {
@@ -39,6 +42,13 @@ const mutations = {
 
   SET_ACTIVE_CATEGORY (state, activeCategory) {
     state.activeCategory = activeCategory
+    state.categories.forEach((item) => {
+      if (item.category === activeCategory[0]) {
+        state.hasArticle = item.hasArticle
+        state.hasVideo = item.hasVideo
+        state.hasLink = item.hasLink
+      }
+    })
   },
 
   SET_STATUS (state, order) {
@@ -61,7 +71,10 @@ const mutations = {
 const getters = {
   categories: state => state.categories,
   activeCategory: state => state.activeCategory,
-  categoryStatus: state => state.categoryStatus
+  categoryStatus: state => state.categoryStatus,
+  hasArticle: state => state.hasArticle,
+  hasVideo: state => state.hasVideo,
+  hasLink: state => state.hasLink
 }
 
 export default {

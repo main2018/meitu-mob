@@ -8,7 +8,6 @@ exports.js = () => {
     files: [],
     title: '',
     desc: '',
-    hasVideo: false,
     content: ''
   }
   return {
@@ -37,7 +36,10 @@ exports.js = () => {
       },
       isPublishShow () { return this.$store.getters.isPublishShow },
       isUpdatesShow () { return this.$store.getters.isUpdatesShow },
-      currAlbum () { return this.$store.getters.currAlbum }
+      currAlbum () { return this.$store.getters.currAlbum },
+      hasArticle () { return this.$store.getters.hasArticle },
+      hasVideo () { return this.$store.getters.hasVideo },
+      hasLink () { return this.$store.getters.hasLink }
     },
 
     watch: {
@@ -94,8 +96,12 @@ exports.js = () => {
           alert('info not complete')
           return
         }
+        this.postJson.hasArticle = this.hasArticle
+        this.postJson.hasVideo = this.hasVideo
+        this.postJson.hasLink = this.hasLink
+
         this.addCategory()
-        this.postForm('/album/add', this.postJson, () => {
+        this.post('/album/add', this.postJson, () => {
           this.reset()
           this.$store.dispatch('hidePublish')
           this.refreshAlbum()

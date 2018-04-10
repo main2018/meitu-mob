@@ -1,5 +1,6 @@
 exports.js = () => {
-  const { VUE_SERVER } = require('config/vue-remote-server.js')
+  // const { VUE_SERVER } = require('config/vue-remote-server.js')
+  const { QINIU_URL_PREFIX } = require('config')
   const { _2space } = require('common/js/index.js')
   return {
     name: 'category-card',
@@ -23,10 +24,10 @@ exports.js = () => {
 
     computed: {
       coverImgStyle () {
-        return ` background-image: url(${VUE_SERVER}${this.content.icon}); `
+        return ` background-image: url(${QINIU_URL_PREFIX}${this.content.icon}); `
       },
       cover () {
-        return `${VUE_SERVER}${this.content.icon}`
+        return `${QINIU_URL_PREFIX}${this.content.icon}`
       }
     },
 

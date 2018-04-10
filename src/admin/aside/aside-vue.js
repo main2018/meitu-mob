@@ -31,7 +31,7 @@ exports.js = () => {
           window.alert('please delete second and try angin')
           return
         }
-        this.post('/category/del', { category }, (resp) => {
+        this.post('/category/delByCategory', { category }, (resp) => {
           if (!resp.success) { return }
           window.alert('delete success')
           this.$store.dispatch('getCategory')
