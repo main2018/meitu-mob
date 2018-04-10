@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from 'comp/home/home'
-import mediaDetail from 'comp/media-detail/media-detail.vue'
+// import mediaDetail from 'comp/media-detail/media-detail.vue'
 import Admin from 'admin/home/home.vue'
 // import Detail from 'comp/detail/detail.vue'
 // import About from 'comp/about/about.vue'
@@ -26,10 +26,10 @@ const routes = [
   }, {
     path: '/__detail',
     component: Detail
-  */
   }, {
     path: '/mediadetail',
     component: mediaDetail
+  */
   }
 ]
 

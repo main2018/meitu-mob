@@ -59,6 +59,7 @@ exports.js = () => {
     methods: {
       getFiles (event) {
         let files = event.target.files
+        this.file = files[0]
         this.postJson.files.push({ coverimg: files })
         let reader = new FileReader()
         reader.readAsDataURL(files[0])
@@ -107,9 +108,6 @@ exports.js = () => {
           this.refreshAlbum()
           alert('publish success')
         })
-        /*
-        console.log(this.postJson)
-        */
       },
       update () {
         if (!this.postJson.title && !this.postJson.desc) {

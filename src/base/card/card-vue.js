@@ -32,10 +32,11 @@ exports.js = () => {
         return this.$store.getters.isUpdatesShow
       },
       coverImgStyle () {
+        let url = this.content.img ? QINIU_URL_PREFIX + this.content.img : ''
         return `
         padding-bottom: 65%;
         background-color: #eee;
-        background-image: url(${QINIU_URL_PREFIX}${this.content.img});
+        background-image: url(${url})
         `
       },
       activeCategory () {
