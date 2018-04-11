@@ -7,7 +7,11 @@
       adminAside(@clicked="getCategory")
     .container
       div.content(v-show="isContentShow")
-        admin-header(:title="breadcrumb")
+        admin-header(
+          :btns="['add']"
+          :title="breadcrumb"
+          @add="showPublish"
+          )
           // .mdi.mdi-plus(
             v-show="breadcrumb"
             @click="showPublish"

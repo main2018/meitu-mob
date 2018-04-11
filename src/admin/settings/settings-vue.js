@@ -1,8 +1,10 @@
 exports.js = () => {
+  const AdminHeader = require('admin/admin-header/admin-header')
   const ImgUpload = require('base/img-upload/img-upload')
   return {
     name: 'settings',
     components: {
+      AdminHeader,
       ImgUpload
     },
 

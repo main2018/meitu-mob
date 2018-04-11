@@ -1,8 +1,10 @@
 <template lang="pug">
   .category-editor
-    .title
-      span.txt Category editor
-      span.mdi.mdi-close(@click="close")
+    admin-header(
+      title="Category editor"
+      :btns="['close']"
+      @close="$emit('close')"
+      )
     .table
       ul.header
         li.order order

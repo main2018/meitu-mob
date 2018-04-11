@@ -1,8 +1,11 @@
 <template lang="pug">
   .settings
-    .title
-      span.txt Settings
-      span.mdi.mdi-close(@click="close")
+    admin-header(
+      title="Site Settings"
+      :btns="['submit', 'close']"
+      @submit="submit"
+      @close="$emit('close')"
+      )
     .content
       img-upload(
         :hint="'Logo'"
@@ -17,7 +20,7 @@
         :placeholder="name"
         )
       br
-      input.submit(
+      // input.submit(
         type="button"
         @click="submit"
         value="save"

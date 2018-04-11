@@ -1,7 +1,9 @@
 exports.js = () => {
+  const AdminHeader = require('admin/admin-header/admin-header')
   return {
     name: 'publish',
     components: {
+      AdminHeader
     },
 
     created () {

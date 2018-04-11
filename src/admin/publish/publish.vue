@@ -1,11 +1,10 @@
 <template lang="pug">
   .publish.bd-1px-l(ref="form")
-    .admin-banner
-      .crumb {{breadcrumb || '/'}}
-      .add(
-        @click="closePublish"
-        v-show="breadcrumb"
-        ) X
+    admin-header(
+      :title="'Publisher | ' + breadcrumb"
+      :btns="['close']"
+      @close="$emit('close')"
+      )
 </template>
 
 <script type="text/ecmascript-6">

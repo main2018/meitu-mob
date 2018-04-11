@@ -41,10 +41,16 @@ exports.js = () => {
     },
 
     watch: {
+      isEditorShow () {
+        if (this.isEditorShow) {
+          this.closeAllTab(true)
+        }
+      }
     },
 
     methods: {
       getCategory (category) { this.categories = category },
+      closeContent () { this.isContentShow = false },
       showPublish () { this.openTab('Publish') },
       closePublish () { this.closeTab() },
       openSettings () { this.openTab('Settings') },
@@ -60,11 +66,11 @@ exports.js = () => {
         this.closeAllTab()
         this[`is${item}Show`] = true
       },
-      closeAllTab () {
+      closeAllTab (exclude = false) {
         this.isContentShow = false
         this.isSettingsShow = false
         this.isPublishShow = false
-        this.$store.dispatch('hideEditor')
+        !exclude && this.$store.dispatch('hideEditor')
       }
     },
 

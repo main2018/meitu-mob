@@ -2,15 +2,30 @@
   .admin-header
     .title {{title}}
     .btn-wrapper
-      .btn.added(v-show="btns.includes('add')")
+      .btn(
+        @click="$emit('add')"
+        v-show="btns.includes('add')"
+        )
         .mdi.mdi-plus
-      .btn.submit(v-show="btns.includes('submit')")
+      .btn(
+        @click="$emit('submit')"
+        v-show="btns.includes('submit')"
+        )
         .mdi.mdi-check
-      .btn.reset(v-show="btns.includes('reset')")
+      .btn(
+        @click="$emit('reset')"
+        v-show="btns.includes('reset')"
+        )
         .mdi.mdi-replay
-      .btn.cancel(v-show="btns.includes('cancel')")
+      .btn(
+        @click="$emit('cancel')"
+        v-show="btns.includes('cancel')"
+        )
         .mdi.mdi-cancel
-      .btn.close(v-show="btns.includes('close')")
+      .btn(
+        v-show="btns.includes('close')"
+        @click="$emit('close')"
+        )
         .mdi.mdi-close
 </template>
 
