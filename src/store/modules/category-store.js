@@ -1,15 +1,20 @@
 import { axiosAjax } from 'common/js'
+const { _2space } = require('common/js/index.js')
 
 const state = {
   categories: [],
   activeCategory: [],
   categoryStatus: [],
+  isEditorShow: false,
   hasArticle: true,
   hasVideo: false,
   hasLink: false
 }
 
 const actions = {
+  hideEditor ({ commit }) { commit('HIDE_CATEGORY_EDITOR') },
+  showEditor ({ commit }) { commit('SHOW_CATEGORY_EDITOR') },
+
   getCategory ({ commit }) {
     commit('GET_CATEGORY')
   },
@@ -39,6 +44,9 @@ const mutations = {
   SET_CATEGORY (state, categories) {
     state.categories = categories
   },
+
+  HIDE_CATEGORY_EDITOR (state) { state.isEditorShow = false },
+  SHOW_CATEGORY_EDITOR (state) { state.isEditorShow = true },
 
   SET_ACTIVE_CATEGORY (state, activeCategory) {
     state.activeCategory = activeCategory
@@ -74,7 +82,14 @@ const getters = {
   categoryStatus: state => state.categoryStatus,
   hasArticle: state => state.hasArticle,
   hasVideo: state => state.hasVideo,
-  hasLink: state => state.hasLink
+  hasLink: state => state.hasLink,
+  isEditorShow: state => state.isEditorShow,
+  categoryCrumb: state => {
+    let arr = state.activeCategory
+    if (arr.length === 0) { return '' }
+    let crumb = arr[1] ? `${arr[0]} / ${arr[1]}` : arr[0]
+    return _2space(crumb)
+  }
 }
 
 export default {

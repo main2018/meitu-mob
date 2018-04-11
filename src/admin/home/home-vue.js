@@ -1,12 +1,13 @@
 exports.js = () => {
-  const { _2space } = require('common/js/index.js')
   const AdminAside = require('admin/aside/aside')
   const Publish = require('admin/publish/publish')
   const Settings = require('admin/settings/settings')
   const Card = require('base/card/card')
+  const CategoryEditor = require('admin/category-editor/category-editor')
   return {
     name: 'admin-home',
     components: {
+      CategoryEditor,
       AdminAside,
       Settings,
       Publish,
@@ -21,49 +22,48 @@ exports.js = () => {
 
     data () {
       return {
-        categories: [],
-        editable: true,
-        isSettingsShow: false
+        isContentShow: true,
+        isPublishShow: false,
+        isSettingsShow: false,
+
+        cardEditable: true,
+        categories: []
       }
     },
 
     computed: {
-      breadcrumb () {
-        let categories = this.categories
-        if (categories.length === 0) { return '' }
-        let crumb = ''
-        if (categories[1]) {
-          crumb = categories[0] + ' / ' + categories[1]
-        } else {
-          crumb = categories[0]
-        }
-        return _2space(crumb)
-      },
-
-      adminAlbums () {
-        return this.$store.getters.adminAlbums
-      },
-      name () { return this.$store.getters.name },
-      isPublishShow () { return this.$store.getters.isPublishShow },
-      isUpdatesShow () { return this.$store.getters.isUpdatesShow }
+      isEditorShow () { return this.$store.getters.isEditorShow },
+      adminAlbums () { return this.$store.getters.adminAlbums },
+      breadcrumb () { return this.$store.getters.categoryCrumb },
+      name () { return this.$store.getters.name }
     },
 
     watch: {
     },
 
     methods: {
-      getCategory (category) {
-        this.categories = category
+      getCategory (category) { this.categories = category },
+      showPublish () { this.openTab('Publish') },
+      closePublish () { this.closeTab() },
+      openSettings () { this.openTab('Settings') },
+      closeSettings () { this.closeTab() },
+      openEditor () { this.openTab('Editor') },
+      closeEditor () { this.closeTab() },
+
+      closeTab () {
+        this.closeAllTab()
+        this.isContentShow = true
       },
-      showPublish () {
-        let prefix = this.isPublishShow ? 'hide' : 'show'
-        this.$store.dispatch(`${prefix}Publish`)
+      openTab (item) {
+        this.closeAllTab()
+        this[`is${item}Show`] = true
       },
-      closeUpdates () {
-        this.$store.dispatch(`hideUpdates`)
-      },
-      closeSettings () { this.isSettingsShow = false },
-      openSettings () { this.isSettingsShow = true }
+      closeAllTab () {
+        this.isContentShow = false
+        this.isSettingsShow = false
+        this.isPublishShow = false
+        this.$store.dispatch('hideEditor')
+      }
     },
 
     mounted () {

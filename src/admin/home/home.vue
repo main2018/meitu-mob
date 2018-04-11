@@ -1,41 +1,33 @@
 <template lang="pug">
-  .home
+  #home
     .aside
       .menu
         .brand: span {{name || 'manager'}}
         .util: .mdi.mdi-18px.mdi-settings(@click="openSettings")
       adminAside(@clicked="getCategory")
     .container
-      div.nav
-        .crumb
-          span {{breadcrumb || '/'}}
-        .add.add-publish(
-          v-text="isPublishShow ? '×' : '+'"
-          v-show="categories.length !== 0 && !isUpdatesShow"
-          @click="showPublish"
-          )
-        .add.add-updates(
-          v-text="isUpdatesShow ? '×' : null"
-          v-show="categories.length !== 0 && isUpdatesShow"
-          @click="closeUpdates"
-          )
-      div.nav-gap
-      div.content(
-        v-show="!isPublishShow && !isUpdatesShow && adminAlbums.length !== 0"
-        )
+      div.content(v-show="isContentShow")
+        .admin-banner
+          .crumb {{breadcrumb || '/'}}
+          .add(
+            v-show="breadcrumb"
+            @click="showPublish"
+            ) +
         .card-wrapper(v-for="album in adminAlbums")
           card(
             :content="album"
             :btn="!''"
-            :editable="editable"
+            :editable="cardEditable"
             )
-      div.blank-page(
-        v-show="adminAlbums.length === 0 && !isPublishShow && !isUpdatesShow"
-        ) no Records
+        .blank-page(
+          v-show="adminAlbums.length === 0"
+          ) no Records
 
 
-      div.publish(v-show="isPublishShow || isUpdatesShow")
-        publish(:crumb="categories")
+      div.publish(v-show="isPublishShow")
+        publish(@close="closePublish")
+      div.editor(v-show="isEditorShow")
+        category-editor(@close="closeEditor")
       div.settings(v-show="isSettingsShow")
         settings(@close="closeSettings")
 </template>

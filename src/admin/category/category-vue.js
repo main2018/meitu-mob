@@ -63,10 +63,7 @@ exports.js = () => {
         })
       },
       showEditor () {
-        this.isEditorShow = true
-      },
-      hideEditor () {
-        this.isEditorShow = false
+        this.$store.dispatch('showEditor')
       }
     },
 

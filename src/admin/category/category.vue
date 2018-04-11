@@ -37,8 +37,6 @@
         value="+"
         @click="addSubcategory"
         )
-    .editor(v-show="isEditorShow")
-      category-editor(@close="hideEditor")
 </template>
 
 <script type="text/ecmascript-6">
