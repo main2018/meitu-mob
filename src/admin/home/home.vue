@@ -7,12 +7,11 @@
       adminAside(@clicked="getCategory")
     .container
       div.content(v-show="isContentShow")
-        .admin-banner
-          .crumb {{breadcrumb || '/'}}
-          .add(
+        admin-header(:title="breadcrumb")
+          // .mdi.mdi-plus(
             v-show="breadcrumb"
             @click="showPublish"
-            ) +
+            )
         .card-wrapper(v-for="album in adminAlbums")
           card(
             :content="album"

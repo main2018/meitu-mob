@@ -1,5 +1,6 @@
 exports.js = () => {
   const AdminAside = require('admin/aside/aside')
+  const AdminHeader = require('admin/admin-header/admin-header')
   const Publish = require('admin/publish/publish')
   const Settings = require('admin/settings/settings')
   const Card = require('base/card/card')
@@ -8,6 +9,7 @@ exports.js = () => {
     name: 'admin-home',
     components: {
       CategoryEditor,
+      AdminHeader,
       AdminAside,
       Settings,
       Publish,
