@@ -1,5 +1,5 @@
 <template lang="pug">
-  .admin-header
+  .admin-header(v-show="show")
     .title {{title}}
     .btn-wrapper
       .btn(

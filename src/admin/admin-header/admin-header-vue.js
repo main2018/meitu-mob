@@ -8,6 +8,10 @@ exports.js = () => {
     },
 
     props: {
+      show: {
+        type: Boolean,
+        default: true
+      },
       title: {
         type: String,
         default: ''

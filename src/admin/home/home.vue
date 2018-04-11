@@ -8,6 +8,7 @@
     .container
       div.content(v-show="isContentShow")
         admin-header(
+          :show="!!breadcrumb"
           :btns="['add']"
           :title="breadcrumb"
           @add="showPublish"
@@ -23,7 +24,7 @@
             :editable="cardEditable"
             )
         .blank-page(
-          v-show="adminAlbums.length === 0"
+          v-show="breadcrumb && adminAlbums.length === 0"
           ) no Records
 
 
