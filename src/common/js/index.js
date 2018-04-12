@@ -55,3 +55,15 @@ export const axiosAjax = ajax
 
 export const _2space = str => str.replace(/__/g, ' ')
 export const timeFormat = str => str ? str.substr(0, 10) : null
+
+export function setObjectPropToData (prop, data) {
+  let ob = {}
+  for (let key in this[data]) {
+    ob[key] = this[data][key]
+  }
+  this[data] = this[prop]
+  for (let key in ob) {
+    let hasKey = this[data].hasOwnProperty(key)
+    if (!hasKey) { this[data][key] = ob[key] }
+  }
+}

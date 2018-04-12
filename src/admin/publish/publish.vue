@@ -4,9 +4,10 @@
       :title="'Publisher | ' + breadcrumb"
       :btns="['reset', 'cancel', 'submit', 'close']"
       @close="$emit('close')"
+      @cancel="cancel"
       )
     .admin-container
-      card-input(@changed="getCard")
+      card-input(@changed="getCard" :content="card")
 </template>
 
 <script type="text/ecmascript-6">

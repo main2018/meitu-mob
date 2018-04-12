@@ -17,8 +17,9 @@ exports.js = () => {
 
     data () {
       return {
-        postJson: {
-        }
+        postJson: {},
+        card: {},
+        num: 1
       }
     },
 
@@ -33,6 +34,10 @@ exports.js = () => {
       closePublish () { this.$emit('close') },
       getCard (card) {
         console.log(card)
+      },
+      cancel () {
+        this.$set(this.card, 'title', this.num++)
+        this.$set(this.card, 'desc', this.num++)
       }
     },
 
