@@ -50,11 +50,13 @@ exports.js = () => {
 
     methods: {
       getFiles (event) {
+        this.$store.dispatch('setLoadingHint', 'upload...')
         let { cover } = this.card
         let file = event.target.files[0]
         cover && qiniuDel(cover)
         qiniuUpload(file, fname => {
           this.card.cover = fname
+          this.$store.dispatch('hideLoading')
           this.changed()
         })
       },

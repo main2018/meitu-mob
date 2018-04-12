@@ -1,4 +1,5 @@
 exports.js = () => {
+  const Loading = require('base/loading/loading')
   const AdminAside = require('admin/aside/aside')
   const AdminHeader = require('admin/admin-header/admin-header')
   const Publish = require('admin/publish/publish')
@@ -13,6 +14,7 @@ exports.js = () => {
       AdminAside,
       Settings,
       Publish,
+      Loading,
       Card
     },
 
@@ -34,6 +36,8 @@ exports.js = () => {
     },
 
     computed: {
+      loadingStatus () { return this.$store.getters.loading.status },
+      loadingHint () { return this.$store.getters.loading.hint },
       isEditorShow () { return this.$store.getters.isEditorShow },
       adminAlbums () { return this.$store.getters.adminAlbums },
       breadcrumb () { return this.$store.getters.categoryCrumb },

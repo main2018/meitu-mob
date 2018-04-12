@@ -6,6 +6,7 @@
         .util: .mdi.mdi-18px.mdi-settings(@click="openSettings")
       adminAside(@clicked="getCategory")
     .container
+      loading(:show="loadingStatus" :hint="loadingHint")
       div.content(v-show="isContentShow")
         admin-header(
           :show="!!breadcrumb"
