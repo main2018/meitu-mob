@@ -1,10 +1,13 @@
 exports.js = () => {
+  const { quillEditor } = require('vue-quill-editor')
+  // const { VUE_SERVER } = require('config/vue-remote-server.js')
+  const { customform } = require('./form')
+  const VideoPublish = require('admin/video-publish/video-publish')
+  const CardInput = require('admin/card-input/card-input')
   const AdminHeader = require('admin/admin-header/admin-header')
   return {
     name: 'publish',
-    components: {
-      AdminHeader
-    },
+    components: { AdminHeader, CardInput, customform, quillEditor, VideoPublish },
 
     created () {
     },
@@ -14,6 +17,8 @@ exports.js = () => {
 
     data () {
       return {
+        postJson: {
+        }
       }
     },
 
@@ -25,7 +30,10 @@ exports.js = () => {
     },
 
     methods: {
-      closePublish () { this.$emit('close') }
+      closePublish () { this.$emit('close') },
+      getCard (card) {
+        console.log(card)
+      }
     },
 
     mounted () {

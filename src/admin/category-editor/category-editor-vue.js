@@ -1,5 +1,5 @@
 exports.js = () => {
-  const { qiniuUpload } = require('common/js/qiniu-upload.js')
+  const { qiniuUpload } = require('common/js/qiniu-api.js')
   const { QINIU_URL_PREFIX } = require('config')
   const ImgUpload = require('base/img-upload/img-upload')
   const AdminHeader = require('admin/admin-header/admin-header')
