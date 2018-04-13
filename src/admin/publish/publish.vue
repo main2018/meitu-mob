@@ -8,6 +8,8 @@
       )
     .admin-container
       card-input(@changed="getCard" :content="card")
+      div.video(v-show="hasVideo")
+        video-publish(title="Videos" @change="")
 </template>
 
 <script type="text/ecmascript-6">

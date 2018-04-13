@@ -24,7 +24,11 @@ exports.js = () => {
     },
 
     computed: {
-      breadcrumb () { return this.$store.getters.categoryCrumb }
+      breadcrumb () { return this.$store.getters.categoryCrumb },
+      hasVideo () {
+        return true
+        // return this.$store.getters.hasVideo
+      }
     },
 
     watch: {

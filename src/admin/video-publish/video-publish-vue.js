@@ -2,23 +2,14 @@ exports.js = () => {
   const ImgUpload = require('base/img-upload/img-upload')
   return {
     name: 'video-publish',
-    components: {
-      ImgUpload
-    },
-
+    components: { ImgUpload },
     created () {
       this.no = 11
     },
 
     props: {
-      videos: {
-        type: Array,
-        default: () => []
-      },
-      title: {
-        type: String,
-        default: ''
-      }
+      videos: { type: Array, default: () => [] },
+      title: { type: String, default: '' }
     },
 
     data () {
