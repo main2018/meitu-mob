@@ -1,23 +1,28 @@
 exports.js = () => {
   const ImgUpload = require('base/img-upload/img-upload')
+  const FileUpload = require('base/file-upload/file-upload')
   return {
-    name: 'video-publish',
-    components: { ImgUpload },
+    name: 'sub-publish',
+    components: { ImgUpload, FileUpload },
     created () {
       this.no = 11
     },
 
     props: {
-      videos: { type: Array, default: () => [] },
-      title: { type: String, default: '' }
+      contents: { type: Array, default: () => [] },
+      title: { type: String, default: '' },
+      type: {
+        Type: String,
+        default: 'content'
+      }
     },
 
     data () {
       return {
         idx: 0,
-        videos_: [{
+        contents_: [{
           cover: {},
-          video: {},
+          content: {},
           url: '',
           order: 10,
           text: ''
@@ -33,29 +38,29 @@ exports.js = () => {
 
     methods: {
       add () {
-        this.videos_.push({
+        this.contents_.push({
           cover: {},
-          video: {},
+          content: {},
           url: '',
           order: this.no++,
           text: ''
         })
       },
       del (idx) {
-        this.videos_.splice(idx, 1)
+        this.contents_.splice(idx, 1)
         this.emit()
       },
       getIdx (idx) { this.idx = idx },
       getImg (ev) {
-        this.videos_[this.idx].cover = ev.target.files
+        this.contents_[this.idx].cover = ev.target.files
         this.emit()
       },
-      getVideo (ev) {
-        this.videos_[this.idx].video = ev.target.files
+      getcontent (ev) {
+        this.contents_[this.idx].content = ev.target.files
         this.emit()
       },
       emit () {
-        this.$emit('change', this.videos_)
+        this.$emit('change', this.contents_)
       }
     },
 

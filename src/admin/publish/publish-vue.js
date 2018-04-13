@@ -2,12 +2,12 @@ exports.js = () => {
   const { quillEditor } = require('vue-quill-editor')
   // const { VUE_SERVER } = require('config/vue-remote-server.js')
   const { customform } = require('./form')
-  const VideoPublish = require('admin/video-publish/video-publish')
+  const SubPublish = require('admin/sub-publish/sub-publish')
   const CardInput = require('admin/card-input/card-input')
   const AdminHeader = require('admin/admin-header/admin-header')
   return {
     name: 'publish',
-    components: { AdminHeader, CardInput, customform, quillEditor, VideoPublish },
+    components: { AdminHeader, CardInput, customform, quillEditor, SubPublish },
 
     created () {
     },
