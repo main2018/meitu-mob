@@ -40,14 +40,13 @@ const mutations = {
   },
 
   GET_ALL_ALBUMS (state, option) {
-    axiosAjax.get('/album/findAll', resp => {
+    axiosAjax.get('/album', resp => {
       state.albums = formatAlbums(resp)
-      // console.log(JSON.stringify(state.albums, null, 2))
     })
   },
 
   GET_CURR_ALBUM (state, id) {
-    axiosAjax.post('/album/findById', { _id: id }, resp => {
+    axiosAjax.get(`/album/${id}`, resp => {
       state.currAlbum = resp
     })
   },

@@ -22,28 +22,24 @@ exports.js = () => {
     computed: {
       id () { return this.$route.query.id },
       video () { return this.$refs.video },
-      album () { return this.$store.getters.currAlbum }
+      album () { return this.$store.getters.currAlbum },
+      time () {
+        if (this.album && this.album.meta) {
+          return timeFormat(this.album.meta.updatedAt)
+        }
+        return ''
+      }
     },
 
     watch: {
     },
 
     methods: {
-      timeFormat,
-      playVid () {
-        this.video.play()
-      },
-      enableMute () {
-        this.video.muted = false
-      },
-      getUrl (video) {
-        console.log(`${this.http}${video}`)
-        return `${this.http}${video}`
-      }
+      playVid () { this.video.play() },
+      enableMute () { this.video.muted = false }
     },
 
     mounted () {
-      console.log(this.album)
       this.currItem = this.$store.getters.currPhoto
     }
   }

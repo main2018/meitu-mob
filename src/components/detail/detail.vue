@@ -3,8 +3,8 @@
 
     .aw-article
       h1.aw-title {{album.title}}
-      time.aw-category {{timeFormat(album.meta.createdAt)}} | &nbsp;
-        span(v-if="album.subcategory") {{album.subcategory.subcategory}}
+      time.aw-category {{time}}
+        span(v-if="album.subcategory")  &nbsp;| {{album.subcategory.subcategory}}
       p.aw-desc {{album.desc}}
     .aw-content(v-html="album.content" v-show="album.hasArticle")
     .aw-video(
