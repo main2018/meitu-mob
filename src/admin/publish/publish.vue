@@ -9,9 +9,22 @@
     .admin-container
       card-input(@changed="getCard" :content="card")
       div.video(v-show="hasVideo")
-        sub-publish(title="Videos" @change="")
-      div.image(v-show="hasVideo")
-        sub-publish(title="Images" @change="")
+        sub-publish(
+          title="Videos"
+          btnHint="Video"
+          type="Video"
+          :contents="album.videos"
+          @changed="getSub"
+          )
+      // div.image(v-show="hasLink")
+        sub-publish(
+          ref="link"
+          title="Links"
+          btnHint="Cover"
+          descHint="title"
+          type="Image"
+          @changed="getSub"
+          )
 </template>
 
 <script type="text/ecmascript-6">

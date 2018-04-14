@@ -6,7 +6,6 @@
       :accept="accept"
       style="display: none"
       @change="getFiles($event)"
-      multiple="multiple"
       )
     .mdi.mdi-upload(
       @click="dispatch"
@@ -14,12 +13,11 @@
       )
       span {{hint}}
     .preview(@click="dispatch")
-      img(v-show="isImage"
-        :src="img"
-        @click="dispatch"
-        )
+      .img-preview(v-show="isImage")
+        img(:src="cover")
       .video-preview(v-show="isVideo")
-        video(:poster="poster")
+        img(:src="poster")
+        // video(:poster="poster")
         .play: .mdi.mdi-24px.mdi-play-circle
       .file-preview(v-show="!isImage && !isVideo && this.fname")
         .mdi.mdi-24px.mdi-file-outline

@@ -5,15 +5,34 @@
       .mdi.mdi-plus(@click="add")
     div.list(v-for="(content, idx) in contents_")
       .item(@click="getIdx(idx)")
-        file-upload(accept="content/*" hint="content" @change="getcontent")
+        file-upload(
+          :accept="`${type}/*`"
+          :hint="btnHint"
+          :fname="content.file"
+          @changed="getFile"
+          )
       .input-wrapper
         .url
           span url: &nbsp;
-          input(type="text" placeholder="http://" v-model="content.url")
-        textarea(placeholder="content info" v-model="content.text")
+          input(
+            type="text"
+            placeholder="http://"
+            v-model="content.url"
+            @change="emit"
+            )
+        textarea(
+          :placeholder="descHint"
+          v-model="content.text"
+          @change="emit"
+          )
       .operator
         label.order No:
-          input(type="number" value="10" v-model="content.order")
+          input(
+            type="number"
+            value="10"
+            v-model="content.order"
+            @change="emit"
+            )
         .mdi.mdi-close(@click="del(idx)")
 </template>
 

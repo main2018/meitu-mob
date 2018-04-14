@@ -19,7 +19,10 @@ exports.js = () => {
       return {
         postJson: {},
         card: {},
-        num: 1
+        num: 1,
+        album: {
+          videos: [ { } ]
+        }
       }
     },
 
@@ -28,6 +31,10 @@ exports.js = () => {
       hasVideo () {
         return true
         // return this.$store.getters.hasVideo
+      },
+      hasLink () {
+        return true
+        // return this.$store.getters.hasLink
       }
     },
 
@@ -42,10 +49,36 @@ exports.js = () => {
       cancel () {
         this.$set(this.card, 'title', this.num++)
         this.$set(this.card, 'desc', this.num++)
+      },
+      getSub (sub) {
+        console.log({ sub })
       }
     },
 
     mounted () {
+      this.$set(this.album, 'videos', mock)
+      // this.$refs.link.contents_ = mock
     }
   }
 }
+
+let mock = [
+  {
+    file: 'VV1ytHWOhR.mp4',
+    url: '//u.u',
+    text: 'heah',
+    order: 10
+  },
+  {
+    file: 'pDtRpFnVnJ.mp4',
+    url: '//2u.u',
+    text: 'heah',
+    order: 10
+  },
+  {
+    file: 'VV1ytHWOhR.mp4',
+    url: '//3u.u',
+    text: 'asdfdsfheah',
+    order: 10
+  }
+]
