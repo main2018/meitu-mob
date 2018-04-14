@@ -34,7 +34,6 @@ exports.js = () => {
     },
 
     methods: {
-      closePublish () { this.$emit('close') },
       submit () {
         let album = { category: this.category[0] }
         this.category[1] && (album.subcategory = this.category[1])
@@ -42,8 +41,11 @@ exports.js = () => {
         album.videos = this.videos
         album.links = this.links
         console.log(album)
-        this.post('/album/add', album, (resp) => {
-          console.log(resp)
+        this.post('/album/add', album, resp => {
+          if (resp.success) {
+            this.clean()
+            this.$emit('close')
+          }
         })
       },
       clean () {
@@ -51,15 +53,9 @@ exports.js = () => {
         this.$refs.video.clean()
         this.$refs.link.clean()
       },
-      getCard (card) {
-        this.card = card
-      },
-      getLinks (links) {
-        this.links = links
-      },
-      getVideos (videos) {
-        this.videos = videos
-      }
+      getCard (card) { this.card = card },
+      getLinks (links) { this.links = links },
+      getVideos (videos) { this.videos = videos }
     },
 
     mounted () {
