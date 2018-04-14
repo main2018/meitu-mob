@@ -27,7 +27,7 @@ exports.js = () => {
     data () {
       return {
         isContentShow: true,
-        isPublishShow: true,
+        isPublishShow: false,
         isSettingsShow: false,
 
         cardEditable: true,

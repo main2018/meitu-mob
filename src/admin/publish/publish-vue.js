@@ -27,7 +27,7 @@ exports.js = () => {
       breadcrumb () { return this.$store.getters.categoryCrumb },
       hasVideo () { return this.$store.getters.hasVideo },
       hasLink () { return this.$store.getters.hasLink },
-      currCategory () { return this.$store.getters.activeCategory }
+      category () { return this.$store.getters.activeCategory }
     },
 
     watch: {
@@ -36,16 +36,12 @@ exports.js = () => {
     methods: {
       closePublish () { this.$emit('close') },
       submit () {
-        let album = { category: this.currCategory[0] }
-        if (this.currCategory[1]) {
-          album.subcategory = this.currCategory[1]
-        }
-        for (let key in this.card) {
-          album[key] = this.card[key]
-        }
+        let album = { category: this.category[0] }
+        this.category[1] && (album.subcategory = this.category[1])
+        for (let key in this.card) { album[key] = this.card[key] }
         album.videos = this.videos
         album.links = this.links
-        console.log({ album })
+        console.log(album)
         this.post('/album/add', album, (resp) => {
           console.log(resp)
         })
@@ -56,23 +52,24 @@ exports.js = () => {
         this.$refs.link.clean()
       },
       getCard (card) {
-        console.log(card)
+        this.card = card
       },
       getLinks (links) {
-        console.log({ links })
+        this.links = links
       },
       getVideos (videos) {
-        console.log({ videos })
+        this.videos = videos
       }
     },
 
     mounted () {
-      this.$set(this, 'videos', mock)
-      this.$set(this, 'links', mock2)
+      // this.$set(this, 'videos', mock)
+      // this.$set(this, 'links', mock2)
     }
   }
 }
 
+/*
 let mock = [
   {
     uri: 'VV1ytHWOhR.mp4',
@@ -114,3 +111,4 @@ let mock2 = [
     order: 10
   }
 ]
+*/
