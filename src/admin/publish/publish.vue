@@ -4,26 +4,34 @@
       :title="'Publisher | ' + breadcrumb"
       :btns="['reset', 'cancel', 'submit', 'close']"
       @close="$emit('close')"
-      @cancel="cancel"
+      @cancel="clean"
+      @submit="submit"
       )
     .admin-container
-      card-input(@changed="getCard" :content="card")
+      div.card
+        card-input(
+          ref="card"
+          @changed="getCard"
+          :content="card"
+          )
       div.video(v-show="hasVideo")
         sub-publish(
+          ref="video"
           title="Videos"
           btnHint="Video"
           type="Video"
-          :contents="album.videos"
-          @changed="getSub"
+          :contents="videos"
+          @changed="getVideos"
           )
-      // div.image(v-show="hasLink")
+      div.image(v-show="hasLink")
         sub-publish(
           ref="link"
           title="Links"
           btnHint="Cover"
           descHint="title"
+          :contents="links"
           type="Image"
-          @changed="getSub"
+          @changed="getLinks"
           )
 </template>
 

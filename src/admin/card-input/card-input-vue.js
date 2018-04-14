@@ -24,12 +24,7 @@ exports.js = () => {
     data () {
       return {
         http: QINIU_URL_PREFIX,
-        card: {
-          status: 0,
-          cover: '',
-          title: 'haha',
-          desc: ''
-        }
+        card: { status: 0, cover: '', title: '', desc: '' }
       }
     },
 
@@ -49,6 +44,10 @@ exports.js = () => {
     },
 
     methods: {
+      clean () {
+        this.card = { status: 0, cover: '', title: '', desc: '' }
+        this.changed()
+      },
       getFiles (event) {
         this.$store.dispatch('setLoadingHint', 'upload...')
         let { cover } = this.card

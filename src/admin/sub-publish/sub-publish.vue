@@ -8,7 +8,7 @@
         file-upload(
           :accept="`${type}/*`"
           :hint="btnHint"
-          :fname="content.file"
+          :fname="content.uri"
           @changed="getFile"
           )
       .input-wrapper

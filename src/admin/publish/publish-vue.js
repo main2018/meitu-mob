@@ -17,25 +17,17 @@ exports.js = () => {
 
     data () {
       return {
-        postJson: {},
         card: {},
-        num: 1,
-        album: {
-          videos: [ { } ]
-        }
+        videos: [],
+        links: []
       }
     },
 
     computed: {
       breadcrumb () { return this.$store.getters.categoryCrumb },
-      hasVideo () {
-        return true
-        // return this.$store.getters.hasVideo
-      },
-      hasLink () {
-        return true
-        // return this.$store.getters.hasLink
-      }
+      hasVideo () { return this.$store.getters.hasVideo },
+      hasLink () { return this.$store.getters.hasLink },
+      currCategory () { return this.$store.getters.activeCategory }
     },
 
     watch: {
@@ -43,40 +35,80 @@ exports.js = () => {
 
     methods: {
       closePublish () { this.$emit('close') },
+      submit () {
+        let album = { category: this.currCategory[0] }
+        if (this.currCategory[1]) {
+          album.subcategory = this.currCategory[1]
+        }
+        for (let key in this.card) {
+          album[key] = this.card[key]
+        }
+        album.videos = this.videos
+        album.links = this.links
+        console.log({ album })
+        this.post('/album/add', album, (resp) => {
+          console.log(resp)
+        })
+      },
+      clean () {
+        this.$refs.card.clean()
+        this.$refs.video.clean()
+        this.$refs.link.clean()
+      },
       getCard (card) {
         console.log(card)
       },
-      cancel () {
-        this.$set(this.card, 'title', this.num++)
-        this.$set(this.card, 'desc', this.num++)
+      getLinks (links) {
+        console.log({ links })
       },
-      getSub (sub) {
-        console.log({ sub })
+      getVideos (videos) {
+        console.log({ videos })
       }
     },
 
     mounted () {
-      this.$set(this.album, 'videos', mock)
-      // this.$refs.link.contents_ = mock
+      this.$set(this, 'videos', mock)
+      this.$set(this, 'links', mock2)
     }
   }
 }
 
 let mock = [
   {
-    file: 'VV1ytHWOhR.mp4',
+    uri: 'VV1ytHWOhR.mp4',
     url: '//u.u',
     text: 'heah',
     order: 10
   },
   {
-    file: 'pDtRpFnVnJ.mp4',
+    uri: 'pDtRpFnVnJ.mp4',
     url: '//2u.u',
     text: 'heah',
     order: 10
   },
   {
-    file: 'VV1ytHWOhR.mp4',
+    uri: 'VV1ytHWOhR.mp4',
+    url: '//3u.u',
+    text: 'asdfdsfheah',
+    order: 10
+  }
+]
+
+let mock2 = [
+  {
+    uri: 'VV1ytHWOhR.mp4',
+    url: '//u.u',
+    text: 'heah',
+    order: 10
+  },
+  {
+    uri: 'pDtRpFnVnJ.mp4',
+    url: '//2u.u',
+    text: 'heah',
+    order: 10
+  },
+  {
+    uri: 'VV1ytHWOhR.mp4',
     url: '//3u.u',
     text: 'asdfdsfheah',
     order: 10
