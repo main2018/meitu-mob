@@ -6,19 +6,17 @@
       time.aw-category {{time}}
         span(v-if="album.subcategory")  &nbsp;| {{album.subcategory.subcategory}}
       p.aw-desc {{album.desc}}
-    // .aw-video(
-      v-if="album.hasVideo"
-      v-for="video in album.videos"
-      )
+    .aw-video(v-if="album.hasVideo" v-for="video in album.videos")
       video(
+        v-show="video.uri"
         controls
         preload="auto"
         :poster="getPoster(video.uri)"
         )
         source(:src="`${http}${video.uri}`")
-    .aw-link
+    .aw-link(v-if="album.hasLink")
       link-card(:content="album.links")
-    // .aw-content(v-html="album.article" v-show="album.hasArticle")
+    .aw-content(v-html="album.article" v-if="album.hasArticle")
 </template>
 
 <script type="text/ecmascript-6">

@@ -1,6 +1,5 @@
 exports.js = () => {
   const { quillEditor } = require('vue-quill-editor')
-  // const { VUE_SERVER } = require('config/vue-remote-server.js')
   const { customform } = require('./form')
   const SubPublish = require('admin/sub-publish/sub-publish')
   const CardInput = require('admin/card-input/card-input')
@@ -13,10 +12,12 @@ exports.js = () => {
     },
 
     props: {
+      isNew: { type: Boolean, default: true }
     },
 
     data () {
       return {
+        id: '',
         card: {},
         article: '',
         videos: [],
@@ -25,6 +26,7 @@ exports.js = () => {
     },
 
     computed: {
+      compTitle () { return this.isNew ? 'Publisher' : 'Updater' },
       breadcrumb () { return this.$store.getters.categoryCrumb },
       hasArticle () { return this.$store.getters.hasArticle },
       hasVideo () { return this.$store.getters.hasVideo },
@@ -37,25 +39,38 @@ exports.js = () => {
 
     methods: {
       submit () {
+        let path = this.isNew ? 'add' : `update`
+        this.post(`/album/${path}`, this.getAlbum(), resp => {
+          if (!resp.success) { return }
+          this.clean()
+          this.$emit('close')
+        })
+      },
+      getAlbum () {
         let { hasArticle, hasVideo, hasLink } = this
-        let album = { category: this.category[0], hasArticle, hasVideo, hasLink }
+        let album = {
+          id: this.id,
+          category: this.category[0],
+          hasArticle,
+          hasVideo,
+          hasLink
+        }
         this.category[1] && (album.subcategory = this.category[1])
         hasArticle && (album.article = this.article)
         hasVideo && (album.videos = this.videos)
         hasLink && (album.links = this.links)
         for (let key in this.card) { album[key] = this.card[key] }
-        this.post('/album/add', album, resp => {
-          if (resp.success) {
-            this.clean()
-            this.$emit('close')
-          }
-        })
+        return album
       },
       clean () {
         this.article = ''
         this.$refs.card.clean()
         this.$refs.video.clean()
         this.$refs.link.clean()
+      },
+      close () {
+        this.clean()
+        this.$emit('close')
       },
       getCard (card) { this.card = card },
       getLinks (links) { this.links = links },
@@ -68,47 +83,3 @@ exports.js = () => {
     }
   }
 }
-
-/*
-let mock = [
-  {
-    uri: 'VV1ytHWOhR.mp4',
-    url: '//u.u',
-    text: 'heah',
-    order: 10
-  },
-  {
-    uri: 'pDtRpFnVnJ.mp4',
-    url: '//2u.u',
-    text: 'heah',
-    order: 10
-  },
-  {
-    uri: 'VV1ytHWOhR.mp4',
-    url: '//3u.u',
-    text: 'asdfdsfheah',
-    order: 10
-  }
-]
-
-let mock2 = [
-  {
-    uri: 'VV1ytHWOhR.mp4',
-    url: '//u.u',
-    text: 'heah',
-    order: 10
-  },
-  {
-    uri: 'pDtRpFnVnJ.mp4',
-    url: '//2u.u',
-    text: 'heah',
-    order: 10
-  },
-  {
-    uri: 'VV1ytHWOhR.mp4',
-    url: '//3u.u',
-    text: 'asdfdsfheah',
-    order: 10
-  }
-]
-*/

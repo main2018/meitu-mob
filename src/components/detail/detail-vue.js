@@ -36,6 +36,7 @@ exports.js = () => {
 
     methods: {
       getPoster (video) {
+        if (!video) { return '' }
         let query = '?vframe/jpg/offset/1/w/640/h/360'
         return `${QINIU_URL_PREFIX}${video}${query}`
       },

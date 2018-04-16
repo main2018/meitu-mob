@@ -14,15 +14,12 @@
           :title="breadcrumb"
           @add="showPublish"
           )
-          // .mdi.mdi-plus(
-            v-show="breadcrumb"
-            @click="showPublish"
-            )
         .card-wrapper(v-for="album in adminAlbums")
           card(
             :content="album"
             :btn="!''"
             :editable="cardEditable"
+            @edit="editCard"
             )
         .blank-page(
           v-show="breadcrumb && adminAlbums.length === 0"
@@ -30,7 +27,12 @@
 
 
       div.publish(v-show="isPublishShow")
-        publish(@close="closePublish")
+        publish(
+          :isNew="isPublish"
+          ref="update"
+          @reset="resetPublish"
+          @close="closePublish"
+          )
       div.editor(v-show="isEditorShow")
         category-editor(@close="closeEditor")
       div.settings(v-show="isSettingsShow")

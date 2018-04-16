@@ -1,9 +1,10 @@
 <template lang="pug">
   .publish.bd-1px-l(ref="form")
     admin-header(
-      :title="'Publisher | ' + breadcrumb"
-      :btns="['cancel', 'submit', 'close']"
-      @close="$emit('close')"
+      :title="compTitle + '  |  ' + breadcrumb"
+      :btns="['cancel', 'submit', 'close', isNew ? '' : 'reset']"
+      @reset="$emit('reset', id)"
+      @close="close"
       @cancel="clean"
       @submit="submit"
       )

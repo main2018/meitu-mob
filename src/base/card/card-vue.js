@@ -63,17 +63,16 @@ exports.js = () => {
         })
       },
       goDetail () {
-        this.$store.dispatch('getCurrAlbum', this.content.id)
-        if (!this.content.id) {
-          alert('no detail')
-          return
-        }
+        let { id } = this.content
+        this.$store.dispatch('getCurrAlbum', id)
+        if (!this.content.id) { return alert('no detail') }
         if (this.editable) {
-          let prefix = this.isUpdatesShow ? 'hide' : 'show'
-          this.$store.dispatch(`${prefix}Updates`)
-          return
+          return this.$emit('edit', id)
         }
-        this.$router.push({ path: `${this.url}/detail`, query: { id: this.content.id } })
+        this.$router.push({
+          path: `${this.url}/detail`,
+          query: { id }
+        })
       }
     },
 

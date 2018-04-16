@@ -26,6 +26,7 @@ exports.js = () => {
 
     data () {
       return {
+        isPublish: true,
         isContentShow: true,
         isPublishShow: false,
         isSettingsShow: false,
@@ -55,7 +56,11 @@ exports.js = () => {
     methods: {
       getCategory (category) { this.categories = category },
       closeContent () { this.isContentShow = false },
-      showPublish () { this.openTab('Publish') },
+      showPublish () {
+        this.isPublish = true
+        this.openTab('Publish')
+      },
+      resetPublish (id) { this.editCard(id) },
       closePublish () { this.closeTab() },
       openSettings () { this.openTab('Settings') },
       closeSettings () { this.closeTab() },
@@ -75,6 +80,23 @@ exports.js = () => {
         this.isSettingsShow = false
         this.isPublishShow = false
         !exclude && this.$store.dispatch('hideEditor')
+      },
+      editCard (id) {
+        this.showPublish()
+        this.isPublish = false
+        let groupKey = ['videos', 'links', 'article']
+        let cardKey = ['title', 'cover', 'desc', 'status']
+        let card = {}
+        this.$refs.update.id = id
+        this.get(`/album/${id}`, resp => {
+          if (!resp.success) { return }
+          let album = resp.data
+          for (let key in album) {
+            groupKey.includes(key) && (this.$refs.update[key] = album[key])
+            cardKey.includes(key) && (card[key] = album[key])
+          }
+          this.$refs.update.card = card
+        })
       }
     },
 
