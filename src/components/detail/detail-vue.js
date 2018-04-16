@@ -16,12 +16,25 @@ exports.js = () => {
 
     data () {
       return {
-        currItem: {},
-        http: QINIU_URL_PREFIX
+        http: QINIU_URL_PREFIX,
+        hasArticle: true,
+        hasVideo: true,
+        hasLink: true
       }
     },
 
     computed: {
+      category () {
+        let categories = this.$store.getters.categories
+        let categoryName = this.album.category.category
+        categories.forEach((item) => {
+          if (item.category === categoryName) {
+            this.hasLink = item.hasLink
+            this.hasArticle = item.hasArticle
+            this.hasVideo = item.hasVideo
+          }
+        })
+      },
       album () { return this.$store.getters.currAlbum },
       time () {
         if (this.album && this.album.meta) {
@@ -45,7 +58,6 @@ exports.js = () => {
     },
 
     mounted () {
-      this.currItem = this.$store.getters.currPhoto
     }
   }
 }

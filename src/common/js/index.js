@@ -70,19 +70,22 @@ export function setObjectPropToData (prop, data) {
 }
 
 export function getBgStyle (uri, ratio = '4 : 3') {
+  if (!uri) { return '' }
   let url = uri ? QINIU_URL_PREFIX + uri : ''
   let w = +ratio.split(':')[0]
   let h = +ratio.split(':')[1]
   let height = 65
   if (w > 0 && h > 0) { height = ~~(100 / w * h) }
-  return `
-  height: 0;
-  width: 100%;
-  padding-bottom: ${height}%;
-  background-color: #eee;
-  background-image: url(${url})
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  let style = `
+    height: 0;
+    width: 100%;
+    padding-bottom: ${height}%;
+    background-color: #eee;
+    background-image: url(${url})
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   `
+  // style = style.replace('/[\r\n]/g', '')
+  return style
 }
