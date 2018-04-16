@@ -1,12 +1,11 @@
 exports.js = () => {
-  const { qiniuUpload } = require('common/js/qiniu-api.js')
   const { QINIU_URL_PREFIX } = require('config')
-  const ImgUpload = require('base/img-upload/img-upload')
+  const FileUpload = require('base/file-upload/file-upload')
   const AdminHeader = require('admin/admin-header/admin-header')
   return {
     name: 'category-editor',
     components: {
-      ImgUpload,
+      FileUpload,
       AdminHeader
     },
 
@@ -18,6 +17,7 @@ exports.js = () => {
     data () {
       return {
         http: QINIU_URL_PREFIX,
+        fname: '',
         showBtn: true,
         imgStyle: '',
         status: [],
@@ -58,20 +58,14 @@ exports.js = () => {
         this.categories[this.activeIdx].icon = this.activeOldIcon
       },
       check (idx) {
-        console.log('in')
-        qiniuUpload(this.file, (fname) => {
-          this.getPostJson(idx)
-          this.postJson.icon = fname
-          console.log({ fname })
-
-          this.post('/category/update', this.postJson, (resp) => {
-            if (resp.success) { this.$store.dispatch('getCategory') }
-          })
-          this.postJson = {}
-          this.imgStyle = ''
-          this.status.splice(idx, 1, false)
-          this.iconShowStatus.splice(this.activeIdx, 1, false)
+        this.getPostJson(idx)
+        this.post('/category/update', this.postJson, (resp) => {
+          if (resp.success) { this.$store.dispatch('getCategory') }
         })
+        this.postJson = {}
+        this.imgStyle = ''
+        this.status.splice(idx, 1, false)
+        this.iconShowStatus.splice(this.activeIdx, 1, false)
       },
       del (idx) {
         this.post('/category/delByCategory', {
@@ -106,17 +100,14 @@ exports.js = () => {
           let val = key === 'order' ? parseInt(html) : html
           this.postJson[key] = val
         })
+        this.postJson.icon = this.fname
         this.postJson.hasArticle = this.categories[idx].hasArticle
         this.postJson.hasVideo = this.categories[idx].hasVideo
         this.postJson.hasLink = this.categories[idx].hasLink
         this.postJson._id = this.categories[idx]._id
       },
-      setPreview (imgs) {
-        this.categories[this.activeIdx].icon = imgs[0]
-      },
-      getFiles (event) {
-        this.showBtn = false
-        this.file = event.target.files[0]
+      getFiles (fname) {
+        this.fname = fname
         this.iconShowStatus.splice(this.activeIdx, 1, true)
       },
       updateImg (idx) {

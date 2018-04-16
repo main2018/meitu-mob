@@ -1,9 +1,11 @@
 exports.js = () => {
-  const { VUE_SERVER } = require('config/vue-remote-server.js')
+  const LinkCard = require('base/link-card/link-card')
+  const { QINIU_URL_PREFIX } = require('config')
   const { timeFormat } = require('common/js')
   return {
     name: 'detail',
     components: {
+      LinkCard
     },
 
     created () {
@@ -15,13 +17,11 @@ exports.js = () => {
     data () {
       return {
         currItem: {},
-        http: VUE_SERVER
+        http: QINIU_URL_PREFIX
       }
     },
 
     computed: {
-      id () { return this.$route.query.id },
-      video () { return this.$refs.video },
       album () { return this.$store.getters.currAlbum },
       time () {
         if (this.album && this.album.meta) {
@@ -35,6 +35,10 @@ exports.js = () => {
     },
 
     methods: {
+      getPoster (video) {
+        let query = '?vframe/jpg/offset/1/w/640/h/360'
+        return `${QINIU_URL_PREFIX}${video}${query}`
+      },
       playVid () { this.video.play() },
       enableMute () { this.video.muted = false }
     },

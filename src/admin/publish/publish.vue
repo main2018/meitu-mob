@@ -2,7 +2,7 @@
   .publish.bd-1px-l(ref="form")
     admin-header(
       :title="'Publisher | ' + breadcrumb"
-      :btns="['reset', 'cancel', 'submit', 'close']"
+      :btns="['cancel', 'submit', 'close']"
       @close="$emit('close')"
       @cancel="clean"
       @submit="submit"
@@ -33,6 +33,9 @@
           type="Image"
           @changed="getLinks"
           )
+      div.input-article(v-show="hasArticle")
+        p content
+        quill-editor(v-model="article")
 </template>
 
 <script type="text/ecmascript-6">

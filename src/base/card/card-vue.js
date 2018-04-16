@@ -1,6 +1,7 @@
 exports.js = () => {
+  const { qiniuDel } = require('common/js/qiniu-api.js')
   const { timeFormat } = require('common/js')
-  const { QINIU_URL_PREFIX } = require('config')
+  const { getBgStyle } = require('common/js')
   return {
     name: 'card',
     components: {
@@ -31,14 +32,6 @@ exports.js = () => {
       isUpdatesShow () {
         return this.$store.getters.isUpdatesShow
       },
-      coverImgStyle () {
-        let url = this.content.img ? QINIU_URL_PREFIX + this.content.img : ''
-        return `
-        padding-bottom: 65%;
-        background-color: #eee;
-        background-image: url(${url})
-        `
-      },
       activeCategory () {
         return this.$store.getters.activeCategory
       }
@@ -48,12 +41,25 @@ exports.js = () => {
     },
 
     methods: {
+      getBgStyle,
       timeFormat,
       del () {
-        this.post('/album/del', {id: this.content.id})
+        this.get(`/album/${this.content.id}`, resp => {
+          this.delQiniuUri(resp.data)
+          this.post('/album/del', {id: this.content.id})
+        })
         this.$store.dispatch('getAdminAlbums', {
           category: this.activeCategory[0],
           subcategory: this.activeCategory[1]
+        })
+      },
+      delQiniuUri (album) {
+        album.cover && qiniuDel(album.cover)
+        album.videos.forEach((video) => {
+          video.uri && qiniuDel(video.uri)
+        })
+        album.links.forEach((link) => {
+          link.uri && qiniuDel(link.uri)
         })
       },
       goDetail () {

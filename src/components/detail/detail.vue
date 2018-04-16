@@ -6,24 +6,19 @@
       time.aw-category {{time}}
         span(v-if="album.subcategory")  &nbsp;| {{album.subcategory.subcategory}}
       p.aw-desc {{album.desc}}
-    .aw-content(v-html="album.content" v-show="album.hasArticle")
-    .aw-video(
+    // .aw-video(
       v-if="album.hasVideo"
       v-for="video in album.videos"
       )
-      //video.video(
-        width="300vw"
-        :poster="`${http}${video.cover}`"
-        :src="getUrl(video.video)"
-        controls="controls"
-        )
       video(
         controls
         preload="auto"
-        :poster="`${http}${video.cover}`"
+        :poster="getPoster(video.uri)"
         )
-        source(:src="`${http}${video.video}`")
-        Your browser does not support the video tag.
+        source(:src="`${http}${video.uri}`")
+    .aw-link
+      link-card(:content="album.links")
+    // .aw-content(v-html="album.article" v-show="album.hasArticle")
 </template>
 
 <script type="text/ecmascript-6">

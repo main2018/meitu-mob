@@ -18,6 +18,7 @@ exports.js = () => {
     data () {
       return {
         card: {},
+        article: '',
         videos: [],
         links: []
       }
@@ -25,6 +26,7 @@ exports.js = () => {
 
     computed: {
       breadcrumb () { return this.$store.getters.categoryCrumb },
+      hasArticle () { return this.$store.getters.hasArticle },
       hasVideo () { return this.$store.getters.hasVideo },
       hasLink () { return this.$store.getters.hasLink },
       category () { return this.$store.getters.activeCategory }
@@ -35,12 +37,13 @@ exports.js = () => {
 
     methods: {
       submit () {
-        let album = { category: this.category[0] }
+        let { hasArticle, hasVideo, hasLink } = this
+        let album = { category: this.category[0], hasArticle, hasVideo, hasLink }
         this.category[1] && (album.subcategory = this.category[1])
+        hasArticle && (album.article = this.article)
+        hasVideo && (album.videos = this.videos)
+        hasLink && (album.links = this.links)
         for (let key in this.card) { album[key] = this.card[key] }
-        album.videos = this.videos
-        album.links = this.links
-        console.log(album)
         this.post('/album/add', album, resp => {
           if (resp.success) {
             this.clean()
@@ -49,6 +52,7 @@ exports.js = () => {
         })
       },
       clean () {
+        this.article = ''
         this.$refs.card.clean()
         this.$refs.video.clean()
         this.$refs.link.clean()

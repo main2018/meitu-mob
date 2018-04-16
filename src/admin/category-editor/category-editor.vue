@@ -19,19 +19,19 @@
           :ref="`${idx}-${category.order}`"
           ) {{category.order}}
         li.icon
-          img-upload(
+          file-upload(
             ref="upload"
             v-show="!!status[idx] && !category.icon"
             :showBtn="showBtn"
+            :fname="fname"
             accept="image/*"
-            @preview="setPreview"
-            @change="getFiles"
+            @changed="getFiles"
           )
           img.iconimg(
             v-show="!iconShowStatus[idx]"
             @click="updateImg(idx)"
             :style="imgStyle"
-            :src="`${http}${category.icon}`"
+            :src="category.icon ? `${http}${category.icon}` : ''"
             )
         li.category(
           :contenteditable="status[idx]"

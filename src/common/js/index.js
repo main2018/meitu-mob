@@ -2,6 +2,7 @@ import { post, get, ajax } from './ajax-axios'
 import { getLocalStore, setLocalStore } from './localStorage'
 import { log } from './logger'
 import { postForm } from './axios-file'
+const { QINIU_URL_PREFIX } = require('config')
 
 export const AjaxPost = {
   install (Vue) {
@@ -66,4 +67,22 @@ export function setObjectPropToData (prop, data) {
     let hasKey = this[data].hasOwnProperty(key)
     if (!hasKey) { this[data][key] = ob[key] }
   }
+}
+
+export function getBgStyle (uri, ratio = '4 : 3') {
+  let url = uri ? QINIU_URL_PREFIX + uri : ''
+  let w = +ratio.split(':')[0]
+  let h = +ratio.split(':')[1]
+  let height = 65
+  if (w > 0 && h > 0) { height = ~~(100 / w * h) }
+  return `
+  height: 0;
+  width: 100%;
+  padding-bottom: ${height}%;
+  background-color: #eee;
+  background-image: url(${url})
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  `
 }

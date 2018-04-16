@@ -2,7 +2,7 @@
   .card(ref="card")
     .btn(v-show="btn")
       .mdi.mdi-close(@click="del")
-    .img(:style="coverImgStyle" @click="goDetail")
+    .img(:style="getBgStyle(content.img)" @click="goDetail")
     .title(
       v-text="content.title"
       @click="goDetail"
