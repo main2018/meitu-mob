@@ -58,6 +58,7 @@ exports.js = () => {
     },
 
     mounted () {
+      console.log(this.album)
     }
   }
 }

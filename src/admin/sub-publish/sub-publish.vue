@@ -1,8 +1,8 @@
 <template lang="pug">
   .sub-publish
     div.title
+      .mdi.mdi-18px.mdi-plus(@click="add")
       .text {{title}}
-      .mdi.mdi-plus(@click="add")
     div.list(v-for="(content, idx) in contents_")
       .item(@click="getIdx(idx)")
         file-upload(
@@ -13,7 +13,7 @@
           )
       .input-wrapper
         .url
-          span url: &nbsp;
+          span link: &nbsp;
           input(
             type="text"
             placeholder="http://"

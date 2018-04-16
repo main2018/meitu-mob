@@ -21,8 +21,15 @@ exports.js = () => {
     },
 
     computed: {
-      cover () { return this.content.shift() },
-      links () { return this.content }
+      cover () { return this.content[0] },
+      links () {
+        let links = []
+        this.content.forEach((item, idx) => {
+          if (idx === 0) { return }
+          links.push(item)
+        })
+        return links
+      }
     },
 
     watch: {
@@ -39,6 +46,7 @@ exports.js = () => {
     },
 
     mounted () {
+      console.log('content: ', this.content)
     }
   }
 }
