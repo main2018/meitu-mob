@@ -1,5 +1,4 @@
 import { axiosAjax } from 'common/js'
-const { _2space } = require('common/js/index.js')
 
 const state = {
   categories: [],
@@ -101,7 +100,7 @@ const getters = {
     let arr = state.activeCategory
     if (arr.length === 0) { return '' }
     let crumb = arr[1] ? `${arr[0]} / ${arr[1]}` : arr[0]
-    return _2space(crumb)
+    return crumb
   }
 }
 

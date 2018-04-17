@@ -1,5 +1,4 @@
 exports.js = () => {
-  const { _2space } = require('common/js/index.js')
   return {
     name: 'bar',
     components: {
@@ -38,7 +37,6 @@ exports.js = () => {
     },
 
     methods: {
-      _2space,
       toggle () {
         this.menuShow = !this.menuShow
         this.sign = this.menuShow ? '×' : '≡'

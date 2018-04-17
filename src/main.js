@@ -39,11 +39,11 @@ console.log(getClientType())
 get('/category', resp => {
   resp.data.forEach(item => {
     routes.push({
-      path: `/${item.category}`,
+      path: `/${item.route}`,
       component: Dynamic
     })
     routes.push({
-      path: `/${item.category}/detail`,
+      path: `/${item.route}/detail`,
       component: Detail
     })
   })

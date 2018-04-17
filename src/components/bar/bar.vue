@@ -10,10 +10,10 @@
         ul
           li(
             v-for="item in categories"
-            @click="go(`/${item.category}`)"
+            @click="go(`/${item.route}`)"
             ): .text
-              p {{_2space(item.category)}}{{item.name}}
-              .hint-color(v-show="isHintShow(item.category)")
+              p {{item.category}}{{item.name}}
+              .hint-color(v-show="isHintShow(item.route)")
 
           // li(@click="go('/video')")
             .text

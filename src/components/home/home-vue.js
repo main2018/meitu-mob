@@ -1,6 +1,5 @@
 exports.js = () => {
   const CategoryCard = require('base/card/category-card/category-card.vue')
-  const { _2space } = require('common/js/index.js')
   return {
     name: 'home',
     components: {
@@ -31,10 +30,7 @@ exports.js = () => {
     },
 
     methods: {
-      goUrl (router) {
-        this.$router.push(`/${router}`)
-      },
-      _2space
+      goUrl (router) { this.$router.push(`/${router}`) }
     },
 
     mounted () {

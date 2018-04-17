@@ -1,5 +1,4 @@
 exports.js = () => {
-  const { _2space } = require('common/js/index.js')
   const Category = require('admin/category/category')
   return {
     name: 'aside-vue',
@@ -24,7 +23,6 @@ exports.js = () => {
     },
 
     methods: {
-      _2space,
       delCategory (category, index) {
         let subcategories = this.categories[index].subcategories
         if (subcategories.length !== 0) {

@@ -3,7 +3,7 @@
     .img(:style="coverImgStyle")
     .title
       .name(v-show="content.name") {{content.name}}
-      .category {{_2space(content.category)}}
+      .category {{content.category}}
 </template>
 
 <script type="text/ecmascript-6">

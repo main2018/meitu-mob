@@ -1,5 +1,4 @@
 exports.js = () => {
-  const { _2space } = require('common/js/index.js')
   const CategoryEditor = require('admin/category-editor/category-editor')
   return {
     name: 'category',
@@ -37,7 +36,6 @@ exports.js = () => {
     },
 
     methods: {
-      _2space,
       addCategory () {
         if (!this.category) { return }
         this.post('/category/add', {

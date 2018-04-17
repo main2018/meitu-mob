@@ -1,7 +1,6 @@
 exports.js = () => {
   // const { VUE_SERVER } = require('config/vue-remote-server.js')
   const { QINIU_URL_PREFIX } = require('config')
-  const { _2space } = require('common/js/index.js')
   return {
     name: 'category-card',
     components: {
@@ -37,7 +36,6 @@ exports.js = () => {
     },
 
     methods: {
-      _2space
     },
 
     mounted () {

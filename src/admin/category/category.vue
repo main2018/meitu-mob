@@ -26,7 +26,7 @@
         option(
           v-for="item in categories"
           :value="item.category"
-          ) {{item.name || _2space(item.category)}}
+          ) {{item.name || item.category}}
       input.add-category(
         type="text"
         v-model="subcategory"
