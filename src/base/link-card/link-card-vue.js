@@ -46,7 +46,6 @@ exports.js = () => {
     },
 
     mounted () {
-      console.log('content: ', this.content)
     }
   }
 }

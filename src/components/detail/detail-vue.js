@@ -24,9 +24,10 @@ exports.js = () => {
     },
 
     computed: {
-      category () {
+      album () {
+        let album = this.$store.getters.currAlbum
         let categories = this.$store.getters.categories
-        let categoryName = this.album.category.category
+        let categoryName = album.category && album.category.category
         categories.forEach((item) => {
           if (item.category === categoryName) {
             this.hasLink = item.hasLink
@@ -34,8 +35,8 @@ exports.js = () => {
             this.hasVideo = item.hasVideo
           }
         })
+        return album
       },
-      album () { return this.$store.getters.currAlbum },
       time () {
         if (this.album && this.album.meta) {
           return timeFormat(this.album.meta.updatedAt)
@@ -58,7 +59,6 @@ exports.js = () => {
     },
 
     mounted () {
-      console.log(this.album)
     }
   }
 }

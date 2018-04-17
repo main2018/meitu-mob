@@ -84,7 +84,6 @@ exports.js = () => {
           status = 0
           this.$set(this.content, 'status', 0)
         }
-        console.log(status)
         this.post('/album/set', { _id, status })
       },
       refreshAlbum () {

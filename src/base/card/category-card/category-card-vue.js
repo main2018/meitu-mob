@@ -19,15 +19,17 @@ exports.js = () => {
 
     data () {
       return {
+        http: QINIU_URL_PREFIX
       }
     },
 
     computed: {
       coverImgStyle () {
-        return ` background-image: url(${QINIU_URL_PREFIX}${this.content.icon}); `
-      },
-      cover () {
-        return `${QINIU_URL_PREFIX}${this.content.icon}`
+        let url = this.content.icon ? this.http + this.content.icon : ''
+        return `
+        background-color: #eee;
+        background-image: url(${url});
+        `
       }
     },
 
