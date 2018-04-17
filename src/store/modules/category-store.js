@@ -3,6 +3,7 @@ const { _2space } = require('common/js/index.js')
 
 const state = {
   categories: [],
+  editIdx: null,
   activeCategory: [],
   categoryStatus: [],
   isEditorShow: false,
@@ -13,7 +14,7 @@ const state = {
 
 const actions = {
   hideEditor ({ commit }) { commit('HIDE_CATEGORY_EDITOR') },
-  showEditor ({ commit }) { commit('SHOW_CATEGORY_EDITOR') },
+  showEditor ({ commit }, idx) { commit('SHOW_CATEGORY_EDITOR', idx) },
 
   getCategory ({ commit }) {
     commit('GET_CATEGORY')
@@ -46,7 +47,10 @@ const mutations = {
   },
 
   HIDE_CATEGORY_EDITOR (state) { state.isEditorShow = false },
-  SHOW_CATEGORY_EDITOR (state) { state.isEditorShow = true },
+  SHOW_CATEGORY_EDITOR (state, idx) {
+    if (idx || idx === 0) { state.editIdx = idx }
+    state.isEditorShow = true
+  },
 
   SET_ACTIVE_CATEGORY (state, activeCategory) {
     state.activeCategory = activeCategory
@@ -84,6 +88,7 @@ const getters = {
   hasVideo: state => state.hasVideo,
   hasLink: state => state.hasLink,
   isEditorShow: state => state.isEditorShow,
+  editIdx: state => state.editIdx,
   categoryCrumb: state => {
     let arr = state.activeCategory
     if (arr.length === 0) { return '' }

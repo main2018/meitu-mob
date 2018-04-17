@@ -67,20 +67,25 @@ exports.js = () => {
       },
 
       addBtn (key) {
+        let isSubcategoryKey = key.indexOf('_') > -1
+        let method = isSubcategoryKey ? 'editSubcategory' : 'editCategory'
+
         let currDom = this.$refs[key][0]
-        let editEvent = this.editCategory(currDom, key)
+        let minusDom = currDom.lastChild
+        let editEvent = this[method](currDom, key)
         let editBtn = this.addDom(key, 'pencil', editEvent)
         let updateBtn = this.addDom(key + '_', 'check', this.updateEvent(currDom, key))
-        currDom.append(editBtn)
-        currDom.append(updateBtn)
+        isSubcategoryKey && currDom.insertBefore(updateBtn, minusDom)
+        currDom.insertBefore(editBtn, minusDom)
       },
 
       delBtn (key) {
+        let isSubcategoryKey = key.indexOf('_') > -1
         let editDom = document.getElementById(key)
         let checkDom = document.getElementById(key + '_')
         let root = this.$refs[key][0]
         root.removeChild(editDom)
-        root.removeChild(checkDom)
+        isSubcategoryKey && root.removeChild(checkDom)
       },
 
       addDom (id, icon, event) {
@@ -94,6 +99,12 @@ exports.js = () => {
       },
 
       editCategory (dom, id) {
+        return () => {
+          this.$store.dispatch('showEditor', +id)
+        }
+      },
+
+      editSubcategory (dom, id) {
         return () => {
           this.canEdit = true
           let txtDom = dom.getElementsByClassName('text')[0]

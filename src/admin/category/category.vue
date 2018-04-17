@@ -3,7 +3,7 @@
     .category
       .title
         span.txt category
-        span.mdi.mdi-pencil(@click="showEditor")
+        // span.mdi.mdi-pencil(@click="showEditor")
       input.add-category(
         type="text"
         v-model="category"

@@ -14,6 +14,13 @@ exports.js = () => {
       this.postJson = {}
     },
 
+    watch: {
+      editIdx () {
+        console.log(this.editIdx)
+        this.edit(this.editIdx)
+      }
+    },
+
     data () {
       return {
         http: QINIU_URL_PREFIX,
@@ -29,6 +36,7 @@ exports.js = () => {
     },
 
     computed: {
+      editIdx () { return this.$store.getters.editIdx },
       categories () { return this.$store.getters.categories },
       canDel () {
         let canDel = []
