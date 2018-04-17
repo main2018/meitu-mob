@@ -43,7 +43,14 @@ exports.js = () => {
         this.post(`/album/${path}`, this.getAlbum(), resp => {
           if (!resp.success) { return }
           this.clean()
+          this.refreshAlbum()
           this.$emit('close')
+        })
+      },
+      refreshAlbum () {
+        this.$store.dispatch('getAdminAlbums', {
+          category: this.category[0],
+          subcategory: this.category[1]
         })
       },
       getAlbum () {
