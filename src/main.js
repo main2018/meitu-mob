@@ -1,4 +1,5 @@
 import { get } from 'common/js/ajax-axios'
+import { getClientType } from 'common/js/user-agent'
 import Vue from 'vue'
 import App from './App'
 import routes from './router'
@@ -31,6 +32,8 @@ Vue.use(GetLocal)
 Vue.use(PostForm)
 Vue.use(Log)
 Vue.use(Router)
+
+console.log(getClientType())
 
 /* eslint-disable no-new */
 get('/category/findAll', resp => {
