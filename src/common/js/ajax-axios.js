@@ -13,7 +13,7 @@ export function post (url, json, success, fail) {
   .then((resp) => {
     // console.log('resp: ', resp.data)
     if (resp.data.success) {
-      success(resp.data)
+      success && success(resp.data)
     } else if (fail) {
       fail(resp.data.msg)
     }
@@ -27,7 +27,7 @@ export function get (url, success, fail) {
   axios({ method: 'GET', url: path, headers: {'x-access-token': token} })
   .then((resp) => {
     if (resp.data.success) {
-      success(resp.data)
+      success && success(resp.data)
     } else if (fail) {
       fail(resp.msg)
     }

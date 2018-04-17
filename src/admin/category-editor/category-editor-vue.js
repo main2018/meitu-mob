@@ -118,6 +118,22 @@ exports.js = () => {
       updateImg (idx) {
         if (!this.status[idx]) { return }
         this.$refs.upload[idx].dispatch()
+      },
+      toggleStatus (idx) {
+        let category = this.categories[idx]
+        let status = 0
+        if (category.status === 0) {
+          status = 1
+        } else if (category.status === 1) {
+          status = 0
+        }
+        console.log(category.status, { status })
+        this.post('/category/set', {
+          category: category.category,
+          status
+        }, () => {
+          this.$store.dispatch('getCategory')
+        })
       }
     },
 

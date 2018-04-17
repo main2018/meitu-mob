@@ -36,7 +36,7 @@ Vue.use(Router)
 console.log(getClientType())
 
 /* eslint-disable no-new */
-get('/category/findAll', resp => {
+get('/category', resp => {
   resp.data.forEach(item => {
     routes.push({
       path: `/${item.category}`,

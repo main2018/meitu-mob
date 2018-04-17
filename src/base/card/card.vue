@@ -15,6 +15,7 @@
       .category(v-if="content.subcategory || content.category")
         span.mdi(
           v-show="btn"
+          @click="toggleStatus"
           :class = "!content.status ? 'mdi-eye' : 'mdi-eye-off'"
           ) &nbsp;|&nbsp;
         span {{content.category}}

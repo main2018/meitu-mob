@@ -73,6 +73,25 @@ exports.js = () => {
           path: `${this.url}/detail`,
           query: { id }
         })
+      },
+      toggleStatus () {
+        let _id = this.content.id
+        let status = 0
+        if (this.content.status === 0) {
+          status = 1
+          this.$set(this.content, 'status', 1)
+        } else if (this.content.status === 1) {
+          status = 0
+          this.$set(this.content, 'status', 0)
+        }
+        console.log(status)
+        this.post('/album/set', { _id, status })
+      },
+      refreshAlbum () {
+        this.$store.dispatch('getAdminAlbums', {
+          category: this.content.category,
+          subcategory: this.content.subcategory
+        })
       }
     },
 

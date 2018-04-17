@@ -49,6 +49,7 @@
           label link
             input(type="checkbox" v-model="category.hasLink" :disabled="!status[idx]")
         li.operator
+          span.mdi( @click="toggleStatus(idx)" :class = "category.status ? 'mdi-eye-off' : 'mdi-eye'")
           span(v-show="!status[idx]" @click="edit(idx)").mdi.mdi-pencil
           span(v-show="status[idx]" @click="cancel(idx)").mdi.mdi-close
           span(v-show="status[idx]" @click="check(idx)").mdi.mdi-check

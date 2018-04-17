@@ -19,7 +19,11 @@ exports.js = () => {
     },
 
     computed: {
-      categories () { return this.$store.getters.categories },
+      categories () {
+        return this.$store.getters.categories.filter((item) => {
+          return item.status === 0
+        })
+      },
       albums () { return this.$store.getters.albums }
     },
 
