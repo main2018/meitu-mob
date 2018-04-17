@@ -1,3 +1,4 @@
+const { _2space } = require('common/js')
 exports.js = () => {
   let Card = {}
   Card = require('base/card/card')
@@ -78,13 +79,17 @@ exports.js = () => {
 
     mounted () {
       getAlbums.call(this)
+      console.log(this.rootAlbums)
     }
   }
 }
 
 function getAlbums () {
-  let category = this.path.match(/\/(\S*)$/)[1]
+  let path = this.path.match(/\/(\S*)$/)[1]
+  let category = _2space(path)
   let currAlbum = this.albums[category]
+  console.log({ category })
+  console.log(this.albums, { currAlbum })
   if (!currAlbum) {
     initVal.call(this)
     return
