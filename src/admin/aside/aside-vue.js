@@ -71,12 +71,12 @@ exports.js = () => {
         let method = isSubcategoryKey ? 'editSubcategory' : 'editCategory'
 
         let currDom = this.$refs[key][0]
-        let minusDom = currDom.lastChild
+        // let minusDom = currDom.lastChild
         let editEvent = this[method](currDom, key)
         let editBtn = this.addDom(key, 'pencil', editEvent)
         let updateBtn = this.addDom(key + '_', 'check', this.updateEvent(currDom, key))
-        isSubcategoryKey && currDom.insertBefore(updateBtn, minusDom)
-        currDom.insertBefore(editBtn, minusDom)
+        isSubcategoryKey && currDom.appendChild(updateBtn)
+        currDom.appendChild(editBtn)
       },
 
       delBtn (key) {

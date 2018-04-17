@@ -15,10 +15,7 @@ exports.js = () => {
     },
 
     watch: {
-      editIdx () {
-        console.log(this.editIdx)
-        this.edit(this.editIdx)
-      }
+      editIdx () { this.edit(this.editIdx) }
     },
 
     data () {
