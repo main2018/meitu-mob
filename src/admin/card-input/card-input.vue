@@ -32,6 +32,27 @@
               v-model="card.status"
               @change="changed"
               )
+        .type
+          .mdi.mdi-play-box-outline
+          input(
+            type="checkbox"
+            :checked="hasVideo"
+            @change="checked('Video')"
+            )
+        .type
+          .mdi.mdi-link-variant
+          input(
+            type="checkbox"
+            :checked="hasLink"
+            @change="checked('Link')"
+            )
+        .type
+          .mdi.mdi-newspaper
+          input(
+            type="checkbox"
+            :checked="hasArticle"
+            @change="checked('Article')"
+            )
 
     input(
       ref="file"

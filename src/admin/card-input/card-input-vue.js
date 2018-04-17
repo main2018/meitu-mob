@@ -33,7 +33,11 @@ exports.js = () => {
         let cover = this.card.cover
         let pre = 'background-image: url('
         return cover ? `${pre}${this.http}${cover});` : ''
-      }
+      },
+      activeCategory () { return this.$store.getters.activeCategory },
+      hasArticle () { return this.$store.getters.hasArticle },
+      hasLink () { return this.$store.getters.hasLink },
+      hasVideo () { return this.$store.getters.hasVideo }
     },
 
     watch: {
@@ -71,7 +75,15 @@ exports.js = () => {
         }
       },
       dispatch () { this.$refs.file.click() },
-      changed () { this.$emit('changed', this.card) }
+      changed () { this.$emit('changed', this.card) },
+      checked (type) {
+        let category = this.$store.getters.activeCategory[0]
+        let json = { category }
+        json[`has${type}`] = !this[`has${type}`]
+        this.post('/category/updateType', json, () => {
+          this.$store.dispatch('getCategory', this.activeCategory)
+        })
+      }
     },
 
     mounted () {

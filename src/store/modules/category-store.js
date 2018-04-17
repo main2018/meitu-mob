@@ -16,8 +16,8 @@ const actions = {
   hideEditor ({ commit }) { commit('HIDE_CATEGORY_EDITOR') },
   showEditor ({ commit }, idx) { commit('SHOW_CATEGORY_EDITOR', idx) },
 
-  getCategory ({ commit }) {
-    commit('GET_CATEGORY')
+  getCategory ({ commit }, activeCategory) {
+    commit('GET_CATEGORY', activeCategory)
   },
 
   setCategory ({ commit }, categories) {
@@ -34,11 +34,19 @@ const actions = {
 }
 
 const mutations = {
-  GET_CATEGORY (state) {
+  GET_CATEGORY (state, activeCategory) {
     let path = '/category/findAll'
     axiosAjax.get(path, resp => {
       state.categories = resp
       setActivesStatus(state, resp)
+
+      if (!activeCategory) { return }
+      state.categories.forEach((item) => {
+        if (item.category !== activeCategory[0]) { return }
+        state.hasArticle = item.hasArticle
+        state.hasVideo = item.hasVideo
+        state.hasLink = item.hasLink
+      })
     })
   },
 
