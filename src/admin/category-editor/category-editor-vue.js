@@ -122,7 +122,7 @@ exports.js = () => {
       toggleStatus (idx) {
         let category = this.categories[idx]
         let status = 0
-        if (category.status === 0) {
+        if (!category.status) {
           status = 1
         } else if (category.status === 1) {
           status = 0

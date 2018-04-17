@@ -20,7 +20,11 @@ exports.js = () => {
     },
 
     computed: {
-      categories () { return this.$store.getters.categories },
+      categories () {
+        return this.$store.getters.categories.filter((item) => {
+          return item.status === 0
+        })
+      },
       url () { return this.$route.path },
       siteLogo () { return this.$store.getters.settings.logo }
     },
