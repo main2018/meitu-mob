@@ -42,7 +42,7 @@
           :ref="`${idx}-${category.name}`"
           ) {{category.name}}
         li.type
-          label Article
+          label article
             input(type="checkbox" v-model="category.hasArticle" :disabled="!status[idx]")
           label video
             input(type="checkbox" v-model="category.hasVideo" :disabled="!status[idx]")
