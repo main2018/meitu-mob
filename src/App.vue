@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <bar></bar>
+    <bar v-if="!isPc"></bar>
     <keep-alive include="Home">
       <router-view></router-view>
     </keep-alive>
-    <!-- <inscribe></inscribe> -->
+    <!-- <inscribe v-if="!isPc"></inscribe> -->
   </div>
 </template>
 
 <script>
 /* eslint-disable no-unused-vars */
 // import vconsole from 'vconsole'
+import { getClientType } from 'common/js/user-agent'
 import Bar from 'comp/bar/bar'
 import Inscribe from 'comp/inscribe/inscribe'
 export default {
@@ -19,10 +20,17 @@ export default {
     Inscribe
   },
   name: 'app',
+  data () {
+    return {
+      isPc: getClientType() === 'PC'
+    }
+  },
+
   mounted () {
     if (this.getLocal('siteName')) {
       document.title = this.getLocal('siteName')
     }
+    console.log(this.isPc)
     this.$store.dispatch('getCategory')
     this.$store.dispatch('getAllAlbum')
     this.$store.dispatch('getSettings')
