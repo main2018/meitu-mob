@@ -12,8 +12,8 @@
 /* eslint-disable no-unused-vars */
 // import vconsole from 'vconsole'
 import { getClientType } from 'common/js/user-agent'
-import Bar from 'comp/bar/bar'
-import Inscribe from 'comp/inscribe/inscribe'
+import Bar from 'mob/bar/bar'
+import Inscribe from 'mob/inscribe/inscribe'
 export default {
   components: {
     Bar,
