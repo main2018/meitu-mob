@@ -79,7 +79,6 @@ exports.js = () => {
 
     mounted () {
       getAlbums.call(this)
-      console.log(this.rootAlbums)
     }
   }
 }
@@ -88,8 +87,6 @@ function getAlbums () {
   let path = this.path.match(/\/(\S*)$/)[1]
   let category = _2space(path)
   let currAlbum = this.albums[category]
-  console.log({ category })
-  console.log(this.albums, { currAlbum })
   if (!currAlbum) {
     initVal.call(this)
     return

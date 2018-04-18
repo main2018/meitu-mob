@@ -37,6 +37,7 @@ exports.js = () => {
     },
 
     computed: {
+      route () { return this.$route.path },
       loadingStatus () { return this.$store.getters.loading.status },
       loadingHint () { return this.$store.getters.loading.hint },
       isEditorShow () { return this.$store.getters.isEditorShow },
@@ -47,9 +48,7 @@ exports.js = () => {
 
     watch: {
       isEditorShow () {
-        if (this.isEditorShow) {
-          this.closeAllTab(true)
-        }
+        this.isEditorShow && this.closeAllTab(true)
       }
     },
 
@@ -101,7 +100,8 @@ exports.js = () => {
     },
 
     mounted () {
-      document.title = this.getLocal('siteName') + ' manager'
+      let title = this.getLocal('siteName') + ' manager'
+      this.$nextTick(() => { document.title = title })
       this.$store.dispatch('getCategory')
     }
   }

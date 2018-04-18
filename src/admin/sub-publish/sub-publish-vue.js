@@ -12,12 +12,10 @@ exports.js = () => {
     props: {
       contents: { type: Array, default: () => [] },
       title: { type: String, default: '' },
+      urlHint: { type: String, default: 'link' },
       btnHint: { type: String, default: 'upload' },
       descHint: { type: String, default: 'desc' },
-      type: {
-        Type: String,
-        default: ''
-      }
+      type: { Type: String, default: '' }
     },
 
     watch: {

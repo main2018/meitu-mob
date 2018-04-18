@@ -1,5 +1,4 @@
 import { get } from 'common/js/ajax-axios'
-import { VUE_SERVER } from 'config/vue-remote-server.js'
 import { setLocalStore } from 'common/js/localStorage'
 
 const state = {
@@ -26,10 +25,7 @@ const mutations = {
       if (!resp.success) { return }
       state.settings = resp.data
       setLocalStore('siteName', resp.data.name)
-      if (!resp.data.logo) { return }
-      let logo = VUE_SERVER + resp.data.logo
-      state.settings.logo = logo
-      setLocalStore('siteLogo', logo)
+      resp.data.logo && setLocalStore('siteLogo', resp.data.logo)
     })
   },
 

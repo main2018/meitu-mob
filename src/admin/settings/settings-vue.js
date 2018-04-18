@@ -1,52 +1,45 @@
 exports.js = () => {
   const AdminHeader = require('admin/admin-header/admin-header')
-  const ImgUpload = require('base/img-upload/img-upload')
+  const FileUpload = require('base/file-upload/file-upload')
   return {
     name: 'settings',
-    components: {
-      AdminHeader,
-      ImgUpload
-    },
+    components: { AdminHeader, FileUpload },
 
-    created () {
-      this.formData = new FormData()
-    },
+    created () { },
 
-    props: {
-    },
+    props: { },
 
     data () {
       return {
-        siteName: ''
+        siteName: '',
+        logo: ''
       }
     },
 
     computed: {
-      name () { return this.$store.getters.settings.name },
-      images () { return [`${this.$store.getters.settings.logo}`] }
+      name () { return this.$store.getters.settings.name }
     },
 
-    watch: {
-    },
+    watch: { },
 
     methods: {
-      getFiles (event) {
-        let files = event.target.files[0]
-        this.formData.set('logo', files)
-      },
+      getFiles (fname) { this.logo = fname },
+      getLogo () { this.logo = this.getLocal('siteLogo') },
       close () { this.$emit('close') },
       submit () {
-        this.formData.set('name', this.siteName || this.name)
-        this.post('/site/set', this.formData, (resp) => {
-          if (resp.success) {
-            this.$store.dispatch('getSettings')
-            this.close()
-          }
+        this.post('/site/set', {
+          name: this.siteName || this.name,
+          logo: this.logo
+        }, resp => {
+          if (!resp.success) { return }
+          this.$store.dispatch('getSettings')
+          this.close()
         })
       }
     },
 
     mounted () {
+      this.getLogo()
     }
   }
 }

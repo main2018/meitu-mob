@@ -7,10 +7,11 @@
       @close="$emit('close')"
       )
     .content
-      img-upload(
+      file-upload(
         :hint="'Logo'"
-        :images="images"
-        @change="getFiles"
+        :fname="logo"
+        accept="image/*"
+        @changed="getFiles"
       )
       span Title
 
@@ -19,7 +20,6 @@
         v-model="siteName"
         :placeholder="name"
         )
-      br
       // input.submit(
         type="button"
         @click="submit"

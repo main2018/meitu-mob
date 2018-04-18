@@ -13,7 +13,7 @@
           )
       .input-wrapper
         .url
-          span link: &nbsp;
+          span {{urlHint}}: &nbsp;
           input(
             type="text"
             placeholder="http://"
@@ -25,7 +25,7 @@
           v-model="content.text"
           @change="emit"
           )
-      .operator
+      .operator(v-show="contents_.length > 1")
         label.order No:
           input(
             type="number"

@@ -18,7 +18,7 @@ exports.js = () => {
         return reg.test(this.fname)
       },
       isImage () {
-        let reg = /\.(jpg|jpeg|png|gif|bmp)$/gi
+        let reg = /\.(jpg|jpeg|png|gif|bmp|svg)$/gi
         return reg.test(this.fname)
       },
       poster () {

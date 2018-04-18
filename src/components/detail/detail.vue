@@ -14,6 +14,7 @@
         :poster="getPoster(video.uri)"
         )
         source(:src="`${http}${video.uri}`")
+    p {{album.links}}
     .aw-link(v-if="hasLink && album.links && album.links.length > 0")
       link-card(:content="album.links")
     .aw-content(v-html="album.article" v-if="hasArticle")

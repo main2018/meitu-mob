@@ -55,13 +55,7 @@ exports.js = () => {
       },
       getAlbum () {
         let { hasArticle, hasVideo, hasLink } = this
-        let album = {
-          id: this.id,
-          category: this.category[0],
-          hasArticle,
-          hasVideo,
-          hasLink
-        }
+        let album = { id: this.id, category: this.category[0] }
         this.category[1] && (album.subcategory = this.category[1])
         hasArticle && (album.article = this.article)
         hasVideo && (album.videos = this.videos)

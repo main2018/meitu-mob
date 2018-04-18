@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { QINIU_URL_PREFIX } = require('config')
   return {
     name: 'bar',
     components: {
@@ -31,7 +32,9 @@ exports.js = () => {
     watch: {
       siteLogo () {
         if (this.siteLogo) {
-          this.logo = this.getLocal('siteLogo')
+          let logo = this.getLocal('siteLogo')
+          let img = `${QINIU_URL_PREFIX}${logo}`
+          this.logo = logo ? img : ''
         }
       }
     },
