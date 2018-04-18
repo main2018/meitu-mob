@@ -45,22 +45,30 @@ exports.js = () => {
       timeFormat,
       del () {
         this.get(`/album/${this.content.id}`, resp => {
-          this.delQiniuUri(resp.data)
-          this.post('/album/del', {id: this.content.id})
+          let uris = this.getAlbumUri(resp.data)
+          uris.forEach(uri => { qiniuDel(uri) })
+          this.post('/album/del', {id: this.content.id}, resp => {
+            if (!resp.success) { return }
+            this.refreshAlbum()
+          })
         })
+      },
+      refreshAlbum () {
         this.$store.dispatch('getAdminAlbums', {
           category: this.activeCategory[0],
           subcategory: this.activeCategory[1]
         })
       },
-      delQiniuUri (album) {
-        album.cover && qiniuDel(album.cover)
+      getAlbumUri (album) {
+        let uris = []
+        album.cover && uris.push(album.cover)
         album.videos.forEach((video) => {
-          video.uri && qiniuDel(video.uri)
+          video.uri && uris.push(video.uri)
         })
         album.links.forEach((link) => {
-          link.uri && qiniuDel(link.uri)
+          link.uri && uris.push(link.uri)
         })
+        return uris
       },
       goDetail () {
         let { id } = this.content
@@ -85,12 +93,6 @@ exports.js = () => {
           this.$set(this.content, 'status', 0)
         }
         this.post('/album/set', { _id, status })
-      },
-      refreshAlbum () {
-        this.$store.dispatch('getAdminAlbums', {
-          category: this.content.category,
-          subcategory: this.content.subcategory
-        })
       }
     },
 
