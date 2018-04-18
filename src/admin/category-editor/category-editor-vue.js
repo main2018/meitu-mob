@@ -112,6 +112,7 @@ exports.js = () => {
         this.postJson._id = this.categories[idx]._id
       },
       getFiles (fname) {
+        this.showBtn = false
         this.fname = fname
         this.iconShowStatus.splice(this.activeIdx, 1, true)
       },
