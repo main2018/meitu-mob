@@ -53,13 +53,13 @@ exports.js = () => {
         let editEvent = this[method](currDom, key)
         let editBtn = this.addDom(key, 'pencil', editEvent)
 
-        let addSubEvent = this.addSubcategory(currDom, key)
-        let addSubBtn = this.addDom(key + '1', 'plus', addSubEvent)
+        // let addSubEvent = this.addSubcategory(currDom, key)
+        // let addSubBtn = this.addDom(key + '1', 'plus', addSubEvent)
 
         let updateEvent = this.updateEvent(currDom, key)
         let updateBtn = this.addDom(key + '_', 'check', updateEvent)
 
-        !isSubcategoryKey && currDom.appendChild(addSubBtn)
+        // !isSubcategoryKey && currDom.appendChild(addSubBtn)
         isSubcategoryKey && currDom.appendChild(updateBtn)
         currDom.appendChild(editBtn)
       },
@@ -68,10 +68,10 @@ exports.js = () => {
         let isSubcategoryKey = key.indexOf('_') > -1
         let editDom = document.getElementById(key)
         let checkDom = document.getElementById(key + '_')
-        let addSubDom = document.getElementById(key + '1')
+        // let addSubDom = document.getElementById(key + '1')
         let root = this.$refs[key][0]
         root.removeChild(editDom)
-        !isSubcategoryKey && root.removeChild(addSubDom)
+        // !isSubcategoryKey && root.removeChild(addSubDom)
         isSubcategoryKey && root.removeChild(checkDom)
       },
 
@@ -99,6 +99,10 @@ exports.js = () => {
           txtDom.focus()
         }
       },
+
+      /**
+       * todo: add subcategory
+       */
 
       addSubcategory (dom, id) {
         return () => {
