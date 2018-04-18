@@ -99,17 +99,19 @@ exports.js = () => {
       },
       getPostJson (idx) {
         let liDom = this.$refs[idx][0]
+        for (let key in this.categories[idx]) {
+          let excepts = ['subcategories', 'id', 'meta', '__v']
+          if (excepts.includes(key)) { continue }
+          this.postJson[key] = key === 'icon'
+            ? this.fname || this.categories[idx][key]
+            : this.categories[idx][key]
+        }
         this.keyArr.forEach((key) => {
           let html = liDom.getElementsByClassName(key)[0].innerHTML
-          if (!html) { return }
+          if (key !== 'name' && !html) { return }
           let val = key === 'order' ? parseInt(html) : html
           this.postJson[key] = val
         })
-        this.postJson.icon = this.fname
-        this.postJson.hasArticle = this.categories[idx].hasArticle
-        this.postJson.hasVideo = this.categories[idx].hasVideo
-        this.postJson.hasLink = this.categories[idx].hasLink
-        this.postJson._id = this.categories[idx]._id
       },
       getFiles (fname) {
         this.showBtn = false
