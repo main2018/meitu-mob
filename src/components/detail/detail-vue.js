@@ -1,5 +1,5 @@
 exports.js = () => {
-  const LinkCard = require('base/link-card/link-card')
+  const LinkCard = require('base/card/link-card/link-card')
   const { QINIU_URL_PREFIX } = require('config')
   const { timeFormat } = require('common/js')
   return {

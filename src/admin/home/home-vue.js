@@ -4,7 +4,7 @@ exports.js = () => {
   const AdminHeader = require('admin/admin-header/admin-header')
   const Publish = require('admin/publish/publish')
   const Settings = require('admin/settings/settings')
-  const Card = require('base/card/card')
+  const Card = require('base/card/show-card/card')
   const CategoryEditor = require('admin/category-editor/category-editor')
   return {
     name: 'admin-home',

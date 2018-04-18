@@ -1,7 +1,7 @@
 const { _2space } = require('common/js')
 exports.js = () => {
   let Card = {}
-  Card = require('base/card/card')
+  Card = require('base/card/show-card/card')
   return {
     name: 'tab',
     components: {
