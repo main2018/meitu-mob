@@ -6,7 +6,7 @@
       li.category.bd-1px-b(v-for="(item, idx) in categories")
 
         div.first(:ref="'' + idx"
-          @mouseenter="addBtn('' + idx)"
+          @mouseenter="bundleBtn('' + idx)"
           @mouseleave="delBtn('' + idx)"
           )
           .active(v-show="actives[idx].category")
@@ -19,12 +19,12 @@
         ol.subcategory
           li.bd-1px-t(v-for="(subcategory, _idx) in item.subcategories")
             .second(:ref="`${idx}_${_idx}`"
-              @mouseenter="addBtn(`${idx}_${_idx}`)"
+              @mouseenter="bundleBtn(`${idx}_${_idx}`)"
               @mouseleave="delBtn(`${idx}_${_idx}`)"
               )
               .active(v-show="actives[idx].subcategories[_idx]")
               .text(
-                @input="enter($event)"
+                @input="enterKey($event)"
                 @click="setActive([item.category, subcategory], idx, _idx)"
                 ) {{subcategory}}
               .btn.mdi.mdi-minus(@click="delSubcategory(item.category, subcategory)")

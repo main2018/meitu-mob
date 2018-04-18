@@ -2,77 +2,64 @@ exports.js = () => {
   const Category = require('admin/category/category')
   return {
     name: 'aside-vue',
-    components: {
-      Category
-    },
+    components: { Category },
 
     data () {
       return {
         canEdit: false,
-        newCategory: ''
+        newSubcategory: ''
       }
     },
 
     computed: {
-      categories () {
-        return this.$store.getters.categories
-      },
-      actives () {
-        return this.$store.getters.categoryStatus
-      }
+      categories () { return this.$store.getters.categories },
+      actives () { return this.$store.getters.categoryStatus }
     },
 
     methods: {
-      delCategory (category, index) {
-        let subcategories = this.categories[index].subcategories
-        if (subcategories.length !== 0) {
-          window.alert('please delete second and try angin')
-          return
-        }
-        this.post('/category/delByCategory', { category }, (resp) => {
-          if (!resp.success) { return }
-          window.alert('delete success')
-          this.$store.dispatch('getCategory')
-        })
-      },
-
       delSubcategory (category, subcategory) {
         this.post('/subcategory/del', {
           category, subcategory
-        }, (resp) => {
+        }, resp => {
           if (!resp.success) { return }
           window.alert('delete success')
           this.$store.dispatch('getCategory')
         })
       },
 
-      updateEvent (currDom, key) {
-        return this.updateCategory(currDom, key, this.categories, (urlPrefix, category, newCategory) => {
+      updateEvent (dom, key) {
+        return this.updateSubcategory(dom, key, this.categories, ({
+          subcategory,
+          newSubcategory
+        }) => {
           this.canEdit = false
-          if (!newCategory) {
-            let txtDom = currDom.getElementsByClassName('text')[0]
-            txtDom.innerHTML = category
+          if (subcategory === newSubcategory) { return }
+          if (!newSubcategory) {
+            let txtDom = dom.getElementsByClassName('text')[0]
+            txtDom.innerHTML = subcategory
             return
           }
-          if (category === newCategory) { return }
-          let url = urlPrefix === 'category' ? '/category' : '/subcategory'
-          this.post(`${url}/updateName`, { category, newCategory }, (resp) => {
-            if (resp.success) {
-              this.$store.dispatch('getCategory')
-            }
+          this.post(`/subcategory/updateName`, { subcategory, newSubcategory }, (resp) => {
+            resp.success && this.$store.dispatch('getCategory')
           })
         })
       },
 
-      addBtn (key) {
+      bundleBtn (key) {
+        let currDom = this.$refs[key][0]
         let isSubcategoryKey = key.indexOf('_') > -1
         let method = isSubcategoryKey ? 'editSubcategory' : 'editCategory'
 
-        let currDom = this.$refs[key][0]
-        // let minusDom = currDom.lastChild
         let editEvent = this[method](currDom, key)
         let editBtn = this.addDom(key, 'pencil', editEvent)
-        let updateBtn = this.addDom(key + '_', 'check', this.updateEvent(currDom, key))
+
+        let addSubEvent = this.addSubcategory(currDom, key)
+        let addSubBtn = this.addDom(key + '1', 'plus', addSubEvent)
+
+        let updateEvent = this.updateEvent(currDom, key)
+        let updateBtn = this.addDom(key + '_', 'check', updateEvent)
+
+        !isSubcategoryKey && currDom.appendChild(addSubBtn)
         isSubcategoryKey && currDom.appendChild(updateBtn)
         currDom.appendChild(editBtn)
       },
@@ -81,8 +68,10 @@ exports.js = () => {
         let isSubcategoryKey = key.indexOf('_') > -1
         let editDom = document.getElementById(key)
         let checkDom = document.getElementById(key + '_')
+        let addSubDom = document.getElementById(key + '1')
         let root = this.$refs[key][0]
         root.removeChild(editDom)
+        !isSubcategoryKey && root.removeChild(addSubDom)
         isSubcategoryKey && root.removeChild(checkDom)
       },
 
@@ -111,24 +100,23 @@ exports.js = () => {
         }
       },
 
-      updateCategory (dom, id, categories, callback) {
+      addSubcategory (dom, id) {
+        return () => {
+          console.log(+id)
+        }
+      },
+
+      updateSubcategory (dom, id, categories, callback) {
         return () => {
           let txtDom = dom.getElementsByClassName('text')[0]
           txtDom.setAttribute('contenteditable', false)
 
           let idxArr = id.split('_')
           let first = idxArr[0]
-          let urlPrefix = 'category'
-          let oldCategory = ''
-          let newCategory = txtDom.innerHTML
-          if (idxArr.length === 1) {
-            oldCategory = categories[first].category
-          } else if (idxArr.length === 2) {
-            let second = idxArr[1]
-            oldCategory = categories[first].subcategories[second]
-            urlPrefix = 'subcategory'
-          }
-          callback(urlPrefix, oldCategory, newCategory)
+          let second = idxArr[1]
+          let subcategory = categories[first].subcategories[second]
+          let newSubcategory = txtDom.innerHTML
+          callback({ subcategory, newSubcategory })
         }
       },
 
@@ -147,16 +135,27 @@ exports.js = () => {
         this.emit(category)
       },
 
-      enter (ev) {
-        console.log(ev)
-      },
+      enterKey (ev) { console.log(ev) },
 
-      emit (category) {
-        this.$emit('clicked', category)
-      }
+      emit (category) { this.$emit('clicked', category) }
     },
 
     mounted () {
     }
   }
 }
+
+/*
+delCategory (category, index) {
+  let subcategories = this.categories[index].subcategories
+  if (subcategories.length !== 0) {
+    window.alert('please delete second and try angin')
+    return
+  }
+  this.post('/category/delByCategory', { category }, (resp) => {
+    if (!resp.success) { return }
+    window.alert('delete success')
+    this.$store.dispatch('getCategory')
+  })
+},
+*/
