@@ -1,10 +1,9 @@
 exports.js = () => {
   const { qiniuDel } = require('common/js/qiniu-api.js')
-  const ImgUpload = require('base/img-upload/img-upload')
   const FileUpload = require('base/file-upload/file-upload')
   return {
     name: 'sub-publish',
-    components: { ImgUpload, FileUpload },
+    components: { FileUpload },
     created () {
       this.no = 11
     },

@@ -1,12 +1,7 @@
 <template lang="pug">
   #home
-    ul
-      // li(@click="$router.push('/photo')") Photo
-      li.item(
-        v-for="item in categories"
-        @click="goUrl (item.route)"
-        )
-          category-card(:content="item")
+    .item(v-for="item in categories" @click="goUrl(item.route)")
+      category-card(:content="item")
 </template>
 
 <script type="text/ecmascript-6">

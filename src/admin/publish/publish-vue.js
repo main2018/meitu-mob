@@ -1,12 +1,11 @@
 exports.js = () => {
   const { quillEditor } = require('vue-quill-editor')
-  const { customform } = require('./form')
   const SubPublish = require('admin/sub-publish/sub-publish')
   const CardInput = require('admin/card-input/card-input')
   const AdminHeader = require('admin/admin-header/admin-header')
   return {
     name: 'publish',
-    components: { AdminHeader, CardInput, customform, quillEditor, SubPublish },
+    components: { AdminHeader, CardInput, quillEditor, SubPublish },
 
     created () {
     },
