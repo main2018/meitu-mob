@@ -13,7 +13,7 @@
           .text(
             @keydown.13="enter($event)"
             @click="setActive([item.category], idx)"
-            ) {{item.category}}
+            ) {{item.name || item.category}}
           // .btn.mdi.mdi-minus( @click="delCategory(item.category, idx)")
 
         ol.subcategory
