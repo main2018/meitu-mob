@@ -2,14 +2,8 @@
   .tab-container(v-if="isTabValid")
     .tab-title
       ul.tab-menu
-        li(
-          v-for="(item, index) in menu"
-          @click="tap(index)"
-          ) {{item}}
-      .tab-color(
-        v-show = "menu.length > 0"
-        :style="colorStyle"
-        )
+        li(v-for="(item, index) in menu" @click="tap(index)") {{item}}
+      .tab-color(v-show = "menu.length > 0" :style="colorStyle")
 
     .tab-padding(v-show="menu.length > 0")
     .tab-content-wrap
@@ -23,13 +17,11 @@
           @touchmove="touchmove(index)"
           @touchend="touchend(index)"
           )
-          ol: li.card-wrapper(v-for="item in content")
-              card(:content="item")
-    .no-subcategory(
-      v-if="!isTabShow"
-      )
-      ol: li.card-wrapper(v-for="item in rootAlbums")
+          .card-wrapper(v-for="item in content")
             card(:content="item")
+    .no-subcategory(v-if="!isTabShow")
+      .card-wrapper(v-for="item in rootAlbums")
+        card(:content="item")
 </template>
 
 <script type="text/ecmascript-6">
