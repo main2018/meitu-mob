@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import { VUE_SERVER } from 'config/vue-remote-server'
 import { VUE_SERVER } from 'config'
 
 export function post (url, json, success, fail) {
@@ -14,8 +13,8 @@ export function post (url, json, success, fail) {
     // console.log('resp: ', resp.data)
     if (resp.data.success) {
       success && success(resp.data)
-    } else if (fail) {
-      fail(resp.data.msg)
+    } else {
+      fail && fail(resp.data.msg)
     }
   })
   .catch(err => { console.log(err) })
@@ -28,8 +27,8 @@ export function get (url, success, fail) {
   .then((resp) => {
     if (resp.data.success) {
       success && success(resp.data)
-    } else if (fail) {
-      fail(resp.msg)
+    } else {
+      fail && fail(resp.msg)
     }
   })
   .catch(err => { console.log(err) })

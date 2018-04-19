@@ -64,6 +64,7 @@ exports.js = () => {
       },
       check (idx) {
         this.getPostJson(idx)
+        console.dir(this.postJson)
         this.post('/category/update', this.postJson, (resp) => {
           if (resp.success) { this.$store.dispatch('getCategory') }
         })
@@ -102,10 +103,9 @@ exports.js = () => {
         for (let key in this.categories[idx]) {
           let excepts = ['subcategories', 'id', 'meta', '__v']
           if (excepts.includes(key)) { continue }
-          this.postJson[key] = key === 'icon'
-            ? this.fname || this.categories[idx][key]
-            : this.categories[idx][key]
+          this.postJson[key] = this.categories[idx][key]
         }
+        this.postJson.icon = this.fname || this.categories[idx].icon
         this.keyArr.forEach((key) => {
           let html = liDom.getElementsByClassName(key)[0].innerHTML
           if (key !== 'name' && !html) { return }

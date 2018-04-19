@@ -2,6 +2,7 @@
   .aside
     .category-editor
       category
+    signin
     ul.category-wrapper
       li.category.bd-1px-b(v-for="(item, idx) in categories")
 
