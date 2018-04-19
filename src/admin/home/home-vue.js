@@ -1,4 +1,6 @@
 exports.js = () => {
+  const { QINIU_URL_PREFIX } = require('config')
+  const Signin = require('base/signin/signin')
   const Loading = require('base/loading/loading')
   const AdminAside = require('admin/aside/aside')
   const AdminHeader = require('admin/admin-header/admin-header')
@@ -15,6 +17,7 @@ exports.js = () => {
       Settings,
       Publish,
       Loading,
+      Signin,
       Card
     },
 
@@ -32,12 +35,14 @@ exports.js = () => {
         isSettingsShow: false,
 
         cardEditable: true,
-        categories: []
+        categories: [],
+        logo: ''
       }
     },
 
     computed: {
       route () { return this.$route.path },
+      siteLogo () { return this.$store.getters.settings.logo },
       loadingStatus () { return this.$store.getters.loading.status },
       loadingHint () { return this.$store.getters.loading.hint },
       isEditorShow () { return this.$store.getters.isEditorShow },
@@ -49,6 +54,13 @@ exports.js = () => {
     watch: {
       isEditorShow () {
         this.isEditorShow && this.closeAllTab(true)
+      },
+      siteLogo () {
+        if (this.siteLogo) {
+          let logo = this.getLocal('siteLogo')
+          let img = `${QINIU_URL_PREFIX}${logo}`
+          this.logo = logo ? img : ''
+        }
       }
     },
 

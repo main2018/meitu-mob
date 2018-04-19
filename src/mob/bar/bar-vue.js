@@ -60,7 +60,6 @@ exports.js = () => {
     },
 
     mounted () {
-      console.log(this.logo)
     }
   }
 }

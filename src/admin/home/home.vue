@@ -1,42 +1,47 @@
 <template lang="pug">
   #home
-    .aside
-      .menu
-        .brand: span {{name || 'manager'}}
-        .util: .mdi.mdi-18px.mdi-settings(@click="openSettings")
-      adminAside(@clicked="getCategory")
-    .container
-      loading(:show="loadingStatus" :hint="loadingHint")
-      div.content(v-show="isContentShow")
-        admin-header(
-          :show="!!breadcrumb"
-          :btns="['add']"
-          :title="breadcrumb"
-          @add="showPublish"
-          )
-        .card-wrapper(v-for="album in adminAlbums")
-          card(
-            :content="album"
-            :btn="!''"
-            :editable="cardEditable"
-            @edit="editCard"
+    .home
+      .aside
+        .menu
+          .brand: span {{name || 'manager'}}
+          .util: .mdi.mdi-18px.mdi-settings(@click="openSettings")
+        adminAside(@clicked="getCategory")
+      .container
+        loading(:show="loadingStatus" :hint="loadingHint")
+        div.content(v-show="isContentShow")
+          admin-header(
+            :show="!!breadcrumb"
+            :btns="['add']"
+            :title="breadcrumb"
+            @add="showPublish"
             )
-        .blank-page(
-          v-show="breadcrumb && adminAlbums.length === 0"
-          ) no Records
+          .card-wrapper(v-for="album in adminAlbums")
+            card(
+              :content="album"
+              :btn="!''"
+              :editable="cardEditable"
+              @edit="editCard"
+              )
+          .blank-page(
+            v-show="breadcrumb && adminAlbums.length === 0"
+            ) no Records
 
 
-      div.publish(v-show="isPublishShow")
-        publish(
-          :isNew="isPublish"
-          ref="update"
-          @reset="resetPublish"
-          @close="closePublish"
-          )
-      div.editor(v-show="isEditorShow")
-        category-editor(@close="closeEditor")
-      div.settings(v-show="isSettingsShow")
-        settings(@close="closeSettings")
+        div.publish(v-show="isPublishShow")
+          publish(
+            :isNew="isPublish"
+            ref="update"
+            @reset="resetPublish"
+            @close="closePublish"
+            )
+        div.editor(v-show="isEditorShow")
+          category-editor(@close="closeEditor")
+        div.settings(v-show="isSettingsShow")
+          settings(@close="closeSettings")
+    .sign-wrapper
+      .sign
+        img.logo(v-if="logo" :src="logo")
+        signin(:hasSignup="!!''")
 </template>
 
 <script type="text/ecmascript-6">

@@ -1,9 +1,8 @@
 exports.js = () => {
-  const Signin = require('base/signin/signin')
   const Category = require('admin/category/category')
   return {
     name: 'aside-vue',
-    components: { Category, Signin },
+    components: { Category },
 
     data () {
       return {
