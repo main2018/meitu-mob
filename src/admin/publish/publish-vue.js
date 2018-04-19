@@ -39,8 +39,7 @@ exports.js = () => {
     methods: {
       submit () {
         let path = this.isNew ? 'add' : `update`
-        this.post(`/album/${path}`, this.getAlbum(), resp => {
-          if (!resp.success) { return }
+        this.post(`/album/${path}`, this.getAlbum(), () => {
           this.clean()
           this.refreshAlbum()
           this.$emit('close')

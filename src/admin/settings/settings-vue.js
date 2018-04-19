@@ -30,8 +30,7 @@ exports.js = () => {
         this.post('/site/set', {
           name: this.siteName || this.name,
           logo: this.logo
-        }, resp => {
-          if (!resp.success) { return }
+        }, () => {
           this.$store.dispatch('getSettings')
           this.close()
         })

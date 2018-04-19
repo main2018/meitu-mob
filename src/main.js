@@ -37,7 +37,7 @@ console.log(getClientType())
 
 /* eslint-disable no-new */
 get('/category', resp => {
-  resp.data.forEach(item => {
+  resp.forEach(item => {
     routes.push({
       path: `/${item.route}`,
       component: Dynamic

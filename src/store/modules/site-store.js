@@ -22,10 +22,9 @@ const actions = {
 const mutations = {
   GET_SETTINGS (state, settings) {
     get('/site', (resp) => {
-      if (!resp.success) { return }
-      state.settings = resp.data
-      setLocalStore('siteName', resp.data.name)
-      resp.data.logo && setLocalStore('siteLogo', resp.data.logo)
+      state.settings = resp
+      setLocalStore('siteName', resp.name)
+      resp.logo && setLocalStore('siteLogo', resp.logo)
     })
   },
 

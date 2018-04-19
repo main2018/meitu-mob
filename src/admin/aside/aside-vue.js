@@ -21,8 +21,7 @@ exports.js = () => {
       delSubcategory (category, subcategory) {
         this.post('/subcategory/del', {
           category, subcategory
-        }, resp => {
-          if (!resp.success) { return }
+        }, () => {
           window.alert('delete success')
           this.$store.dispatch('getCategory')
         })
@@ -40,8 +39,10 @@ exports.js = () => {
             txtDom.innerHTML = subcategory
             return
           }
-          this.post(`/subcategory/updateName`, { subcategory, newSubcategory }, (resp) => {
-            resp.success && this.$store.dispatch('getCategory')
+          this.post(`/subcategory/updateName`, {
+            subcategory, newSubcategory
+          }, () => {
+            this.$store.dispatch('getCategory')
           })
         })
       },
@@ -157,8 +158,7 @@ delCategory (category, index) {
     window.alert('please delete second and try angin')
     return
   }
-  this.post('/category/delByCategory', { category }, (resp) => {
-    if (!resp.success) { return }
+  this.post('/category/delByCategory', { category }, () => {
     window.alert('delete success')
     this.$store.dispatch('getCategory')
   })

@@ -1,4 +1,5 @@
 exports.js = () => {
+  const { qiniuDel } = require('common/js/qiniu-api.js')
   const { QINIU_URL_PREFIX } = require('config')
   const FileUpload = require('base/file-upload/file-upload')
   const AdminHeader = require('admin/admin-header/admin-header')
@@ -64,9 +65,8 @@ exports.js = () => {
       },
       check (idx) {
         this.getPostJson(idx)
-        console.dir(this.postJson)
-        this.post('/category/update', this.postJson, (resp) => {
-          if (resp.success) { this.$store.dispatch('getCategory') }
+        this.post('/category/update', this.postJson, () => {
+          this.$store.dispatch('getCategory')
         })
         this.postJson = {}
         this.imgStyle = ''
@@ -74,10 +74,10 @@ exports.js = () => {
         this.iconShowStatus.splice(this.activeIdx, 1, false)
       },
       del (idx) {
+        qiniuDel(this.categories[idx].icon)
         this.post('/category/delByCategory', {
           category: this.categories[idx].category
-        }, (resp) => {
-          if (!resp.success) { return }
+        }, () => {
           window.alert('delete success')
           this.$store.dispatch('getCategory')
         })

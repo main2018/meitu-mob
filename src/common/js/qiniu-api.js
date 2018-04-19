@@ -19,7 +19,7 @@ export function qiniuUpload (file, succ, fail) {
   get(`/qiniu/token`, (resp) => {
     let fileName = nanoId()
     let fileExtension = file.name.match(/\.\w*$/g)[0]
-    let token = resp.data.token
+    let token = resp.token
     let key = fileName + fileExtension
     const observable = qiniu.upload(file, key, token, putExtra, config)
 
@@ -40,11 +40,9 @@ export function qiniuUpload (file, succ, fail) {
 
 export function qiniuDel (fname, succ, fail) {
   get(`/qiniu/del/${fname}`, resp => {
-    if (resp.success) {
-      succ && succ(resp.data)
-    } else {
-      fail && fail(resp.msg)
-    }
+    succ && succ(resp)
+  }, err => {
+    fail && fail(err)
   })
 }
 

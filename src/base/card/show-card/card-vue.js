@@ -44,11 +44,12 @@ exports.js = () => {
       getBgStyle,
       timeFormat,
       del () {
-        this.get(`/album/${this.content.id}`, resp => {
-          let uris = this.getAlbumUri(resp.data)
+        this.get(`/album/${this.content.id}`, album => {
+          let uris = this.getAlbumUri(album)
           uris.forEach(uri => { qiniuDel(uri) })
-          this.post('/album/del', {id: this.content.id}, resp => {
-            if (!resp.success) { return }
+          this.post('/album/del', {
+            id: this.content.id
+          }, () => {
             this.refreshAlbum()
           })
         })

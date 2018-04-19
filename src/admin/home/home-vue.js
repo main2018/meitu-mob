@@ -88,8 +88,7 @@ exports.js = () => {
         let card = {}
         this.$refs.update.id = id
         this.get(`/album/${id}`, resp => {
-          if (!resp.success) { return }
-          let album = resp.data
+          let album = resp
           for (let key in album) {
             groupKey.includes(key) && (this.$refs.update[key] = album[key])
             cardKey.includes(key) && (card[key] = album[key])

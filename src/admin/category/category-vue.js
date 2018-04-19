@@ -41,8 +41,7 @@ exports.js = () => {
         this.post('/category/add', {
           category: this.category,
           name: this.categoryName
-        }, (resp) => {
-          if (!resp.success) { return }
+        }, () => {
           window.alert('publish success')
           this.category = ''
           this.categoryName = ''
@@ -53,8 +52,7 @@ exports.js = () => {
         this.post('/subcategory/add', {
           category: this.currCategory,
           subcategory: this.subcategory
-        }, (resp) => {
-          if (!resp.success) { return }
+        }, () => {
           window.alert('publish success')
           this.subcategory = ''
           this.$store.dispatch('getCategory')
