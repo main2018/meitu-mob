@@ -11,7 +11,6 @@ import {
   AjaxGet,
   GetLocal,
   SetLocal,
-  PostForm,
   Log
 } from 'common/js'
 import store from './store'
@@ -29,7 +28,6 @@ Vue.use(AjaxPost)
 Vue.use(AjaxGet)
 Vue.use(SetLocal)
 Vue.use(GetLocal)
-Vue.use(PostForm)
 Vue.use(Log)
 Vue.use(Router)
 

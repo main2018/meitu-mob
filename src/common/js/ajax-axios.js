@@ -1,20 +1,22 @@
 import axios from 'axios'
-import { VUE_SERVER } from 'config'
-import { HEADER_KEY_PREFIX } from '../../../../config'
+import {
+  HEADER_KEY_PREFIX,
+  SERVER_HTTP
+} from '../../../../config'
 
 const account = global.localStorage.getItem('account') || ''
 const token = global.localStorage.getItem('token') || ''
 
 function genConf (method, path, data) {
-  let url = `${VUE_SERVER}${path}`
+  let url = `${SERVER_HTTP}${path}`
   let accountKey = `${HEADER_KEY_PREFIX}account`
   let tokenKey = `${HEADER_KEY_PREFIX}token`
   let headers = {}
   headers[accountKey] = account
   headers[tokenKey] = token
+  // console.log({ url })
   let config = { method, headers, url }
   if (data) { config.data = data }
-  console.dir({ config })
   return config
 }
 

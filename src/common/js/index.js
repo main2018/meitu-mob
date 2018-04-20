@@ -1,7 +1,6 @@
 import { post, get, ajax } from './ajax-axios'
 import { getLocalStore, setLocalStore } from './localStorage'
 import { log } from './logger'
-import { postForm } from './axios-file'
 const { QINIU_URL_PREFIX } = require('config')
 
 export const AjaxPost = {
@@ -34,14 +33,6 @@ export const SetLocal = {
     Vue.setLocal = setLocalStore
   },
   post: post
-}
-
-export const PostForm = {
-  install (Vue) {
-    Vue.prototype.postForm = postForm
-    Vue.postForm = postForm
-  },
-  postForm: postForm
 }
 
 export const Log = {
