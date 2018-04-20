@@ -1,5 +1,4 @@
 exports.js = () => {
-  const { QINIU_URL_PREFIX } = require('config')
   return {
     name: 'bar',
     components: {
@@ -33,7 +32,7 @@ exports.js = () => {
       siteLogo () {
         if (this.siteLogo) {
           let logo = this.getLocal('siteLogo')
-          let img = `${QINIU_URL_PREFIX}${logo}`
+          let img = this.$qiniuUrl(logo)
           this.logo = logo ? img : ''
         }
       }

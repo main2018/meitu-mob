@@ -1,6 +1,5 @@
 exports.js = () => {
   const { qiniuUpload, qiniuDel } = require('common/js/qiniu-api.js')
-  const { QINIU_URL_PREFIX } = require('config')
   const { setObjectPropToData } = require('common/js')
   return {
     name: 'card-input',
@@ -23,16 +22,15 @@ exports.js = () => {
 
     data () {
       return {
-        http: QINIU_URL_PREFIX,
         card: { status: 0, cover: '', title: '', desc: '' }
       }
     },
 
     computed: {
       coverStyle () {
-        let cover = this.card.cover
+        let cover = this.$qiniuUrl(this.card.cover)
         let pre = 'background-image: url('
-        return cover ? `${pre}${this.http}${cover});` : ''
+        return cover ? `${pre}${cover});` : ''
       },
       activeCategory () { return this.$store.getters.activeCategory },
       hasArticle () { return this.$store.getters.hasArticle },

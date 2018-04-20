@@ -1,6 +1,5 @@
 exports.js = () => {
   const { qiniuDel } = require('common/js/qiniu-api.js')
-  const { QINIU_URL_PREFIX } = require('config')
   const FileUpload = require('base/file-upload/file-upload')
   const AdminHeader = require('admin/admin-header/admin-header')
   return {
@@ -21,7 +20,6 @@ exports.js = () => {
 
     data () {
       return {
-        http: QINIU_URL_PREFIX,
         fname: '',
         showBtn: true,
         imgStyle: '',

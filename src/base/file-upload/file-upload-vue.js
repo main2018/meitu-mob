@@ -1,6 +1,9 @@
 exports.js = () => {
-  const { qiniuUpload, qiniuDel } = require('common/js/qiniu-api.js')
-  const { QINIU_URL_PREFIX } = require('config')
+  const {
+    qiniuUpload,
+    qiniuDel,
+    getQiniuPosterUrl
+  } = require('common/js/qiniu-api.js')
   return {
     name: 'file-upload',
 
@@ -22,12 +25,11 @@ exports.js = () => {
         return reg.test(this.fname)
       },
       poster () {
-        let query = '?vframe/jpg/offset/1/w/640/h/360'
-        let poster = `${QINIU_URL_PREFIX}${this.fname}${query}`
+        let poster = getQiniuPosterUrl(this.fname)
         return this.isVideo && this.fname ? poster : ''
       },
       cover () {
-        let img = `${QINIU_URL_PREFIX}${this.fname}`
+        let img = this.$qiniuUrl(this.fname)
         return this.isImage && this.fname ? img : ''
       }
     },

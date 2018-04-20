@@ -1,5 +1,4 @@
 exports.js = () => {
-  const { QINIU_URL_PREFIX } = require('config')
   const Signin = require('base/signin/signin')
   const Loading = require('base/loading/loading')
   const AdminAside = require('admin/aside/aside')
@@ -59,8 +58,7 @@ exports.js = () => {
       siteLogo () {
         if (this.siteLogo) {
           let logo = this.getLocal('siteLogo')
-          let img = `${QINIU_URL_PREFIX}${logo}`
-          this.logo = logo ? img : ''
+          this.logo = logo ? this.$qiniuUrl(logo) : ''
         }
       }
     },

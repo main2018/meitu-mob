@@ -31,7 +31,7 @@
             v-show="!iconShowStatus[idx]"
             @click="updateImg(idx)"
             :style="imgStyle"
-            :src="category.icon ? `${http}${category.icon}` : ''"
+            :src="category.icon ? $qiniuUrl(category.icon) : ''"
             )
         li.category(
           :contenteditable="status[idx]"
