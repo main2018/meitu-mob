@@ -2,7 +2,6 @@ import { post, get, ajax } from './ajax-axios'
 import { getLocalStore, setLocalStore } from './localStorage'
 import { log } from './logger'
 import { getQiniuUrl } from './qiniu-api.js'
-const { QINIU_URL_PREFIX } = require('config')
 
 export const AjaxPost = {
   install (Vue) {
@@ -71,7 +70,6 @@ export function setObjectPropToData (prop, data) {
 
 export function getBgStyle (uri, ratio = '4 : 3') {
   if (!uri) { return '' }
-  let url = uri ? QINIU_URL_PREFIX + uri : ''
   let w = +ratio.split(':')[0]
   let h = +ratio.split(':')[1]
   let height = 65
@@ -81,7 +79,7 @@ export function getBgStyle (uri, ratio = '4 : 3') {
     width: 100%;
     padding-bottom: ${height}%;
     background-color: #eee;
-    background-image: url(${url})
+    background-image: url(${getQiniuUrl(uri)})
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

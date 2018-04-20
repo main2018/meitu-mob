@@ -28,7 +28,6 @@ module.exports = {
       'base': resolve('src/base'),
       'admin': resolve('src/admin'),
       'test': resolve('src/test'),
-      'config': resolve('src/config'),
       'common': resolve('src/common')
     }
   },
