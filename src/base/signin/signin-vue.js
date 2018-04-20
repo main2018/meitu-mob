@@ -36,14 +36,12 @@ exports.js = () => {
         this.post('/user/signin', {
           username: this.inUsername,
           password: this.inPassword
-        }, (resp) => {
+        }, resp => {
           global.localStorage.setItem('account', this.inUsername)
           global.localStorage.setItem('token', resp.token)
-          window.alert('success')
+          this.$emit('succ')
           this.$router.push('/admin')
-        }, (err) => {
-          this.log(err)
-        })
+        }, err => { console.log(err) })
       },
       signup () {
         if (!this.upUsername || !this.upPassword) { return }

@@ -42,6 +42,7 @@ exports.js = () => {
 
     computed: {
       route () { return this.$route.path },
+      isSigninPass () { return this.getLocal('token') },
       siteLogo () { return this.$store.getters.settings.logo },
       loadingStatus () { return this.$store.getters.loading.status },
       loadingHint () { return this.$store.getters.loading.hint },

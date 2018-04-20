@@ -1,6 +1,6 @@
 <template lang="pug">
   #home
-    .home
+    .home(v-if="isSigninPass")
       .aside
         .menu
           .brand: span {{name || 'manager'}}
@@ -18,7 +18,7 @@
           .card-wrapper(v-for="album in adminAlbums")
             card(
               :content="album"
-              :btn="!''"
+              :btn="!0"
               :editable="cardEditable"
               @edit="editCard"
               )
@@ -38,10 +38,10 @@
           category-editor(@close="closeEditor")
         div.settings(v-show="isSettingsShow")
           settings(@close="closeSettings")
-    .sign-wrapper
+    .sign-wrapper(v-if="!isSigninPass")
       .sign
         img.logo(v-if="logo" :src="logo")
-        signin(:hasSignup="!!''")
+        signin(:hasSignup="!1")
 </template>
 
 <script type="text/ecmascript-6">
