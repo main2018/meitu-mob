@@ -1,18 +1,18 @@
 import axios from 'axios'
 import { VUE_SERVER } from 'config'
 
-export function post (url, json, success, fail) {
-  let token = global.localStorage.getItem('token') || ''
+const token = global.localStorage.getItem('token') || ''
+
+export function post (url, json, succ, fail) {
   axios({
     method: 'POST',
     url: `${VUE_SERVER}${url}`,
     data: json,
     headers: {'x-access-token': token}
   })
-  .then((resp) => {
-    // console.log('resp: ', resp.data)
+  .then(resp => {
     if (resp.data.success) {
-      success && success(resp.data.data)
+      succ && succ(resp.data.data)
     } else {
       fail && fail(resp.data.msg)
     }
@@ -20,13 +20,15 @@ export function post (url, json, success, fail) {
   .catch(err => { console.log(err) })
 }
 
-export function get (url, success, fail) {
-  let token = global.localStorage.getItem('token') || ''
-  let path = `${VUE_SERVER}${url}`
-  axios({ method: 'GET', url: path, headers: {'x-access-token': token} })
-  .then((resp) => {
+export function get (url, succ, fail) {
+  axios({
+    method: 'GET',
+    url: `${VUE_SERVER}${url}`,
+    headers: {'x-access-token': token}
+  })
+  .then(resp => {
     if (resp.data.success) {
-      success && success(resp.data.data)
+      succ && succ(resp.data.data)
     } else {
       fail && fail(resp.data.msg)
     }
@@ -36,15 +38,11 @@ export function get (url, success, fail) {
 
 export const ajax = {
   get (path, cb) {
-    let url = `${VUE_SERVER}${path}`
-    axios.get(url).then((resp) => {
-      if (resp.data.success) { cb(resp.data.data) }
-    })
+    axios.get(`${VUE_SERVER}${path}`)
+    .then(resp => resp.data.success && cb && cb(resp.data.data))
   },
   post (path, json, cb) {
-    let url = `${VUE_SERVER}${path}`
-    axios.post(url, json).then((resp) => {
-      if (resp.data.success) { cb(resp.data.data) }
-    })
+    axios.post(`${VUE_SERVER}${path}`, json)
+    .then(resp => resp.data.success && cb && cb(resp.data.data))
   }
 }
