@@ -1,6 +1,6 @@
 exports.js = () => {
   const LinkCard = require('base/card/link-card/link-card')
-  const { QINIU_URL_PREFIX } = require('config')
+  const { getQiniuPosterUrl } = require('common/js/qiniu-api')
   const { timeFormat } = require('common/js')
   return {
     name: 'detail',
@@ -16,7 +16,6 @@ exports.js = () => {
 
     data () {
       return {
-        http: QINIU_URL_PREFIX,
         hasArticle: true,
         hasVideo: true,
         hasLink: true
@@ -50,9 +49,7 @@ exports.js = () => {
 
     methods: {
       getPoster (video) {
-        if (!video) { return '' }
-        let query = '?vframe/jpg/offset/1/w/640/h/360'
-        return `${QINIU_URL_PREFIX}${video}${query}`
+        return getQiniuPosterUrl(video)
       },
       playVid () { this.video.play() },
       enableMute () { this.video.muted = false }

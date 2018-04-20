@@ -1,6 +1,7 @@
 import { post, get, ajax } from './ajax-axios'
 import { getLocalStore, setLocalStore } from './localStorage'
 import { log } from './logger'
+import { getQiniuUrl } from './qiniu-api.js'
 const { QINIU_URL_PREFIX } = require('config')
 
 export const AjaxPost = {
@@ -24,7 +25,7 @@ export const GetLocal = {
     Vue.prototype.getLocal = getLocalStore
     Vue.getLocal = getLocalStore
   },
-  post: post
+  getLocal: getLocalStore
 }
 
 export const SetLocal = {
@@ -32,7 +33,15 @@ export const SetLocal = {
     Vue.prototype.setLocal = setLocalStore
     Vue.setLocal = setLocalStore
   },
-  post: post
+  setLocal: setLocalStore
+}
+
+export const QiniuUrl = {
+  install (Vue) {
+    Vue.prototype.$qiniuUrl = getQiniuUrl
+    Vue.$qiniuUrl = getQiniuUrl
+  },
+  $qiniuUrl: getQiniuUrl
 }
 
 export const Log = {

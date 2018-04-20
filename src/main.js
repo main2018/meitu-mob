@@ -11,6 +11,7 @@ import {
   AjaxGet,
   GetLocal,
   SetLocal,
+  QiniuUrl,
   Log
 } from 'common/js'
 import store from './store'
@@ -28,6 +29,7 @@ Vue.use(AjaxPost)
 Vue.use(AjaxGet)
 Vue.use(SetLocal)
 Vue.use(GetLocal)
+Vue.use(QiniuUrl)
 Vue.use(Log)
 Vue.use(Router)
 
