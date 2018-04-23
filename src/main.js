@@ -11,6 +11,7 @@ import {
   AjaxGet,
   GetLocal,
   SetLocal,
+  DelLocal,
   QiniuUrl,
   Log
 } from 'common/js'
@@ -28,6 +29,7 @@ Vue.use(VueQuillEditor)
 Vue.use(AjaxPost)
 Vue.use(AjaxGet)
 Vue.use(SetLocal)
+Vue.use(DelLocal)
 Vue.use(GetLocal)
 Vue.use(QiniuUrl)
 Vue.use(Log)

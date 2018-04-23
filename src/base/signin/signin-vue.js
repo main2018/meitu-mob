@@ -37,8 +37,8 @@ exports.js = () => {
           username: this.inUsername,
           password: this.inPassword
         }, resp => {
-          global.localStorage.setItem('account', this.inUsername)
-          global.localStorage.setItem('token', resp.token)
+          this.setLocal('account', this.inUsername)
+          this.setLocal('token', resp.token)
           this.$emit('succ')
           this.$router.push('/admin')
         }, err => { console.log(err) })

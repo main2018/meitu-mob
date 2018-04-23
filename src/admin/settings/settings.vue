@@ -2,9 +2,10 @@
   .settings
     admin-header(
       title="Site Settings"
-      :btns="['submit', 'close']"
+      :btns="[showSubmit ? 'submit' : '', 'exit', 'close']"
       @submit="submit"
-      @close="$emit('close')"
+      @close="close"
+      @exit="signout"
       )
     .content
       file-upload(

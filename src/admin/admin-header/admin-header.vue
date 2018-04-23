@@ -23,6 +23,11 @@
         )
         .mdi.mdi-cancel
       .btn(
+        @click="$emit('exit')"
+        v-show="btns.includes('exit')"
+        )
+        .mdi.mdi-export
+      .btn(
         v-show="btns.includes('close')"
         @click="$emit('close')"
         )

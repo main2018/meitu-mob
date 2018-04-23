@@ -1,47 +1,42 @@
 <template lang="pug">
-  #home
-    .home(v-if="isSigninPass")
-      .aside
-        .menu
-          .brand: span {{name || 'manager'}}
-          .util: .mdi.mdi-18px.mdi-settings(@click="openSettings")
-        adminAside(@clicked="getCategory")
-      .container
-        loading(:show="loadingStatus" :hint="loadingHint")
-        div.content(v-show="isContentShow")
-          admin-header(
-            :show="!!breadcrumb"
-            :btns="['add']"
-            :title="breadcrumb"
-            @add="showPublish"
+  .home
+    .aside
+      .menu
+        .brand: span {{name || 'manager'}}
+        .util: .mdi.mdi-18px.mdi-settings(@click="openSettings")
+      adminAside(@clicked="getCategory")
+    .container
+      loading(:show="loadingStatus" :hint="loadingHint")
+      div.content(v-show="isContentShow")
+        admin-header(
+          :show="!!breadcrumb"
+          :btns="['add']"
+          :title="breadcrumb"
+          @add="showPublish"
+          )
+        .card-wrapper(v-for="album in adminAlbums")
+          card(
+            :content="album"
+            :btn="!0"
+            :editable="cardEditable"
+            @edit="editCard"
             )
-          .card-wrapper(v-for="album in adminAlbums")
-            card(
-              :content="album"
-              :btn="!0"
-              :editable="cardEditable"
-              @edit="editCard"
-              )
-          .blank-page(
-            v-show="breadcrumb && adminAlbums.length === 0"
-            ) no Records
+        .blank-page(
+          v-show="breadcrumb && adminAlbums.length === 0"
+          ) no Records
 
 
-        div.publish(v-show="isPublishShow")
-          publish(
-            :isNew="isPublish"
-            ref="update"
-            @reset="resetPublish"
-            @close="closePublish"
-            )
-        div.editor(v-show="isEditorShow")
-          category-editor(@close="closeEditor")
-        div.settings(v-show="isSettingsShow")
-          settings(@close="closeSettings")
-    .sign-wrapper(v-if="!isSigninPass")
-      .sign
-        img.logo(v-if="logo" :src="logo")
-        signin(:hasSignup="!1")
+      div.publish(v-show="isPublishShow")
+        publish(
+          :isNew="isPublish"
+          ref="update"
+          @reset="resetPublish"
+          @close="closePublish"
+          )
+      div.editor(v-show="isEditorShow")
+        category-editor(@close="closeEditor")
+      div.settings(v-show="isSettingsShow")
+        settings(@close="closeSettings")
 </template>
 
 <script type="text/ecmascript-6">

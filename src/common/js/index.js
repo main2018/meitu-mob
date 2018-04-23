@@ -1,5 +1,9 @@
 import { post, get, ajax } from './ajax-axios'
-import { getLocalStore, setLocalStore } from './localStorage'
+import {
+  getLocalStore,
+  setLocalStore,
+  delLocalStore
+} from './localStorage'
 import { log } from './logger'
 import { getQiniuUrl } from './qiniu-api.js'
 
@@ -33,6 +37,14 @@ export const SetLocal = {
     Vue.setLocal = setLocalStore
   },
   setLocal: setLocalStore
+}
+
+export const DelLocal = {
+  install (Vue) {
+    Vue.prototype.delLocal = delLocalStore
+    Vue.delLocal = delLocalStore
+  },
+  delLocal: delLocalStore
 }
 
 export const QiniuUrl = {

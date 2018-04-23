@@ -2,6 +2,7 @@ import { get } from 'common/js/ajax-axios'
 import { setLocalStore } from 'common/js/localStorage'
 
 const state = {
+  isAdminSignin: false,
   settings: {
     logo: '',
     name: ''
@@ -21,7 +22,8 @@ const actions = {
 
 const mutations = {
   GET_SETTINGS (state, settings) {
-    get('/site', (resp) => {
+    get('/site', resp => {
+      state.isAdminSignin = true
       state.settings = resp
       setLocalStore('siteName', resp.name)
       resp.logo && setLocalStore('siteLogo', resp.logo)

@@ -1,5 +1,4 @@
 exports.js = () => {
-  const Signin = require('base/signin/signin')
   const Loading = require('base/loading/loading')
   const AdminAside = require('admin/aside/aside')
   const AdminHeader = require('admin/admin-header/admin-header')
@@ -16,11 +15,12 @@ exports.js = () => {
       Settings,
       Publish,
       Loading,
-      Signin,
       Card
     },
 
     created () {
+      let isSignin = !!this.getLocal('token')
+      if (!isSignin) { this.$router.push('/admin/signin') }
     },
 
     props: {
@@ -32,17 +32,13 @@ exports.js = () => {
         isContentShow: true,
         isPublishShow: false,
         isSettingsShow: false,
-
         cardEditable: true,
-        categories: [],
-        logo: ''
+        categories: []
       }
     },
 
     computed: {
       route () { return this.$route.path },
-      isSigninPass () { return this.getLocal('token') },
-      siteLogo () { return this.$store.getters.settings.logo },
       loadingStatus () { return this.$store.getters.loading.status },
       loadingHint () { return this.$store.getters.loading.hint },
       isEditorShow () { return this.$store.getters.isEditorShow },
@@ -54,12 +50,6 @@ exports.js = () => {
     watch: {
       isEditorShow () {
         this.isEditorShow && this.closeAllTab(true)
-      },
-      siteLogo () {
-        if (this.siteLogo) {
-          let logo = this.getLocal('siteLogo')
-          this.logo = logo ? this.$qiniuUrl(logo) : ''
-        }
       }
     },
 

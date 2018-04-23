@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import MobHome from 'mob/home/home'
 import PcHome from 'pc/home/home'
 import { getClientType } from 'common/js/user-agent'
-import Admin from 'admin/home/home.vue'
+import AdminHome from 'admin/home/home.vue'
+const AdminSign = require('admin/admin-sign/admin-sign')
 
 const type = getClientType()
 const isPC = type === 'PC'
@@ -15,7 +16,10 @@ const routes = [
     component: isPC ? PcHome : MobHome
   }, {
     path: '/admin',
-    component: Admin
+    component: AdminHome
+  }, {
+    path: '/admin/signin',
+    component: AdminSign
   }
 ]
 
