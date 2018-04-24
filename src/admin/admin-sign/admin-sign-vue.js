@@ -14,7 +14,7 @@ exports.js = () => {
 
     data () {
       return {
-        logo: ''
+        logo: this.getLogo() || ''
       }
     },
 
@@ -25,13 +25,17 @@ exports.js = () => {
     watch: {
       siteLogo () {
         if (this.siteLogo) {
-          let logo = this.getLocal('siteLogo')
-          this.logo = logo ? this.$qiniuUrl(logo) : ''
+          this.logo = this.getLogo()
         }
       }
     },
 
     methods: {
+      getLogo () {
+        let logo = this.getLocal('siteLogo')
+        logo = logo ? this.$qiniuUrl(logo) : ''
+        return logo
+      }
     },
 
     mounted () {

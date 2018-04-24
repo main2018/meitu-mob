@@ -14,12 +14,25 @@
         accept="image/*"
         @changed="getFiles"
       )
-      span Title
 
+      span Website Title
       input.site-name(
         type="text"
         v-model="siteName"
         :placeholder="name"
+        )
+
+      br
+      span Old password
+      input.site-name(
+        type="text"
+        v-model="oldPassword"
+        )
+      br
+      span New password
+      input.site-name(
+        type="text"
+        v-model="oldPassword"
         )
       // input.submit(
         type="button"

@@ -13,9 +13,11 @@ exports.js = () => {
 
     data () {
       return {
+        isLogoChanged: false,
         siteName: '',
         logo: '',
-        isLogoChanged: false
+        oldPassword: '',
+        newPassword: ''
       }
     },
 
