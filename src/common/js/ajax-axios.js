@@ -6,13 +6,13 @@ import {
   CODE
 } from '../../../../config'
 
+const headers = {}
 function genConf (method, path, data) {
-  const account = global.localStorage.getItem('account') || ''
-  const token = global.localStorage.getItem('token') || ''
   const url = `${SERVER_HTTP}${path}`
+  const account = global.localStorage.getItem('account') || ''
   const accountKey = `${HEADER_KEY_PREFIX}account`
+  const token = global.localStorage.getItem('token') || ''
   const tokenKey = `${HEADER_KEY_PREFIX}token`
-  const headers = {}
 
   headers[accountKey] = account
   headers[tokenKey] = token
