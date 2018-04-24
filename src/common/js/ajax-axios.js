@@ -1,17 +1,19 @@
 import axios from 'axios'
 import {
   HEADER_KEY_PREFIX,
-  SERVER_HTTP
+  SERVER_HTTP,
+  CLIENT_HTTP,
+  CODE
 } from '../../../../config'
 
-const account = global.localStorage.getItem('account') || ''
-const token = global.localStorage.getItem('token') || ''
-
 function genConf (method, path, data) {
-  let url = `${SERVER_HTTP}${path}`
-  let accountKey = `${HEADER_KEY_PREFIX}account`
-  let tokenKey = `${HEADER_KEY_PREFIX}token`
-  let headers = {}
+  const account = global.localStorage.getItem('account') || ''
+  const token = global.localStorage.getItem('token') || ''
+  const url = `${SERVER_HTTP}${path}`
+  const accountKey = `${HEADER_KEY_PREFIX}account`
+  const tokenKey = `${HEADER_KEY_PREFIX}token`
+  const headers = {}
+
   headers[accountKey] = account
   headers[tokenKey] = token
   // console.log({ url })
@@ -26,6 +28,11 @@ export function post (url, json, succ, fail) {
     if (resp.data.success) {
       succ && succ(resp.data.data)
     } else {
+      if (resp.data.code === CODE.EXPIRED) {
+        alert(resp.data.msg)
+        global.localStorage.removeItem('token')
+        window.location.href = `${CLIENT_HTTP}/admin`
+      }
       fail && fail(resp.data.msg)
     }
   })

@@ -1,6 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
-const { ADDRESS } = require('./remote.server')
+const { SERVER_HTTP, CLIENT_PORT } = require('../../config')
 
 module.exports = {
   build: {
@@ -24,7 +24,7 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8000,
+    port: CLIENT_PORT,
     autoOpenBrowser: false,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -36,5 +36,5 @@ module.exports = {
     // just be aware of this issue when enabling this option.
     cssSourceMap: false
   },
-  REMOTE_ADDRESS: ADDRESS
+  REMOTE_ADDRESS: SERVER_HTTP
 }
