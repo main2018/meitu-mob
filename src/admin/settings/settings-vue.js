@@ -2,9 +2,10 @@ exports.js = () => {
   const { qiniuDel } = require('common/js/qiniu-api.js')
   const AdminHeader = require('admin/admin-header/admin-header')
   const FileUpload = require('base/file-upload/file-upload')
+  const AdminDialog = require('base/dialog/dialog')
   return {
     name: 'settings',
-    components: { AdminHeader, FileUpload },
+    components: { AdminHeader, FileUpload, AdminDialog },
 
     created () {
     },

@@ -22,23 +22,24 @@
         :placeholder="name"
         )
 
-      br
-      span Old password
-      input.site-name(
-        type="text"
-        v-model="oldPassword"
-        )
-      br
-      span New password
-      input.site-name(
-        type="text"
-        v-model="oldPassword"
-        )
       // input.submit(
         type="button"
         @click="submit"
         value="save"
         )
+      admin-dialog(:show="!0")
+        br
+        span Old password
+        input.site-name(
+          type="text"
+          v-model="oldPassword"
+          )
+        br
+        span New password
+        input.site-name(
+          type="text"
+          v-model="newPassword"
+          )
 </template>
 
 <script type="text/ecmascript-6">
