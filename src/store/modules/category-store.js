@@ -1,4 +1,4 @@
-import { axiosAjax } from 'common/js'
+import { get } from 'common/js/ajax-axios'
 
 const state = {
   categories: [],
@@ -35,7 +35,7 @@ const actions = {
 const mutations = {
   GET_CATEGORY (state, activeCategory) {
     let path = '/category/findAll'
-    axiosAjax.get(path, resp => {
+    get(path, resp => {
       state.categories = resp
       setActivesStatus(state, resp)
 

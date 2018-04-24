@@ -44,6 +44,7 @@ export function get (url, succ, fail) {
   .catch(err => { console.log(err) })
 }
 
+/*
 export const ajax = {
   get (path, cb) {
     axios(genConf('GET', path))
@@ -54,3 +55,4 @@ export const ajax = {
     .then(resp => resp.data.success && cb && cb(resp.data.data))
   }
 }
+*/

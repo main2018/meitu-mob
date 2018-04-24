@@ -1,4 +1,4 @@
-import { post, get, ajax } from './ajax-axios'
+import { post, get } from './ajax-axios'
 import {
   getLocalStore,
   setLocalStore,
@@ -62,8 +62,6 @@ export const Log = {
   },
   log: log
 }
-
-export const axiosAjax = ajax
 
 export const _2space = str => str.replace(/__/g, ' ')
 export const timeFormat = str => str ? str.substr(0, 10) : null

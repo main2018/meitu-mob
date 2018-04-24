@@ -1,4 +1,4 @@
-import { axiosAjax } from 'common/js'
+import { post, get } from 'common/js/ajax-axios'
 
 const state = {
   albums: {},
@@ -34,19 +34,19 @@ const actions = {
 const mutations = {
   GET_ALBUMS_BY_CATEGORY (state, category) {
     let path = '/album/findByCategory'
-    axiosAjax.post(path, { category, status: 0 }, resp => {
+    post(path, { category, status: 0 }, resp => {
       state.albums[category] = formatAlbums(resp)
     })
   },
 
   GET_ALL_ALBUMS (state, option) {
-    axiosAjax.get('/album', resp => {
+    get('/album', resp => {
       state.albums = formatAlbums(resp)
     })
   },
 
   GET_CURR_ALBUM (state, id) {
-    axiosAjax.get(`/album/${id}`, resp => {
+    get(`/album/${id}`, resp => {
       state.currAlbum = resp
     })
   },
@@ -55,7 +55,7 @@ const mutations = {
 
   GET_ADMIN_ALBUMS (state, category) {
     let path = '/album/findByCategory'
-    axiosAjax.post(path, category, resp => {
+    post(path, category, resp => {
       state.adminAlbums = resp
     })
   },
