@@ -1,9 +1,10 @@
 <template lang="pug">
-  .home
-    .aside
-    .content
-    .panels
-      pc-nav
+  .home-wrapper
+    .home
+      .aside
+      .content
+      .panels
+        pc-nav
 </template>
 
 <script type="text/ecmascript-6">
