@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import MobHome from 'mob/home/home'
+import MobIndex from 'mob/index/index'
 import PcHome from 'pc/home/home'
 import { getClientType } from 'common/js/user-agent'
 import AdminHome from 'admin/home/home.vue'
@@ -13,7 +15,11 @@ Vue.use(Router)
 
 const routes = [
   { path: '/',
-    component: isPC ? PcHome : MobHome
+    component: isPC ? PcHome : MobHome,
+    children: [{
+      path: '/',
+      component: MobIndex
+    }]
   }, {
     path: '/admin',
     component: AdminHome

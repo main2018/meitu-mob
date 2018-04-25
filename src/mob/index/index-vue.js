@@ -1,9 +1,10 @@
 exports.js = () => {
-  const MobBar = require('mob/bar/bar')
-  const MobInscribe = require('mob/inscribe/inscribe')
+  const CategoryCard = require('base/card/category-card/category-card.vue')
   return {
-    name: 'MobHome',
-    components: { MobBar, MobInscribe },
+    name: 'MobIndex',
+    components: {
+      CategoryCard
+    },
 
     created () {
     },

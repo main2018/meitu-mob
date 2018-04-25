@@ -1,6 +1,9 @@
 <template lang="pug">
   #home
-    .item(v-for="item in categories" @click="goUrl(item.route)")
+    mob-bar
+    keep-alive(include="MobHome")
+      router-view
+    // .item(v-for="item in categories" @click="goUrl(item.route)")
       category-card(:content="item")
 </template>
 

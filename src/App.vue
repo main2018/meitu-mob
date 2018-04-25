@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <bar v-if="!isPc"></bar>
+    <!-- <bar v-if="!isPc"></bar> -->
     <keep-alive include="Home">
       <router-view></router-view>
     </keep-alive>

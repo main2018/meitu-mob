@@ -39,16 +39,25 @@ console.log(getClientType())
 
 /* eslint-disable no-new */
 get('/category', resp => {
+  let subRoutes = []
   resp.forEach(item => {
-    routes.push({
+    subRoutes.push({
       path: `/${item.route}`,
       component: Dynamic
     })
-    routes.push({
+    subRoutes.push({
       path: `/${item.route}/detail`,
       component: Detail
     })
   })
+  routes.forEach((route) => {
+    if (route.children) {
+      subRoutes.forEach((sub) => {
+        route.children.push(sub)
+      })
+    }
+  })
+  console.dir({ routes })
   const router = new Router({ mode: 'history', routes })
   new Vue({
     el: '#app',
