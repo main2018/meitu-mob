@@ -6,9 +6,17 @@
         slot
       .footer
         .btn
-          input.cancel(type="button" value="cancel")
+          input.cancel(
+            type="button"
+            value="✘ cancel"
+            @click="$emit('cancel')"
+          )
         .btn
-          input.submit(type="button" value="submit")
+          input.submit(
+            type="button"
+            value="✔ submit"
+            @click="$emit('submit')"
+            )
 </template>
 
 <script type="text/ecmascript-6">

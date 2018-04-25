@@ -14,6 +14,7 @@ exports.js = () => {
 
     data () {
       return {
+        isDialogShow: true,
         isLogoChanged: false,
         siteName: '',
         logo: '',
@@ -43,7 +44,7 @@ exports.js = () => {
         }
         this.$emit('close')
       },
-      submit () {
+      siteUpdate () {
         this.post('/site/set', {
           name: this.siteName || this.name,
           logo: this.logo
@@ -57,6 +58,18 @@ exports.js = () => {
         this.delLocal('account')
         this.delLocal('token')
         this.$router.push('/admin/signin')
+      },
+
+      dialogClose () { this.isDialogShow = false },
+      dialogUpdate () {
+        let { oldPassword, newPassword } = this
+        this.post('/user/update', {
+          oldPassword, newPassword
+        }, (resp) => {
+          console.log(resp)
+        }, (err) => {
+          console.log(err)
+        })
       }
     },
 

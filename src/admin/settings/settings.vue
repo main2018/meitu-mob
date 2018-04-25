@@ -3,7 +3,7 @@
     admin-header(
       title="Site Settings"
       :btns="[showSubmit ? 'submit' : '', 'exit', 'close']"
-      @submit="submit"
+      @submit="siteUpdate"
       @close="close"
       @exit="signout"
       )
@@ -27,19 +27,18 @@
         @click="submit"
         value="save"
         )
-      admin-dialog(:show="!0")
-        br
-        span Old password
-        input.site-name(
-          type="text"
-          v-model="oldPassword"
-          )
-        br
-        span New password
-        input.site-name(
-          type="text"
-          v-model="newPassword"
-          )
+      admin-dialog(
+        :show="isDialogShow"
+        title="Modify password"
+        @cancel="dialogClose"
+        @submit="dialogUpdate"
+        )
+        .old
+          span Old password
+          input.site-name(type="text" v-model="oldPassword")
+        .new
+          span New password
+          input.site-name(type="text" v-model="newPassword")
 </template>
 
 <script type="text/ecmascript-6">
