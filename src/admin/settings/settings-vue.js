@@ -65,11 +65,10 @@ exports.js = () => {
         let { oldPassword, newPassword } = this
         this.post('/user/update', {
           oldPassword, newPassword
-        }, (resp) => {
-          console.log(resp)
-        }, (err) => {
-          console.log(err)
-        })
+        }, (data, msg) => {
+          this.dialogClose()
+          alert(msg)
+        }, msg => { alert(msg) })
       }
     },
 
