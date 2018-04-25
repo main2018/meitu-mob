@@ -1,0 +1,15 @@
+<template lang="pug">
+  .pc-list
+    p {{ contents }}
+    p {{ menu }}
+</template>
+
+<script type="text/ecmascript-6">
+  import { js } from './pc-list-vue.js'
+  export default js.call(this)
+</script>
+
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  @import '~common/stylus/variable.styl'
+  @import './pc-list.styl'
+</style>

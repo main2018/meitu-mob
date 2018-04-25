@@ -1,6 +1,6 @@
 export const genDynamicWrapper = (isPC, name) => {
   const Dynamic = isPC
-    ? require('pc/pc-index/pc-index')
+    ? require('pc/pc-list/pc-list')
     : require('base/tab/tab')
 
   return {
