@@ -15,6 +15,10 @@ exports.js = () => {
       title: {
         type: String,
         default: 'title demo'
+      },
+      disabled: {
+        type: Boolean,
+        default: true
       }
     },
 

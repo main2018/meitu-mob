@@ -16,6 +16,8 @@
             type="button"
             value="✔ submit"
             @click="$emit('submit')"
+            :disabled="disabled"
+            :class="disabled ? 'normal-disable' : 'submit-active'"
             )
 </template>
 

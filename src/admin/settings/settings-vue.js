@@ -14,7 +14,7 @@ exports.js = () => {
 
     data () {
       return {
-        isDialogShow: true,
+        isDialogShow: false,
         isLogoChanged: false,
         siteName: '',
         logo: '',
@@ -26,7 +26,8 @@ exports.js = () => {
     computed: {
       name () { return this.$store.getters.settings.name },
       isNameChanged () { return this.siteName && this.siteName !== this.name },
-      showSubmit () { return this.isLogoChanged || this.isNameChanged }
+      showSubmit () { return this.isLogoChanged || this.isNameChanged },
+      dialogDisabled () { return !this.oldPassword || !this.newPassword }
     },
 
     watch: { },
@@ -48,9 +49,10 @@ exports.js = () => {
         this.post('/site/set', {
           name: this.siteName || this.name,
           logo: this.logo
-        }, () => {
+        }, (resp, msg) => {
           this.$store.dispatch('getSettings')
           this.isLogoChanged = false
+          alert(msg)
           this.close()
         })
       },
@@ -60,6 +62,7 @@ exports.js = () => {
         this.$router.push('/admin/signin')
       },
 
+      dialogOpen () { this.isDialogShow = true },
       dialogClose () { this.isDialogShow = false },
       dialogUpdate () {
         let { oldPassword, newPassword } = this
