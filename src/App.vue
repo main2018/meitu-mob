@@ -1,28 +1,20 @@
 <template>
   <div id="app">
-    <!-- <bar v-if="!isPc"></bar> -->
     <keep-alive include="Home">
       <router-view></router-view>
     </keep-alive>
-    <!-- <inscribe v-if="!isPc"></inscribe> -->
   </div>
 </template>
 
 <script>
 /* eslint-disable no-unused-vars */
 // import vconsole from 'vconsole'
-import { getClientType } from 'common/js/user-agent'
-import Bar from 'mob/bar/bar'
-import Inscribe from 'mob/inscribe/inscribe'
 export default {
   components: {
-    Bar,
-    Inscribe
   },
   name: 'app',
   data () {
     return {
-      isPc: getClientType() === 'PC'
     }
   },
 

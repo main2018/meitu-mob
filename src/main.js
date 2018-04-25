@@ -16,7 +16,7 @@ import {
   Log
 } from 'common/js'
 import store from './store'
-import { dynamicWrapper as Dynamic } from 'base/str-templ/dynamic-wrapper.js'
+import { genDynamicWrapper } from 'base/str-templ/dynamic-wrapper.js'
 import Detail from 'mob/detail/detail.vue'
 
 import VueQuillEditor from 'vue-quill-editor'
@@ -35,7 +35,9 @@ Vue.use(QiniuUrl)
 Vue.use(Log)
 Vue.use(Router)
 
-console.log(getClientType())
+const type = getClientType()
+const isPC = type === 'PC'
+console.log(isPC)
 
 /* eslint-disable no-new */
 get('/category', resp => {
@@ -43,7 +45,7 @@ get('/category', resp => {
   resp.forEach(item => {
     subRoutes.push({
       path: `/${item.route}`,
-      component: Dynamic
+      component: genDynamicWrapper(isPC, item.route)
     })
     subRoutes.push({
       path: `/${item.route}/detail`,

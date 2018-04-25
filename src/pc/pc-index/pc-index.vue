@@ -1,19 +1,18 @@
 <template lang="pug">
-  .pc-home-wrapper
-    .pc-home
-      .pc-aside
-      .pc-content
-        router-view
-      .pc-panels
-        pc-nav
+  .pc-index
+    p pc-index
 </template>
 
 <script type="text/ecmascript-6">
-  import { js } from './home-vue.js'
+  import { js } from './pc-index-vue.js'
   export default js.call(this)
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
-  @import './home.styl'
+  @import './pc-index.styl'
+  .pc-index
+    background: red;
+  p
+    color #fff
 </style>

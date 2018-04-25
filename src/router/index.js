@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import MobHome from 'mob/home/home'
 import MobIndex from 'mob/index/index'
 import PcHome from 'pc/home/home'
+import PcIndex from 'pc/pc-index/pc-index'
 import { getClientType } from 'common/js/user-agent'
 import AdminHome from 'admin/home/home.vue'
 const AdminSign = require('admin/admin-sign/admin-sign')
@@ -18,7 +19,7 @@ const routes = [
     component: isPC ? PcHome : MobHome,
     children: [{
       path: '/',
-      component: MobIndex
+      component: isPC ? PcIndex : MobIndex
     }]
   }, {
     path: '/admin',

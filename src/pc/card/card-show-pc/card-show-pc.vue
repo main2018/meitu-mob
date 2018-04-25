@@ -1,19 +1,14 @@
 <template lang="pug">
-  .pc-home-wrapper
-    .pc-home
-      .pc-aside
-      .pc-content
-        router-view
-      .pc-panels
-        pc-nav
+  .card-show-pc
+    p card-show-pc
 </template>
 
 <script type="text/ecmascript-6">
-  import { js } from './home-vue.js'
+  import { js } from './card-show-pc-vue.js'
   export default js.call(this)
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
-  @import './home.styl'
+  @import './card-show-pc.styl'
 </style>

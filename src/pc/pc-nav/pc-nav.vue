@@ -1,19 +1,15 @@
 <template lang="pug">
   ul.nav-wrapper
-    li.nav
-      .item
+    li.nav(v-for="item in categories" :key="item.route")
+      .item(@click="go(item.route)")
         .trangle
-        .text: p one
+        .text: p {{item.name}}&nbsp;{{item.category}}
         .mark: span
-    li.nav
+
+    //li.nav
       .item
         .trangle
         .text: p tow test
-        .mark: span
-    li.nav
-      .item
-        .trangle
-        .text: p three
         .mark: span
 </template>
 

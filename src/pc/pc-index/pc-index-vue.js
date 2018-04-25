@@ -1,15 +1,13 @@
 exports.js = () => {
-  const Card = require('base/card/show-card/card')
-  // const Tab = require('base/tab-slot/tab-slot')
-  const Tab = require('base/tab/tab')
   return {
-    name: 'dynamic',
+    name: 'pc-index',
     components: {
-      Card,
-      Tab
     },
 
     created () {
+    },
+
+    props: {
     },
 
     data () {
