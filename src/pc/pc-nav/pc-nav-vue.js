@@ -1,9 +1,7 @@
 exports.js = () => {
-  const PcNav = require('pc/pc-nav/pc-nav')
   return {
-    name: 'home-vue',
+    name: 'pc-nav',
     components: {
-      PcNav
     },
 
     created () {

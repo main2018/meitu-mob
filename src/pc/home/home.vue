@@ -1,6 +1,9 @@
 <template lang="pug">
   .home
-    p pc home
+    .aside
+    .content
+    .panels
+      pc-nav
 </template>
 
 <script type="text/ecmascript-6">
