@@ -1,8 +1,10 @@
 const { _2space } = require('common/js')
+const Card = require('pc/card/card-show-pc/card-show-pc')
 exports.js = () => {
   return {
     name: 'pc-list',
     components: {
+      Card
     },
 
     created () {
@@ -14,17 +16,28 @@ exports.js = () => {
     data () {
       return {
         menu: [],
-        contents: []
+        contents: [],
+        subContents: ''
       }
     },
 
     computed: {
       path () { return this.$route.path },
-      albums () { return this.$store.getters.albums }
+      albums () { return this.$store.getters.albums },
+      subNavActive () { return this.$store.getters.subNavActive }
     },
 
     watch: {
-      path () { getAlbums.call(this) }
+      path () { getAlbums.call(this) },
+      subNavActive () {
+        let subIdx = -1
+        this.contents.forEach((subContents, index) => {
+          subContents.forEach((content) => {
+            if (content.subcategory === this.subNavActive) { subIdx = index }
+          })
+        })
+        this.subContents = subIdx >= 0 ? this.contents[subIdx] : []
+      }
     },
 
     methods: {

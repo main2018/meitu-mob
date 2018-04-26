@@ -4,7 +4,7 @@ export const genDynamicWrapper = (isPC, name) => {
     : require('base/tab/tab')
 
   return {
-    name,
+    name: `Dy${name}`,
     template: `<div><dynamic></dynamic></div>`,
     components: { Dynamic }
   }

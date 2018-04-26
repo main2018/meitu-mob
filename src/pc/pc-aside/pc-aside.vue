@@ -22,6 +22,7 @@
   @import '~common/stylus/variable.styl'
   @import './pc-aside.styl'
   .pc-aside
+    position fixed
     padding .5rem 1rem
   .logo
     height 2.5rem

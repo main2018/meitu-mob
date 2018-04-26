@@ -25,7 +25,7 @@ exports.js = () => {
       },
       bgStyle () {
         let ltColor = 'rgb(246, 247, 255)'
-        let dkColor = '#666'
+        let dkColor = '#333'
         let param = `to right, ${dkColor} 50%, ${ltColor} 50%`
         let style = ''
         if (!this.isCategoryEven) {
@@ -44,6 +44,7 @@ exports.js = () => {
     },
 
     mounted () {
+      document.body.style.backgroundColor = '#333'
     }
   }
 }

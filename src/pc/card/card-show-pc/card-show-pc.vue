@@ -1,6 +1,12 @@
 <template lang="pug">
   .card-show-pc
-    p card-show-pc
+    .cover
+      .img(:style="getBgStyle(content.img)" @click="goDetail")
+    .text
+      h1.title {{content.title}}
+      p.time {{timeFormat(content.time)}}
+      p.desc {{content.desc}}
+      .more more...
 </template>
 
 <script type="text/ecmascript-6">

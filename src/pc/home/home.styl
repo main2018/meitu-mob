@@ -2,20 +2,29 @@
   width 100vw
   // background linear-gradient(to right, #666 50%, $color-bg 50%)
 .pc-home
-  width 1000px
   margin 0 auto
   display flex
   min-height 100vh
   color $color-text-white
-  background #666
+  background #333
 .pc-aside
-  width 10rem
+  width 13rem
+  padding-right 1rem
 .pc-content
   flex 1
-  padding-right 10rem
+  padding-right 3rem
+  overflow hidden
 .pc-panels-wrapper
-  position relative
+  width 8rem
 .pc-panels
-  position absolute
-  right 0
+  position fixed
   top 0
+@media screen and (min-width:1600px)
+  .pc-home
+    width 1400px
+@media screen and (min-width:1440px) and (max-width: 1599px)
+  .pc-home
+    width 1200px
+@media screen and (min-width:1024px) and (max-width: 1439px)
+  .pc-home
+    width 1000px

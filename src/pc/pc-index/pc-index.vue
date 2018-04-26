@@ -11,8 +11,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
   @import './pc-index.styl'
-  .pc-index
-    background: red;
   p
     color #fff
 </style>
