@@ -6,6 +6,7 @@ exports.js = () => {
 
     data () {
       return {
+        isAddSubcategory: false,
         canEdit: false,
         newSubcategory: ''
       }
@@ -17,6 +18,12 @@ exports.js = () => {
     },
 
     methods: {
+      delCategory (category) {
+        this.post('/subcategory/del', { category }, () => {
+          window.alert('delete success')
+          this.$store.dispatch('getCategory')
+        })
+      },
       delSubcategory (category, subcategory) {
         this.post('/subcategory/del', {
           category, subcategory
@@ -31,17 +38,28 @@ exports.js = () => {
           subcategory,
           newSubcategory
         }) => {
+          console.log('exec', this.isAddSubcategory)
           this.canEdit = false
-          if (subcategory === newSubcategory) { return }
+          let path = '/subcatgory/'
+          let data = {}
+          if (this.isAddSubcategory) {
+            if (!this.newCategory) { return }
+            path += 'add'
+            data.subCategory = this.newCategory
+          } else {
+            if (subcategory === newSubcategory) { return }
+            path += 'updateName'
+            data = { subcategory, newSubcategory }
+          }
           if (!newSubcategory) {
             let txtDom = dom.getElementsByClassName('text')[0]
             txtDom.innerHTML = subcategory
             return
           }
-          this.post(`/subcategory/updateName`, {
-            subcategory, newSubcategory
-          }, () => {
+          console.log({ path, data })
+          this.post(path, data, () => {
             this.$store.dispatch('getCategory')
+            this.isAddSubcategory = false
           })
         })
       },
@@ -105,10 +123,16 @@ exports.js = () => {
        * todo: add subcategory
        */
 
-      addSubcategory (dom, id) {
+      addSubcategory (idx) {
+        this.isAddSubcategory = true
+        console.log(this.categories[idx])
+        this.categories[idx].subcategories.unshift('new item')
+        console.log(idx)
+        /*
         return () => {
           console.log(+id)
         }
+        */
       },
 
       updateSubcategory (dom, id, categories, callback) {
@@ -149,17 +173,3 @@ exports.js = () => {
     }
   }
 }
-
-/*
-delCategory (category, index) {
-  let subcategories = this.categories[index].subcategories
-  if (subcategories.length !== 0) {
-    window.alert('please delete second and try angin')
-    return
-  }
-  this.post('/category/delByCategory', { category }, () => {
-    window.alert('delete success')
-    this.$store.dispatch('getCategory')
-  })
-},
-*/

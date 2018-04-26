@@ -14,7 +14,15 @@
             @keydown.13="enter($event)"
             @click="setActive([item.category], idx)"
             ) {{item.name || item.category}}
-          // .btn.mdi.mdi-minus( @click="delCategory(item.category, idx)")
+          .btn.mdi.mdi-minus(
+            v-show="item.subcategories.length === 0"
+            @click="delCategory(item.category)"
+            )
+          .btn.mdi.mdi-plus(
+            v-show="!isAddSubcategory"
+            @click="addSubcategory(idx)"
+            )
+
 
         ol.subcategory
           li.bd-1px-t(v-for="(subcategory, _idx) in item.subcategories")
