@@ -32,6 +32,7 @@ exports.js = () => {
 
     mounted () {
       getAlbums.call(this)
+      this.$store.dispatch('setSubNavMenu', this.menu)
     }
   }
 }

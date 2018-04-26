@@ -1,11 +1,13 @@
 <template lang="pug">
-  .pc-home-wrapper
+  .pc-home-wrapper(:style="bgStyle")
     .pc-home
       .pc-aside
+        pc-aside
       .pc-content
         router-view
-      .pc-panels
-        pc-nav
+      .pc-panels-wrapper
+        .pc-panels
+          pc-nav
 </template>
 
 <script type="text/ecmascript-6">

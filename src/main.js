@@ -37,7 +37,6 @@ Vue.use(Router)
 
 const type = getClientType()
 const isPC = type === 'PC'
-console.log(isPC)
 
 /* eslint-disable no-new */
 get('/category', resp => {
@@ -59,7 +58,6 @@ get('/category', resp => {
       })
     }
   })
-  console.dir({ routes })
   const router = new Router({ mode: 'history', routes })
   new Vue({
     el: '#app',

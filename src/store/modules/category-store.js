@@ -2,6 +2,7 @@ import { get } from 'common/js/ajax-axios'
 
 const state = {
   categories: [],
+  subNavMenu: [],
   editIdx: null,
   activeCategory: [],
   categoryStatus: [],
@@ -15,13 +16,10 @@ const actions = {
   hideEditor ({ commit }) { commit('HIDE_CATEGORY_EDITOR') },
   showEditor ({ commit }, idx) { commit('SHOW_CATEGORY_EDITOR', idx) },
 
-  getCategory ({ commit }, activeCategory) {
-    commit('GET_CATEGORY', activeCategory)
-  },
+  getCategory ({ commit }, activeCategory) { commit('GET_CATEGORY', activeCategory) },
+  setCategory ({ commit }, categories) { commit('SET_CATEGORY', categories) },
 
-  setCategory ({ commit }, categories) {
-    commit('SET_CATEGORY', categories)
-  },
+  setSubNavMenu ({ commit }, menu) { commit('SET_SUB_NAV_MENU', menu) },
 
   setActiveCategory ({ commit }, activeCategory) {
     commit('SET_ACTIVE_CATEGORY', activeCategory)
@@ -51,6 +49,10 @@ const mutations = {
 
   SET_CATEGORY (state, categories) {
     state.categories = categories
+  },
+
+  SET_SUB_NAV_MENU (state, menu) {
+    state.subNavMenu = menu
   },
 
   HIDE_CATEGORY_EDITOR (state) { state.isEditorShow = false },
@@ -89,6 +91,7 @@ const mutations = {
 
 const getters = {
   categories: state => state.categories,
+  subNavMenu: state => state.subNavMenu,
   activeCategory: state => state.activeCategory,
   categoryStatus: state => state.categoryStatus,
   hasArticle: state => state.hasArticle,

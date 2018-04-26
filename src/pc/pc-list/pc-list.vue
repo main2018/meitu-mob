@@ -1,7 +1,6 @@
 <template lang="pug">
   .pc-list
     p {{ contents }}
-    p {{ menu }}
 </template>
 
 <script type="text/ecmascript-6">

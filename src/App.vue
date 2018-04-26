@@ -22,7 +22,6 @@ export default {
     if (this.getLocal('siteName')) {
       document.title = this.getLocal('siteName')
     }
-    console.log(this.isPc)
     this.$store.dispatch('getCategory')
     this.$store.dispatch('getAllAlbum')
     this.$store.dispatch('getSettings')
