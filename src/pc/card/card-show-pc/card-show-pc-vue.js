@@ -32,7 +32,10 @@ exports.js = () => {
       getBgStyle,
       timeFormat,
       goDetail () {
-        console.log('go')
+        let { id } = this.content
+        this.$store.dispatch('getCurrAlbum', id)
+        if (!this.content.id) { return alert('no detail') }
+        this.$router.push({ path: `/detail`, query: { id } })
       }
     },
 
