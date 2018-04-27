@@ -29,12 +29,10 @@ exports.js = () => {
       setStatus (idx, _idx) {
         let subcategory = this.menus[idx].subcategories[_idx].name
         let { category, route } = this.menus[idx]
-        this.$store.dispatch('setStatus', [idx, _idx])
-        this.$store.dispatch('setSubategoryAlbums', [category, subcategory])
-        if (this.path === '/') {
-          this.$store.dispatch('setSubNavMenu', category)
-          this.$router.push(`/${route}`)
-        }
+        // this.$store.dispatch('setStatus', [idx, _idx])
+        this.$store.dispatch('setSubategoryAlbums', [category, subcategory, idx, _idx])
+        this.$store.dispatch('setSubNavMenu', category)
+        this.$router.push(`/${route}`)
       },
       getLogo () {
         let logo = this.getLocal('siteLogo')

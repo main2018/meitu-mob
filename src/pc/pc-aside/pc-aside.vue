@@ -40,6 +40,11 @@
     font-weight 700
     cursor pointer
     color #fff
+  .subcategory
+    &:focus
+      margin-left: -1rem
+      content "►"
+
   .active:before
     margin-left: -1rem
     content "►"

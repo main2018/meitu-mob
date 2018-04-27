@@ -26,9 +26,8 @@ const actions = {
     commit('SET_ACTIVE_CATEGORY', activeCategory)
   },
 
-  setStatus ({ commit }, order) {
-    commit('SET_STATUS', order)
-  }
+  setAdminNavStatus ({ commit }, order) { commit('SET_ADMIN_NAV_STATUS', order) },
+  setStatus ({ commit }, order) { commit('SET_STATUS', order) }
 }
 
 const mutations = {
@@ -98,6 +97,22 @@ const mutations = {
         sub.active = subIndex === _idx
       })
     })
+  },
+
+  SET_ADMIN_NAV_STATUS (state, order) {
+    state.categoryStatus.forEach((item, idx) => {
+      item.category = false
+      item.subcategories.forEach((subItem, subIdx) => {
+        item.subcategories.splice(subIdx, 1, false)
+      })
+    })
+    let { index, subIndex } = order
+    let current = state.categoryStatus[index]
+    if (subIndex || subIndex === 0) {
+      current.subcategories.splice(subIndex, 1, true)
+    } else {
+      current.category = true
+    }
   }
 }
 

@@ -162,7 +162,7 @@ exports.js = () => {
         if (subIndex || subIndex === 0) {
           order.subIndex = subIndex
         }
-        this.$store.dispatch('setStatus', order)
+        this.$store.dispatch('setAdminNavStatus', order)
         this.$store.dispatch('setActiveCategory', category)
         this.$store.dispatch('getAdminAlbums', {
           category: category[0],
