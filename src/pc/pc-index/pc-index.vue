@@ -1,6 +1,7 @@
 <template lang="pug">
   .pc-index
     p pc-index
+    .img(:style="getBgStyle(img)")
 </template>
 
 <script type="text/ecmascript-6">

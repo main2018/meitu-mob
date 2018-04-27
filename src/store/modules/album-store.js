@@ -4,6 +4,7 @@ const state = {
   albums: {},
   currAlbum: {},
   adminAlbums: [],
+  commendAlbums: [],
   subcategoryAlbums: [],
   isPublishShow: false,
   isUpdatesShow: false
@@ -42,8 +43,12 @@ const mutations = {
   },
 
   GET_ALL_ALBUMS (state, option) {
-    get('/album', resp => {
-      state.albums = formatAlbums(resp)
+    get('/album', albums => {
+      state.commendAlbums = []
+      albums.forEach(album => {
+        album.isCommend && state.commendAlbums.push(album)
+      })
+      state.albums = formatAlbums(albums)
     })
   },
 
@@ -79,6 +84,7 @@ const getters = {
   albums: state => state.albums,
   currAlbum: state => state.currAlbum,
   adminAlbums: state => state.adminAlbums,
+  commendAlbums: state => state.commendAlbums,
   subcategoryAlbums: state => state.subcategoryAlbums,
   isPublishShow: state => state.isPublishShow,
   isUpdatesShow: state => state.isUpdatesShow

@@ -40,7 +40,6 @@ exports.js = () => {
     },
 
     mounted () {
-      console.log(this.activeNav)
     }
   }
 }
