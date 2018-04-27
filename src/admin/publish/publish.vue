@@ -1,5 +1,5 @@
 <template lang="pug">
-  .publish.bd-1px-l(ref="form")
+  .publish(ref="form")
     admin-header(
       :title="compTitle + '  |  ' + breadcrumb"
       :btns="['cancel', 'submit', 'close', isNew ? '' : 'reset']"

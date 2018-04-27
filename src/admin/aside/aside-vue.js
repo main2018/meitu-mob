@@ -24,7 +24,13 @@ exports.js = () => {
           this.$store.dispatch('getCategory')
         })
       },
-      delSubcategory (category, subcategory) {
+      delSubcategory (idx, category, subcategory) {
+        console.log({ idx })
+        if (this.isAddSubcategory) {
+          this.isAddSubcategory = false
+          this.categories[idx].subcategories.shift()
+          return
+        }
         this.post('/subcategory/del', {
           category, subcategory
         }, () => {
@@ -33,31 +39,35 @@ exports.js = () => {
         })
       },
 
-      updateEvent (dom, key) {
+      addOrUpdateEvent (dom, key) {
         return this.updateSubcategory(dom, key, this.categories, ({
           subcategory,
           newSubcategory
         }) => {
-          console.log('exec', this.isAddSubcategory)
           this.canEdit = false
-          let path = '/subcatgory/'
-          let data = {}
-          if (this.isAddSubcategory) {
-            if (!this.newCategory) { return }
-            path += 'add'
-            data.subCategory = this.newCategory
-          } else {
-            if (subcategory === newSubcategory) { return }
-            path += 'updateName'
-            data = { subcategory, newSubcategory }
-          }
+          let index = key.split('_')[0]
+          if (subcategory === newSubcategory) { return }
           if (!newSubcategory) {
             let txtDom = dom.getElementsByClassName('text')[0]
             txtDom.innerHTML = subcategory
             return
           }
-          console.log({ path, data })
-          this.post(path, data, () => {
+
+          if (this.isAddSubcategory) {
+            this.post('/subCategory/add', {
+              category: this.categories[index].category,
+              subcategory: newSubcategory
+            }, () => {
+              this.categories[index].subcategories.shift()
+              this.$store.dispatch('getCategory')
+              this.isAddSubcategory = false
+            })
+            return
+          }
+
+          this.post(`/subCategory/updateName`, {
+            subcategory, newSubcategory
+          }, () => {
             this.$store.dispatch('getCategory')
             this.isAddSubcategory = false
           })
@@ -72,11 +82,8 @@ exports.js = () => {
         let editEvent = this[method](currDom, key)
         let editBtn = this.addDom(key, 'pencil', editEvent)
 
-        // let addSubEvent = this.addSubcategory(currDom, key)
-        // let addSubBtn = this.addDom(key + '1', 'plus', addSubEvent)
-
-        let updateEvent = this.updateEvent(currDom, key)
-        let updateBtn = this.addDom(key + '_', 'check', updateEvent)
+        let addOrUpdateEvent = this.addOrUpdateEvent(currDom, key)
+        let updateBtn = this.addDom(key + '_', 'check', addOrUpdateEvent)
 
         // !isSubcategoryKey && currDom.appendChild(addSubBtn)
         isSubcategoryKey && currDom.appendChild(updateBtn)
@@ -125,14 +132,15 @@ exports.js = () => {
 
       addSubcategory (idx) {
         this.isAddSubcategory = true
-        console.log(this.categories[idx])
-        this.categories[idx].subcategories.unshift('new item')
-        console.log(idx)
-        /*
-        return () => {
-          console.log(+id)
-        }
-        */
+        this.categories[idx].subcategories.unshift('')
+
+        this.canEdit = true
+        this.$nextTick(() => {
+          let currDom = this.$refs[`${idx}_0`][0]
+          let txtDom = currDom.getElementsByClassName('text')[0]
+          txtDom.setAttribute('contenteditable', true)
+          txtDom.focus()
+        })
       },
 
       updateSubcategory (dom, id, categories, callback) {

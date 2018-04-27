@@ -1,7 +1,7 @@
 <template lang="pug">
   .wrapper
     .category
-      .title
+      // .title
         span.txt category
         // span.mdi.mdi-pencil(@click="showEditor")
       input.add-category(
@@ -19,20 +19,20 @@
         value="+"
         @click="addCategory"
         )
-      .title subcategory
-      select.select(
+      // .title subcategory
+      // select.select(
         v-model="currCategory"
         )
         option(
           v-for="item in categories"
           :value="item.category"
           ) {{item.name || item.category}}
-      input.add-category(
+      // input.add-category(
         type="text"
         v-model="subcategory"
         placeholder="subcategory"
         )
-      input.add-btn(
+      // input.add-btn(
         type="button"
         value="+"
         @click="addSubcategory"
