@@ -84,18 +84,20 @@ exports.js = () => {
       editCard (id) {
         this.showPublish()
         this.isPublish = false
-        let groupKey = ['videos', 'links', 'article']
-        let cardKey = ['title', 'cover', 'desc', 'status']
-        let card = {}
         this.$refs.update.id = id
-        this.get(`/album/${id}`, resp => {
-          let album = resp
-          for (let key in album) {
-            groupKey.includes(key) && (this.$refs.update[key] = album[key])
-            cardKey.includes(key) && (card[key] = album[key])
-          }
-          this.$refs.update.card = card
+        this.get(`/album/${id}`, album => {
+          this.groupAndSetProps(album)
         })
+      },
+      groupAndSetProps (album) {
+        let albumGroupKey = ['videos', 'links', 'article']
+        let cardKey = ['isCommend', 'title', 'cover', 'desc', 'status']
+        let cardContent = {}
+        for (let key in album) {
+          albumGroupKey.includes(key) && (this.$refs.update[key] = album[key])
+          cardKey.includes(key) && (cardContent[key] = album[key])
+        }
+        this.$refs.update.card = cardContent
       }
     },
 

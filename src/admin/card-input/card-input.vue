@@ -33,6 +33,14 @@
               @change="changed"
               )
         .type
+          .mdi.mdi-star
+          input(
+            type="checkbox"
+            :checked="card.isCommend"
+            v-model="card.isCommend"
+            @change="changed"
+            )
+        .type
           .mdi.mdi-play-box-outline
           input(
             type="checkbox"

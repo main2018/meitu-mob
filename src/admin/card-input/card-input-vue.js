@@ -22,7 +22,7 @@ exports.js = () => {
 
     data () {
       return {
-        card: { status: 0, cover: '', title: '', desc: '' }
+        card: { status: 0, isCommend: false, cover: '', title: '', desc: '' }
       }
     },
 
@@ -47,7 +47,7 @@ exports.js = () => {
 
     methods: {
       clean () {
-        this.card = { status: 0, cover: '', title: '', desc: '' }
+        this.card = { status: 0, isCommend: false, cover: '', title: '', desc: '' }
         this.changed()
       },
       getFiles (event) {
