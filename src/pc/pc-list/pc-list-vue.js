@@ -15,7 +15,6 @@ exports.js = () => {
 
     data () {
       return {
-        menu: [],
         contents: [],
         subContents: ''
       }
@@ -45,7 +44,6 @@ exports.js = () => {
 
     mounted () {
       getAlbums.call(this)
-      this.$store.dispatch('setSubNavMenu', this.menu)
     }
   }
 }
@@ -68,7 +66,6 @@ function getAlbums () {
 
   initVal.call(this)
   for (let key in currAlbum.subcategory) {
-    this.menu.push(key)
     this.contents.push(currAlbum.subcategory[key])
   }
 }
@@ -83,6 +80,5 @@ function hasKey (obj) {
 
 function initVal () {
   this.rootAlbums = []
-  this.menu = []
   this.contents = []
 }

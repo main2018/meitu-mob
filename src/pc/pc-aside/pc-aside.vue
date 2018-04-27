@@ -1,16 +1,19 @@
 <template lang="pug">
   .pc-aside
     .brand
-      img.logo(v-if="logo" :src="logo")
+      img.logo(v-if="logo" :src="logo" @click="goHome")
     ul.nav(
       v-if="menus.length > 0"
       v-for="(menu, idx) in menus"
       :key="menu.name"
       )
-      li.item(
-        :class="menu.active ? 'active' : ''"
-        @click="setStatus(idx)"
-        ) {{menu.name}}
+      li.category {{menu.category}}
+        .subcategory(
+          v-for="(item, _idx) of menu.subcategories"
+          :class="item.active ? 'active' : ''"
+          @click="setStatus(idx, _idx)"
+          ) {{item.name}}
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -25,6 +28,7 @@
     position fixed
     padding .5rem 1rem
   .logo
+    cursor pointer
     height 2.5rem
     margin-bottom: 1rem
   .item

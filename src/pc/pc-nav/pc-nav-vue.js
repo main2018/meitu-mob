@@ -37,17 +37,9 @@ exports.js = () => {
     },
 
     methods: {
-      go (path) {
-        this.$router.push(`${path}`)
-      },
-      goHome () {
-        this.$router.push(`/`)
-        this.menuShow = false
-        this.sign = '≡'
-      },
-      isHintShow (category) {
-        let isCurrCateory = new RegExp(`/${category}`)
-        return isCurrCateory.test(this.url)
+      go ({ route, category }) {
+        this.$store.dispatch('setSubNavMenu', category)
+        this.$router.push(`${route}`)
       }
     },
 

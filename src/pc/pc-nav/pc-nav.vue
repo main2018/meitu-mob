@@ -1,7 +1,7 @@
 <template lang="pug">
   ul.nav-wrapper
     li.nav(v-for="item in categories" :key="item.route")
-      .item(@click="go(item.route)")
+      .item(@click="go(item)")
         .trangle
         .text: p {{item.name}}&nbsp;{{item.category}}
         .mark: span

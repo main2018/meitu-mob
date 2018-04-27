@@ -20,7 +20,7 @@ const actions = {
   getCategory ({ commit }, activeCategory) { commit('GET_CATEGORY', activeCategory) },
   setCategory ({ commit }, categories) { commit('SET_CATEGORY', categories) },
 
-  setSubNavMenu ({ commit }, menu) { commit('SET_SUB_NAV_MENU', menu) },
+  setSubNavMenu ({ commit }, categoryName) { commit('SET_SUB_NAV_MENU', categoryName) },
   setSubNavActive ({ commit }, item) { commit('SET_SUB_NAV_ACTIVE', item) },
 
   setActiveCategory ({ commit }, activeCategory) {
@@ -53,7 +53,20 @@ const mutations = {
     state.categories = categories
   },
 
-  SET_SUB_NAV_MENU (state, menu) { state.subNavMenu = menu },
+  SET_SUB_NAV_MENU (state, categoryName) {
+    state.subNavMenu = []
+    state.categories.forEach(category => {
+      if (categoryName && category.category !== categoryName) { return }
+      if (state.categories.length === 0) { return }
+
+      let menu = { category: category.category, subcategories: [] }
+      category.subcategories.forEach(subcategory => {
+        menu.subcategories.push({ name: subcategory, active: false })
+      })
+      state.subNavMenu.push(menu)
+    })
+  },
+
   SET_SUB_NAV_ACTIVE (state, item) { state.subNavActive = item },
 
   HIDE_CATEGORY_EDITOR (state) { state.isEditorShow = false },
@@ -74,19 +87,16 @@ const mutations = {
   },
 
   SET_STATUS (state, order) {
-    state.categoryStatus.forEach((item, idx) => {
-      item.category = false
-      item.subcategories.forEach((subItem, subIdx) => {
-        item.subcategories.splice(subIdx, 1, false)
+    let [idx, _idx] = order
+    state.subNavMenu.forEach((menu, index) => {
+      if (index !== idx) {
+        menu.subcategories.forEach(sub => { sub.active = false })
+        return
+      }
+      menu.subcategories.forEach((sub, subIndex) => {
+        sub.active = subIndex === _idx
       })
     })
-    let { index, subIndex } = order
-    let current = state.categoryStatus[index]
-    if (subIndex || subIndex === 0) {
-      current.subcategories.splice(subIndex, 1, true)
-    } else {
-      current.category = true
-    }
   }
 }
 

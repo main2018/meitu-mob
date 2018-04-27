@@ -25,6 +25,7 @@ exports.js = () => {
     },
 
     mounted () {
+      this.$store.dispatch('setSubNavMenu', '')
     }
   }
 }
