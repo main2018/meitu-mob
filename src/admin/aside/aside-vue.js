@@ -25,7 +25,6 @@ exports.js = () => {
         })
       },
       delSubcategory (idx, category, subcategory) {
-        console.log({ idx })
         if (this.isAddSubcategory) {
           this.isAddSubcategory = false
           this.categories[idx].subcategories.shift()
@@ -40,35 +39,34 @@ exports.js = () => {
       },
 
       addOrUpdateEvent (dom, key) {
+        let index = key.split('_')[0]
+        let path = `/subCategory/updateName`
+
         return this.updateSubcategory(dom, key, this.categories, ({
           subcategory,
           newSubcategory
         }) => {
           this.canEdit = false
-          let index = key.split('_')[0]
           if (subcategory === newSubcategory) { return }
+
           if (!newSubcategory) {
             let txtDom = dom.getElementsByClassName('text')[0]
             txtDom.innerHTML = subcategory
             return
           }
 
+          let data = { subcategory, newSubcategory }
           if (this.isAddSubcategory) {
-            this.post('/subCategory/add', {
+            path = `/subCategory/add`
+            data = {
               category: this.categories[index].category,
               subcategory: newSubcategory
-            }, () => {
-              this.categories[index].subcategories.shift()
-              this.$store.dispatch('getCategory')
-              this.isAddSubcategory = false
-            })
-            return
+            }
           }
 
-          this.post(`/subCategory/updateName`, {
-            subcategory, newSubcategory
-          }, () => {
+          this.post(path, data, () => {
             this.$store.dispatch('getCategory')
+            window.location.reload()
             this.isAddSubcategory = false
           })
         })
@@ -147,12 +145,13 @@ exports.js = () => {
         return () => {
           let txtDom = dom.getElementsByClassName('text')[0]
           txtDom.setAttribute('contenteditable', false)
+          let newSubcategory = txtDom.innerHTML
+          txtDom.innerHTML = ''
 
           let idxArr = id.split('_')
           let first = idxArr[0]
           let second = idxArr[1]
           let subcategory = categories[first].subcategories[second]
-          let newSubcategory = txtDom.innerHTML
           callback({ subcategory, newSubcategory })
         }
       },
