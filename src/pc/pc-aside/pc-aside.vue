@@ -32,14 +32,13 @@
     height 2.5rem
     margin-bottom: 1rem
   .category
-    margin-top 1rem
     font-weight 700
-    color #ccc
-  .subcategory
-    line-height 2rem
-    font-weight 700
-    cursor pointer
     color #fff
+  .subcategory
+    line-height 1.6rem
+    font-size .8rem
+    cursor pointer
+    color #ccc
   .subcategory
     &:focus
       margin-left: -1rem
