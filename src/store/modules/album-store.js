@@ -4,6 +4,7 @@ const state = {
   albums: {},
   currAlbum: {},
   adminAlbums: [],
+  subcategoryAlbums: [],
   isPublishShow: false,
   isUpdatesShow: false
 }
@@ -11,6 +12,7 @@ const state = {
 const actions = {
   getAlbumsByCategory ({ commit }, category) { commit('GET_ALBUMS_BY_CATEGORY', category) },
   setAlbums ({ commit }, albums) { commit('SET_ALBUMS', albums) },
+  setSubategoryAlbums ({ commit }, category) { commit('SET_SUBCATEGORY_ALBUMS', category) },
   getAllAlbum ({ commit }, option) { commit('GET_ALL_ALBUMS', option) },
   showPublish ({ commit }) { commit('SHOW_PUBLISH') },
   hidePublish ({ commit }) { commit('HIDE_PUBLISH') },
@@ -53,6 +55,13 @@ const mutations = {
 
   SET_ALBUMS (state, albums) { state.albums = albums },
 
+  SET_SUBCATEGORY_ALBUMS (state, [category, subcategory]) {
+    let categoryAlbum = state.albums[category]
+    if (categoryAlbum && categoryAlbum.subcategory) {
+      state.subcategoryAlbums = categoryAlbum.subcategory[subcategory]
+    }
+  },
+
   GET_ADMIN_ALBUMS (state, category) {
     let path = '/album/findByCategory'
     post(path, category, resp => {
@@ -70,6 +79,7 @@ const getters = {
   albums: state => state.albums,
   currAlbum: state => state.currAlbum,
   adminAlbums: state => state.adminAlbums,
+  subcategoryAlbums: state => state.subcategoryAlbums,
   isPublishShow: state => state.isPublishShow,
   isUpdatesShow: state => state.isUpdatesShow
 }

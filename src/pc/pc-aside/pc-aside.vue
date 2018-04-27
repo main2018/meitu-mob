@@ -31,8 +31,15 @@
     cursor pointer
     height 2.5rem
     margin-bottom: 1rem
-  .item
+  .category
+    margin-top 1rem
+    font-weight 700
+    color #ccc
+  .subcategory
+    line-height 2rem
+    font-weight 700
     cursor pointer
+    color #fff
   .active:before
     margin-left: -1rem
     content "►"

@@ -1,6 +1,6 @@
 <template lang="pug">
   .pc-list
-    .pc-card-wrapper(v-for="content in subContents")
+    .pc-card-wrapper(v-for="content in contents")
       Card(:content="content")
 </template>
 

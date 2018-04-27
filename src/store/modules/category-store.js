@@ -3,7 +3,6 @@ import { get } from 'common/js/ajax-axios'
 const state = {
   categories: [],
   subNavMenu: [],
-  subNavActive: '',
   editIdx: null,
   activeCategory: [],
   categoryStatus: [],
@@ -59,15 +58,17 @@ const mutations = {
       if (categoryName && category.category !== categoryName) { return }
       if (state.categories.length === 0) { return }
 
-      let menu = { category: category.category, subcategories: [] }
+      let menu = {
+        category: category.category,
+        route: category.route,
+        subcategories: []
+      }
       category.subcategories.forEach(subcategory => {
         menu.subcategories.push({ name: subcategory, active: false })
       })
       state.subNavMenu.push(menu)
     })
   },
-
-  SET_SUB_NAV_ACTIVE (state, item) { state.subNavActive = item },
 
   HIDE_CATEGORY_EDITOR (state) { state.isEditorShow = false },
   SHOW_CATEGORY_EDITOR (state, idx) {
@@ -103,7 +104,6 @@ const mutations = {
 const getters = {
   categories: state => state.categories,
   subNavMenu: state => state.subNavMenu,
-  subNavActive: state => state.subNavActive,
   activeCategory: state => state.activeCategory,
   categoryStatus: state => state.categoryStatus,
   hasArticle: state => state.hasArticle,

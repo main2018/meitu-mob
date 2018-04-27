@@ -17,6 +17,7 @@ exports.js = () => {
     },
 
     computed: {
+      path () { return this.$route.path },
       menus () { return this.$store.getters.subNavMenu },
       siteLogo () { return this.$store.getters.settings.logo }
     },
@@ -26,9 +27,14 @@ exports.js = () => {
 
     methods: {
       setStatus (idx, _idx) {
+        let subcategory = this.menus[idx].subcategories[_idx].name
+        let { category, route } = this.menus[idx]
         this.$store.dispatch('setStatus', [idx, _idx])
-        let navItem = this.menus[idx].subcategories[_idx].name
-        this.$store.dispatch('setSubNavActive', navItem)
+        this.$store.dispatch('setSubategoryAlbums', [category, subcategory])
+        if (this.path === '/') {
+          this.$store.dispatch('setSubNavMenu', category)
+          this.$router.push(`/${route}`)
+        }
       },
       getLogo () {
         let logo = this.getLocal('siteLogo')
@@ -36,6 +42,7 @@ exports.js = () => {
         return logo
       },
       goHome () {
+        this.$store.dispatch('setSubategoryAlbums', ['one', 'bb'])
         this.$store.dispatch('setSubNavMenu')
         this.$router.push('/')
       }
