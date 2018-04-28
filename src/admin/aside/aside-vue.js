@@ -18,8 +18,8 @@ exports.js = () => {
     },
 
     methods: {
-      delCategory (category) {
-        this.post('/subcategory/del', { category }, () => {
+      delCategory (_id) {
+        this.post('/category/del', { _id }, () => {
           window.alert('delete success')
           this.$store.dispatch('getCategory')
         })

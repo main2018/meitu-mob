@@ -18,6 +18,7 @@ exports.js = () => {
     },
 
     computed: {
+      path () { return this.$route.path },
       contents () { return this.$store.getters.subcategoryAlbums }
     },
 
@@ -28,6 +29,7 @@ exports.js = () => {
     },
 
     mounted () {
+      console.log(this.path)
     }
   }
 }

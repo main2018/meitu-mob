@@ -17,7 +17,7 @@
             ) {{item.name || item.category}}
           .btn.mdi.mdi-minus(
             v-show="item.subcategories.length === 0"
-            @click="delCategory(item.category)"
+            @click="delCategory(item.id)"
             )
           .btn.mdi.mdi-plus(
             v-show="!isAddSubcategory"
