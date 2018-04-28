@@ -1,5 +1,7 @@
 .pc-home-wrapper
   width 100vw
+  height 100vh
+  overflow-x hidden
   // background linear-gradient(to right, #666 50%, $color-bg 50%)
 .pc-home
   margin 0 auto
@@ -18,12 +20,12 @@
 .pc-panels
   position fixed
   top 0
-@media screen and (min-width:1600px)
+@media only screen and (min-width:1600px)
   .pc-home
     width 1400px
-@media screen and (min-width:1440px) and (max-width: 1599px)
+@media only screen and (min-width:1440px) and (max-width: 1599px)
   .pc-home
     width 1200px
-@media screen and (min-width:1024px) and (max-width: 1439px)
+@media only screen and (min-width:1024px) and (max-width: 1439px)
   .pc-home
     width 1000px

@@ -78,7 +78,7 @@ export function setObjectPropToData (prop, data) {
   }
 }
 
-export function getBgStyle (uri, ratio = '4 : 3') {
+export function getBgStyle (uri, ratio = '3 : 2') {
   if (!uri) { return '' }
   let w = +ratio.split(':')[0]
   let h = +ratio.split(':')[1]
