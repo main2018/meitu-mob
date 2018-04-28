@@ -1,9 +1,11 @@
 <template lang="pug">
   .pc-list
-    .pc-list-cover(v-show="contents.length === 0")
+    .pc-list-swiper
+      swiper(:images="imgs")
+    //.pc-list-cover(v-show="contents.length === 0")
       .img(:style="coverStyle")
     .pc-card-wrapper(v-for="content in contents")
-      Card(:content="content")
+      card(:content="content")
 </template>
 
 <script type="text/ecmascript-6">
