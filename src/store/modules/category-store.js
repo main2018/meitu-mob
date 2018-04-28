@@ -3,6 +3,7 @@ import { get } from 'common/js/ajax-axios'
 const state = {
   categories: [],
   subNavMenu: [],
+  activeSubNavMenu: {},
   editIdx: null,
   activeCategory: [],
   categoryStatus: [],
@@ -20,7 +21,8 @@ const actions = {
   setCategory ({ commit }, categories) { commit('SET_CATEGORY', categories) },
 
   setSubNavMenu ({ commit }, categoryName) { commit('SET_SUB_NAV_MENU', categoryName) },
-  setSubNavActive ({ commit }, item) { commit('SET_SUB_NAV_ACTIVE', item) },
+  setSubNavActive ({ commit }, menu) { commit('SET_SUB_NAV_ACTIVE', menu) },
+  clearSubNavActive ({ commit }) { commit('CLEAR_SUB_NAV_ACTIVE') },
 
   setActiveCategory ({ commit }, activeCategory) {
     commit('SET_ACTIVE_CATEGORY', activeCategory)
@@ -86,6 +88,12 @@ const mutations = {
     })
   },
 
+  SET_SUB_NAV_ACTIVE (state, { category, subcategory }) {
+    state.activeSubNavMenu = { category, subcategory }
+  },
+
+  CLEAR_SUB_NAV_ACTIVE (state) { state.activeSubNavMenu = {} },
+
   SET_STATUS (state, order) {
     let [idx, _idx] = order
     state.subNavMenu.forEach((menu, index) => {
@@ -118,9 +126,10 @@ const mutations = {
 
 const getters = {
   categories: state => state.categories,
-  subNavMenu: state => state.subNavMenu,
-  activeCategory: state => state.activeCategory,
   categoryStatus: state => state.categoryStatus,
+  activeCategory: state => state.activeCategory,
+  subNavMenu: state => state.subNavMenu,
+  activeSubNavMenu: state => state.activeSubNavMenu,
   hasArticle: state => state.hasArticle,
   hasVideo: state => state.hasVideo,
   hasLink: state => state.hasLink,

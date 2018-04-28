@@ -19,29 +19,34 @@ exports.js = () => {
     computed: {
       path () { return this.$route.path },
       menus () { return this.$store.getters.subNavMenu },
-      siteLogo () { return this.$store.getters.settings.logo }
+      siteLogo () { return this.$store.getters.settings.logo },
+      activeSubNavMenu () { return this.$store.getters.activeSubNavMenu }
     },
 
     watch: {
     },
 
     methods: {
-      setStatus (idx, _idx) {
-        let subcategory = this.menus[idx].subcategories[_idx].name
-        let { category, route } = this.menus[idx]
-        // this.$store.dispatch('setStatus', [idx, _idx])
-        this.$store.dispatch('setSubategoryAlbums', [category, subcategory, idx, _idx])
-        this.$store.dispatch('setSubNavMenu', category)
-        this.$router.push(`/${route}`)
-      },
       getLogo () {
         let logo = this.getLocal('siteLogo')
-        logo = logo ? this.$qiniuUrl(logo) : ''
-        return logo
+        return logo ? this.$qiniuUrl(logo) : ''
+      },
+      isActive (item, sub) {
+        let { category, subcategory } = this.activeSubNavMenu
+        return item === category && sub === subcategory
+      },
+      go (idx, _idx) {
+        let subcategory = this.menus[idx].subcategories[_idx].name
+        let { category, route } = this.menus[idx]
+        this.$store.dispatch('setSubategoryAlbums', [category, subcategory, idx, _idx])
+        this.$store.dispatch('setSubNavActive', { category, subcategory })
+        this.$store.dispatch('setSubNavMenu', category)
+        this.$router.push(`/${route}`)
       },
       goHome () {
         this.$store.dispatch('setSubategoryAlbums', ['one', 'bb'])
         this.$store.dispatch('setSubNavMenu')
+        this.$store.dispatch('clearSubNavActive')
         this.$router.push('/')
       }
     },

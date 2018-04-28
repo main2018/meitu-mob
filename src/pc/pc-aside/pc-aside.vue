@@ -10,8 +10,8 @@
       li.category {{menu.category}}
         .subcategory(
           v-for="(item, _idx) of menu.subcategories"
-          :class="item.active ? 'active' : ''"
-          @click="setStatus(idx, _idx)"
+          :class="isActive(menu.category, item.name) ? 'active' : ''"
+          @click="go(idx, _idx)"
           ) {{item.name}}
 
 </template>
@@ -39,12 +39,9 @@
     font-size .8rem
     cursor pointer
     color #ccc
-  .subcategory
-    &:focus
-      margin-left: -1rem
-      content "►"
 
   .active:before
-    margin-left: -1rem
+    margin-left: -.8rem
+    font-size .8rem
     content "►"
 </style>
