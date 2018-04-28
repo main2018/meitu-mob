@@ -34,21 +34,26 @@ exports.js = () => {
         this.index = index
         this.contentLeft = -index * window.innerWidth
       },
+      isSlide () {
+      },
       touchstart () {
         let touch = event.targetTouches[0]
         this.startX = touch.clientX
+        this.startY = touch.clientY
       },
       touchmove () {
         let touch = event.targetTouches[0]
-        this.detaX = touch.clientX - this.startX
+        this.distX = touch.clientX - this.startX
+        this.distY = touch.clientY - this.startY
       },
       touchend () {
-        let OFFSET = 40
-        let notOver = this.index < this.count - 1
-        if (this.detaX < -OFFSET && notOver) {
+        const OFFSET = 40
+        let isVertical = Math.abs(this.distX) - Math.abs(this.distY) < 0
+        let isIndexOver = this.index >= this.count - 1
+        if (this.distX < -OFFSET && !isIndexOver && !isVertical) {
           this.index++
           this.tap(this.index)
-        } else if (this.detaX > OFFSET && this.index > 0) {
+        } else if (this.distX > OFFSET && this.index > 0 && !isVertical) {
           this.index--
           this.tap(this.index)
         } else {
