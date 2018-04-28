@@ -34,7 +34,7 @@
               )
               .active-block(v-show="actives[idx].subcategories[_idx]")
               .text(
-                @input="enterKey($event)"
+                @input="enterKey(_idx)"
                 @click="setActive([item.category, subcategory], idx, _idx)"
                 ) {{subcategory}}
               .btn.mdi.mdi-minus(@click="delSubcategory(idx, item.category, subcategory)")

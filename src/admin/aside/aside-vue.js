@@ -171,7 +171,11 @@ exports.js = () => {
         this.emit(category)
       },
 
-      enterKey (ev) { console.log(ev) },
+      enterKey (idx, _idx) {
+        if (event.data === null) {
+          console.log('enter')
+        }
+      },
 
       emit (category) { this.$emit('clicked', category) }
     },
