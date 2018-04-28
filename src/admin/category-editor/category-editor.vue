@@ -44,6 +44,8 @@
         li.type
           label article
             input(type="checkbox" v-model="category.hasArticle" :disabled="!status[idx]")
+          label img
+            input(type="checkbox" v-model="category.hasImage" :disabled="!status[idx]")
           label video
             input(type="checkbox" v-model="category.hasVideo" :disabled="!status[idx]")
           label link
