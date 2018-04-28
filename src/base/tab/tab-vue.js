@@ -1,4 +1,5 @@
 const { _2space } = require('common/js')
+const { MIN_DISTANCE } = require('common/constant')
 exports.js = () => {
   let Card = {}
   Card = require('base/card/show-card/card')
@@ -47,18 +48,17 @@ exports.js = () => {
         this.distY = touch.clientY - this.startY
       },
       touchend () {
-        const OFFSET = 40
-        let isVertical = Math.abs(this.distX) - Math.abs(this.distY) < 0
+        let isLeft = this.distX < -MIN_DISTANCE
+        let isRight = this.distX > MIN_DISTANCE
+        let isAxisX = Math.abs(this.distX) - Math.abs(this.distY) > 0
         let isIndexOver = this.index >= this.count - 1
-        if (this.distX < -OFFSET && !isIndexOver && !isVertical) {
+        if (isLeft && !isIndexOver && isAxisX) {
           this.index++
           this.tap(this.index)
-        } else if (this.distX > OFFSET && this.index > 0 && !isVertical) {
+        } else if (isRight && this.index > 0 && isAxisX) {
           this.index--
           this.tap(this.index)
-        } else {
-          return
-        }
+        } else { return }
       },
       initLayout () {
         let width = `${this.count * 100}%`
