@@ -38,24 +38,26 @@ exports.js = () => {
       isSlide () {
       },
       touchstart () {
-        let touch = event.targetTouches[0]
+        const touch = event.targetTouches[0]
         this.startX = touch.clientX
         this.startY = touch.clientY
       },
       touchmove () {
-        let touch = event.targetTouches[0]
+        const touch = event.targetTouches[0]
         this.distX = touch.clientX - this.startX
         this.distY = touch.clientY - this.startY
       },
       touchend () {
         let isLeft = this.distX < -MIN_DISTANCE
+        let isLeftOver = this.index >= this.count - 1
         let isRight = this.distX > MIN_DISTANCE
+        let isRightOver = this.index <= 0
         let isAxisX = Math.abs(this.distX) - Math.abs(this.distY) > 0
-        let isIndexOver = this.index >= this.count - 1
-        if (isLeft && !isIndexOver && isAxisX) {
+
+        if (isLeft && !isLeftOver && isAxisX) {
           this.index++
           this.tap(this.index)
-        } else if (isRight && this.index > 0 && isAxisX) {
+        } else if (isRight && !isRightOver && isAxisX) {
           this.index--
           this.tap(this.index)
         } else { return }
