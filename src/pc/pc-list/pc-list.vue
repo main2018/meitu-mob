@@ -1,6 +1,7 @@
 <template lang="pug">
   .pc-list
-    .pc-list-cover
+    .pc-list-cover(v-show="contents.length === 0")
+      .img(:style="coverStyle")
     .pc-card-wrapper(v-for="content in contents")
       Card(:content="content")
 </template>
