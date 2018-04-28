@@ -19,6 +19,7 @@ exports.js = () => {
         id: '',
         card: {},
         article: '',
+        images: [],
         videos: [],
         links: []
       }
@@ -28,6 +29,7 @@ exports.js = () => {
       compTitle () { return this.isNew ? 'Publisher' : 'Updater' },
       breadcrumb () { return this.$store.getters.categoryCrumb },
       hasArticle () { return this.$store.getters.hasArticle },
+      hasImage () { return this.$store.getters.hasImage },
       hasVideo () { return this.$store.getters.hasVideo },
       hasLink () { return this.$store.getters.hasLink },
       category () { return this.$store.getters.activeCategory }
@@ -52,10 +54,11 @@ exports.js = () => {
         })
       },
       getAlbum () {
-        let { hasArticle, hasVideo, hasLink } = this
+        let { hasArticle, hasImage, hasVideo, hasLink } = this
         let album = { id: this.id, category: this.category[0] }
         this.category[1] && (album.subcategory = this.category[1])
         hasArticle && (album.article = this.article)
+        hasImage && (album.images = this.images)
         hasVideo && (album.videos = this.videos)
         hasLink && (album.links = this.links)
         for (let key in this.card) { album[key] = this.card[key] }
@@ -73,6 +76,7 @@ exports.js = () => {
       },
       getCard (card) { this.card = card },
       getLinks (links) { this.links = links },
+      getImages (images) { this.images = images },
       getVideos (videos) { this.videos = videos }
     },
 

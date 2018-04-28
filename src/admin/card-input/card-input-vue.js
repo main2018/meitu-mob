@@ -35,6 +35,7 @@ exports.js = () => {
       activeCategory () { return this.$store.getters.activeCategory },
       hasArticle () { return this.$store.getters.hasArticle },
       hasLink () { return this.$store.getters.hasLink },
+      hasImage () { return this.$store.getters.hasImage },
       hasVideo () { return this.$store.getters.hasVideo }
     },
 

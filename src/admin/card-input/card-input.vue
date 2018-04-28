@@ -15,7 +15,8 @@
       .input-options
         span.hint status
         span.radio
-          label online &nbsp;
+          label
+            .mdi.mdi-eye-outline
             input(
               type="radio"
               name="status"
@@ -24,7 +25,8 @@
               v-model="card.status"
               @change="changed"
               )
-          label outline &nbsp;
+          label
+            .mdi.mdi-eye-off
             input(
               type="radio"
               name="status"
@@ -32,13 +34,21 @@
               v-model="card.status"
               @change="changed"
               )
-        .type
+        .operate
           .mdi.mdi-star
           input(
             type="checkbox"
             :checked="card.isCommend"
             v-model="card.isCommend"
             @change="changed"
+            )
+
+        span.type &nbsp;&nbsp;type&nbsp;
+          .mdi.mdi-image
+          input(
+            type="checkbox"
+            :checked="hasImage"
+            @change="checked('Image')"
             )
         .type
           .mdi.mdi-play-box-outline

@@ -9,6 +9,7 @@ const state = {
   categoryStatus: [],
   isEditorShow: false,
   hasArticle: true,
+  hasImage: false,
   hasVideo: false,
   hasLink: false
 }
@@ -40,9 +41,10 @@ const mutations = {
       state.categories = resp
 
       if (!activeCategory) { return }
-      state.categories.forEach((item) => {
+      state.categories.forEach(item => {
         if (item.category !== activeCategory[0]) { return }
         state.hasArticle = item.hasArticle
+        state.hasImage = item.hasImage
         state.hasVideo = item.hasVideo
         state.hasLink = item.hasLink
       })
@@ -131,6 +133,7 @@ const getters = {
   subNavMenu: state => state.subNavMenu,
   activeSubNavMenu: state => state.activeSubNavMenu,
   hasArticle: state => state.hasArticle,
+  hasImage: state => state.hasImage,
   hasVideo: state => state.hasVideo,
   hasLink: state => state.hasLink,
   isEditorShow: state => state.isEditorShow,

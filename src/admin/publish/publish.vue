@@ -15,6 +15,15 @@
           @changed="getCard"
           :content="card"
           )
+      div.image(v-show="hasImage")
+        sub-publish(
+          ref="Image"
+          title="Image"
+          btnHint="Image"
+          type="Image"
+          :contents="images"
+          @changed="getImages"
+          )
       div.video(v-show="hasVideo")
         sub-publish(
           ref="video"
