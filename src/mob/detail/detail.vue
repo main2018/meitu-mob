@@ -14,6 +14,8 @@
         :poster="getPoster(video.uri)"
         )
         source(:src="$qiniuUrl(video.uri)")
+    .aw-image(v-if="hasImage" v-for="image in album.images")
+      img(:src="$qiniuUrl(image.uri)")
     .aw-link(v-if="hasLink && album.links && album.links.length > 0")
       link-card(:content="album.links")
     .aw-content(v-html="album.article" v-if="hasArticle")

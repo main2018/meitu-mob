@@ -17,6 +17,7 @@ exports.js = () => {
     data () {
       return {
         hasArticle: true,
+        hasImage: true,
         hasVideo: true,
         hasLink: true
       }
@@ -31,6 +32,7 @@ exports.js = () => {
           if (item.category === categoryName) {
             this.hasLink = item.hasLink
             this.hasArticle = item.hasArticle
+            this.hasImage = item.hasImage
             this.hasVideo = item.hasVideo
           }
         })
