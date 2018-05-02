@@ -15,6 +15,7 @@ exports.js = () => {
 
     data () {
       return {
+        isMouseDown: false,
         activeIndex: 0,
         contentLeft: 0
       }
@@ -36,6 +37,23 @@ exports.js = () => {
         let itemWidth = this.ulDom.offsetWidth / this.count
         this.contentLeft = -activeIndex * itemWidth
       },
+      mousedown () {
+        this.isMouseDown = true
+        let { offsetX, offsetY } = event
+        this.startX = offsetX
+        this.startY = offsetY
+      },
+      mousemove () {
+        if (!this.isMouseDown) { return }
+        let { offsetX, offsetY } = event
+        this.distX = offsetX - this.startX
+        this.distY = offsetY - this.startY
+      },
+      mouseup () {
+        this.isMouseDown = false
+        this.touchend()
+      },
+
       touchstart () {
         const touch = event.targetTouches[0]
         this.startX = touch.clientX
@@ -47,11 +65,9 @@ exports.js = () => {
         this.distY = touch.clientY - this.startY
       },
       touchend () {
-        let isLeft = this.distX < -MIN_DISTANCE
-        let isLeftOver = this.activeIndex >= this.count - 1
-        let isRight = this.distX > MIN_DISTANCE
-        let isRightOver = this.activeIndex <= 0
-        let isAxisX = Math.abs(this.distX) - Math.abs(this.distY) > 0
+        const {
+          isLeft, isLeftOver, isRight, isRightOver, isAxisX
+        } = this.getDirection()
 
         if (isLeft && !isLeftOver && isAxisX) {
           this.activeIndex++
@@ -60,6 +76,14 @@ exports.js = () => {
           this.activeIndex--
           this.tap(this.activeIndex)
         } else { return }
+      },
+      getDirection () {
+        let isLeft = this.distX < -MIN_DISTANCE
+        let isLeftOver = this.activeIndex >= this.count - 1
+        let isRight = this.distX > MIN_DISTANCE
+        let isRightOver = this.activeIndex <= 0
+        let isAxisX = Math.abs(this.distX) - Math.abs(this.distY) > 0
+        return { isLeft, isLeftOver, isRight, isRightOver, isAxisX }
       },
       initLayout () {
         let width = `${this.count * 100}%`

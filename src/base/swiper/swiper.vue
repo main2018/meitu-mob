@@ -11,9 +11,12 @@
           )
           .aw-swiper-img(
             :style="getBgStyle(image)"
-            @touchstart="touchstart(idx)"
-            @touchmove="touchmove(idx)"
-            @touchend="touchend(idx)"
+            @mousedown="mousedown"
+            @mousemove="mousemove"
+            @mouseup="mouseup"
+            @touchstart="touchstart"
+            @touchmove="touchmove"
+            @touchend="touchend"
             )
     ul.aw-swiper-nav
       li.aw-swiper-l
