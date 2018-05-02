@@ -24,7 +24,7 @@
         v-for="num of count"
         :key="num"
         :class="docActiveClass(num)"
-        @click="tap(num - 1)"
+        @click="swipeTo(num - 1)"
         )
       li.aw-swiper-r
 </template>

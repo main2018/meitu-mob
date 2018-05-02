@@ -1,5 +1,6 @@
 exports.js = () => {
   const { MIN_DISTANCE } = require('common/constant')
+  const { SWIPE_SPEED } = require('../../../../config')
   const { getBgStyle } = require('common/js')
   return {
     name: 'swiper',
@@ -10,7 +11,8 @@ exports.js = () => {
     },
 
     props: {
-      images: { type: Array, default: () => [] }
+      images: { type: Array, default: () => [] },
+      auto: { type: Boolean, default: false }
     },
 
     data () {
@@ -32,7 +34,7 @@ exports.js = () => {
 
     methods: {
       getBgStyle,
-      tap (activeIndex) {
+      swipeTo (activeIndex) {
         this.activeIndex = activeIndex
         let itemWidth = this.ulDom.offsetWidth / this.count
         this.contentLeft = -activeIndex * itemWidth
@@ -66,24 +68,24 @@ exports.js = () => {
       },
       touchend () {
         const {
-          isLeft, isLeftOver, isRight, isRightOver, isAxisX
+          isToLeft, isToLeftOver, isToRight, isToRightOver, isAxisX
         } = this.getDirection()
 
-        if (isLeft && !isLeftOver && isAxisX) {
+        if (isToLeft && !isToLeftOver && isAxisX) {
           this.activeIndex++
-          this.tap(this.activeIndex)
-        } else if (isRight && !isRightOver && isAxisX) {
+          this.swipeTo(this.activeIndex)
+        } else if (isToRight && !isToRightOver && isAxisX) {
           this.activeIndex--
-          this.tap(this.activeIndex)
+          this.swipeTo(this.activeIndex)
         } else { return }
       },
       getDirection () {
-        let isLeft = this.distX < -MIN_DISTANCE
-        let isLeftOver = this.activeIndex >= this.count - 1
-        let isRight = this.distX > MIN_DISTANCE
-        let isRightOver = this.activeIndex <= 0
+        let isToLeft = this.distX < -MIN_DISTANCE
+        let isToLeftOver = this.activeIndex >= this.count - 1
+        let isToRight = this.distX > MIN_DISTANCE
+        let isToRightOver = this.activeIndex <= 0
         let isAxisX = Math.abs(this.distX) - Math.abs(this.distY) > 0
-        return { isLeft, isLeftOver, isRight, isRightOver, isAxisX }
+        return { isToLeft, isToLeftOver, isToRight, isToRightOver, isAxisX }
       },
       initLayout () {
         let width = `${this.count * 100}%`
@@ -97,6 +99,17 @@ exports.js = () => {
 
     mounted () {
       this.initLayout()
+      if (!this.auto || this.interval) { return }
+      this.interval = setInterval(() => {
+        let isToLeftOver = this.activeIndex >= this.count - 1
+        this.activeIndex = isToLeftOver ? 0 : this.activeIndex + 1
+        this.swipeTo(this.activeIndex)
+        console.log('alive')
+      }, SWIPE_SPEED)
+    },
+
+    destroyed () {
+      window.clearInterval(this.interval)
     }
   }
 }
