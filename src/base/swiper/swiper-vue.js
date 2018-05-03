@@ -2,9 +2,11 @@ exports.js = () => {
   const { MIN_DISTANCE } = require('common/constant')
   const { SWIPE_SPEED } = require('../../../../config')
   const { getBgStyle } = require('common/js')
+  const SwiperThumbnail = require('./swiper-thumbnail.vue')
   return {
     name: 'swiper',
     components: {
+      SwiperThumbnail
     },
 
     created () {
@@ -12,6 +14,7 @@ exports.js = () => {
 
     props: {
       images: { type: Array, default: () => [] },
+      thumbnail: { type: Boolean, default: true },
       auto: { type: Boolean, default: false }
     },
 
@@ -24,6 +27,19 @@ exports.js = () => {
     },
 
     computed: {
+      nails () {
+        let pre = this.images[0]
+        let nxt = this.images[1]
+        let nails = []
+        let i = 0
+        while (i < 3) {
+          nails.push(pre)
+          nails.push(pre)
+          nails.push(nxt)
+          i++
+        }
+        return nails
+      },
       ulDom () { return this.$refs.content },
       count () { return this.images.length },
       contentStyle () { return `margin-left:${this.contentLeft}px` }

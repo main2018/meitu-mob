@@ -4,7 +4,7 @@
       ul.aw-swiper-content(ref="content" :style="contentStyle")
         li.aw-swiper-item(
           v-for="(image, idx) in images"
-          :key="image"
+          :key="'swiper' + idx"
           @mouseover="mouseover"
           @mouseout="mouseout"
           @mousedown="mousedown"
@@ -15,7 +15,8 @@
           @touchend="touchend"
           )
           .aw-swiper-img(:style="getBgStyle(image)")
-    ul.aw-swiper-nav
+
+    ul.aw-swiper-nav(v-if="!thumbnail")
       li.aw-swiper-l
       li.aw-swiper-dot(
         v-for="num of count"
@@ -24,6 +25,9 @@
         @click="swipeTo(num - 1)"
         )
       li.aw-swiper-r
+
+    ul.aw-swiper-thumbnail(v-if="thumbnail")
+      swiper-thumbnail(:images="nails")
 </template>
 
 <script type="text/ecmascript-6">

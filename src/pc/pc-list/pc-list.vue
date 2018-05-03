@@ -1,7 +1,7 @@
 <template lang="pug">
   .pc-list
     .pc-list-swiper
-      swiper(:images="imgs" :auto="true")
+      swiper(:images="imgs" :auto="false")
     //.pc-list-cover(v-show="contents.length === 0")
       .img(:style="coverStyle")
     .pc-card-wrapper(v-for="content in contents")
