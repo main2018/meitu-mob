@@ -39,6 +39,9 @@ exports.js = () => {
         let itemWidth = this.ulDom.offsetWidth / this.count
         this.contentLeft = -activeIndex * itemWidth
       },
+      mouseover () { this.clearAuto() },
+      mouseout () { this.setAuto() },
+
       mousedown () {
         this.isMouseDown = true
         let { offsetX, offsetY } = event
@@ -91,25 +94,30 @@ exports.js = () => {
         let width = `${this.count * 100}%`
         this.ulDom.style.width = width
       },
-      docActiveClass (num) {
+      getDotClass (num) {
         let flag = num - 1 === this.activeIndex
         return flag ? 'aw-swiper-active' : ''
+      },
+
+      setAuto () {
+        if (!this.auto || this.interval) { return }
+        this.interval = setInterval(() => {
+          let isToLeftOver = this.activeIndex >= this.count - 1
+          this.activeIndex = isToLeftOver ? 0 : this.activeIndex + 1
+          this.swipeTo(this.activeIndex)
+        }, SWIPE_SPEED)
+      },
+      clearAuto () {
+        window.clearInterval(this.interval)
+        this.interval = null
       }
     },
 
     mounted () {
       this.initLayout()
-      if (!this.auto || this.interval) { return }
-      this.interval = setInterval(() => {
-        let isToLeftOver = this.activeIndex >= this.count - 1
-        this.activeIndex = isToLeftOver ? 0 : this.activeIndex + 1
-        this.swipeTo(this.activeIndex)
-        console.log('alive')
-      }, SWIPE_SPEED)
+      this.setAuto()
     },
 
-    destroyed () {
-      window.clearInterval(this.interval)
-    }
+    destroyed () { this.clearAuto() }
   }
 }
