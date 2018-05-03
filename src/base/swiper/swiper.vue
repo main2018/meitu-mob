@@ -16,7 +16,7 @@
           )
           .aw-swiper-img(:style="getBgStyle(image)")
 
-    ul.aw-swiper-nav(v-if="!thumbnail")
+    ul.aw-swiper-nav(v-if="!thumbnail && count > 1")
       li.aw-swiper-l
       li.aw-swiper-dot(
         v-for="num of count"
@@ -26,8 +26,12 @@
         )
       li.aw-swiper-r
 
-    ul.aw-swiper-thumbnail(v-if="thumbnail")
-      swiper-thumbnail(:images="nails")
+    ul.aw-swiper-thumbnail(v-if="thumbnail && count > 1")
+      swiper-thumbnail(
+        :images="images"
+        :activeIndex="activeIndex"
+        @select="thumbnailSelect"
+        )
 </template>
 
 <script type="text/ecmascript-6">

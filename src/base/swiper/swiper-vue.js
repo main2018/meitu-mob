@@ -14,7 +14,7 @@ exports.js = () => {
 
     props: {
       images: { type: Array, default: () => [] },
-      thumbnail: { type: Boolean, default: true },
+      thumbnail: { type: Boolean, default: false },
       auto: { type: Boolean, default: false }
     },
 
@@ -91,12 +91,10 @@ exports.js = () => {
         } = this.getDirection()
 
         if (isToLeft && !isToLeftOver && isAxisX) {
-          this.activeIndex++
-          this.swipeTo(this.activeIndex)
+          this.swipeTo(++this.activeIndex)
         } else if (isToRight && !isToRightOver && isAxisX) {
-          this.activeIndex--
-          this.swipeTo(this.activeIndex)
-        } else { return }
+          this.swipeTo(--this.activeIndex)
+        }
       },
       getDirection () {
         let isToLeft = this.distX < -MIN_DISTANCE
@@ -126,6 +124,9 @@ exports.js = () => {
       clearAuto () {
         window.clearInterval(this.interval)
         this.interval = null
+      },
+      thumbnailSelect (index) {
+        this.swipeTo(index)
       }
     },
 
