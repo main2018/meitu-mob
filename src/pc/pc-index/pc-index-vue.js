@@ -1,8 +1,10 @@
 exports.js = () => {
+  const Swiper = require('base/swiper/swiper')
   const { getBgStyle } = require('common/js')
   return {
     name: 'pc-index',
     components: {
+      Swiper
     },
 
     created () {
@@ -20,9 +22,12 @@ exports.js = () => {
       commendAlbums () {
         return this.$store.getters.commendAlbums
       },
-      img () {
-        let album = this.commendAlbums[0]
-        return album ? album.img : ''
+      imgs () {
+        let imgs = []
+        this.commendAlbums.forEach(album => {
+          album.img && imgs.push(album.img)
+        })
+        return imgs
       }
     },
 

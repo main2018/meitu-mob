@@ -5,7 +5,7 @@
         pc-aside
       .pc-content
         router-view
-      .pc-panels-wrapper
+      // .pc-panels-wrapper
         .pc-panels
           pc-nav
 </template>

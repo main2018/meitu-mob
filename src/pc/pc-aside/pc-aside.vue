@@ -7,7 +7,7 @@
       v-for="(menu, idx) in menus"
       :key="menu.name"
       )
-      li.category {{menu.category}}
+      li.category(@click="goSubHome(menu)") {{menu.category}}
         .subcategory(
           v-for="(item, _idx) of menu.subcategories"
           :class="isActive(menu.category, item.name) ? 'active' : ''"
@@ -34,6 +34,7 @@
   .category
     font-weight 700
     color #fff
+    cursor pointer
   .subcategory
     line-height 1.6rem
     font-size .8rem

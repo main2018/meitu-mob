@@ -43,6 +43,10 @@ exports.js = () => {
         this.$store.dispatch('setSubNavMenu', category)
         this.$router.push(`/${route}`)
       },
+      goSubHome ({ route, category }) {
+        this.$store.dispatch('setSubNavMenu', category)
+        this.$router.push(`${route}`)
+      },
       goHome () {
         this.$store.dispatch('setSubategoryAlbums', ['one', 'bb'])
         this.$store.dispatch('setSubNavMenu')

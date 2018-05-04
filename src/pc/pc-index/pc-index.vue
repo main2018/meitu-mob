@@ -1,7 +1,9 @@
 <template lang="pug">
   .pc-index
-    p pc-index
-    .img(:style="getBgStyle(img)")
+    swiper(
+      :images="imgs"
+      :auto="false"
+      )
 </template>
 
 <script type="text/ecmascript-6">
