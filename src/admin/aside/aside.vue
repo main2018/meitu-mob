@@ -38,7 +38,8 @@
                 @click="setActive([item.category, subcategory], idx, _idx)"
                 ) {{subcategory}}
               .btn.mdi.mdi-minus(@click="delSubcategory(idx, item.category, subcategory)")
-
+    .add-subcategory-dialog
+      add-dialog
 </template>
 
 <script type="text/ecmascript-6">
