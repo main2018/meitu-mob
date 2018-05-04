@@ -27,29 +27,25 @@ exports.js = () => {
     },
 
     computed: {
-      nails () {
-        let pre = this.images[0]
-        let nxt = this.images[1]
-        let nails = []
-        let i = 0
-        while (i < 3) {
-          nails.push(pre)
-          nails.push(pre)
-          nails.push(nxt)
-          i++
-        }
-        return nails
-      },
       ulDom () { return this.$refs.content },
       count () { return this.images.length },
       contentStyle () { return `margin-left:${this.contentLeft}px` }
     },
 
     watch: {
+      images () {
+        this.initLayout()
+      }
+    },
+
+    filters: {
+      getBgStyle
     },
 
     methods: {
-      getBgStyle,
+      getUrl (uri) {
+        return this.$qiniuUrl(uri)
+      },
       swipeTo (activeIndex) {
         this.activeIndex = activeIndex
         let itemWidth = this.ulDom.offsetWidth / this.count

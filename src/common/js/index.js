@@ -80,20 +80,22 @@ export function setObjectPropToData (prop, data) {
 
 export function getBgStyle (uri, ratio = '3 : 2') {
   if (!uri) { return '' }
+  return {
+    height: 0,
+    width: '100%',
+    paddingBottom: getImgHeight(ratio),
+    backgroundColor: '#eee',
+    backgroundImage: `url(${getQiniuUrl(uri)})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }
+}
+
+export function getImgHeight (ratio = '3 : 2') {
   let w = +ratio.split(':')[0]
   let h = +ratio.split(':')[1]
   let height = 65
   if (w > 0 && h > 0) { height = ~~(100 / w * h) }
-  let style = `
-    height: 0;
-    width: 100%;
-    padding-bottom: ${height}%;
-    background-color: #eee;
-    background-image: url(${getQiniuUrl(uri)})
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  `
-  // style = style.replace('/[\r\n]/g', '')
-  return style
+  return height + '%'
 }

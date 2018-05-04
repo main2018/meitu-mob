@@ -14,7 +14,7 @@
           @touchmove="touchmove"
           @touchend="touchend"
           )
-          .aw-swiper-img(:style="getBgStyle(image)")
+          .aw-swiper-img(:style="image | getBgStyle")
 
     ul.aw-swiper-nav(v-if="!thumbnail && count > 1")
       li.aw-swiper-l
