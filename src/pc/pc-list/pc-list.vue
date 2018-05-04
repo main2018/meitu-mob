@@ -1,10 +1,17 @@
 <template lang="pug">
   .pc-list
     .pc-list-swiper
-      swiper(:images="imgs" :auto="false")
+      swiper(
+        :images="imgs"
+        :auto="false"
+        v-show="!isInSubHome"
+        )
     //.pc-list-cover(v-show="contents.length === 0")
       .img(:style="coverStyle")
-    .pc-card-wrapper(v-for="content in contents")
+    .pc-card-wrapper(
+      v-for="content in contents"
+      v-show="isInSubHome"
+      )
       card(:content="content")
 </template>
 

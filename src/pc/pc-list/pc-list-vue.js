@@ -18,6 +18,9 @@ exports.js = () => {
     },
 
     computed: {
+      activeSubNavMenu () { return this.$store.getters.activeSubNavMenu },
+      isInSubHome () { return !!this.activeSubNavMenu.subcategory },
+
       currCategory () { return _2space(this.$route.path) },
       contents () { return this.$store.getters.subcategoryAlbums },
       coverStyle () {
