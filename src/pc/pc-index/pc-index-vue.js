@@ -25,7 +25,11 @@ exports.js = () => {
       imgs () {
         let imgs = []
         this.commendAlbums.forEach(album => {
-          album.img && imgs.push(album.img)
+          album.img && imgs.push({
+            type: 'image',
+            id: album.id,
+            src: album.img
+          })
         })
         return imgs
       }

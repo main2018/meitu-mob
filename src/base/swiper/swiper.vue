@@ -3,18 +3,20 @@
     div.aw-swiper-wrap
       ul.aw-swiper-content(ref="content" :style="contentStyle")
         li.aw-swiper-item(
-          v-for="(image, idx) in images"
+          v-for="(item, idx) in images"
           :key="'swiper' + idx"
           @mouseover="mouseover"
           @mouseout="mouseout"
           @mousedown="mousedown"
           @mousemove="mousemove"
-          @mouseup="mouseup"
+          @mouseup="mouseup(item)"
           @touchstart="touchstart"
           @touchmove="touchmove"
-          @touchend="touchend"
+          @touchend="touchend(item)"
           )
-          .aw-swiper-img(:style="image | getBgStyle")
+          .aw-swiper-img(
+            :style="item.src | getBgStyle"
+            )
 
     ul.aw-swiper-nav(v-if="!thumbnail && count > 1")
       li.aw-swiper-l

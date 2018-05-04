@@ -18,6 +18,7 @@ exports.js = () => {
     },
 
     computed: {
+      albums () { return this.$store.getters.albums },
       activeSubNavMenu () { return this.$store.getters.activeSubNavMenu },
       isInSubHome () { return !!this.activeSubNavMenu.subcategory },
 
@@ -33,11 +34,16 @@ exports.js = () => {
         })
         return getBgStyle(img)
       },
+      route () {
+        return this.$route.path
+      },
       imgs () {
         let imgs = []
         let categories = this.$store.getters.categories
         categories.forEach(item => {
-          imgs.push(item.icon)
+          let isCurrRoute = `/${item.route}` !== this.route
+          if (isCurrRoute) { return }
+          imgs.push({ src: item.icon })
         })
         return imgs
       }

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .detail
+  .detail(v-if="album")
 
     .aw-article
       h1.aw-title {{album.title}}

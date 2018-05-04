@@ -66,9 +66,9 @@ exports.js = () => {
         this.distX = offsetX - this.startX
         this.distY = offsetY - this.startY
       },
-      mouseup () {
+      mouseup (item) {
         this.isMouseDown = false
-        this.touchend()
+        this.touchend(item)
       },
 
       touchstart () {
@@ -81,7 +81,7 @@ exports.js = () => {
         this.distX = touch.clientX - this.startX
         this.distY = touch.clientY - this.startY
       },
-      touchend () {
+      touchend (item) {
         const {
           isToLeft, isToLeftOver, isToRight, isToRightOver, isAxisX
         } = this.getDirection()
@@ -90,6 +90,8 @@ exports.js = () => {
           this.swipeTo(++this.activeIndex)
         } else if (isToRight && !isToRightOver && isAxisX) {
           this.swipeTo(--this.activeIndex)
+        } else {
+          this.go(item)
         }
       },
       getDirection () {
@@ -118,11 +120,21 @@ exports.js = () => {
         }, SWIPE_SPEED)
       },
       clearAuto () {
+        if (!this.interval) { return }
         window.clearInterval(this.interval)
         this.interval = null
       },
       thumbnailSelect (index) {
         this.swipeTo(index)
+      },
+      go ({id}) {
+        if (!id) { return }
+        this.$store.dispatch('getCurrAlbum', id)
+        console.log({ id })
+        this.$router.push({
+          path: `/detail`,
+          query: { id }
+        })
       }
     },
 
