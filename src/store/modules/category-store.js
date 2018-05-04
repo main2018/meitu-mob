@@ -18,11 +18,12 @@ const actions = {
   hideEditor ({ commit }) { commit('HIDE_CATEGORY_EDITOR') },
   showEditor ({ commit }, idx) { commit('SHOW_CATEGORY_EDITOR', idx) },
 
-  getCategory ({ commit }, activeCategory) { commit('GET_CATEGORY', activeCategory) },
+  getCategory ({ commit }, activeCategory) { commit('GET_CATEGORY_BY_CATEGORY', activeCategory) },
   setCategory ({ commit }, categories) { commit('SET_CATEGORY', categories) },
 
   setSubNavMenu ({ commit }, categoryName) { commit('SET_SUB_NAV_MENU', categoryName) },
   setSubNavActive ({ commit }, menu) { commit('SET_SUB_NAV_ACTIVE', menu) },
+  getAllSubNavMenu ({ commit }) { commit('GET_ALL_SUB_NAV_MENUS') },
   clearSubNavActive ({ commit }) { commit('CLEAR_SUB_NAV_ACTIVE') },
 
   setActiveCategory ({ commit }, activeCategory) {
@@ -34,7 +35,12 @@ const actions = {
 }
 
 const mutations = {
-  GET_CATEGORY (state, activeCategory) {
+  GET_ALL_SUB_NAV_MENUS (state) {
+    let path = '/category/findAll'
+    get(path, categories => { state.subNavMenu = genSubNavMenus(categories) })
+  },
+
+  GET_CATEGORY_BY_CATEGORY (state, activeCategory) {
     let path = '/category/findAll'
     get(path, resp => {
       setActivesStatus(state, resp)
@@ -56,21 +62,8 @@ const mutations = {
   },
 
   SET_SUB_NAV_MENU (state, categoryName) {
-    state.subNavMenu = []
-    state.categories.forEach(category => {
-      if (categoryName && category.category !== categoryName) { return }
-      if (state.categories.length === 0) { return }
-
-      let menu = {
-        category: category.category,
-        route: category.route,
-        subcategories: []
-      }
-      category.subcategories.forEach(subcategory => {
-        menu.subcategories.push({ name: subcategory, active: false })
-      })
-      state.subNavMenu.push(menu)
-    })
+    if (state.categories.length === 0) { return }
+    state.subNavMenu = genSubNavMenus(state.categories, categoryName)
   },
 
   HIDE_CATEGORY_EDITOR (state) { state.isEditorShow = false },
@@ -151,6 +144,23 @@ export default {
   getters,
   actions,
   mutations
+}
+
+function genSubNavMenus (categories, categoryName) {
+  let menus = []
+  categories.forEach(category => {
+    if (categoryName && category.category !== categoryName) { return }
+    let menu = {
+      category: category.category,
+      route: category.route,
+      subcategories: []
+    }
+    category.subcategories.forEach(subcategory => {
+      menu.subcategories.push({ name: subcategory, active: false })
+    })
+    menus.push(menu)
+  })
+  return menus
 }
 
 function setActivesStatus (state, data) {

@@ -56,6 +56,7 @@ exports.js = () => {
     },
 
     mounted () {
+      this.$store.dispatch('getAllSubNavMenu')
     }
   }
 }
