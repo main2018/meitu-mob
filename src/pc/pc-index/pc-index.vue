@@ -1,9 +1,5 @@
 <template lang="pug">
   .pc-index
-    swiper(
-      :images="imgs"
-      :auto="false"
-      )
 </template>
 
 <script type="text/ecmascript-6">

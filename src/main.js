@@ -18,7 +18,7 @@ import {
 import store from './store'
 import { genDynamicWrapper } from 'base/str-templ/dynamic-wrapper.js'
 import Detail from 'mob/detail/detail.vue'
-// import PcDetail from 'pc/pc-detail/pc-detail'
+import PcDetail from 'pc/pc-detail/pc-detail'
 
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
@@ -49,8 +49,8 @@ get('/category', resp => {
     })
     subRoutes.push({
       path: isPC ? `/detail` : `/${item.route}/detail`,
-      component: Detail
-      // component: isPC ? PcDetail : Detail
+      // component: Detail
+      component: isPC ? PcDetail : Detail
     })
   })
   routes.forEach((route) => {

@@ -8,15 +8,18 @@
         .hint
           span.mdi.mdi-magnify
           span(v-show = '!keyword') search
-    // swiper(
+    swiper(
+      v-show="path !== '/detail'"
       :images="imgs"
       :auto="false"
       ratio="25rem"
       :inside = "true"
       )
+    router-view
+    p {{path}}
     ul.pc-content
       li(v-for="content in contents")
-        card(:content="content")
+        card(:content="content" :is-pc="true")
 </template>
 
 <script type="text/ecmascript-6">

@@ -1,6 +1,6 @@
 <template lang="pug">
   .pc-detail
-    p pc-detail
+    p(style="color: #fff") pc-detail
 </template>
 
 <script type="text/ecmascript-6">
