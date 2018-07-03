@@ -15,7 +15,7 @@
           @touchend="touchend(item)"
           )
           .aw-swiper-img(
-            :style="item.src | getBgStyle"
+            :style="getBgStyle(item.src, ratio)"
             )
 
     ul.aw-swiper-nav(v-if="!thumbnail && count > 1")
@@ -23,7 +23,7 @@
       li.aw-swiper-dot(
         v-for="num of count"
         :key="num"
-        :class="getDotClass(num)"
+        :class="[getDotClass(num), inside ? 'aw-swiper-inside' : '']"
         @click="swipeTo(num - 1)"
         )
       li.aw-swiper-r

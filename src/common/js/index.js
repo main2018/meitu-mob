@@ -93,9 +93,13 @@ export function getBgStyle (uri, ratio = '3 : 2') {
 }
 
 export function getImgHeight (ratio = '3 : 2') {
-  let w = +ratio.split(':')[0]
-  let h = +ratio.split(':')[1]
-  let height = 65
-  if (w > 0 && h > 0) { height = ~~(100 / w * h) }
-  return height + '%'
+  let height = ''
+  if (/:/g.test(ratio)) {
+    let w = +ratio.split(':')[0]
+    let h = +ratio.split(':')[1]
+    if (w > 0 && h > 0) { height = ~~(100 / w * h) + '%' }
+  } else {
+    height = ratio
+  }
+  return height
 }

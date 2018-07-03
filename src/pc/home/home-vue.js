@@ -1,10 +1,11 @@
 exports.js = () => {
   const PcNav = require('pc/pc-nav/pc-nav')
-  const PcAside = require('pc/pc-aside/pc-aside')
+  const Swiper = require('base/swiper/swiper')
   return {
     name: 'home-vue',
     components: {
-      PcNav, PcAside
+      Swiper,
+      PcNav
     },
 
     created () {
@@ -15,36 +16,50 @@ exports.js = () => {
 
     data () {
       return {
+        logo: '',
+        keyword: ''
       }
     },
 
     computed: {
-      isCategoryEven () {
-        let categoryCount = this.$store.getters.categories.length
-        return categoryCount % 2 === 0
+      siteLogo () { return this.$store.getters.settings.logo },
+      commendAlbums () {
+        return this.$store.getters.commendAlbums
       },
-      bgStyle () {
-        let ltColor = 'rgb(246, 247, 255)'
-        let dkColor = '#333'
-        let param = `to right, ${dkColor} 50%, ${ltColor} 50%`
-        let style = ''
-        if (!this.isCategoryEven) {
-          style = `background: linear-gradient(${param});`
-        } else {
-          style = `background-color: ${dkColor}`
-        }
-        return style
+      imgs () {
+        let imgs = []
+        this.commendAlbums.forEach(album => {
+          album.img && imgs.push({
+            type: 'image',
+            id: album.id,
+            src: album.img
+          })
+        })
+        return imgs
       }
     },
 
     watch: {
+      siteLogo () {
+        if (this.siteLogo) {
+          let logo = this.getLocal('siteLogo')
+          let img = this.$qiniuUrl(logo)
+          this.logo = logo ? img : ''
+        }
+      }
     },
 
     methods: {
+      goHome () {
+        this.$router.push(`/`)
+        this.menuShow = false
+        this.sign = '≡'
+      }
     },
 
     mounted () {
-      document.body.style.backgroundColor = '#333'
+      // document.body.style.backgroundColor = '#333'
+      // this.$store.dispatch('setSubNavMenu', '')
     }
   }
 }

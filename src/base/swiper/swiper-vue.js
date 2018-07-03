@@ -15,7 +15,9 @@ exports.js = () => {
     props: {
       images: { type: Array, default: () => [] },
       thumbnail: { type: Boolean, default: false },
-      auto: { type: Boolean, default: false }
+      inside: { type: Boolean, default: false },
+      auto: { type: Boolean, default: false },
+      ratio: { type: String, default: '3:2' }
     },
 
     data () {
@@ -39,10 +41,10 @@ exports.js = () => {
     },
 
     filters: {
-      getBgStyle
     },
 
     methods: {
+      getBgStyle,
       getUrl (uri) {
         return this.$qiniuUrl(uri)
       },
