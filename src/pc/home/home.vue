@@ -1,7 +1,7 @@
 <template lang="pug">
   .pc-home-wrapper
     .pc-header
-      .pc-brand(@click="goHome"): img.logo(v-if="logo" :src="logo")
+      .pc-brand(@click="$router.push('/')"): img.logo(v-if="logo" :src="logo")
       .pc-nav: pc-nav
       .pc-search
         input(type="text" v-model="keyword")
@@ -14,6 +14,9 @@
       ratio="25rem"
       :inside = "true"
       )
+    ul.pc-content
+      li(v-for="content in contents")
+        card(:content="content")
 </template>
 
 <script type="text/ecmascript-6">

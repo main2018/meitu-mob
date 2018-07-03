@@ -2,6 +2,7 @@ import { post, get } from 'common/js/ajax-axios'
 
 const state = {
   albums: {},
+  allAlbums: [],
   currAlbum: {},
   adminAlbums: [],
   commendAlbums: [],
@@ -43,9 +44,11 @@ const mutations = {
   },
 
   GET_ALL_ALBUMS (state, option) {
+    state.allAlbums = []
     get('/album', albums => {
       state.commendAlbums = []
       albums.forEach(album => {
+        state.allAlbums.push(album)
         album.isCommend && state.commendAlbums.push(album)
       })
       state.albums = formatAlbums(albums)
@@ -82,6 +85,7 @@ const mutations = {
 
 const getters = {
   albums: state => state.albums,
+  allAlbums: state => state.allAlbums,
   currAlbum: state => state.currAlbum,
   adminAlbums: state => state.adminAlbums,
   commendAlbums: state => state.commendAlbums,
