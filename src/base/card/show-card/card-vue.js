@@ -79,7 +79,7 @@ exports.js = () => {
           return this.$emit('edit', id)
         }
         this.$router.push({
-          path: `${this.url}/detail`,
+          path: `/${this.content.category}/detail`,
           query: { id }
         })
       },
