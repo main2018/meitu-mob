@@ -8,9 +8,7 @@
       :inside = "true"
       )
     router-view
-    ul.pc-content
-      li(v-for="content in contents")
-        card(:content="content" :is-pc="true")
+    pc-list
 </template>
 
 <script type="text/ecmascript-6">

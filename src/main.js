@@ -38,6 +38,7 @@ Vue.use(Router)
 
 const type = getClientType()
 const isPC = type === 'PC'
+Vue.prototype.$isPc = isPC
 
 /* eslint-disable no-new */
 get('/category', resp => {

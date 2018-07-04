@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <mob-bar v-if="!isPc"></mob-bar>
+    <mob-bar v-if="!$isPc"></mob-bar>
     <pc-bar v-else></pc-bar>
 
     <keep-alive include="Home">
@@ -26,7 +26,6 @@ export default {
   name: 'app',
   data () {
     return {
-      isPc: getClientType() === 'PC'
     }
   },
 

@@ -1,6 +1,7 @@
 <template lang="pug">
   .dynamic
-    tab
+    pc-list(v-if="$isPc")
+    tab(v-else)
 
     // tab-slot(:menu="menu")
       .wrap(
@@ -13,12 +14,12 @@
             card(:content="album")
 </template>
 
-<script type="text/ecmascript-6">
-  import { js } from './dynamic-vue.js'
-  export default js.call(this)
-</script>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-  @import '~common/stylus/variable.styl'
-  @import './dynamic.styl'
-</style>
+<script>
+const Tab = require('base/tab/tab')
+const PcList = require('pc/pc-list/pc-list')
+export default {
+  name: 'dynamic',
+  components: { Tab, PcList }
+}
+</script>
