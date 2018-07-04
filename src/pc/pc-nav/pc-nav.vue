@@ -1,8 +1,10 @@
 <template lang="pug">
   ul.nav-wrapper
     li.nav(v-for="item in categories" :key="item.route")
-      .item(@click="go(item)")
-        .text: p {{item.name}}&nbsp;{{item.category}}
+      .item
+        router-link(
+          :to="'/' + item.route"
+          ) {{item.name}}&nbsp;{{item.category}}
         .hint-color(v-show="isHintShow(item.route)")
 </template>
 

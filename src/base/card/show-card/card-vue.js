@@ -19,10 +19,6 @@ exports.js = () => {
       btn: {
         type: Boolean,
         default: false
-      },
-      isPc: {
-        type: Boolean,
-        default: false
       }
     },
 
@@ -83,7 +79,7 @@ exports.js = () => {
           return this.$emit('edit', id)
         }
         this.$router.push({
-          path: this.isPc ? `/detail` : `${this.url}/detail`,
+          path: `${this.url}/detail`,
           query: { id }
         })
       },

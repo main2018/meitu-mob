@@ -33,11 +33,7 @@ exports.js = () => {
     },
 
     mounted () {
-      this.$nextTick(() => {
-        getAlbums.call(this)
-        console.log(this.contents)
-        console.log('in')
-      })
+      this.$nextTick(() => { getAlbums.call(this) })
     }
   }
 }

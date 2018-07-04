@@ -12,7 +12,6 @@ exports.js = () => {
 
     data () {
       return {
-        logo: ''
       }
     },
 
@@ -22,25 +21,13 @@ exports.js = () => {
           return item.status === 0
         })
       },
-      url () { return this.$route.path },
-      siteLogo () { return this.$store.getters.settings.logo }
+      url () { return this.$route.path }
     },
 
     watch: {
-      siteLogo () {
-        if (this.siteLogo) {
-          let logo = this.getLocal('siteLogo')
-          let img = this.$qiniuUrl(logo)
-          this.logo = logo ? img : ''
-        }
-      }
     },
 
     methods: {
-      go ({ route, category }) {
-        this.$store.dispatch('setSubNavMenu', category)
-        this.$router.push(`${route}`)
-      },
       isHintShow (category) {
         let isCurrCateory = new RegExp(`/${category}`)
         return isCurrCateory.test(this.url)
