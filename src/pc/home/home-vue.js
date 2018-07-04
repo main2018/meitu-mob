@@ -33,7 +33,8 @@ exports.js = () => {
           album.img && imgs.push({
             type: 'image',
             id: album.id,
-            src: album.img
+            src: album.img,
+            category: album.category
           })
         })
         return imgs

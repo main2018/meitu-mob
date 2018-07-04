@@ -129,12 +129,12 @@ exports.js = () => {
       thumbnailSelect (index) {
         this.swipeTo(index)
       },
-      go ({id}) {
+      go ({id, category}) {
         if (!id) { return }
         this.$store.dispatch('getCurrAlbum', id)
-        console.log({ id })
+        console.log({ id, category })
         this.$router.push({
-          path: `/detail`,
+          path: `/${category}/detail`,
           query: { id }
         })
       }

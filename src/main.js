@@ -18,7 +18,7 @@ import {
 import store from './store'
 import { dynamicWrapper as Dynamic } from '../src/base/str-templ/dynamic-wrapper'
 import Detail from 'mob/detail/detail.vue'
-import PcDetail from 'pc/pc-detail/pc-detail'
+import PcDetail from 'pc/pc-detail'
 
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
