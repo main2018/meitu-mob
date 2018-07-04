@@ -16,7 +16,7 @@ import {
   Log
 } from 'common/js'
 import store from './store'
-import { genDynamicWrapper } from 'base/str-templ/dynamic-wrapper.js'
+import { dynamicWrapper as Dynamic } from '../src/base/str-templ/dynamic-wrapper'
 import Detail from 'mob/detail/detail.vue'
 import PcDetail from 'pc/pc-detail/pc-detail'
 
@@ -41,25 +41,17 @@ const isPC = type === 'PC'
 
 /* eslint-disable no-new */
 get('/category', resp => {
-  let subRoutes = []
   resp.forEach(item => {
-    subRoutes.push({
+    routes.push({
       path: `/${item.route}`,
-      component: genDynamicWrapper(isPC, item.route)
+      component: Dynamic
     })
-    subRoutes.push({
-      path: isPC ? `/detail` : `/${item.route}/detail`,
-      // component: Detail
+    routes.push({
+      path: `/${item.route}/detail`,
       component: isPC ? PcDetail : Detail
     })
   })
-  routes.forEach((route) => {
-    if (route.children) {
-      subRoutes.forEach((sub) => {
-        route.children.push(sub)
-      })
-    }
-  })
+
   const router = new Router({ mode: 'history', routes })
   new Vue({
     el: '#app',

@@ -17,7 +17,6 @@ exports.js = () => {
     data () {
       return {
         hasArticle: true,
-        hasImage: true,
         hasVideo: true,
         hasLink: true
       }
@@ -27,12 +26,11 @@ exports.js = () => {
       album () {
         let album = this.$store.getters.currAlbum
         let categories = this.$store.getters.categories
-        let category = album && album.category && album.category.category
+        let categoryName = album.category && album.category.category
         categories.forEach((item) => {
-          if (item.category === category) {
+          if (item.category === categoryName) {
             this.hasLink = item.hasLink
             this.hasArticle = item.hasArticle
-            this.hasImage = item.hasImage
             this.hasVideo = item.hasVideo
           }
         })

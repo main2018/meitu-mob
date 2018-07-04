@@ -1,9 +1,5 @@
-export const genDynamicWrapper = (isPC, name) => {
-  const Dynamic = isPC ? '' : require('base/tab/tab')
-
-  return {
-    name: `Dy${name}`,
-    template: `<div><dynamic></dynamic></div>`,
-    components: { Dynamic }
-  }
+const dynamic = require('./dynamic/dynamic.vue')
+export const dynamicWrapper = {
+  template: `<div><dynamic></dynamic></div>`,
+  components: { dynamic }
 }
