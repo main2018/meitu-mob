@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <mob-bar v-if="!isPc"></mob-bar>
+    <pc-bar v-else></pc-bar>
+
     <keep-alive include="Home">
       <router-view></router-view>
     </keep-alive>
@@ -13,10 +15,12 @@
 // import vconsole from 'vconsole'
 import { getClientType } from 'common/js/user-agent'
 import MobBar from 'mob/bar/bar'
+import PcBar from 'pc/pc-bar/pc-bar'
 import Inscribe from 'mob/inscribe/inscribe'
 export default {
   components: {
     MobBar,
+    PcBar,
     Inscribe
   },
   name: 'app',

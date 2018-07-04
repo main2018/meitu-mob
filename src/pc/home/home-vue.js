@@ -1,13 +1,11 @@
 const { _2space } = require('common/js')
 exports.js = () => {
-  const PcNav = require('pc/pc-nav/pc-nav')
   const Swiper = require('base/swiper/swiper')
   const Card = require('base/card/show-card/card')
   return {
     name: 'home-vue',
     components: {
       Swiper,
-      PcNav,
       Card
     },
 
@@ -20,7 +18,6 @@ exports.js = () => {
     data () {
       return {
         contents: [],
-        logo: '',
         keyword: ''
       }
     },
@@ -29,7 +26,6 @@ exports.js = () => {
       path () { return this.$route.path },
       albums () { return this.$store.getters.albums },
       allAlbums () { return this.$store.getters.allAlbums },
-      siteLogo () { return this.$store.getters.settings.logo },
       commendAlbums () {
         return this.$store.getters.commendAlbums
       },
@@ -47,14 +43,7 @@ exports.js = () => {
     },
 
     watch: {
-      path () { getAlbums.call(this) },
-      siteLogo () {
-        if (this.siteLogo) {
-          let logo = this.getLocal('siteLogo')
-          let img = this.$qiniuUrl(logo)
-          this.logo = logo ? img : ''
-        }
-      }
+      path () { getAlbums.call(this) }
     },
 
     methods: {
