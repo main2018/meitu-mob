@@ -2,6 +2,7 @@
   .sub-publish
     div.title
       .mdi.mdi-18px.mdi-plus(@click="add")
+      // .mdi.mdi-18px.mdi-plus(@click="addMulti")
       .text {{title}}
     div.list(v-for="(content, idx) in contents_")
       .item(@click="getIdx(idx)")

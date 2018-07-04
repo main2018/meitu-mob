@@ -46,6 +46,9 @@ exports.js = () => {
           order: this.no++
         })
       },
+      addMulti () {
+        console.log('hi')
+      },
       del (idx) {
         let uri = this.contents_.uri
         uri && qiniuDel(uri)
