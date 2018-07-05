@@ -2,10 +2,12 @@ exports.js = () => {
   const LinkCard = require('base/card/link-card/link-card')
   const { getQiniuPosterUrl } = require('common/js/qiniu-api')
   const { timeFormat } = require('common/js')
+  const Gallery = require('base/gallery')
   return {
     name: 'detail',
     components: {
-      LinkCard
+      LinkCard,
+      Gallery
     },
 
     created () {

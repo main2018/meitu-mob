@@ -1,6 +1,7 @@
 <template lang="pug">
   .detail(v-if="album")
 
+    gallery
     .aw-article
       h1.aw-title {{album.title}}
       time.aw-category {{time}}
