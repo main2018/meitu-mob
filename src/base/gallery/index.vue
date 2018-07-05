@@ -1,7 +1,7 @@
 <template lang="pug">
   section
-    .item(v-for="(item, index) in imgs" :style="genItemStyle(item)")
-      i(:style="genStyleOfI(item)")
+    .item(v-for="(item, index) in imgs" :style="genStyleOfItem(item)")
+      i(:style="genStyleOfDomI(item)")
       img(:src="item.url" :alt="index")
 </template>
 
@@ -15,14 +15,13 @@ export default {
     }
   },
   methods: {
-    genItemStyle ({width, height}) {
-      let ratio = width * 200 / height
-      let flexGrow = ratio
-      width = ratio + 'px'
+    genStyleOfItem ({width, height}) {
+      const flexGrow = width * 200 / height
+      width = flexGrow + 'px'
       return [{ width, flexGrow }]
     },
-    genStyleOfI ({width, height}) {
-      let paddingBottom = height / width * 100 + '%'
+    genStyleOfDomI ({width, height}) {
+      const paddingBottom = height / width * 100 + '%'
       return { paddingBottom }
     }
   },
