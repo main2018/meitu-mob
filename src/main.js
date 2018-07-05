@@ -1,4 +1,5 @@
 import { get } from 'common/js/ajax-axios'
+const { QINIU_URL_PREFIX } = require('../../config')
 import { getClientType } from 'common/js/user-agent'
 import Vue from 'vue'
 import App from './App'
@@ -39,6 +40,7 @@ Vue.use(Router)
 const type = getClientType()
 const isPC = type === 'PC'
 Vue.prototype.$isPc = isPC
+Vue.prototype.$http = QINIU_URL_PREFIX
 
 /* eslint-disable no-new */
 get('/category', resp => {

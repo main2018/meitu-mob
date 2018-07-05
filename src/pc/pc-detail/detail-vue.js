@@ -45,6 +45,21 @@ exports.js = () => {
           return timeFormat(this.album.meta.updatedAt)
         }
         return ''
+      },
+      imgs () {
+        let imgs = []
+        if (!this.album.images) { return }
+        this.album.images.forEach(img => {
+          console.log(img)
+          imgs.push({
+            url: img.url || img.uri,
+            size: this.getImgSize(img.uri),
+            width: 900,
+            height: 1500
+          })
+        })
+        console.log(imgs)
+        return imgs
       }
     },
 
@@ -52,6 +67,26 @@ exports.js = () => {
     },
 
     methods: {
+      getImgSize (filename) {
+        let width = 0
+        let height = 0
+        let img = new Image()
+        img.src = `${this.$http}${filename}`
+        let interVal = setInterval(() => {
+          if (img.width > 0 || img.height > 0) {
+            width = width || img.width
+            height = width || img.height
+            clearInterval(interVal)
+            console.log({ width, height })
+          }
+        }, 40)
+        img.onload = () => {
+          width = width || img.width
+          height = width || img.height
+          console.log({ width, height })
+        }
+        return { width, height }
+      },
       getPoster (video) {
         return getQiniuPosterUrl(video)
       },

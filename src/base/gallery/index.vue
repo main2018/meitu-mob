@@ -2,7 +2,7 @@
   section
     .item(v-for="(item, index) in imgs" :style="genStyleOfItem(item)")
       i(:style="genStyleOfDomI(item)")
-      img(:src="item.url" :alt="index")
+      img(:src="$http + item.url" :alt="index")
 </template>
 
 <script>
