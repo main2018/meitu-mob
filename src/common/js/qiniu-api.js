@@ -3,6 +3,39 @@ const nanoId = require('nano-id')
 const { get } = require('common/js/ajax-axios')
 const { QINIU_URL_PREFIX } = require('../../../../config')
 
+export async function qiniuUploads (files, succ, fail) {
+  let filenames = await Promise.all(
+    files.map(file => qnUpload(file))
+  )
+  return Promise.resolve(filenames)
+}
+
+export function qnUpload (file) {
+  return new Promise((resolve, reject) => {
+    let config = {
+      useCdnDomain: false,
+      disableStatisticsReport: false,
+      retryCount: 6,
+      region: qiniu.region.z2
+    }
+
+    let putExtra = { fname: '', params: {}, mimeType: null }
+
+    get(`/qiniu/token`, (resp) => {
+      let fileName = nanoId()
+      let fileExtension = file.name.match(/\.\w*$/g)[0]
+      let token = resp.token
+      let key = fileName + fileExtension
+      const observable = qiniu.upload(file, key, token, putExtra, config)
+
+      var next = (res) => {}
+      var error = (err) => { reject(err) }
+      var complete = (res) => { resolve(res.key) } // res.key is fileName
+      observable.subscribe({ next, error, complete })
+    })
+  })
+}
+
 export function qiniuUpload (file, succ, fail) {
   let config = {
     useCdnDomain: false,
@@ -11,11 +44,7 @@ export function qiniuUpload (file, succ, fail) {
     region: qiniu.region.z2
   }
 
-  let putExtra = {
-    fname: '',
-    params: {},
-    mimeType: null
-  }
+  let putExtra = { fname: '', params: {}, mimeType: null }
 
   get(`/qiniu/token`, (resp) => {
     let fileName = nanoId()
@@ -25,16 +54,8 @@ export function qiniuUpload (file, succ, fail) {
     const observable = qiniu.upload(file, key, token, putExtra, config)
 
     var next = (res) => {}
-
-    var error = (err) => {
-      fail && fail(err)
-    }
-
-    var complete = (res) => {
-      // res.key is fileName
-      succ(res.key)
-    }
-
+    var error = (err) => { fail && fail(err) }
+    var complete = (res) => { succ(res.key) } // res.key is fileName
     observable.subscribe({ next, error, complete })
   })
 }

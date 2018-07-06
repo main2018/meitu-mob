@@ -1,9 +1,9 @@
 <template lang="pug">
   .sub-publish
     div.title
-      .mdi.mdi-18px.mdi-plus(@click="add")
-      // .mdi.mdi-18px.mdi-plus(@click="addMulti")
+      .mdi.mdi-24px.mdi-library-plus(@click="dispatch")
       .text {{title}}
+      .mdi.mdi-24px.mdi-plus-box(@click="add")
     div.list(v-for="(content, idx) in contents_")
       .item(@click="getIdx(idx)")
         file-upload(
@@ -35,6 +35,14 @@
             @change="emit"
             )
         .mdi.mdi-close(@click="del(idx)")
+    input.upload(
+      ref="file"
+      type="file"
+      :accept="`${type}/*`"
+      style="display: none"
+      multiple="true"
+      @change="getFiles($event)"
+      )
 </template>
 
 <script type="text/ecmascript-6">

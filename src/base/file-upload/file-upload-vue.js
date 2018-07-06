@@ -1,6 +1,6 @@
 exports.js = () => {
   const {
-    qiniuUpload,
+    qnUpload,
     qiniuDel,
     getQiniuPosterUrl
   } = require('common/js/qiniu-api.js')
@@ -39,7 +39,7 @@ exports.js = () => {
         this.$store.dispatch('setLoadingHint', 'upload...')
         let file = event.target.files[0]
         this.fname && qiniuDel(this.fname)
-        qiniuUpload(file, fname => {
+        qnUpload(file).then(fname => {
           this.$store.dispatch('hideLoading')
           this.$emit('changed', fname)
         })

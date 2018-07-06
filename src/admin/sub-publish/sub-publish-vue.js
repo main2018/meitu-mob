@@ -1,6 +1,9 @@
 exports.js = () => {
-  const { qiniuDel } = require('common/js/qiniu-api.js')
   const FileUpload = require('base/file-upload/file-upload')
+  const {
+    qiniuUploads,
+    qiniuDel
+  } = require('common/js/qiniu-api.js')
   return {
     name: 'sub-publish',
     components: { FileUpload },
@@ -46,9 +49,6 @@ exports.js = () => {
           order: this.no++
         })
       },
-      addMulti () {
-        console.log('hi')
-      },
       del (idx) {
         let uri = this.contents_.uri
         uri && qiniuDel(uri)
@@ -64,6 +64,31 @@ exports.js = () => {
         this.contents_[this.idx].uri = fname
         this.emit()
       },
+      getFiles (ev) {
+        this.$store.dispatch('setLoadingHint', 'upload...')
+        let fileArr = []
+        let files = event.target.files
+        for (let i = 0; i < files.length; i++) {
+          fileArr.push(files[i])
+        }
+        // this.fname && qiniuDel(this.fname)
+        qiniuUploads(fileArr).then(fnames => {
+          if (this.contents_[0] && !this.contents_[0].uri) {
+            this.contents_ = []
+          }
+          fnames.forEach(fname => {
+            this.contents_.push({
+              uri: fname,
+              url: '',
+              text: '',
+              order: this.no++
+            })
+          })
+          this.$store.dispatch('hideLoading')
+          this.emit()
+        })
+      },
+      dispatch () { this.$refs.file.click() },
       emit () { this.$emit('changed', this.contents_) }
     },
 
