@@ -79,6 +79,7 @@ const mutations = {
         state.hasArticle = item.hasArticle
         state.hasVideo = item.hasVideo
         state.hasLink = item.hasLink
+        state.hasImage = item.hasImage
       }
     })
   },
