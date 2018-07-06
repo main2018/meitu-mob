@@ -104,11 +104,23 @@ export function getImgHeight (ratio = '3 : 2') {
   return height
 }
 
-export function getRemoteImgSize (img) {
-  return new Promise((resolve) => {
-    img.onload = () => {
-      let { width, height } = img
-      resolve({ width, height })
+export async function getRemoteImgsSize (imgs) {
+  let images = await Promise.all(
+    imgs.map(img => _getSize(img))
+  )
+  return Promise.resolve(images)
+}
+
+function _getSize (img) {
+  return new Promise(resolve => {
+    let dom = document.createElement('img')
+    dom.src = getQiniuUrl(img.url || img.uri)
+    dom.onload = () => {
+      let { width, height } = dom
+      resolve({ ...img, width, height })
+    }
+    dom.onerror = () => {
+      console.log('on error')
     }
   })
 }

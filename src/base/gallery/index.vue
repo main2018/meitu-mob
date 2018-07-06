@@ -1,18 +1,25 @@
 <template lang="pug">
   section
-    .item(v-for="(img, index) in imgs" :style="genStyleOfItem(img)")
+    .item(v-for="(img, index) in images" :style="genStyleOfItem(img)")
       i(:style="genStyleOfDomI(img)")
-      img(:src="$http + img.url" :alt="index")
-      p {{img}}
+      img(:src="$http + (img.url || img.uri)" :alt="index")
 </template>
 
 <script>
+const { getRemoteImgsSize } = require('../../common/js')
 export default {
   props: {
     imgs: { type: Array, default: () => [] }
   },
   data () {
     return {
+      images: []
+    }
+  },
+  watch: {
+    imgs () {
+      getRemoteImgsSize(this.imgs)
+      .then(images => { this.images = images })
     }
   },
   methods: {
@@ -24,15 +31,20 @@ export default {
     genStyleOfDomI ({width, height}) {
       const paddingBottom = height / width * 100 + '%'
       return { paddingBottom }
+    },
+    getImgSize () {
     }
   },
   created () {
+  },
+  mounted () {
   }
 }
 </script>
 
 <style lang="stylus" scoped>
 section
+  padding 2px
   display: flex
   flex-wrap: wrap
   &::after

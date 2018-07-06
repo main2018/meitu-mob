@@ -132,7 +132,6 @@ exports.js = () => {
       go ({id, category}) {
         if (!id) { return }
         this.$store.dispatch('getCurrAlbum', id)
-        console.log({ id, category })
         this.$router.push({
           path: `/${category}/detail`,
           query: { id }

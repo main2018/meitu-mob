@@ -1,7 +1,7 @@
 <template lang="pug">
   .detail(v-if="album")
 
-    gallery(:imgs="imgs")
+    gallery(:imgs="album.images")
     .aw-article
       h1.aw-title {{album.title}}
       time.aw-category {{time}}
@@ -15,11 +15,11 @@
         :poster="getPoster(video.uri)"
         )
         source(:src="$qiniuUrl(video.uri)")
-    .aw-image(v-if="hasImage" v-for="image in album.images")
+    // .aw-image(v-if="hasImage" v-for="image in album.images")
       img(:src="$qiniuUrl(image.uri)")
     .aw-link(v-if="hasLink && album.links && album.links.length > 0")
       link-card(:content="album.links")
-    .aw-content(v-html="album.article" v-if="hasArticle")
+    // .aw-content(v-html="album.article" v-if="hasArticle")
 </template>
 
 <script type="text/ecmascript-6">

@@ -46,20 +46,6 @@ exports.js = () => {
           return timeFormat(this.album.meta.updatedAt)
         }
         return ''
-      },
-      imgs () {
-        let imgs = []
-        if (!this.album.images) { return }
-        this.album.images.forEach(img => {
-          console.log(img)
-          imgs.push({
-            url: img.url || img.uri,
-            size: this.getImgSize(img.uri),
-            width: img.width,
-            height: img.height
-          })
-        })
-        return imgs
       }
     },
 
