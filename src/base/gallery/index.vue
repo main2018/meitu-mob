@@ -1,8 +1,9 @@
 <template lang="pug">
   section
-    .item(v-for="(item, index) in imgs" :style="genStyleOfItem(item)")
-      i(:style="genStyleOfDomI(item)")
-      img(:src="$http + item.url" :alt="index")
+    .item(v-for="(img, index) in imgs" :style="genStyleOfItem(img)")
+      i(:style="genStyleOfDomI(img)")
+      img(:src="$http + img.url" :alt="index")
+      p {{img}}
 </template>
 
 <script>

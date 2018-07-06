@@ -17,7 +17,7 @@
         .card-wrapper(v-for="album in adminAlbums")
           card(
             :content="album"
-            :btn="!0"
+            :btn="true"
             :editable="cardEditable"
             @edit="editCard"
             )

@@ -90,7 +90,7 @@ exports.js = () => {
         })
       },
       groupAndSetProps (album) {
-        let albumGroupKey = ['videos', 'links', 'article']
+        let albumGroupKey = ['videos', 'links', 'article', 'images']
         let cardKey = ['isCommend', 'title', 'cover', 'desc', 'status']
         let cardContent = {}
         for (let key in album) {

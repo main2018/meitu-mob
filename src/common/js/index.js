@@ -103,3 +103,24 @@ export function getImgHeight (ratio = '3 : 2') {
   }
   return height
 }
+
+export function getRemoteImgSize (img) {
+  return new Promise((resolve) => {
+    img.onload = () => {
+      let { width, height } = img
+      resolve({ width, height })
+    }
+  })
+}
+
+export function getCacheImgSize (img) {
+  return new Promise((resolve) => {
+    let interVal = setInterval(() => {
+      if (img.width > 0 || img.height > 0) {
+        let { width, height } = img
+        clearInterval(interVal)
+        resolve({ width, height })
+      }
+    }, 40)
+  })
+}

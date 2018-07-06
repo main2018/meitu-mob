@@ -1,6 +1,7 @@
 exports.js = () => {
   const LinkCard = require('base/card/link-card/link-card')
   const { getQiniuPosterUrl } = require('common/js/qiniu-api')
+  const { getRemoteImgSize } = require('common/js')
   const { timeFormat } = require('common/js')
   const Gallery = require('base/gallery')
   return {
@@ -54,11 +55,10 @@ exports.js = () => {
           imgs.push({
             url: img.url || img.uri,
             size: this.getImgSize(img.uri),
-            width: 900,
-            height: 1500
+            width: img.width,
+            height: img.height
           })
         })
-        console.log(imgs)
         return imgs
       }
     },
@@ -77,15 +77,10 @@ exports.js = () => {
             width = width || img.width
             height = width || img.height
             clearInterval(interVal)
-            console.log({ width, height })
+            return { width, height }
           }
         }, 40)
-        img.onload = () => {
-          width = width || img.width
-          height = width || img.height
-          console.log({ width, height })
-        }
-        return { width, height }
+        getRemoteImgSize(img).then(size => size)
       },
       getPoster (video) {
         return getQiniuPosterUrl(video)
