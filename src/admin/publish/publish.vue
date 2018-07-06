@@ -17,7 +17,7 @@
           )
       div.image(v-show="hasImage")
         sub-publish(
-          ref="Image"
+          ref="image"
           title="Image"
           btnHint="Image"
           type="Image"

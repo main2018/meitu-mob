@@ -69,6 +69,7 @@ exports.js = () => {
         this.$refs.card.clean()
         this.$refs.video.clean()
         this.$refs.link.clean()
+        this.$refs.image.clean()
       },
       close () {
         this.clean()
