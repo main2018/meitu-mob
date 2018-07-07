@@ -1,5 +1,5 @@
 <template lang="pug">
-  .pc-bar-wrapper(v-if="isPcBarShow")
+  .pc-bar-wrapper
     .pc-bar-fluid
       .pc-bar
         .pc-brand(@click="$router.push('/')"): img.logo(v-if="logo" :src="logo")

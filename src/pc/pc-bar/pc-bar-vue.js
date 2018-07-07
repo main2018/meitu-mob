@@ -20,7 +20,6 @@ exports.js = () => {
     },
 
     computed: {
-      isPcBarShow () { return this.$route.path !== '/admin' },
       siteLogo () { return this.$store.getters.settings.logo }
     },
 

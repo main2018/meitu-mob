@@ -13,8 +13,11 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
   @import './pc-list.styl'
+  .pc-list
+    min-height calc(100vh - 11.55rem - 48px)
   .pc-content
     margin: 0 auto
+    padding-bottom: 10px;
   .pc-list-item
     margin 10px 0 0 10px
     display inline-block

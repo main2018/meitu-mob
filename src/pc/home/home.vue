@@ -19,4 +19,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~common/stylus/variable.styl'
   @import './home.styl'
+  .pc-home-wrapper
+    min-height calc(100vh - 11.55rem - 48px)
 </style>

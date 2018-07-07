@@ -2,16 +2,16 @@
   .inscribe
     .wrapper(:class="thinLine")
       .contact
+        .line
+        .title 联系我们
         .text TEL: 0898-8888 8888
         .text E-MAIL: DAMEI@FOXMAIL.COM
-        .copyright
-          .line
-          span.text Copyright© 2017 foto inc.
-          span.ch-zn 保留所有权利.
       .qrcode
         span.ch-zn 微信公众号:
         span &nbsp;
         img(:src="qrcode")
+    .copyright
+      span.text Copyright© Hainan Meitu Culture Communication Co,.Ltd. All RightSReserved
 </template>
 
 <script>
