@@ -17,7 +17,7 @@
     min-height calc(100vh - 11.55rem - 48px)
   .pc-content
     margin: 0 auto
-    padding-bottom: 10px;
+    padding-bottom: 50px;
   .pc-list-item
     margin 10px 0 0 10px
     display inline-block

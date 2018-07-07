@@ -4,7 +4,7 @@
       .item
         router-link(
           :to="'/' + item.route"
-          ) {{item.name}}&nbsp;{{item.category}}
+          ) {{item.name || '分类'}}
         .hint-color(v-show="isHintShow(item.route)")
 </template>
 
