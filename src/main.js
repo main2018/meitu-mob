@@ -18,13 +18,25 @@ import {
 } from 'common/js'
 import store from './store'
 import { dynamicWrapper as Dynamic } from '../src/base/str-templ/dynamic-wrapper'
-import Detail from 'mob/detail/detail.vue'
-import PcDetail from 'pc/pc-detail'
+// import Detail from 'mob/detail/detail.vue'
+// import PcDetail from 'pc/pc-detail'
 
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+
+const Detail = (resolve) => {
+  require.ensure(['mob/detail/detail.vue'], () => {
+    resolve(require('mob/detail/detail.vue'))
+  })
+}
+
+const PcDetail = (resolve) => {
+  require.ensure(['pc/pc-detail'], () => {
+    resolve(require('pc/pc-detail'))
+  })
+}
 
 Vue.config.productionTip = false
 Vue.use(VueQuillEditor)
