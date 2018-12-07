@@ -2,7 +2,7 @@
   .admin-sign
     .sign
       img.logo(v-if="logo" :src="logo")
-      signin(:hasSignup="!1")
+      signin(:hasSignup="false")
 </template>
 
 <script type="text/ecmascript-6">

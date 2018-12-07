@@ -36,21 +36,24 @@ exports.js = () => {
         this.post('/user/signin', {
           username: this.inUsername,
           password: this.inPassword
-        }, resp => {
-          this.setLocal('account', this.inUsername)
-          this.setLocal('token', resp.token)
+        }, ({token, expire}) => {
+          const account = this.inUsername
+          const user = {account, token, expire}
+          this.setLocal('account', account)
+          this.setLocal('token', token)
+          this.$store.dispatch('setUser', user)
           this.$emit('succ')
           this.$router.push('/admin')
-        }, err => { console.log(err) })
+        }, err => { alert(err) })
       },
       signup () {
         if (!this.upUsername || !this.upPassword) { return }
         this.post('/user/signup', {
           username: this.upUsername,
           password: this.upPassword
-        }, (resp) => {
+        }, resp => {
           window.alert(resp)
-        }, (err) => {
+        }, err => {
           this.log(err)
         })
       },

@@ -57,8 +57,11 @@ exports.js = () => {
         })
       },
       signout () {
-        this.delLocal('account')
-        this.delLocal('token')
+        this.$store.dispatch('setUser', {
+          account: '',
+          token: '',
+          epxpire: 0
+        })
         this.$router.push('/admin/signin')
       },
 

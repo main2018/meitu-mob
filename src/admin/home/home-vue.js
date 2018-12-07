@@ -6,6 +6,7 @@ exports.js = () => {
   const Settings = require('admin/settings/settings')
   const Card = require('base/card/show-card/card')
   const CategoryEditor = require('admin/category-editor/category-editor')
+  const { sortAlbum } = require('common/js')
   return {
     name: 'admin-home',
     components: {
@@ -19,8 +20,8 @@ exports.js = () => {
     },
 
     created () {
-      let isSignin = !!this.getLocal('token')
-      if (!isSignin) { this.$router.push('/admin/signin') }
+      const token = this.$store.getters.user.token
+      if (!token) { this.$router.push('/admin/signin') }
     },
 
     props: {
@@ -28,6 +29,8 @@ exports.js = () => {
 
     data () {
       return {
+        EXPIRE: 1000 * 60 * 40,
+        hasExpire: null,
         isPublish: true,
         isContentShow: true,
         isPublishShow: false,
@@ -54,7 +57,10 @@ exports.js = () => {
     },
 
     methods: {
-      getCategory (category) { this.categories = category },
+      getCategory (category) {
+        this.categories = category
+        this.refreshExpire()
+      },
       closeContent () { this.isContentShow = false },
       showPublish () {
         this.isPublish = true
@@ -87,6 +93,7 @@ exports.js = () => {
         this.$refs.update.id = id
         this.get(`/album/${id}`, album => {
           this.groupAndSetProps(album)
+          sortAlbum(album)
         })
       },
       groupAndSetProps (album) {
@@ -98,13 +105,35 @@ exports.js = () => {
           cardKey.includes(key) && (cardContent[key] = album[key])
         }
         this.$refs.update.card = cardContent
+      },
+      signout () {
+        this.$store.dispatch('setUser', {
+          account: '',
+          token: '',
+          epxpire: 0
+        })
+        this.$router.push('/admin/signin')
+      },
+      testExpire () {
+        this.hasExpire = setTimeout(() => {
+          this.signout()
+        }, this.EXPIRE)
+      },
+      cleanExpire () {
+        this.hasExpire && clearTimeout(this.hasExpire)
+      },
+      refreshExpire () {
+        this.cleanExpire()
+        this.testExpire()
       }
     },
 
     mounted () {
-      let title = this.getLocal('siteName') + ' manager'
+      this.testExpire()
+      const title = this.$store.getters.settings.name + ' manager'
       this.$nextTick(() => { document.title = title })
       this.$store.dispatch('getCategory')
-    }
+    },
+    destroyed () { this.cleanExpire() }
   }
 }

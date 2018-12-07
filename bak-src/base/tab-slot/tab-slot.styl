@@ -1,0 +1,42 @@
+.tab-menu,
+.tab-content
+  display flex
+  .tab-item,
+  .tab-page
+    flex 1
+.tab-title
+  width 100%
+  position fixed
+  background #eee
+.tab-item
+  margin .6rem 0
+  font-size .8rem
+  line-height .8rem
+  text-align center
+  border-right 1px solid #ccc
+  &:last-child
+    border-right none
+
+.tab-padding
+  height 2.1rem
+  margin-bottom 15px
+.tab-content
+  transition 0.5s
+.tab-page
+  width 100%
+  min-height 80vh
+  /*
+  &:nth-child(1)
+    background #ccc
+  &:nth-child(2)
+    background #eee
+  &:nth-child(3)
+    background #ddd
+  */
+.tab-color
+  height 2px
+  background gray
+  transition 0.5s
+.tab-content-wrap
+  width 100%
+  overflow hidden

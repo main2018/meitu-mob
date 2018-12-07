@@ -1,0 +1,89 @@
+$ratio = 0.5
+
+// 1px public
+.bd-1px-pseudo
+  display block
+  position absolute
+  content ' '
+
+.bd-1px-pseudo-h
+  @extend .bd-1px-pseudo
+  width 100%
+  left 0
+  transform: scaleY($ratio)
+  transform-origin 0 0
+  border-top 1px solid $color-border
+
+.bd-1px-pseudo-v
+  @extend .bd-1px-pseudo
+  height 100%
+  top 0
+  transform: scaleX($ratio)
+  border-left 1px solid $color-border
+
+// 1px
+.bd-1px-t
+  position relative
+  &:before
+    @extend .bd-1px-pseudo-h
+    top 0
+
+.bd-1px-b
+  position relative
+  &:after
+    @extend .bd-1px-pseudo-h
+    bottom 0
+
+.bd-1px-tb
+  position relative
+  &:after
+    @extend .bd-1px-pseudo-h
+    top 0
+  &:before
+    @extend .bd-1px-pseudo-h
+    bottom 0
+
+.bd-1px-l
+  position relative
+  &:before
+    @extend .bd-1px-pseudo-v
+    left 0
+
+.bd-1px-r
+  position relative
+  &:before
+    @extend .bd-1px-pseudo-v
+    right 0
+
+
+.bd-1px
+  position relative
+  &:after
+    position absolute
+    width 199%
+    height 196%
+    top 0
+    left 0
+    z-index -1
+    content ""
+    border 1px solid $color-border
+    transform scale(0.5)
+    transform-origin 0 0
+
+    /*
+  &:before
+    z-index: -1;
+    content:'';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 199%;
+    height: 196%;
+    transform-origin: 0 0;
+    background red
+    transform: scale(.5,.5);
+    border: 1px solid blue
+    border-radius: 20px;
+    */
+

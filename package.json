@@ -14,6 +14,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^1.0.8",
     "axios": "^0.16.2",
     "better-scroll": "^1.2.3",
     "body-parser": "^1.17.2",
@@ -27,6 +28,7 @@
     "qiniu.js": "^0.1.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
+    "tinymce": "^4.8.2",
     "vconsole": "^2.5.2",
     "vue": "^2.3.3",
     "vue-html5-editor": "^1.1.1",
@@ -34,7 +36,8 @@
     "vue-router": "^2.6.0",
     "vue2-editor": "^2.0.26",
     "vuedraggable": "^2.14.1",
-    "vuex": "^2.4.0"
+    "vuex": "^2.4.0",
+    "vuex-along": "^1.1.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

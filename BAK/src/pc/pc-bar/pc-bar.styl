@@ -1,0 +1,52 @@
+.pc-bar-wrapper
+  height 60px
+
+.pc-bar-fluid
+  position fixed
+  z-index 10000
+  top 0
+  width 100vw
+  height 48px
+  padding-top 12px
+  overflow hidden
+  background #333
+.pc-bar
+  margin 0 auto
+  height 48px
+  line-height 48px
+  display flex
+  color $color-text-white
+
+.pc-nav
+  flex 1
+.pc-brand
+  height inherit
+  .logo
+    margin-right 1.5rem
+    padding 5px
+    height calc(100% - 10px)
+    cursor pointer
+.pc-search
+  position relative
+  width 9.4rem
+  input
+    padding .2rem
+    width 8rem
+    margin-right 1rem
+    background none
+    border-bottom 1px solid #eee
+    color #fff
+  .hint
+    position absolute
+    right 1.2rem
+    bottom 0
+    color #eee
+  .mdi
+    color #aaa
+
+@media only screen and (min-width:1600px)
+  .pc-bar
+    width 1200px
+@media only screen and (min-width:1024px) and (max-width: 1599px)
+  .pc-bar
+    width 1000px

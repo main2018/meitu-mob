@@ -1,0 +1,44 @@
+.card-show-pc
+  margin-top 1rem
+  // background #fff
+  display flex
+  .cover
+    flex 1
+  .text
+    padding 0 1rem
+  .title
+    margin-top -.25rem
+    font-weight 700
+    font-size .9rem
+  .time
+    padding .5rem 0
+    font-size .7rem
+    // color #aaa
+  .more
+    padding-top 1rem
+    font-size .7rem
+    color #aaa
+  .desc
+    display  -webkit-box
+    overflow hidden
+    text-align justify
+    -webkit-box-orient vertical
+    font-size .8rem
+@media screen and (min-width:1600px)
+  .text
+    width 18rem
+  .desc
+    -webkit-line-clamp 7
+@media screen and (min-width:1440px) and (max-width: 1599px)
+  .text
+    width 15rem
+  .desc
+    -webkit-line-clamp 5
+@media screen and (min-width:1024px) and (max-width: 1439px)
+  .text
+    width 10rem
+  .desc
+    -webkit-line-clamp 3
+@media screen and (max-width: 1024px)
+  .text
+    display none
