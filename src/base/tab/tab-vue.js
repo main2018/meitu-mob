@@ -1,17 +1,10 @@
+const { _2space } = require('common/js')
+const { MIN_DISTANCE } = require('common/constant')
 exports.js = () => {
-  let Card = {}
-  Card = require('base/card/card')
+  const Card = require('base/card/show-card/card')
   return {
     name: 'tab',
-    components: {
-      Card
-    },
-
-    created () {
-    },
-
-    props: {
-    },
+    components: { Card },
 
     data () {
       return {
@@ -25,7 +18,16 @@ exports.js = () => {
     },
 
     watch: {
-      path () { getAlbums.call(this) }
+      path () {
+        this.redirectDetail() // redirect
+        getAlbums.call(this)
+      },
+      albums: {
+        handler: function () {
+          getAlbums.call(this)
+        },
+        immediate: true
+      }
     },
 
     methods: {
@@ -33,30 +35,59 @@ exports.js = () => {
         this.index = index
         this.contentLeft = -index * window.innerWidth
       },
+      isSlide () {
+      },
       touchstart () {
-        let touch = event.targetTouches[0]
+        const touch = event.targetTouches[0]
         this.startX = touch.clientX
+        this.startY = touch.clientY
       },
       touchmove () {
-        let touch = event.targetTouches[0]
-        this.detaX = touch.clientX - this.startX
+        const touch = event.targetTouches[0]
+        this.distX = touch.clientX - this.startX
+        this.distY = touch.clientY - this.startY
       },
       touchend () {
-        let OFFSET = 40
-        let notOver = this.index < this.count - 1
-        if (this.detaX < -OFFSET && notOver) {
+        let isLeft = this.distX < -MIN_DISTANCE
+        let isLeftOver = this.index >= this.count - 1
+        let isRight = this.distX > MIN_DISTANCE
+        let isRightOver = this.index <= 0
+        let isAxisX = Math.abs(this.distX) - Math.abs(this.distY) > 0
+
+        if (isLeft && !isLeftOver && isAxisX) {
           this.index++
           this.tap(this.index)
-        } else if (this.detaX > OFFSET && this.index > 0) {
+        } else if (isRight && !isRightOver && isAxisX) {
           this.index--
           this.tap(this.index)
-        } else {
-          return
-        }
+        } else { return }
       },
       initLayout () {
         let width = `${this.count * 100}%`
         this.dom.style.width = width
+      },
+
+      // redirect
+      redirectDetail () {
+        if (!this.getIsSubpage()) { return }
+        let category = this.category
+        this.post('/album/findBySubpage', { category }, album => {
+          const route = {
+            path: `${this.path}/detail`,
+            query: { id: album._id }
+          }
+          this.$store.dispatch('getCurrAlbum', album._id)
+          this.$router.replace(route)
+        })
+      },
+
+      getIsSubpage () {
+        let isSubpage = false
+        this.categories.forEach(item => {
+          if (item.category !== this.category) { return }
+          isSubpage = item.isSubpage
+        })
+        return isSubpage
       }
     },
 
@@ -73,17 +104,23 @@ exports.js = () => {
         let width = `width: ${100 / this.count}%`
         return `${width};margin-left:${left}`
       },
-      isTabValid () { return this.menu.length === this.contents.length }
+      isTabValid () { return this.menu.length === this.contents.length },
+
+      // redirect
+      category () { return _2space(this.path).replace(/^\//g, '') },
+      categories () { return this.$store.getters.categories }
     },
 
     mounted () {
+      this.redirectDetail()
       getAlbums.call(this)
     }
   }
 }
 
 function getAlbums () {
-  let category = this.path.match(/\/(\S*)$/)[1]
+  let path = this.path.match(/\/(\S*)$/)[1]
+  let category = _2space(path)
   let currAlbum = this.albums[category]
   if (!currAlbum) {
     initVal.call(this)

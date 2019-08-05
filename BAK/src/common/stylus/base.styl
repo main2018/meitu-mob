@@ -1,0 +1,20 @@
+@import "./1px.styl"
+*
+  font-family Arial
+// 不换行
+.no-wrap
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+
+// 扩展点击区域
+$extend-width = -10px
+.ex-click
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    top: $extend-width
+    left: $extend-width
+    right: $extend-width
+    bottom: $extend-width

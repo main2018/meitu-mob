@@ -1,0 +1,63 @@
+.head-padding
+  height 3rem
+  padding 0
+.head
+  height 3rem
+  position fixed
+  z-index 1000
+  width 100%
+  line-height 3rem
+  color #fff
+  background $color-theme
+
+.bar
+  display flex
+  .brand
+    flex 1
+    padding-left 10px
+  .logo
+    margin-top .25rem
+    height 2.2rem
+    cursor pointer
+  .icon
+    flex 1
+    padding-right 20px
+    text-align right
+    font-size 1.5rem
+
+.menu
+  top 3rem
+  position absolute
+  width calc(100% - 20px)
+  padding 0 10px
+  background inherit
+  li
+    display flex
+    flex-direction row-reverse
+    .hint-color
+      width inherit
+      height 2px
+      background-color red
+  input
+    width 100%
+    text-align left
+  .search
+    display block
+    position relative
+    input
+      margin-bottom 15px
+      padding 5px 0
+      color #fff
+      background none
+      border-bottom 1px solid #fff
+      &:focus ~#result
+        display block!important
+    .hint
+      vertical-align b
+      position absolute
+      right 0
+      top 0
+#result
+  display none
+  li
+    text-align left
