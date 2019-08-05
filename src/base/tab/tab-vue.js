@@ -21,6 +21,12 @@ exports.js = () => {
       path () {
         this.redirectDetail() // redirect
         getAlbums.call(this)
+      },
+      albums: {
+        handler: function () {
+          getAlbums.call(this)
+        },
+        immediate: true
       }
     },
 

@@ -21,10 +21,11 @@
               .hint-color(v-show="url==='/video'")
 
           li.search
-            input(type="text")
+            input(list="results" type="text" @input="input")
             .hint
               span.mdi.mdi-magnify
               span search
+            ul#result: li(v-for="item in searchRes" @touchstart="change(item)") {{item}}
     .head-padding
 </template>
 

@@ -6,7 +6,7 @@
     )
     .aw-article
       h1.aw-title {{album.title}}
-      time.aw-category(v-show="!isSubpage") {{time}}
+      time.aw-category {{time}}
         span(v-if="album.subcategory")  &nbsp;| {{album.subcategory.subcategory}}
       p.aw-desc {{album.desc}}
     gallery(v-if="$isPc" :imgs="album.images")
@@ -23,7 +23,7 @@
         v-if="!video.uri && video.url && /^http/gi.test(video.url)"
         controls
         preload="auto"
-        :poster="getPoster(video.uri)"
+        :poster="getPoster(video.url || video.uri)"
         )
         source(:src="video.url")
       .video(

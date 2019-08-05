@@ -17,7 +17,7 @@
     padding-left 10px
   .logo
     margin-top .25rem
-    height 2.5rem
+    height 2.2rem
     cursor pointer
   .icon
     flex 1
@@ -50,8 +50,14 @@
       color #fff
       background none
       border-bottom 1px solid #fff
+      &:focus ~#result
+        display block!important
     .hint
       vertical-align b
       position absolute
       right 0
       top 0
+#result
+  display none
+  li
+    text-align left

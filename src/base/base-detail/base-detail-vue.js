@@ -47,15 +47,6 @@ exports.js = () => {
           return timeFormat(this.album.meta.updatedAt)
         }
         return ''
-      },
-      isSubpage () {
-        const category = this.album.category.category
-        let isSubpage = false
-        this.categories.forEach(item => {
-          if (item.category !== category) { return }
-          isSubpage = item.isSubpage
-        })
-        return isSubpage
       }
     },
 

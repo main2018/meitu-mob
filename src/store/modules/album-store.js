@@ -28,7 +28,13 @@ const actions = {
   },
 
   getCurrAlbum ({ commit }, id) {
-    commit('GET_CURR_ALBUM', id)
+    return new Promise((resolve, reject) => {
+      get(`/album/${id}`, album => {
+        const currAlbum = sortAlbum(album)
+        commit('GET_CURR_ALBUM', currAlbum)
+        resolve(currAlbum)
+      })
+    })
   },
 
   setAdminAlbums ({ commit }, adminAlbums) {
@@ -58,10 +64,8 @@ const mutations = {
     })
   },
 
-  GET_CURR_ALBUM (state, id) {
-    get(`/album/${id}`, album => {
-      state.currAlbum = sortAlbum(album)
-    })
+  GET_CURR_ALBUM (state, currAlbum) {
+    state.currAlbum = currAlbum
   },
 
   SET_ALBUMS (state, albums) { state.albums = albums },

@@ -88,14 +88,15 @@ exports.js = () => {
       goDetail () {
         if (!this.$isPc) { this.hideMenu() }
         let { id } = this.content
-        this.$store.dispatch('getCurrAlbum', id)
-        if (!this.content.id) { return alert('no detail') }
-        if (this.editable) {
-          return this.$emit('edit', id)
-        }
-        this.$router.push({
-          path: `/${this.currCategory.route}/detail`,
-          query: { id }
+        this.$store.dispatch('getCurrAlbum', id).then(res => {
+          if (!this.content.id) { return alert('no detail') }
+          if (this.editable) {
+            return this.$emit('edit', id)
+          }
+          this.$router.push({
+            path: `/${this.currCategory.route}/detail`,
+            query: { id }
+          })
         })
       },
       toggleStatus () {

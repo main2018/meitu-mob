@@ -76,8 +76,10 @@ export function getQiniuUrl (fname, isMob) {
 
 export function getQiniuPosterUrl (fname) {
   if (!fname) { return '' }
-  let query = '?vframe/jpg/offset/1/w/640/h/360'
-  return `${QINIU_URL_PREFIX}${fname}${query}`
+  // let query = '?vframe/jpg/offset/1/w/640/h/360'
+  let query = '?vframe/jpg/offset/1'
+  // return `${QINIU_URL_PREFIX}${fname}${query}`
+  return `${fname}${query}`
 }
 
 /*

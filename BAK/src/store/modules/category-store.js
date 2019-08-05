@@ -42,10 +42,12 @@ const mutations = {
   },
 
   GET_CATEGORY_BY_CATEGORY (state, activeCategory) {
+    console.log('888888888')
     let path = '/category/findAll'
     get(path, resp => {
       setActivesStatus(state, resp)
       state.categories = resp
+      console.log('resp', resp)
 
       if (!activeCategory) { return }
       state.categories.forEach(item => {
